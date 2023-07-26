@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero</title>
+  <link rel="stylesheet" type="text/css" href="/css/hero.css">
+</head>
+<body>
+<div class="container">
+  <div id="hero-table">
+    <!-- Contents of the hero-table div -->
+    <h3>Welcome, <span th:text="${hero.name}"></span>!</h3>
+    <div>
+      <button class="btn btn-secondary" onclick="location.href='/shop'">Shop</button>
+      <button class="btn btn-secondary" onclick="location.href='/fight'">Fight</button>
+    </div>
+    <p>Health: <span th:text="${hero.health}"></span></p>
+    <p>Attack: <span th:text="${hero.attack}"></span></p>
+    <p>Defense: <span th:text="${hero.defense}"></span></p>
+    <p>Gold: <span th:text="${hero.gold}"></span></p>
+    <p>Healing potion: <span th:text="${hero.potion}"></span></p>
+    <p>Mana: <span th:text="${hero.mana}"></span></p>
+  </div>
+  <div id="items-table">
+    <h3>Equipped Items:</h3>
+    <ul>
+      <li th:each="item : ${hero.equippedItems}">
+        <span th:if="${item.type == T(com.dnd.models.ItemType).HELMET}" th:id="'helmet-' + ${item.id}"></span>
+        <span th:if="${item.type == T(com.dnd.models.ItemType).ARMOR}" th:id="'armor-' + ${item.id}"></span>
+        <span th:if="${item.type == T(com.dnd.models.ItemType).TROUSERS}" th:id="'trousers-' + ${item.id}"></span>
+        <span th:if="${item.type == T(com.dnd.models.ItemType).BOOTS}" th:id="'boots-' + ${item.id}"></span>
+        <span th:if="${item.type == T(com.dnd.models.ItemType).GLOVES}" th:id="'gloves-' + ${item.id}"></span>
+        <span th:if="${item.type == T(com.dnd.models.ItemType).CLOAK}" th:id="'cloak-' + ${item.id}"></span>
+        <span th:if="${item.type == T(com.dnd.models.ItemType).WEAPON}" th:id="'weapon-' + ${item.id}"></span>
+        <span th:if="${item.type == T(com.dnd.models.ItemType).SHIELD}" th:id="'shield-' + ${item.id}"></span>
+        <span th:text="${item.name}"></span>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

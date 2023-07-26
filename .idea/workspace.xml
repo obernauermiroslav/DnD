@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0081780f-bad1-4d93-a4ce-e4b1d176e363" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/controllers/GameController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/controllers/ShopController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/models/Enemies.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/models/Hero.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/models/ItemType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/models/Items.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/models/Shop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/repositories/EnemiesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/repositories/HeroRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/repositories/ItemsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/services/EnemiesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/services/HeroService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/services/ItemsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/services/ItemsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/java/com/dnd/utils/EnumUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/resources/static/css/fight.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/resources/static/css/hero.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/resources/static/css/shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/resources/templates/fight.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/resources/templates/hero.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/resources/templates/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/src/main/resources/templates/shop.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2T7GJEzA0LcloXkjpl9vv5KdJZy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0081780f-bad1-4d93-a4ce-e4b1d176e363" name="Changes" comment="" />
+      <created>1690386631657</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1690386631657</updated>
+      <workItem from="1690386635990" duration="309000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

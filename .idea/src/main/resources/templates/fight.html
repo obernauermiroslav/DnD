@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fighting Page</title>
+  <link rel="stylesheet" href="/css/fight.css">
+</head>
+<body>
+<h1>Fighting Page</h1>
+<div id="buttons">
+  <button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
+  <form id="healForm" action="/heal" method="post">
+    <button type="submit" class="btn btn-secondary">Use Healing potion</button>
+    <input type="hidden" name="heroId" value="1" />
+  </form>
+  <form id="spellCast" action="/cast-spell" method="post">
+    <button type="submit" class="btn btn-secondary">Cast spell</button>
+    <input type="hidden" name="heroId" value="1" />
+  </form>
+  <form id="fight" class="btn btn-secondary"  action="/fight" method="post">
+    <input type="hidden" name="heroId" th:value="${hero.id}">
+    <input type="hidden" name="enemyId" th:if="${enemy != null}" th:value="${enemy.id}">
+    <input type="submit" value="Fight!" th:if="${enemy != null}">
+  </form>
+</div>
+<div class="hero-container">
+  <h2>Your Hero:</h2>
+  <p>Health: <span th:text="${hero.health}"></span></p>
+  <p>Attack: <span th:text="${hero.attack}"></span></p>
+  <p>Defense: <span th:text="${hero.defense}"></span></p>
+  <p>Gold: <span th:text="${hero.gold}"></span></p>
+  <p>Healing potion: <span th:text="${hero.potion}"></span></p>
+  <p>Mana: <span th:text="${hero.mana}"></span></p>
+</div>
+<div class="enemy-container" th:if="${enemy != null}">
+  <h2>Enemy:</h2>
+  <p>Name: <span th:text="${enemy.name}"></span></p>
+  <p>Health: <span th:text="${enemy.health}"></span></p>
+  <p>Attack: <span th:text="${enemy.attack}"></span></p>
+  <p>Defense: <span th:text="${enemy.defence}"></span></p>
+</div>
+<div class="results">
+  <h2>Result:</h2>
+  <p id="fightResultP" th:text="${healMessage}"></p>
+  <p id="fightResult" th:text="${fightResult}"></p>
+  <p id="fightResultH" th:text="${heroAttackMessage}"></p>
+  <p id="fightResultE" th:text="${enemyAttackMessage}"></p>
+  <p id="fightResultI" th:text="${ineffectiveAttackMessage}"></p>
+  <p id="fightResultS" th:text="${spellCastingResult}"></p>
+</div>
+</body>
+</html>

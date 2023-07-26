@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Hero Shop</title>
+  <link rel="stylesheet" type="text/css" href="/css/shop.css">
+</head>
+<body>
+<h1>Welcome to the Shop</h1>
+<button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
+<h2>Available Items:</h2>
+<p1>Gold: <span th:text="${heroGold}"></span></p1>
+<div class="table-container">
+  <table class="item-table">
+    <th>Healing Potion</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).POTION}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Spells</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).SPELL}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Helmets</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).HELMET}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Armor</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).ARMOR}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Trousers</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).TROUSERS}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Gloves</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).GLOVES}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Boots</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).BOOTS}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Cloak</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).CLOAK}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Weapons</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).WEAPON}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Shields</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).SHIELD}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
+          <input type="submit" value="Buy" />
+          <span th:text="${item.name}"></span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+  </table>
+</div>
+<p2 th:if="${message}" th:text="${message}"></p2>
+</body>
+</html>

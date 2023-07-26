@@ -1,0 +1,77 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #008CBA;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #008CBA;
+    margin-top: 20px;
+}
+
+
+.container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+.hero-container {
+    position: relative;
+    margin-top: 10px;
+    margin-left: -250px;
+    padding: 20px;
+}
+
+.enemy-container {
+    position: relative;
+    margin-top: -310px;
+    margin-left: 210px;
+    padding: 20px;
+}
+
+.hero-info,
+.enemy-info {
+    padding: 10px;
+}
+
+.results {
+    position: relative;
+    margin-top: 70px;
+    margin-left: -110px;
+    max-width: 800px;
+}
+
+#buttons {
+    display: inline-flex;
+    gap: 10px;
+    padding: 25px;
+}
+
+.btn-secondary form {
+    margin: 5px;
+    padding: 15px 30px;
+    min-width: 150px;
+    min-height: 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+.btn-secondary form input[type="submit"] {
+    display: none;
+}
+
+.btn-secondary form:hover {
+    background-color: #aaa;
+}
