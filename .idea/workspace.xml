@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added readme">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" afterDir="false" />
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="some css changes and attribute changes for monsters and items">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690387755104</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="some css changes and attribute changes for monsters and items">
+      <created>1690389288937</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1690389288937</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,6 +217,7 @@
     <MESSAGE value="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress" />
     <MESSAGE value="started with new project, readme will be the next commit" />
     <MESSAGE value="added readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="added readme" />
+    <MESSAGE value="some css changes and attribute changes for monsters and items" />
+    <option name="LAST_COMMIT_MESSAGE" value="some css changes and attribute changes for monsters and items" />
   </component>
 </project>
