@@ -108,10 +108,10 @@ public class DnDApplication implements CommandLineRunner {
         // Create a new Hero instance
         Hero hero = new Hero("hero");
 
-        Enemies enemy1 = new Enemies(1L,"Goblin", 150,15,5);
-        Enemies enemy2= new Enemies(2L,"Orc", 200,17,7);
-        Enemies enemy3= new Enemies(3L,"Troll", 250,20,10);
-        Enemies enemy4= new Enemies(4L,"Dragon", 300,22,13);
+        Enemies enemy1 = new Enemies(1L,"Goblin", 160,15,6);
+        Enemies enemy2= new Enemies(2L,"Orc", 220,17,8);
+        Enemies enemy3= new Enemies(3L,"Troll", 270,20,11);
+        Enemies enemy4= new Enemies(4L,"Dragon", 330,24,14);
 
 // Save the Hero entity to the database
         heroRepository.save(hero);

@@ -142,7 +142,7 @@ public class Hero {
     public Hero(String name) {
         this.name = name;
         this.health = 100;
-        this.attack = 20;
+        this.attack = 7;
         this.defense = 5;
         this.gold = 500;
         this.potion = 2;
