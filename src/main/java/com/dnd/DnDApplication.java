@@ -90,6 +90,9 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(weapon4);
         Items weapon5 = new Items(null, "Spear", ItemType.WEAPON, 8, 0,0,150,0);
         itemsRepository.save(weapon5);
+        Items weapon6 = new Items(null, "Morningstar", ItemType.WEAPON, 11, 0,0,200,0);
+        itemsRepository.save(weapon6);
+
 
 
         Items shield1 = new Items(null, "Small shield", ItemType.SHIELD, 0, 2,7,70,0);
@@ -102,22 +105,26 @@ public class DnDApplication implements CommandLineRunner {
         Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,120,0);
         itemsRepository.save(potion);
 
-        Items spell = new Items(null, "Fire bolt", ItemType.SPELL, 0, 0,0,210,5);
-        itemsRepository.save(spell);
+        Items spell1 = new Items(null, "Fire bolt", ItemType.SPELL, 0, 0,0,210,5);
+        itemsRepository.save(spell1);
+        Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,220,6);
+        itemsRepository.save(spell2);
 
         // Create a new Hero instance
         Hero hero = new Hero("hero");
 
         Enemies enemy1 = new Enemies(1L,"Goblin", 160,15,6);
+        enemiesRepository.save(enemy1);
         Enemies enemy2= new Enemies(2L,"Orc", 220,17,8);
+        enemiesRepository.save(enemy2);
         Enemies enemy3= new Enemies(3L,"Troll", 270,20,11);
+        enemiesRepository.save(enemy3);
         Enemies enemy4= new Enemies(4L,"Dragon", 330,24,14);
+        enemiesRepository.save(enemy4);
+        Enemies enemy5= new Enemies(5L,"Behemoth", 400,28,17);
+        enemiesRepository.save(enemy5);
 
 // Save the Hero entity to the database
         heroRepository.save(hero);
-        enemiesRepository.save(enemy1);
-        enemiesRepository.save(enemy2);
-        enemiesRepository.save(enemy3);
-        enemiesRepository.save(enemy4);
     }
 }

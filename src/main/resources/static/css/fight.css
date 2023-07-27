@@ -7,6 +7,8 @@ body {
 }
 
 h1 {
+    position: absolute;
+    margin-top: -840px;
     color: #008CBA;
     margin-bottom: 10px;
 }
@@ -27,14 +29,14 @@ h2 {
 
 .hero-container {
     position: relative;
-    margin-top: -25px;
+    margin-top: -10px;
     margin-left: -250px;
     padding: 20px;
 }
 
 .enemy-container {
     position: relative;
-    margin-top: -312px;
+    margin-top: -295px;
     margin-left: 210px;
     padding: 20px;
 }
@@ -54,11 +56,11 @@ h2 {
 #buttons {
     display: inline-flex;
     gap: 10px;
-    padding: 25px;
+    padding: 30px;
+    margin-top: -300px;
 }
 
 .btn-secondary form {
-    margin: 5px;
     padding: 15px 30px;
     min-width: 150px;
     min-height: 50px;
@@ -75,3 +77,19 @@ h2 {
 .btn-secondary form:hover {
     background-color: #aaa;
 }
+#firebolt{
+    position: absolute;
+    margin-top: 38px;
+    margin-left: -100px;
+    width: 60px;
+    height: 25px;
+}
+#weakness{
+    position: absolute;
+    margin-top: 38px;
+    margin-left: -170px;
+    width: 70px;
+    height: 25px;
+}
+
+

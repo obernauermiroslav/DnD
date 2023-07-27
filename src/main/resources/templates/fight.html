@@ -12,8 +12,13 @@
     <button type="submit" class="btn btn-secondary">Use Healing potion</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <form id="spellCast" action="/cast-spell" method="post">
-    <button type="submit" class="btn btn-secondary">Cast spell</button>
+  <button type="button" class="btn btn-secondary" onclick="toggleFormVisibility()">Spells</button>
+  <form class="spellCast" action="/weakness" method="post" style="display: none;">
+    <button id="weakness" class=" btn btn-secondary" type="submit">Weakness</button>
+    <input type="hidden" name="heroId" value="1" />
+  </form>
+  <form class="spellCast" action="/firebolt" method="post" style="display: none;">
+    <button id="firebolt" class=" btn btn-secondary" type="submit">Firebolt</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
   <form id="fight" class="btn btn-secondary"  action="/fight" method="post">
@@ -47,5 +52,15 @@
   <p id="fightResultI" th:text="${ineffectiveAttackMessage}"></p>
   <p id="fightResultS" th:text="${spellCastingResult}"></p>
 </div>
+<script>
+  function toggleFormVisibility() {
+    const spellForms = document.querySelectorAll('.spellCast');
+    spellForms.forEach(form => {
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    });
+  }
+</script>
+
+
 </body>
 </html>

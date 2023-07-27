@@ -35,9 +35,35 @@ public class Hero {
     }
 
     public void equipItem(Items item) {
-        equippedItems.add(item);
-        updateStats();
+        // Check if the item is not already equipped
+        if (!equippedItems.contains(item)) {
+            if (item.getType() == ItemType.SPELL) {
+                // For spells, check if the hero already has a spell with the same name
+                boolean hasSameSpell = equippedItems.stream()
+                        .anyMatch(existingSpell -> existingSpell.getName().equals(item.getName()));
+
+                if (!hasSameSpell) {
+                    equippedItems.add(item);
+                }
+            } else {
+                // For non-spell items, check for duplicates and equip the item
+                Items existingItemOfType = equippedItems.stream()
+                        .filter(existingItem -> existingItem.getType() == item.getType())
+                        .findFirst()
+                        .orElse(null);
+
+                if (existingItemOfType != null) {
+                    // Unequip the existing item of the same type
+                    unequipItem(existingItemOfType);
+                }
+                equippedItems.add(item);
+            }
+
+            updateStats();
+        }
     }
+
+
 
     public void unequipItem(Items item) {
         equippedItems.remove(item);
@@ -128,7 +154,7 @@ public class Hero {
         this.mana = mana;
     }
     public int getBaseAttack() {
-        return 20;
+        return 7;
     }
 
     public int getBaseDefense() {

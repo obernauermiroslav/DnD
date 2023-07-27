@@ -80,43 +80,46 @@ public class ShopController {
         if (itemToBuy != null) {
             Hero hero = heroRepository.findByName("hero");
             if (hero != null) {
-                // Check if the hero already has an item of the same type equipped
-                ItemType itemType = itemToBuy.getType();
+                // Check if the hero already has the same spell equipped
+                if (itemToBuy.getType() == ItemType.SPELL) {
+                    boolean hasSameSpell = hero.getEquippedItems().stream()
+                            .anyMatch(existingSpell -> existingSpell.getName().equals(itemToBuy.getName()));
 
-                Items existingItemOfType = hero.getEquippedItems().stream()
-                        .filter(item -> item.getType() == itemType)
-                        .findFirst()
-                        .orElse(null);
-
-                if (existingItemOfType != null) {
-                    // Hero already has an item of the same type equipped
-                    // Check if the names of the items are different
-                    if (!existingItemOfType.getName().equals(itemToBuy.getName())) {
-                        // Names are different, replace the old item with the new one
-                        hero.unequipItem(existingItemOfType);
-                    } else {
-                        model.addAttribute("message", "You already have that item!");
-                        // Show the updated shop with available items
+                    if (hasSameSpell) {
+                        model.addAttribute("message", "You already have that spell!");
                         List<Items> availableItems = shop.getAvailableItems();
                         model.addAttribute("items", availableItems);
                         model.addAttribute("heroGold", hero.getGold());
                         return "shop";
                     }
+                } else {
+                    Items existingItemOfType = hero.getEquippedItems().stream()
+                            .filter(item -> item.getType() == itemToBuy.getType())
+                            .findFirst()
+                            .orElse(null);
+
+                    if (existingItemOfType != null) {
+                        if (!existingItemOfType.getName().equals(itemToBuy.getName())) {
+                            hero.unequipItem(existingItemOfType);
+                        } else {
+                            model.addAttribute("message", "You already have that item!");
+                            List<Items> availableItems = shop.getAvailableItems();
+                            model.addAttribute("items", availableItems);
+                            model.addAttribute("heroGold", hero.getGold());
+                            return "shop";
+                        }
+                    }
                 }
 
-                // Check if the hero has enough currency (gold) to buy the item
                 int heroGold = hero.getGold();
                 int itemPrice = itemToBuy.getPrice();
 
                 if (heroGold >= itemPrice) {
-                    // Reduce the hero's gold by the item price
                     hero.setGold(heroGold - itemPrice);
 
-                    // If the purchased item is a healing potion, increase the potion count
                     if (itemToBuy.getName().equals("Healing Potion")) {
                         hero.setPotion(hero.getPotion() + 1);
                     } else {
-                        // If the purchased item is not a healing potion, equip the item
                         hero.equipItem(itemToBuy);
                     }
 
@@ -132,17 +135,17 @@ public class ShopController {
             model.addAttribute("message", "Item not found!");
         }
 
-        // Get the updated hero from the repository
         Hero updatedHero = heroRepository.findByName("hero");
         if (updatedHero != null) {
-            // Add the updated hero's gold to the model
             model.addAttribute("heroGold", updatedHero.getGold());
         }
 
-        // Show the updated shop with available items
         List<Items> availableItems = shop.getAvailableItems();
         model.addAttribute("items", availableItems);
 
         return "shop";
     }
+
+
+
 }
