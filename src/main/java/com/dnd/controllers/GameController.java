@@ -98,7 +98,7 @@ public class GameController {
         int newHeroHealth = hero.getHealth() - enemyAttack;
 
         // Update the health of the hero and the enemy
-        hero.setHealth(newHeroHealth);
+        hero.setHealth(Math.max(newHeroHealth, 0));
         enemy.setHealth(newEnemyHealth);
 
         // Save the updated hero and enemy data back to their respective tables
