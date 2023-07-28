@@ -9,14 +9,15 @@
 <button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
 <h2>Available Items:</h2>
 <p1>Gold: <span th:text="${heroGold}"></span></p1>
-<div class="table-container">
+<div class="table-container" id="scrollable-table">
   <table class="item-table">
     <th>Healing Potion</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).POTION}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect} , data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
@@ -24,19 +25,22 @@
     <th>Spells</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).SPELL}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect}, data-price=${item.price}, data-mana-cost=${item.manaCost}, data-attack-bonus=${item.attackBonus}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
     </tr>
+
     <th>Helmets</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).HELMET}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
@@ -44,9 +48,10 @@
     <th>Armor</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).ARMOR}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type},  data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
@@ -54,9 +59,10 @@
     <th>Trousers</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).TROUSERS}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
@@ -64,9 +70,10 @@
     <th>Gloves</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).GLOVES}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
@@ -74,9 +81,10 @@
     <th>Boots</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).BOOTS}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
@@ -84,9 +92,10 @@
     <th>Cloak</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).CLOAK}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
@@ -94,9 +103,10 @@
     <th>Weapons</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).WEAPON}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-attack-bonus=${item.attackBonus}, data-item-type=${item.type}, data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
@@ -104,15 +114,106 @@
     <th>Shields</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).SHIELD}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post">
-          <input type="submit" value="Buy" />
-          <span th:text="${item.name}"></span>
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
       </td>
     </tr>
   </table>
 </div>
+
+<div id="item-info-popup" class="item-popup"></div>
 <p2 th:if="${message}" th:text="${message}"></p2>
+
+<script th:inline="javascript">
+  function saveScrollPosition() {
+    // Save the current scroll position in the session storage
+    const scrollPosition = document.getElementById('scrollable-table').scrollTop;
+    sessionStorage.setItem('scrollPosition', scrollPosition.toString());
+  }
+
+  function restoreScrollPosition() {
+    // Retrieve the saved scroll position from the session storage
+    const scrollPosition = sessionStorage.getItem('scrollPosition');
+    if (scrollPosition !== null) {
+      // Scroll the table container to the saved position
+      document.getElementById('scrollable-table').scrollTop = parseInt(scrollPosition);
+      // Remove the saved position after restoring it
+      sessionStorage.removeItem('scrollPosition');
+    }
+  }
+
+  // Restore the scroll position when the page loads
+  window.onload = function() {
+    restoreScrollPosition();
+  };
+
+  function handleItemHover(button) {
+    const itemName = button.getAttribute('data-item-name');
+    const itemType = button.getAttribute('data-item-type');
+    const price = button.getAttribute('data-price');
+
+    let popupContent = `
+      <p>Name: ${itemName}</p>
+      <p>Price: ${price} GP</p>
+    `;
+
+    if (itemType === 'POTION') {
+      const effect = button.getAttribute('data-effect');
+      popupContent += `
+        <p>Effect: ${effect}</p>
+      `;
+    } else if (itemType === 'SPELL') {
+      const effect = button.getAttribute('data-effect');
+      const manaCost = button.getAttribute('data-mana-cost');
+      popupContent += `
+        <p>Effect: ${effect}</p>
+        <p>Mana Cost: ${manaCost}</p>
+      `;
+    } else if (itemType === 'WEAPON') {
+      const attackBonus = button.getAttribute('data-attack-bonus');
+      popupContent += `
+        <p>Attack Bonus: ${attackBonus}</p>
+      `;
+    } else if (itemType === 'HELMET' || itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK' || itemType === 'SHIELD') {
+      const defenseBonus = button.getAttribute('data-defense-bonus');
+      const healthBonus = button.getAttribute('data-health-bonus');
+      popupContent += `
+        <p>Defense Bonus: ${defenseBonus}</p>
+        <p>Health Bonus: ${healthBonus}</p>
+      `;
+    } else {
+      // Handle any other item types here
+      // For now, we don't show any additional information for other types
+    }
+
+    const popup = document.getElementById('item-info-popup');
+    popup.innerHTML = popupContent;
+    popup.style.display = 'block';
+  }
+
+  function handleItemLeave() {
+    const popup = document.getElementById('item-info-popup');
+    popup.style.display = 'none';
+  }
+
+  // Attach event listeners to each "Buy" button to show/hide the popup
+  document.addEventListener('DOMContentLoaded', function() {
+    const buyButtons = document.querySelectorAll('.item-table .item-button');
+    buyButtons.forEach(button => {
+      button.addEventListener('mouseover', function() {
+        handleItemHover(button);
+      });
+
+      button.addEventListener('mouseleave', function() {
+        handleItemLeave();
+      });
+    });
+  });
+</script>
+</script>
 </body>
 </html>

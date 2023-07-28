@@ -154,23 +154,23 @@ public class Hero {
         this.mana = mana;
     }
     public int getBaseAttack() {
-        return 7;
+        return 8;
     }
 
     public int getBaseDefense() {
-        return 5;
+        return 6;
     }
 
     public int getBaseHealth() {
-        return 100;
+        return 125;
     }
 
     public Hero(String name) {
         this.name = name;
-        this.health = 100;
-        this.attack = 7;
-        this.defense = 5;
-        this.gold = 500;
+        this.health = 125;
+        this.attack = 8;
+        this.defense = 6;
+        this.gold = 600;
         this.potion = 2;
         this.mana = 10;
     }

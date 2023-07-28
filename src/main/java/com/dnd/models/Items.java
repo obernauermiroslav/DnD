@@ -23,6 +23,7 @@ public class Items {
     private int quantity;
 
     private int manaCost;
+    private String effect;
 
     public Items() {
     }
@@ -35,7 +36,7 @@ public class Items {
         this.manaCost = manaCost;
     }
 
-    public Items(Long id, String name, ItemType type, int attackBonus, int defenseBonus, int healthBonus, int price, int manaCost) {
+    public Items(Long id, String name, ItemType type, int attackBonus, int defenseBonus, int healthBonus, int price, int manaCost, String effect) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -44,7 +45,9 @@ public class Items {
         this.healthBonus = healthBonus;
         this.price = price;
         this.manaCost = manaCost;
+        this.effect = effect;
     }
+
 
     public Long getId() {
         return id;
@@ -108,6 +111,14 @@ public class Items {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getEffect() {
+        return effect;
+    }
+
+    public void setEffect(String effect) {
+        this.effect = effect;
     }
 
     @Override

@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added new spell: weakness, that can be used to decrease enemy attack + some minor css and html changes">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Items.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fight.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fight.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,6 +173,7 @@
       <workItem from="1690352036328" duration="33372000" />
       <workItem from="1690437128113" duration="6200000" />
       <workItem from="1690451447522" duration="15986000" />
+      <workItem from="1690535364626" duration="18814000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
