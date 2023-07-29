@@ -211,7 +211,7 @@ public class Hero {
         this.health = 125;
         this.attack = 8;
         this.defense = 6;
-        this.gold = 600;
+        this.gold = 500;
         this.potion = 2;
         this.mana = 10;
         this.skillPoints = 3;

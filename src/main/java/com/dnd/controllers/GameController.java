@@ -114,6 +114,10 @@ public class GameController {
 
         // Determine the fight result message based on hero's and enemy's health after the fight
         String fightResult;
+        String heroAttackMessage = "";
+        String enemyAttackMessage = "";
+        String ineffectiveHeroAttackMessage = "";
+        String ineffectiveEnemyAttackMessage = "";
         if (newEnemyHealth <= 0) {
             hero.setGold(hero.getGold() + 150);
             hero.setHealth(hero.getHealth() + 100);
@@ -140,16 +144,30 @@ public class GameController {
         } else {
             fightResult = "";
         }
-        model.addAttribute("fightResult", fightResult);
+        if (heroAttack > 0) {
+            heroAttackMessage = "Your hero attacks for " + heroAttack + " damage!";
+        }
 
-        // Set attack messages based on the fight outcome
-        model.addAttribute("heroAttackMessage", heroAttack > 0 ? "Your hero attacks for " + heroAttack + " damage!" : "");
-        model.addAttribute("enemyAttackMessage", enemyAttack > 0 ? "Enemy attacks for " + enemyAttack + " damage!" : "");
+        if (enemyAttack > 0) {
+            enemyAttackMessage = "Enemy attacks for " + enemyAttack + " damage!";
+        }
 
-        model.addAttribute("ineffectiveAttackMessage", heroAttack <= 0 ? "Your hero's attack is ineffective!" : "");
-        model.addAttribute("ineffectiveAttackMessage", enemyAttack == 0 ? "Enemy's attack is ineffective!" : "");
+        if (heroAttack == 0) {
+            ineffectiveHeroAttackMessage = "Your hero's attack is ineffective!";
+        }
 
-        return "fight";
+        if (enemyAttack == 0) {
+            ineffectiveEnemyAttackMessage = "Enemy's attack is ineffective!";
+        }
+
+
+model.addAttribute("fightResult", fightResult);
+model.addAttribute("heroAttackMessage", heroAttackMessage);
+model.addAttribute("enemyAttackMessage", enemyAttackMessage);
+model.addAttribute("ineffectiveHeroAttackMessage", ineffectiveHeroAttackMessage);
+model.addAttribute("ineffectiveEnemyAttackMessage", ineffectiveEnemyAttackMessage);
+
+return "fight";
     }
 
     @PostMapping("/heal")
@@ -168,7 +186,7 @@ public class GameController {
         int potionCount = hero.getPotion();
         if (potionCount > 0) {
             // Heal the hero
-            hero.setHealth(hero.getHealth() + 40);
+            hero.setHealth(hero.getHealth() + 30);
 
             // Reduce the number of healing potions by 1
             hero.setPotion(potionCount - 1);

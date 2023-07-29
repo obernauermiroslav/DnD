@@ -10,54 +10,101 @@
 <body>
 <div class="container">
   <div id="hero-table">
-    <!-- Contents of the hero-table div -->
     <h3>Welcome, <span th:if="${hero != null}" th:text="${hero.name}">Guest</span>!</h3>
-    <p>Skill points: <span th:if="${hero != null}" th:text="${hero.skillPoints}">0</span></p>
     <div>
       <button class="btn btn-secondary" onclick="location.href='/shop'">Shop</button>
       <button class="btn btn-secondary" onclick="location.href='/fight'">Fight</button>
     </div>
+    <p>Skill points: <span th:if="${hero != null}" th:text="${hero.skillPoints}">0</span></p>
     <p th:if="${hero != null}">Health: <span th:text="${hero.health}"></span></p>
     <form action="/upgradeHealth" method="post" class="button-container">
-      <button type="submit"> Upgrade Health (1SP)</button>
-      <span class="help-btn" onclick="window.location.href='/SecondGame'">?</span>
+      <button id="health" type="submit">+</button>
     </form>
     <p th:if="${hero != null}">Attack: <span th:text="${hero.attack}"></span></p>
     <form action="/upgradeAttack" method="post" class="button-container">
-      <button type="submit">Upgrade Attack (1SP)</button>
-      <span class="help-btn" onclick="window.location.href='/SecondGame'">?</span>
+      <button id="attack" type="submit">+</button>
     </form>
     <p th:if="${hero != null}">Defense: <span th:text="${hero.defense}"></span></p>
     <form action="/upgradeDefense" method="post" class="button-container">
-      <button type="submit">Upgrade Defense (1SP)</button>
-      <span class="help-btn" onclick="window.location.href='/SecondGame'">?</span>
+      <button id="defense" type="submit">+</button>
+    </form>
+    <p th:if="${hero != null}">Mana: <span th:text="${hero.mana}"></span></p>
+    <form action="/upgradeMana" method="post" class="button-container">
+      <button id="mana" type="submit">+</button>
     </form>
     <p th:if="${hero != null}">Gold: <span th:text="${hero.gold}"></span></p>
     <p th:if="${hero != null}">Healing potion: <span th:text="${hero.potion}"></span></p>
-    <p th:if="${hero != null}">Mana: <span th:text="${hero.mana}"></span></p>
-    <form action="/upgradeMana" method="post" class="button-container">
-      <button type="submit"> Upgrade Mana (1SP)</button>
-      <span class="help-btn" onclick="window.location.href='/SecondGame'">?</span>
-    </form>
-
   </div>
   <div id="items-table">
     <h3>Equipped Items:</h3>
-    <ul>
-      <li th:each="item : ${hero?.equippedItems}" th:if="${hero != null and item != null}">
-        <span th:if="${item.type == T(com.dnd.models.ItemType).HELMET}" th:id="'helmet-' + ${item.id}"></span>
-        <span th:if="${item.type == T(com.dnd.models.ItemType).ARMOR}" th:id="'armor-' + ${item.id}"></span>
-        <span th:if="${item.type == T(com.dnd.models.ItemType).TROUSERS}" th:id="'trousers-' + ${item.id}"></span>
-        <span th:if="${item.type == T(com.dnd.models.ItemType).BOOTS}" th:id="'boots-' + ${item.id}"></span>
-        <span th:if="${item.type == T(com.dnd.models.ItemType).GLOVES}" th:id="'gloves-' + ${item.id}"></span>
-        <span th:if="${item.type == T(com.dnd.models.ItemType).CLOAK}" th:id="'cloak-' + ${item.id}"></span>
-        <span th:if="${item.type == T(com.dnd.models.ItemType).WEAPON}" th:id="'weapon-' + ${item.id}"></span>
-        <span th:if="${item.type == T(com.dnd.models.ItemType).SHIELD}" th:id="'shield-' + ${item.id}"></span>
-        <span th:text="${item.name}"></span>
-      </li>
-    </ul>
+    <div class="equipped-items">
+      <p th:each="item : ${hero?.equippedItems}" th:if="${hero != null and item != null}"
+         class="item-button"
+         th:text="${item.name}"
+         th:attr="data-item-name=${item.name},data-effect=${item.effect},data-item-type=${item.type},data-attack-bonus=${item.attackBonus},data-defense-bonus=${item.defenseBonus},data-health-bonus=${item.healthBonus},data-mana-cost=${item.manaCost}">
+      </p>
+    </div>
   </div>
+
   <p id="upgradeMessage" th:text="${upgradeMessage}"></p>
 </div>
+<div id="item-info-popup" class="item-popup"></div>
+<script th:inline="javascript">
+  function handleItemHover(button) {
+    const itemName = button.getAttribute('data-item-name');
+    const itemType = button.getAttribute('data-item-type');
+
+    let popupContent = `
+      <p>Name: ${itemName}</p>
+    `;
+
+    if (itemType === 'SPELL') {
+      const effect = button.getAttribute('data-effect');
+      const manaCost = button.getAttribute('data-mana-cost');
+      popupContent += `
+        <p>Effect: ${effect}</p>
+        <p>Mana Cost: ${manaCost}</p>
+      `;
+    } else if (itemType === 'WEAPON') {
+      const attackBonus = button.getAttribute('data-attack-bonus');
+      popupContent += `
+        <p>Attack Bonus: ${attackBonus}</p>
+      `;
+    } else if (itemType === 'HELMET' || itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK' || itemType === 'SHIELD') {
+      const defenseBonus = button.getAttribute('data-defense-bonus');
+      const healthBonus = button.getAttribute('data-health-bonus');
+      popupContent += `
+        <p>Defense Bonus: ${defenseBonus}</p>
+        <p>Health Bonus: ${healthBonus}</p>
+      `;
+    } else {
+      // Handle any other item types here
+      // For now, we don't show any additional information for other types
+    }
+
+    const popup = document.getElementById('item-info-popup');
+    popup.innerHTML = popupContent;
+    popup.style.display = 'block';
+  }
+
+  function handleItemLeave() {
+    const popup = document.getElementById('item-info-popup');
+    popup.style.display = 'none';
+  }
+
+  // Attach event listeners to each item button to show/hide the popup
+  document.addEventListener('DOMContentLoaded', function() {
+    const itemButtons = document.querySelectorAll('.item-button');
+    itemButtons.forEach(button => {
+      button.addEventListener('mouseover', function() {
+        handleItemHover(button);
+      });
+
+      button.addEventListener('mouseleave', function() {
+        handleItemLeave();
+      });
+    });
+  });
+</script>
 </body>
 </html>

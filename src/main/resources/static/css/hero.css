@@ -11,17 +11,21 @@ body {
 
 #hero-table,
 #items-table {
-    width: 260px;
-    padding: 10px;
+    width: 170px;
+    padding: 30px;
     border: 1px solid #ccc;
     margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+#items-table{
+    list-style: none;
+}
 
 #hero-table {
     margin-right: 20px;
+
 }
 
 .btn-secondary {
@@ -41,5 +45,37 @@ body {
 #upgradeMessage{
     position: absolute;
     margin-left: -15px;
-    margin-top: 630px;
+    margin-top: 600px;
+}
+#item-info-popup{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    border-radius: 5px;
+    max-width: 200px;
+    margin-left: 1305px;
+    margin-top: -330px;
+}
+#health{
+    position: absolute;
+    margin-left: 52px;
+    margin-top: -37px;
+}
+#attack{
+    position: absolute;
+    margin-left: 52px;
+    margin-top: -37px;
+}
+#defense{
+    position: absolute;
+    margin-left: 52px;
+    margin-top: -37px;
+}
+#mana{
+    position: absolute;
+    margin-left: 52px;
+    margin-top: -37px;
 }

@@ -32,9 +32,8 @@
   <p>Health: <span th:text="${hero.health}"></span></p>
   <p>Attack: <span th:text="${hero.attack}"></span></p>
   <p>Defense: <span th:text="${hero.defense}"></span></p>
-  <p>Gold: <span th:text="${hero.gold}"></span></p>
-  <p>Healing potion: <span th:text="${hero.potion}"></span></p>
   <p>Mana: <span th:text="${hero.mana}"></span></p>
+  <p>Healing potion: <span th:text="${hero.potion}"></span></p>
 </div>
 <div class="enemy-container" th:if="${enemy != null}">
   <h2>Enemy:</h2>
@@ -49,7 +48,8 @@
   <p id="fightResult" th:text="${fightResult}"></p>
   <p id="fightResultH" th:text="${heroAttackMessage}"></p>
   <p id="fightResultE" th:text="${enemyAttackMessage}"></p>
-  <p id="fightResultI" th:text="${ineffectiveAttackMessage}"></p>
+  <p id="fightResultIH" th:text="${ineffectiveHeroAttackMessage}"></p>
+  <p id="fightResultIE" th:text="${ineffectiveEnemyAttackMessage}"></p>
   <p id="fightResultS" th:text="${spellCastingResult}"></p>
 </div>
 <script>
