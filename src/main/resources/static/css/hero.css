@@ -37,3 +37,9 @@ body {
 .btn-secondary:hover {
     background-color: #aaa;
 }
+
+#upgradeMessage{
+    position: absolute;
+    margin-left: -15px;
+    margin-top: 630px;
+}

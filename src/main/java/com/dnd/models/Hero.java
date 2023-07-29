@@ -20,6 +20,11 @@ public class Hero {
     private int spell;
     private int mana;
 
+    private int skillPoints;
+    private int permanentHealthUpgrades;
+    private int permanentAttackUpgrades;
+    private int permanentDefenseUpgrades;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "hero_equipped_items",
             joinColumns = @JoinColumn(name = "hero_id"),
@@ -81,6 +86,11 @@ public class Hero {
             totalDefenseBonus += item.getDefenseBonus();
             totalHealthBonus += item.getHealthBonus();
         }
+
+        // Include permanent upgrades in the stats calculation
+        totalAttackBonus += permanentAttackUpgrades;
+        totalDefenseBonus += permanentDefenseUpgrades;
+        totalHealthBonus += permanentHealthUpgrades;
 
         // Update the hero's attack, defense, and health stats
         this.attack = getBaseAttack() + totalAttackBonus;
@@ -164,6 +174,37 @@ public class Hero {
     public int getBaseHealth() {
         return 125;
     }
+    public int getSkillPoints() {
+        return skillPoints;
+    }
+
+    public void setSkillPoints(int skillPoints) {
+        this.skillPoints = skillPoints;
+    }
+
+    public int getPermanentHealthUpgrades() {
+        return permanentHealthUpgrades;
+    }
+    public void setPermanentHealthUpgrades(int permanentHealthUpgrades) {
+        this.permanentHealthUpgrades = permanentHealthUpgrades;
+    }
+
+    public int getPermanentAttackUpgrades() {
+        return permanentAttackUpgrades;
+    }
+
+    public void setPermanentAttackUpgrades(int permanentAttackUpgrades) {
+        this.permanentAttackUpgrades = permanentAttackUpgrades;
+    }
+
+    public int getPermanentDefenseUpgrades() {
+        return permanentDefenseUpgrades;
+    }
+
+    public void setPermanentDefenseUpgrades(int permanentDefenseUpgrades) {
+        this.permanentDefenseUpgrades = permanentDefenseUpgrades;
+    }
+
 
     public Hero(String name) {
         this.name = name;
@@ -173,5 +214,37 @@ public class Hero {
         this.gold = 600;
         this.potion = 2;
         this.mana = 10;
+        this.skillPoints = 3;
     }
+
+    public void upgradeHealth() {
+        if (skillPoints > 0) {
+            health += 20;
+            permanentHealthUpgrades += 20;
+            skillPoints -= 1;
+        }
     }
+    public void upgradeMana() {
+        if (skillPoints > 0) {
+            mana += 5;
+            skillPoints -= 1;
+        }
+    }
+
+    public void upgradeAttack() {
+        if (skillPoints > 0) {
+            attack += 1;
+            permanentAttackUpgrades += 1;
+            skillPoints -= 1;
+        }
+    }
+
+    public void upgradeDefense() {
+        if (skillPoints > 0) {
+            defense += 1;
+            permanentDefenseUpgrades += 1;
+            skillPoints -= 1;
+        }
+    }
+
+}

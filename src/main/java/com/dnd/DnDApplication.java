@@ -102,12 +102,12 @@ public class DnDApplication implements CommandLineRunner {
         Items shield3 = new Items(null, "Tower shield", ItemType.SHIELD, 0, 4,12,135,0,"");
         itemsRepository.save(shield3);
 
-        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,120,0,"Heals for 20");
+        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,120,0,"Heals for 40 points");
         itemsRepository.save(potion);
 
         Items spell1 = new Items(null, "Fire bolt", ItemType.SPELL, 0, 0,0,210,5,"Damages enemy for 20 points");
         itemsRepository.save(spell1);
-        Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,210,5,"Decreases enemy attack by 3");
+        Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,210,5,"Decreases enemy attack by 3 points");
         itemsRepository.save(spell2);
 
         // Create a new Hero instance

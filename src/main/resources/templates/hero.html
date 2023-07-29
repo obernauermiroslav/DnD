@@ -11,22 +11,40 @@
 <div class="container">
   <div id="hero-table">
     <!-- Contents of the hero-table div -->
-    <h3>Welcome, <span th:text="${hero.name}"></span>!</h3>
+    <h3>Welcome, <span th:if="${hero != null}" th:text="${hero.name}">Guest</span>!</h3>
+    <p>Skill points: <span th:if="${hero != null}" th:text="${hero.skillPoints}">0</span></p>
     <div>
       <button class="btn btn-secondary" onclick="location.href='/shop'">Shop</button>
       <button class="btn btn-secondary" onclick="location.href='/fight'">Fight</button>
     </div>
-    <p>Health: <span th:text="${hero.health}"></span></p>
-    <p>Attack: <span th:text="${hero.attack}"></span></p>
-    <p>Defense: <span th:text="${hero.defense}"></span></p>
-    <p>Gold: <span th:text="${hero.gold}"></span></p>
-    <p>Healing potion: <span th:text="${hero.potion}"></span></p>
-    <p>Mana: <span th:text="${hero.mana}"></span></p>
+    <p th:if="${hero != null}">Health: <span th:text="${hero.health}"></span></p>
+    <form action="/upgradeHealth" method="post" class="button-container">
+      <button type="submit"> Upgrade Health (1SP)</button>
+      <span class="help-btn" onclick="window.location.href='/SecondGame'">?</span>
+    </form>
+    <p th:if="${hero != null}">Attack: <span th:text="${hero.attack}"></span></p>
+    <form action="/upgradeAttack" method="post" class="button-container">
+      <button type="submit">Upgrade Attack (1SP)</button>
+      <span class="help-btn" onclick="window.location.href='/SecondGame'">?</span>
+    </form>
+    <p th:if="${hero != null}">Defense: <span th:text="${hero.defense}"></span></p>
+    <form action="/upgradeDefense" method="post" class="button-container">
+      <button type="submit">Upgrade Defense (1SP)</button>
+      <span class="help-btn" onclick="window.location.href='/SecondGame'">?</span>
+    </form>
+    <p th:if="${hero != null}">Gold: <span th:text="${hero.gold}"></span></p>
+    <p th:if="${hero != null}">Healing potion: <span th:text="${hero.potion}"></span></p>
+    <p th:if="${hero != null}">Mana: <span th:text="${hero.mana}"></span></p>
+    <form action="/upgradeMana" method="post" class="button-container">
+      <button type="submit"> Upgrade Mana (1SP)</button>
+      <span class="help-btn" onclick="window.location.href='/SecondGame'">?</span>
+    </form>
+
   </div>
   <div id="items-table">
     <h3>Equipped Items:</h3>
     <ul>
-      <li th:each="item : ${hero.equippedItems}">
+      <li th:each="item : ${hero?.equippedItems}" th:if="${hero != null and item != null}">
         <span th:if="${item.type == T(com.dnd.models.ItemType).HELMET}" th:id="'helmet-' + ${item.id}"></span>
         <span th:if="${item.type == T(com.dnd.models.ItemType).ARMOR}" th:id="'armor-' + ${item.id}"></span>
         <span th:if="${item.type == T(com.dnd.models.ItemType).TROUSERS}" th:id="'trousers-' + ${item.id}"></span>
@@ -39,6 +57,7 @@
       </li>
     </ul>
   </div>
+  <p id="upgradeMessage" th:text="${upgradeMessage}"></p>
 </div>
 </body>
 </html>

@@ -33,7 +33,6 @@
         </form>
       </td>
     </tr>
-
     <th>Helmets</th>
     <tr th:each="item : ${items}">
       <td th:if="${item.type == T(com.dnd.models.ItemType).HELMET}">
@@ -124,7 +123,6 @@
     </tr>
   </table>
 </div>
-
 <div id="item-info-popup" class="item-popup"></div>
 <p2 th:if="${message}" th:text="${message}"></p2>
 

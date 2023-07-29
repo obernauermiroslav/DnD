@@ -6,6 +6,7 @@ import com.dnd.models.ItemType;
 import com.dnd.services.EnemiesService;
 import com.dnd.services.HeroService;
 import jakarta.servlet.http.HttpSession;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,6 +118,7 @@ public class GameController {
             hero.setGold(hero.getGold() + 150);
             hero.setHealth(hero.getHealth() + 100);
             hero.setMana(hero.getMana() + 5);
+            hero.setSkillPoints(hero.getSkillPoints() + 2);
             heroService.saveHero(hero);
 
             // Remove the defeated enemy from the database
@@ -144,7 +146,7 @@ public class GameController {
         model.addAttribute("heroAttackMessage", heroAttack > 0 ? "Your hero attacks for " + heroAttack + " damage!" : "");
         model.addAttribute("enemyAttackMessage", enemyAttack > 0 ? "Enemy attacks for " + enemyAttack + " damage!" : "");
 
-        model.addAttribute("ineffectiveAttackMessage", heroAttack == 0 ? "Your hero's attack is ineffective!" : "");
+        model.addAttribute("ineffectiveAttackMessage", heroAttack <= 0 ? "Your hero's attack is ineffective!" : "");
         model.addAttribute("ineffectiveAttackMessage", enemyAttack == 0 ? "Enemy's attack is ineffective!" : "");
 
         return "fight";
@@ -294,6 +296,7 @@ public class GameController {
                             hero.setGold(hero.getGold() + 150);
                             hero.setHealth(hero.getHealth() + 100);
                             hero.setMana(hero.getMana() + 5);
+                            hero.setSkillPoints(hero.getSkillPoints() + 2);
                             heroService.saveHero(hero);
                             // Remove the defeated enemy from the database
                             enemiesService.deleteEnemy(enemy);
@@ -340,4 +343,61 @@ public class GameController {
         model.addAttribute("hero", hero);
         return "fight";
     }
+
+    @PostMapping("/upgradeHealth")
+    public String upgradeHealth(Model model) {
+        Hero hero = heroService.getYourHero();
+        if (hero != null && hero.getSkillPoints() > 0) {
+            hero.upgradeHealth();
+            heroService.saveHero(hero);
+            model.addAttribute("upgradeMessage", "Health upgraded by 20 points.");
+        } else {
+            model.addAttribute("upgradeMessage", "Not enough skill points to upgrade health.");
+        }
+        model.addAttribute("hero", hero);
+        return "hero";
+    }
+    @PostMapping("/upgradeMana")
+    public String upgradeMana(Model model) {
+        Hero hero = heroService.getYourHero();
+        if (hero != null && hero.getSkillPoints() > 0) {
+            hero.upgradeMana();
+            heroService.saveHero(hero);
+            model.addAttribute("upgradeMessage", "Mana upgraded by 5 points.");
+        } else {
+            model.addAttribute("upgradeMessage", "Not enough skill points to upgrade mana.");
+        }
+        model.addAttribute("hero", hero);
+        return "hero";
+    }
+
+    @PostMapping("/upgradeAttack")
+    public String upgradeAttack(Model model) {
+        Hero hero = heroService.getYourHero();
+        if (hero != null && hero.getSkillPoints() > 0) {
+            hero.upgradeAttack();
+            heroService.saveHero(hero);
+            model.addAttribute("upgradeMessage", "Attack upgraded by 1 point.");
+        } else {
+            model.addAttribute("upgradeMessage", "Not enough skill points to upgrade attack.");
+        }
+        model.addAttribute("hero", hero);
+        return "hero";
+    }
+
+    @PostMapping("/upgradeDefense")
+    public String upgradeDefense(Model model) {
+        Hero hero = heroService.getYourHero();
+        if (hero != null && hero.getSkillPoints() > 0) {
+            hero.upgradeDefense();
+            heroService.saveHero(hero);
+            model.addAttribute("upgradeMessage", "Defense upgraded by 1 point.");
+        } else {
+            model.addAttribute("upgradeMessage", "Not enough skill points to upgrade defense.");
+        }
+        model.addAttribute("hero", hero);
+        return "hero";
+    }
+
+
 }
