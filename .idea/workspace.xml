@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added 2 new item types -ring, necklace">
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added new condition check when fighting with shield, it gives hero 15% chance to block every enemy attack , if the enemy is not a dragon + when hero dies, it disables all attack and spell buttons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/ShopController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fight.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fight.html" afterDir="false" />
@@ -178,7 +179,7 @@
       <workItem from="1690615664690" duration="12888000" />
       <workItem from="1690633014379" duration="14262000" />
       <workItem from="1690702403501" duration="10076000" />
-      <workItem from="1690717054113" duration="11443000" />
+      <workItem from="1690717054113" duration="11805000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -271,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690726664601</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added new condition check when fighting with shield, it gives hero 15% chance to block every enemy attack , if the enemy is not a dragon + when hero dies, it disables all attack and spell buttons">
+      <created>1690731404865</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1690731404866</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,6 +296,7 @@
     <MESSAGE value="added pop-up window for items , made better skill points redistribution system and some css and html changes for better view" />
     <MESSAGE value="now you can give your hero your own name that will be displayed + minor css and html changes" />
     <MESSAGE value="added 2 new item types -ring, necklace" />
-    <option name="LAST_COMMIT_MESSAGE" value="added 2 new item types -ring, necklace" />
+    <MESSAGE value="added new condition check when fighting with shield, it gives hero 15% chance to block every enemy attack , if the enemy is not a dragon + when hero dies, it disables all attack and spell buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new condition check when fighting with shield, it gives hero 15% chance to block every enemy attack , if the enemy is not a dragon + when hero dies, it disables all attack and spell buttons" />
   </component>
 </project>
