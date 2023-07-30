@@ -24,6 +24,7 @@ public class Hero {
     private int permanentHealthUpgrades;
     private int permanentAttackUpgrades;
     private int permanentDefenseUpgrades;
+    private boolean hasShield;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "hero_equipped_items",
@@ -203,6 +204,13 @@ public class Hero {
 
     public void setPermanentDefenseUpgrades(int permanentDefenseUpgrades) {
         this.permanentDefenseUpgrades = permanentDefenseUpgrades;
+    }
+    public boolean hasShield() {
+        return hasShield;
+    }
+
+    public void setHasShield(boolean hasShield) {
+        this.hasShield = hasShield;
     }
 
 

@@ -94,11 +94,11 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(weapon6);
 
 
-        Items shield1 = new Items(null, "Small shield", ItemType.SHIELD, 0, 2,7,75,0,"");
+        Items shield1 = new Items(null, "Small shield", ItemType.SHIELD, 0, 2,7,85,0,"15% chance to block enemy attack");
         itemsRepository.save(shield1);
-        Items shield2 = new Items(null, "Medium shield", ItemType.SHIELD, 0, 3,10,110,0,"");
+        Items shield2 = new Items(null, "Medium shield", ItemType.SHIELD, 0, 3,10,125,0,"15% chance to block enemy attack");
         itemsRepository.save(shield2);
-        Items shield3 = new Items(null, "Tower shield", ItemType.SHIELD, 0, 4,12,135,0,"");
+        Items shield3 = new Items(null, "Tower shield", ItemType.SHIELD, 0, 4,12,155,0,"15% chance to block enemy attack");
         itemsRepository.save(shield3);
 
         Items ring1 = new Items(null, "Ring of Health", ItemType.RING, 0, 0,10,100,0,"+10 to health");
@@ -120,7 +120,7 @@ public class DnDApplication implements CommandLineRunner {
 
         Items spell1 = new Items(null, "Fire bolt", ItemType.SPELL, 0, 0,0,210,5,"Damages enemy for 20 points and ignores armor");
         itemsRepository.save(spell1);
-        Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,210,5,"Decreases enemy attack by 3 points");
+        Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,210,5,"Decreases enemy attack by 2 points");
         itemsRepository.save(spell2);
 
 

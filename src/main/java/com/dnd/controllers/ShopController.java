@@ -120,7 +120,11 @@ public class ShopController {
                 if (heroGold >= itemPrice) {
                     hero.setGold(heroGold - itemPrice);
 
-                    if (itemToBuy.getName().equals("Healing Potion")) {
+                    if (itemToBuy.getType() == ItemType.SHIELD) {
+                        // Set hasShield to true since the hero bought a shield
+                        hero.setHasShield(true);
+                        hero.equipItem(itemToBuy);
+                    } else if (itemToBuy.getName().equals("Healing Potion")) {
                         hero.setPotion(hero.getPotion() + 1);
                     } else {
                         hero.equipItem(itemToBuy);

@@ -115,7 +115,7 @@
       <td th:if="${item.type == T(com.dnd.models.ItemType).SHIELD}">
         <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
           <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
           <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
@@ -208,7 +208,16 @@
       popupContent += `
         <p>Attack Bonus: ${attackBonus}</p>
       `;
-    } else if (itemType === 'HELMET' || itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK' || itemType === 'SHIELD') {
+    } else if (itemType === 'SHIELD') {
+        const defenseBonus = button.getAttribute('data-defense-bonus');
+        const healthBonus = button.getAttribute('data-health-bonus');
+        const effect = button.getAttribute('data-effect');
+        popupContent += `
+        <p>Defense Bonus: ${defenseBonus}</p>
+        <p>Health Bonus: ${healthBonus}</p>
+        <p>Effect: ${effect}</p>
+      `;
+    } else if (itemType === 'HELMET' || itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK') {
       const defenseBonus = button.getAttribute('data-defense-bonus');
       const healthBonus = button.getAttribute('data-health-bonus');
       popupContent += `

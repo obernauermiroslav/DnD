@@ -93,6 +93,14 @@ public class GameController {
         heroAttack = Math.max(heroAttack, 0);
         enemyAttack = Math.max(enemyAttack, 0);
 
+        String enemyAttackMessage = "";
+
+        if (!enemy.getName().equalsIgnoreCase("dragon") && hero.hasShield() && Math.random() <= 0.15) {
+            enemyAttack = 0;
+            enemyAttackMessage = "You blocked enemy attack by your shield!";
+
+        }
+
         int newEnemyHealth = enemy.getHealth() - heroAttack;
         int newHeroHealth = hero.getHealth() - enemyAttack;
 
@@ -113,7 +121,7 @@ public class GameController {
         // Determine the fight result message based on hero's and enemy's health after the fight
         String fightResult;
         String heroAttackMessage = "";
-        String enemyAttackMessage = "";
+
         String ineffectiveHeroAttackMessage = "";
         String ineffectiveEnemyAttackMessage = "";
         if (newEnemyHealth <= 0) {
@@ -139,6 +147,7 @@ public class GameController {
             }
         } else if (newHeroHealth <= 0) {
             fightResult = "You have lost!";
+            model.addAttribute("heroLost", true);
         } else {
             fightResult = "";
         }
@@ -151,11 +160,11 @@ public class GameController {
         }
 
         if (heroAttack == 0) {
-            ineffectiveHeroAttackMessage = "Your hero's attack is ineffective!";
+            ineffectiveHeroAttackMessage = "Your hero's attack was ineffective!";
         }
 
         if (enemyAttack == 0) {
-            ineffectiveEnemyAttackMessage = "Enemy's attack is ineffective!";
+            ineffectiveEnemyAttackMessage = "Enemy's attack was ineffective!";
         }
 
         model.addAttribute("fightResult", fightResult);
@@ -191,7 +200,7 @@ public class GameController {
             // Update the hero's stats in the database
             heroService.saveHero(hero);
 
-            model.addAttribute("healMessage", "Healing potion gives you 40 health.");
+            model.addAttribute("healMessage", "Healing potion gives you 30 health.");
         } else {
             model.addAttribute("healMessage", "Hero does not have any healing potion.");
         }
@@ -234,7 +243,7 @@ public class GameController {
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
                     if (enemy != null) {
-                        int spellDamage = 3;
+                        int spellDamage = 2;
                         int newEnemyAttack = enemy.getAttack() - spellDamage;
 
                         // Ensure the attack doesn't go below zero
@@ -332,7 +341,7 @@ public class GameController {
                         enemiesService.saveEnemy(enemy);
 
                         // Set the spell casting result message in the model to display it in the fight page
-                        model.addAttribute("spellCastingResult", "You cast Fire bolt for " + spellDamage + " damage!");
+                        model.addAttribute("spellCastingResult", "You cast Firebolt for " + spellDamage + " damage!");
                     } else {
                         model.addAttribute("spellCastingResult", "No enemy to cast the spell on.");
                     }

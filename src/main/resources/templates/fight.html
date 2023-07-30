@@ -52,7 +52,23 @@
   <p id="fightResultIE" th:text="${ineffectiveEnemyAttackMessage}"></p>
   <p id="fightResultS" th:text="${spellCastingResult}"></p>
 </div>
-<script>
+<script th:inline="javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var heroLost = false; // Set to true if the hero has lost
+    if (heroLost) {
+      var buttons = document.querySelectorAll('button[type="submit"]');
+      buttons.forEach(function(button) {
+        button.disabled = true;
+      });
+      var fightForm = document.getElementById('fight');
+      if (fightForm) {
+        var fightButton = fightForm.querySelector('input[type="submit"]');
+        if (fightButton) {
+          fightButton.disabled = true;
+        }
+      }
+    }
+  });
   function toggleFormVisibility() {
     const spellForms = document.querySelectorAll('.spellCast');
     spellForms.forEach(form => {

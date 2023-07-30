@@ -7,9 +7,10 @@
     <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added 2 new item types -ring, necklace">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/ItemType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/ItemType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Items.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fight.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fight.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hero.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/hero.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop.html" afterDir="false" />
     </list>
@@ -177,7 +178,7 @@
       <workItem from="1690615664690" duration="12888000" />
       <workItem from="1690633014379" duration="14262000" />
       <workItem from="1690702403501" duration="10076000" />
-      <workItem from="1690717054113" duration="6844000" />
+      <workItem from="1690717054113" duration="11443000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -263,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690712398920</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added 2 new item types -ring, necklace">
+      <created>1690726664601</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1690726664601</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
