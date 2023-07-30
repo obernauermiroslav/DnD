@@ -6,7 +6,6 @@ import com.dnd.models.ItemType;
 import com.dnd.services.EnemiesService;
 import com.dnd.services.HeroService;
 import jakarta.servlet.http.HttpSession;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +37,7 @@ public class GameController {
     }
 
     @GetMapping("/fight")
-    public String showFightPage(Model model, HttpSession session) {
+    public String showFightPage(Model model) {
         // Load your hero from the hero table
         Hero hero = heroService.getYourHero();
         model.addAttribute("hero", hero);
@@ -75,8 +74,7 @@ public class GameController {
     @PostMapping("/fight")
     public String fight(@RequestParam("heroId") Long heroId,
                         @RequestParam("enemyId") Long enemyId,
-                        Model model,
-                        HttpSession session) {
+                        Model model) {
         // Load your hero and the enemy from their respective tables using the IDs received from the form
         Optional<Hero> heroOptional = heroService.getHeroById(heroId);
         Hero hero = heroOptional.orElse(null);
@@ -160,14 +158,13 @@ public class GameController {
             ineffectiveEnemyAttackMessage = "Enemy's attack is ineffective!";
         }
 
+        model.addAttribute("fightResult", fightResult);
+        model.addAttribute("heroAttackMessage", heroAttackMessage);
+        model.addAttribute("enemyAttackMessage", enemyAttackMessage);
+        model.addAttribute("ineffectiveHeroAttackMessage", ineffectiveHeroAttackMessage);
+        model.addAttribute("ineffectiveEnemyAttackMessage", ineffectiveEnemyAttackMessage);
 
-model.addAttribute("fightResult", fightResult);
-model.addAttribute("heroAttackMessage", heroAttackMessage);
-model.addAttribute("enemyAttackMessage", enemyAttackMessage);
-model.addAttribute("ineffectiveHeroAttackMessage", ineffectiveHeroAttackMessage);
-model.addAttribute("ineffectiveEnemyAttackMessage", ineffectiveEnemyAttackMessage);
-
-return "fight";
+        return "fight";
     }
 
     @PostMapping("/heal")

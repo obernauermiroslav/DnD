@@ -208,13 +208,6 @@ public class Hero {
 
     public Hero(String name) {
         this.name = name;
-        this.health = 125;
-        this.attack = 8;
-        this.defense = 6;
-        this.gold = 500;
-        this.potion = 2;
-        this.mana = 10;
-        this.skillPoints = 3;
     }
 
     public void upgradeHealth() {

@@ -6,28 +6,31 @@ import com.dnd.models.Items;
 import com.dnd.models.Shop;
 import com.dnd.repositories.HeroRepository;
 import com.dnd.repositories.ItemsRepository;
+import com.dnd.services.HeroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class ShopController {
 
-    @Autowired
-    private ItemsRepository itemsRepository;
+    private final ItemsRepository itemsRepository;
     private final HeroRepository heroRepository;
+    private final HeroService heroService;
     private final Shop shop;
     private boolean isShopInitialized = false;
 
     @Autowired
-    public ShopController(ItemsRepository itemsRepository, HeroRepository heroRepository) {
+    public ShopController(ItemsRepository itemsRepository, HeroRepository heroRepository, HeroService heroService) {
         this.itemsRepository = itemsRepository;
         this.heroRepository = heroRepository;
+        this.heroService = heroService;
         this.shop = new Shop();
         initializeShop();
     }
@@ -54,18 +57,18 @@ public class ShopController {
         // Add the available items to the model
         model.addAttribute("items", availableItems);
 
-        // Get the hero from the repository
-        Hero hero = heroRepository.findByName("hero");
+        // Get the hero from the service
+        Hero hero = heroService.getYourHero();
         if (hero != null) {
             // Add the hero's gold to the model
             model.addAttribute("heroGold", hero.getGold());
         } else {
-            // Create a new Hero if not found in the repository
+            // Create a new Hero if not found in the service
             Hero newHero = new Hero();
             // Set an initial gold value
             newHero.setGold(0);
-            // Save the newHero to the repository
-            heroRepository.save(newHero);
+            // Save the newHero to the service
+            heroService.saveHero(newHero);
             // Add the newHero's gold to the model
             model.addAttribute("heroGold", newHero.getGold());
         }
@@ -78,7 +81,7 @@ public class ShopController {
     public String buyItem(@PathVariable Long itemId, Model model) {
         Items itemToBuy = itemsRepository.findById(itemId).orElse(null);
         if (itemToBuy != null) {
-            Hero hero = heroRepository.findByName("hero");
+            Hero hero = heroService.getYourHero();
             if (hero != null) {
                 // Check if the hero already has the same spell equipped
                 if (itemToBuy.getType() == ItemType.SPELL) {
@@ -123,10 +126,10 @@ public class ShopController {
                         hero.equipItem(itemToBuy);
                     }
 
-                    heroRepository.save(hero);
-                    model.addAttribute("message", "Item purchased successfully!");
+                    heroService.updateHeroById(hero.getId(), hero);
+                    model.addAttribute("message", "Item purchased!");
                 } else {
-                    model.addAttribute("message", "Not enough gold to buy the item!");
+                    model.addAttribute("message", "Not enough gold!");
                 }
             } else {
                 model.addAttribute("message", "Hero not found!");
@@ -135,7 +138,7 @@ public class ShopController {
             model.addAttribute("message", "Item not found!");
         }
 
-        Hero updatedHero = heroRepository.findByName("hero");
+        Hero updatedHero = heroService.getYourHero();
         if (updatedHero != null) {
             model.addAttribute("heroGold", updatedHero.getGold());
         }
@@ -145,7 +148,4 @@ public class ShopController {
 
         return "shop";
     }
-
-
-
 }

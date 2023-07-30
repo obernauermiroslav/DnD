@@ -2,45 +2,25 @@ package com.dnd.services;
 
 import com.dnd.models.Hero;
 import com.dnd.repositories.HeroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class HeroService {
-    private final HeroRepository heroRepository;
-
-    @Autowired
-    public HeroService(HeroRepository heroRepository) {
-        this.heroRepository = heroRepository;
-    }
+public interface HeroService {
 
     // Method to save a new hero
-    public Hero saveHero(Hero hero) {
-        return heroRepository.save(hero);
-    }
+    Hero saveHero(Hero hero);
 
-    public List<Hero> getAllHeroes() {
-        return heroRepository.findAll();
-    }
+    List<Hero> getAllHeroes();
 
     // Method to retrieve a hero by id
-    public Optional<Hero> getHeroById(Long id) {
-        return heroRepository.findById(id);
-    }
+    Optional<Hero> getHeroById(Long id);
 
     // Method to update a hero
-    public Hero updateHero(Hero hero) {
-        return heroRepository.save(hero);
-    }
+    void updateHeroById(Long heroId, Hero updatedHero);
 
     // Method to delete a hero by id
-    public void deleteHero(Long id) {
-        heroRepository.deleteById(id);
-    }
+    void deleteHero(Long id);
 
-    public Hero getYourHero() {
-        return heroRepository.findById(1L).orElse(null);
-    }
+    Hero getYourHero();
 }

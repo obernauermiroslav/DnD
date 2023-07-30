@@ -5,7 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-<button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
-<button class="btn btn-secondary" onclick="location.href='/shop'">Shop</button>
+<h1>Hail to you champion, what shall we call you?</h1>
+<form action="/hero/save" method="post">
+    <input type="text" name="heroName" placeholder="Enter hero name" required>
+    <button type="submit">Save</button>
+</form>
 </body>
 </html>

@@ -112,9 +112,6 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(spell2);
 
 
-        // Create a new Hero instance
-        Hero hero = new Hero("hero");
-
         Enemies enemy1 = new Enemies(1L,"Great rat", 80,7,4);
         enemiesRepository.save(enemy1);
         Enemies enemy2 = new Enemies(2L,"Goblin", 155,15,6);
@@ -127,8 +124,5 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy5);
         Enemies enemy6= new Enemies(6L,"Behemoth", 400,28,17);
         enemiesRepository.save(enemy6);
-
-// Save the Hero entity to the database
-        heroRepository.save(hero);
     }
 }

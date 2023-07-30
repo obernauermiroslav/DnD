@@ -21,14 +21,14 @@ body {
 h1 {
     color: #008CBA;
     text-align: center;
-    margin-top: -630px;
+    margin-top: -550px;
     margin-left: 13px;
 }
 
 p1{
     position: absolute;
     margin-left: -105px;
-    margin-top: -565px;
+    margin-top: -485px;
 }
 
 h2 {
@@ -37,19 +37,19 @@ h2 {
     width: 280px;
     color: #008CBA;
     text-align: center;
-    margin-top: -480px;
+    margin-top: -400px;
 }
 
 p2{
     position: absolute;
-    margin-left: 160px;
-    margin-top: -565px;
+    margin-left: 145px;
+    margin-top: -485px;
 }
 
 .table-container {
     position: absolute;
     margin-left: 30px;
-    margin-top: -120px;
+    margin-top: -40px;
     width: 300px;
     height: 330px;
     border: 1px solid black;
@@ -58,7 +58,7 @@ p2{
 
 .btn {
     justify-content: center;
-    margin-top: -565px;
+    margin-top: -485px;
     position: absolute;
     margin-left: -220px;
 
@@ -105,7 +105,7 @@ p2{
     border-radius: 5px;
     max-width: 200px;
     margin-left: 600px;
-    margin-top: -145px;
+    margin-top: -70px;
 }
 
 /* Position the popup below the "Buy" button */

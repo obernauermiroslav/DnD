@@ -12,7 +12,7 @@ body {
 #hero-table,
 #items-table {
     width: 170px;
-    padding: 30px;
+    padding: 20px;
     border: 1px solid #ccc;
     margin-top: 50px;
     display: flex;
@@ -31,7 +31,7 @@ body {
 .btn-secondary {
     display: inline-block;
     margin: 5px;
-    padding: 7px 15px;
+    padding: 5px 8px;
     background-color: #ccc;
     border: none;
     border-radius: 5px;
@@ -45,18 +45,18 @@ body {
 #upgradeMessage{
     position: absolute;
     margin-left: -15px;
-    margin-top: 600px;
+    margin-top: 560px;
 }
 #item-info-popup{
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 5px;
     z-index: 1;
     border-radius: 5px;
     max-width: 200px;
-    margin-left: 1305px;
+    margin-left: 1200px;
     margin-top: -330px;
 }
 #health{
