@@ -121,6 +121,28 @@
         </form>
       </td>
     </tr>
+    <th>Rings</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).RING}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type},data-effect=${item.effect},  data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
+    <th>Necklaces</th>
+    <tr th:each="item : ${items}">
+      <td th:if="${item.type == T(com.dnd.models.ItemType).NECKLACE}">
+        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
+          <input type="submit" value="Buy" class="item-button"
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type},data-effect=${item.effect}, data-price=${item.price}" />
+          <span th:text="${item.name}">Item Name</span>
+          <span th:text="'(' + ${item.price} + 'GP)'"></span>
+        </form>
+      </td>
+    </tr>
   </table>
 </div>
 <div id="item-info-popup" class="item-popup"></div>
@@ -162,6 +184,16 @@
     if (itemType === 'POTION') {
       const effect = button.getAttribute('data-effect');
       popupContent += `
+        <p>Effect: ${effect}</p>
+      `;
+    } else if (itemType === 'NECKLACE') {
+        const effect = button.getAttribute('data-effect');
+        popupContent += `
+        <p>Effect: ${effect}</p>
+      `;
+      } else if (itemType === 'RING') {
+        const effect = button.getAttribute('data-effect');
+        popupContent += `
         <p>Effect: ${effect}</p>
       `;
     } else if (itemType === 'SPELL') {

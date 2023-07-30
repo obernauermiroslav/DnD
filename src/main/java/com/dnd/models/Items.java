@@ -21,7 +21,6 @@ public class Items {
     private int healthBonus;
     private int price;
     private int quantity;
-
     private int manaCost;
     private String effect;
 

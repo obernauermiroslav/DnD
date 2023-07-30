@@ -101,8 +101,20 @@ public class DnDApplication implements CommandLineRunner {
         Items shield3 = new Items(null, "Tower shield", ItemType.SHIELD, 0, 4,12,135,0,"");
         itemsRepository.save(shield3);
 
+        Items ring1 = new Items(null, "Ring of Health", ItemType.RING, 0, 0,10,100,0,"+10 to health");
+        itemsRepository.save(ring1);
+        Items ring2 = new Items(null, "Ring of Attack", ItemType.RING, 2, 0,0,100,0,"+2 to attack");
+        itemsRepository.save(ring2);
+        Items ring3 = new Items(null, "Ring of Defence", ItemType.RING, 0, 2,0,100,0,"+2 to defence");
+        itemsRepository.save(ring3);
 
-        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,120,0,"Heals for 40 points");
+        Items necklace1 = new Items(null, "Necklace of Power", ItemType.NECKLACE, 1, 1,5,100,0,"+1 attack, +1 defence and +5 health");
+        itemsRepository.save(necklace1);
+        Items necklace2 = new Items(null, "Necklace of Greater Power", ItemType.NECKLACE, 2, 2,10,150,0,"+2 attack,+2 defence and +10 health ");
+        itemsRepository.save(necklace2);
+
+
+        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,120,0,"Heals for 30 points");
         itemsRepository.save(potion);
 
 

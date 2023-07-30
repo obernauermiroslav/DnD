@@ -49,6 +49,9 @@ public class HeroController {
             hero.setMana(10);
             hero.setPotion(3);
             hero.setSkillPoints(3);
+            hero.setHealth(125);
+            hero.setAttack(8);
+            hero.setDefense(6);
         }
         heroService.saveHero(hero);
         return "redirect:/hero";

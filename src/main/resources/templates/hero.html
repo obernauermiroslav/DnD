@@ -65,6 +65,16 @@
         <p>Effect: ${effect}</p>
         <p>Mana Cost: ${manaCost}</p>
       `;
+    } else if (itemType === 'NECKLACE') {
+        const effect = button.getAttribute('data-effect');
+        popupContent += `
+        <p>Effect: ${effect}</p>
+      `;
+      } else if (itemType === 'RING') {
+          const effect = button.getAttribute('data-effect');
+          popupContent += `
+        <p>Effect: ${effect}</p>
+      `;
     } else if (itemType === 'WEAPON') {
       const attackBonus = button.getAttribute('data-attack-bonus');
       popupContent += `

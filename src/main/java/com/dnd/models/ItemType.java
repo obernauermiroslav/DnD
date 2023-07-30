@@ -8,6 +8,8 @@ public enum ItemType {
     CLOAK("cloak"),
     WEAPON("weapon"),
     SHIELD("shield"),
+    RING("ring"),
+    NECKLACE("necklace"),
     POTION("potion"),
     GOLD("gold"),
     SPELL("spell");
