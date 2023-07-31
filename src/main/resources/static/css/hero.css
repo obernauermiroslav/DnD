@@ -9,23 +9,28 @@ body {
     justify-content: center;
 }
 
-#hero-table,
-#items-table {
+#hero-table {
+    margin-left: -400px;
+    position: absolute;
     width: 170px;
     padding: 20px;
     border: 1px solid #ccc;
-    margin-top: 50px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 #items-table{
+    position: absolute;
+    margin-left: 785px;
+    width: 170px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     list-style: none;
-}
-
-#hero-table {
-    margin-right: 20px;
-
 }
 
 .btn-secondary {
@@ -44,8 +49,8 @@ body {
 
 #upgradeMessage{
     position: absolute;
-    margin-left: -15px;
-    margin-top: 560px;
+    margin-left: -1190px;
+    margin-top: 490px;
 }
 #item-info-popup{
     display: none;
@@ -56,8 +61,8 @@ body {
     z-index: 1;
     border-radius: 5px;
     max-width: 200px;
-    margin-left: 1200px;
-    margin-top: -330px;
+    margin-left: 1220px;
+    margin-top: 100px;
 }
 #health{
     position: absolute;
@@ -78,4 +83,59 @@ body {
     position: absolute;
     margin-left: 52px;
     margin-top: -37px;
+}
+#myHero{
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 170px;
+}
+#helmet{
+    position: absolute;
+    margin-left: 75px;
+    margin-top: 105px;
+}
+#armor{
+    position: absolute;
+    margin-left: -45px;
+    margin-top: 250px;
+}
+#necklace{
+    position: absolute;
+    margin-left: 190px;
+    margin-top: 190px;
+}
+#gloves{
+    position: absolute;
+    margin-left: 190px;
+    margin-top: 255px;
+}
+#trousers{
+    position: absolute;
+    margin-left: -45px;
+    margin-top: 380px;
+}
+#weapon{
+    position: absolute;
+    margin-left: -45px;
+    margin-top: 315px;
+}
+#shield{
+    position: absolute;
+    margin-left: 190px;
+    margin-top: 320px;
+}
+#boots{
+    position: absolute;
+    margin-left: 70px;
+    margin-top: 480px;
+}
+#ring{
+    position: absolute;
+    margin-left: 190px;
+    margin-top: 384px;
+}
+#cloak{
+    position: absolute;
+    margin-left: -43px;
+    margin-top: 175px;
 }

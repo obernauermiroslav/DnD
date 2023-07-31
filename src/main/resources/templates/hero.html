@@ -35,6 +35,7 @@
     <p th:if="${hero != null}">Gold: <span th:text="${hero.gold}"></span></p>
     <p th:if="${hero != null}">Healing potion: <span th:text="${hero.potion}"></span></p>
   </div>
+
   <div id="items-table">
     <h3>Equipped Items:</h3>
     <div class="equipped-items">
@@ -44,11 +45,23 @@
          th:attr="data-item-name=${item.name},data-effect=${item.effect},data-item-type=${item.type},data-attack-bonus=${item.attackBonus},data-defense-bonus=${item.defenseBonus},data-health-bonus=${item.healthBonus},data-mana-cost=${item.manaCost}">
       </p>
     </div>
-  </div>
-
   <p id="upgradeMessage" th:text="${upgradeMessage}"></p>
 </div>
+<div id="heroItems">
+<img id="myHero" src="/images/hero.jpg" alt="myHero">
+  <img id="helmet" src="/images/helmet.jpg" alt="">
+  <img id="armor" src="/images/armor.jpg" alt="">
+  <img id="trousers" src="/images/trousers.jpg" alt="">
+  <img id="gloves" src="/images/gloves.jpg" alt="">
+  <img id="necklace" src="/images/necklace.jpg" alt="">
+  <img id="ring" src="/images/ring.jpg" alt="">
+  <img id="boots" src="/images/boots.jpg" alt="">
+  <img id="cloak" src="/images/cloak.jpg" alt="">
+  <img id="weapon" src="/images/weapon.jpg" alt="">
+  <img id="shield" src="/images/shield.jpg" alt="">
+</div>
 <div id="item-info-popup" class="item-popup"></div>
+</div>
 <script th:inline="javascript">
   var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
 

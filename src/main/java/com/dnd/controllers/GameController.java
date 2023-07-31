@@ -384,7 +384,7 @@ public class GameController {
         if (hero != null && hero.getSkillPoints() > 0) {
             hero.upgradeHealth();
             heroService.saveHero(hero);
-            model.addAttribute("upgradeMessage", "Health upgraded by 20 points.");
+            model.addAttribute("upgradeMessage", "Health upgraded by 33 points.");
         } else {
             model.addAttribute("upgradeMessage", "Not enough skill points to upgrade health.");
         }
@@ -432,6 +432,4 @@ public class GameController {
         model.addAttribute("hero", hero);
         return "hero";
     }
-
-
 }
