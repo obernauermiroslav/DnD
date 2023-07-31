@@ -47,19 +47,19 @@
     </div>
   <p id="upgradeMessage" th:text="${upgradeMessage}"></p>
 </div>
-<div id="heroItems">
-<img id="myHero" src="/images/hero.jpg" alt="myHero">
-  <img id="helmet" src="/images/helmet.jpg" alt="">
-  <img id="armor" src="/images/armor.jpg" alt="">
-  <img id="trousers" src="/images/trousers.jpg" alt="">
-  <img id="gloves" src="/images/gloves.jpg" alt="">
-  <img id="necklace" src="/images/necklace.jpg" alt="">
-  <img id="ring" src="/images/ring.jpg" alt="">
-  <img id="boots" src="/images/boots.jpg" alt="">
-  <img id="cloak" src="/images/cloak.jpg" alt="">
-  <img id="weapon" src="/images/weapon.jpg" alt="">
-  <img id="shield" src="/images/shield.jpg" alt="">
-</div>
+  <div id="item-pictures">
+    <img id="myHero" src="/images/hero.jpg" alt="">
+    <img class="item-picture" id="helmet-picture" src="/images/helmet.jpg" alt="Helmet" style="display: none;">
+    <img class="item-picture" id="armor-picture" src="/images/armor.jpg" alt="Armor" style="display: none;">
+    <img class="item-picture" id="trousers-picture" src="/images/trousers.jpg" alt="Trousers" style="display: none;">
+    <img class="item-picture" id="gloves-picture" src="/images/gloves.jpg" alt="Gloves" style="display: none;">
+    <img class="item-picture" id="necklace-picture" src="/images/necklace.jpg" alt="Necklace" style="display: none;">
+    <img class="item-picture" id="ring-picture" src="/images/ring.jpg" alt="Ring" style="display: none;">
+    <img class="item-picture" id="boots-picture" src="/images/boots.jpg" alt="Boots" style="display: none;">
+    <img class="item-picture" id="cloak-picture" src="/images/cloak.jpg" alt="Cloak" style="display: none;">
+    <img class="item-picture" id="weapon-picture" src="/images/weapon.jpg" alt="Weapon" style="display: none;">
+    <img class="item-picture" id="shield-picture" src="/images/shield.jpg" alt="Shield" style="display: none;">
+  </div>
 <div id="item-info-popup" class="item-popup"></div>
 </div>
 <script th:inline="javascript">
@@ -71,6 +71,7 @@
       button.disabled = true;
     });
   }
+
   function handleItemHover(button) {
     const itemName = button.getAttribute('data-item-name');
     const itemType = button.getAttribute('data-item-type');
@@ -87,13 +88,13 @@
         <p>Mana Cost: ${manaCost}</p>
       `;
     } else if (itemType === 'NECKLACE') {
-        const effect = button.getAttribute('data-effect');
-        popupContent += `
+      const effect = button.getAttribute('data-effect');
+      popupContent += `
         <p>Effect: ${effect}</p>
       `;
-      } else if (itemType === 'RING') {
-          const effect = button.getAttribute('data-effect');
-          popupContent += `
+    } else if (itemType === 'RING') {
+      const effect = button.getAttribute('data-effect');
+      popupContent += `
         <p>Effect: ${effect}</p>
       `;
     } else if (itemType === 'WEAPON') {
@@ -118,22 +119,51 @@
         <p>Health Bonus: ${healthBonus}</p>
       `;
     } else {
-      // Handle any other item types here
-      // For now, we don't show any additional information for other types
     }
 
     const popup = document.getElementById('item-info-popup');
     popup.innerHTML = popupContent;
     popup.style.display = 'block';
+
+    // Display the corresponding item picture based on the item type
+    const itemPicture = document.getElementById(`${itemType.toLowerCase()}-picture`);
+    if (itemPicture) {
+      itemPicture.classList.add('highlight'); // Add the 'highlight' class to apply the highlighting style
+    }
   }
 
   function handleItemLeave() {
     const popup = document.getElementById('item-info-popup');
     popup.style.display = 'none';
+
+    // Remove the 'highlight' class to remove the highlighting style from all item pictures
+    const itemPictures = document.querySelectorAll('.item-picture');
+    itemPictures.forEach(picture => {
+      picture.classList.remove('highlight');
+    });
   }
 
-  // Attach event listeners to each item button to show/hide the popup
+  // Add this function to update the item pictures based on equipped items
+  function updateItemPictures() {
+    const equippedItems = /*[[${hero?.equippedItems}]]*/ [];
+
+    const itemPictures = document.querySelectorAll('.item-picture');
+    itemPictures.forEach(picture => {
+      const itemType = picture.id.split('-')[0].toUpperCase();
+      const hasItem = equippedItems.some(item => item.type === itemType);
+
+      if (hasItem) {
+        picture.style.display = 'block';
+      } else {
+        picture.style.display = 'none';
+      }
+    });
+  }
+
+  // Call the function to update item pictures on page load
   document.addEventListener('DOMContentLoaded', function() {
+    updateItemPictures();
+
     const itemButtons = document.querySelectorAll('.item-button');
     itemButtons.forEach(button => {
       button.addEventListener('mouseover', function() {

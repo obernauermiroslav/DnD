@@ -89,53 +89,62 @@ body {
     margin-left: 20px;
     margin-top: 170px;
 }
-#helmet{
+#helmet-picture{
     position: absolute;
     margin-left: 75px;
     margin-top: 105px;
 }
-#armor{
+#armor-picture{
     position: absolute;
     margin-left: -45px;
     margin-top: 250px;
 }
-#necklace{
+#necklace-picture{
     position: absolute;
     margin-left: 190px;
     margin-top: 190px;
 }
-#gloves{
+#gloves-picture{
     position: absolute;
     margin-left: 190px;
     margin-top: 255px;
 }
-#trousers{
+#trousers-picture{
     position: absolute;
     margin-left: -45px;
     margin-top: 380px;
 }
-#weapon{
+#weapon-picture{
     position: absolute;
     margin-left: -45px;
     margin-top: 315px;
 }
-#shield{
+#shield-picture{
     position: absolute;
     margin-left: 190px;
     margin-top: 320px;
 }
-#boots{
+#boots-picture{
     position: absolute;
     margin-left: 70px;
     margin-top: 480px;
 }
-#ring{
+#ring-picture{
     position: absolute;
     margin-left: 190px;
     margin-top: 384px;
 }
-#cloak{
+#cloak-picture{
     position: absolute;
     margin-left: -43px;
     margin-top: 175px;
+}
+/* Add the following styles to highlight the item picture when hovering over the item button */
+.item-button:hover {
+    background-color: #f2f2f2; /* Change the background color when hovering over an item button */
+}
+
+/* Add the following styles to display the highlighted item picture */
+.item-picture.highlight {
+    border: 3px solid maroon; /* Add a border to the highlighted item picture */
 }
