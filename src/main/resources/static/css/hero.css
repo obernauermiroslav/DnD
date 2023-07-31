@@ -10,10 +10,10 @@ body {
 }
 
 #hero-table {
-    margin-left: -400px;
+    margin-left: -390px;
     position: absolute;
     width: 170px;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
     margin-top: 100px;
     display: flex;
@@ -22,7 +22,7 @@ body {
 }
 #items-table{
     position: absolute;
-    margin-left: 785px;
+    margin-left: 740px;
     width: 170px;
     padding: 20px;
     border: 1px solid #ccc;
@@ -49,8 +49,8 @@ body {
 
 #upgradeMessage{
     position: absolute;
-    margin-left: -1190px;
-    margin-top: 490px;
+    margin-left: -1125px;
+    margin-top: -50px;
 }
 #item-info-popup{
     display: none;
@@ -60,8 +60,8 @@ body {
     padding: 5px;
     z-index: 1;
     border-radius: 5px;
-    max-width: 200px;
-    margin-left: 1220px;
+    max-width: 150px;
+    margin-left: 1160px;
     margin-top: 100px;
 }
 #health{
@@ -86,57 +86,57 @@ body {
 }
 #myHero{
     position: absolute;
-    margin-left: 20px;
+    margin-left: -1px;
     margin-top: 170px;
 }
 #helmet-picture{
     position: absolute;
-    margin-left: 75px;
+    margin-left: 55px;
     margin-top: 105px;
 }
 #armor-picture{
     position: absolute;
-    margin-left: -45px;
+    margin-left: -65px;
     margin-top: 250px;
 }
 #necklace-picture{
     position: absolute;
-    margin-left: 190px;
+    margin-left: 170px;
     margin-top: 190px;
 }
 #gloves-picture{
     position: absolute;
-    margin-left: 190px;
+    margin-left: 170px;
     margin-top: 255px;
 }
 #trousers-picture{
     position: absolute;
-    margin-left: -45px;
+    margin-left: -65px;
     margin-top: 380px;
 }
 #weapon-picture{
     position: absolute;
-    margin-left: -45px;
+    margin-left: -65px;
     margin-top: 315px;
 }
 #shield-picture{
     position: absolute;
-    margin-left: 190px;
+    margin-left: 170px;
     margin-top: 320px;
 }
 #boots-picture{
     position: absolute;
-    margin-left: 70px;
+    margin-left: 50px;
     margin-top: 480px;
 }
 #ring-picture{
     position: absolute;
-    margin-left: 190px;
+    margin-left: 170px;
     margin-top: 384px;
 }
 #cloak-picture{
     position: absolute;
-    margin-left: -43px;
+    margin-left: -63px;
     margin-top: 175px;
 }
 /* Add the following styles to highlight the item picture when hovering over the item button */

@@ -7,7 +7,6 @@
     <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="connected pictures interface with table for equipped items and added hover over highlight effect for selected items">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hero.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/hero.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +178,7 @@
       <workItem from="1690633014379" duration="14262000" />
       <workItem from="1690702403501" duration="10076000" />
       <workItem from="1690717054113" duration="11843000" />
-      <workItem from="1690784732333" duration="25514000" />
+      <workItem from="1690784732333" duration="29084000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -300,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690807174768</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="connected pictures interface with table for equipped items and added hover over highlight effect for selected items">
+      <created>1690811570965</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1690811570965</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
