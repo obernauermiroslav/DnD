@@ -85,20 +85,27 @@ public class GameController {
             return "error-page";
         }
 
-        // Perform the fight logic
-        int heroAttack = hero.getAttack() - enemy.getDefence();
-        int enemyAttack = enemy.getAttack() - hero.getDefense();
-
-        // Check if the attack is ineffective and set it to zero
-        heroAttack = Math.max(heroAttack, 0);
-        enemyAttack = Math.max(enemyAttack, 0);
-
+        int heroAttack;
+        int enemyAttack;
         String enemyAttackMessage = "";
+        if (enemy.getName().equalsIgnoreCase("Lich") || enemy.getName().equalsIgnoreCase("Drake")) {
+            // Lich and Dragon ignore hero armor, so the default attack will be just the enemy's attack
+            heroAttack = hero.getAttack() - enemy.getDefence();
+            enemyAttack = enemy.getAttack();
+            enemyAttackMessage = enemy.getName() + "'s attack bypasses your armor!";
+        } else {
+            // Normal attack calculation considering hero's armor
+            heroAttack = hero.getAttack() - enemy.getDefence();
+            enemyAttack = enemy.getAttack() - hero.getDefense();
 
-        if (!enemy.getName().equalsIgnoreCase("dragon") && hero.hasShield() && Math.random() <= 0.15) {
+            // Check if the attack is ineffective and set it to zero
+            heroAttack = Math.max(heroAttack, 0);
+            enemyAttack = Math.max(enemyAttack, 0);
+        }
+
+        if (!enemy.getName().equalsIgnoreCase("drake") && !enemy.getName().equalsIgnoreCase("lich") && hero.hasShield() && Math.random() <= 0.15) {
             enemyAttack = 0;
-            enemyAttackMessage = "You blocked enemy attack by your shield!";
-
+            enemyAttackMessage = "You blocked the enemy's attack with your shield!";
         }
 
         int newEnemyHealth = enemy.getHealth() - heroAttack;
@@ -121,7 +128,6 @@ public class GameController {
         // Determine the fight result message based on hero's and enemy's health after the fight
         String fightResult;
         String heroAttackMessage = "";
-
         String ineffectiveHeroAttackMessage = "";
         String ineffectiveEnemyAttackMessage = "";
         if (newEnemyHealth <= 0) {
@@ -148,9 +154,12 @@ public class GameController {
         } else if (newHeroHealth <= 0) {
             fightResult = "You have lost!";
             model.addAttribute("heroLost", true);
+            session.setAttribute("heroLost", true);
         } else {
             fightResult = "";
+            model.addAttribute("heroLost", false);
         }
+
         if (heroAttack > 0) {
             heroAttackMessage = "Your hero attacks for " + heroAttack + " damage!";
         }
@@ -176,6 +185,7 @@ public class GameController {
         return "fight";
     }
 
+
     @PostMapping("/heal")
     public String healHero(@RequestParam("heroId") Long heroId,
                            Model model,
@@ -192,7 +202,7 @@ public class GameController {
         int potionCount = hero.getPotion();
         if (potionCount > 0) {
             // Heal the hero
-            hero.setHealth(hero.getHealth() + 30);
+            hero.setHealth(hero.getHealth() + 33);
 
             // Reduce the number of healing potions by 1
             hero.setPotion(potionCount - 1);
@@ -200,7 +210,7 @@ public class GameController {
             // Update the hero's stats in the database
             heroService.saveHero(hero);
 
-            model.addAttribute("healMessage", "Healing potion gives you 30 health.");
+            model.addAttribute("healMessage", "Healing potion gives you 33 health.");
         } else {
             model.addAttribute("healMessage", "Hero does not have any healing potion.");
         }
@@ -312,7 +322,7 @@ public class GameController {
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
                     if (enemy != null) {
-                        int spellDamage = 20;
+                        int spellDamage = 22;
                         int newEnemyHealth = enemy.getHealth() - spellDamage;
 
                         // Ensure the health doesn't go below zero

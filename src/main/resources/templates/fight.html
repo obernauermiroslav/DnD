@@ -54,7 +54,9 @@
 </div>
 <script th:inline="javascript">
   document.addEventListener('DOMContentLoaded', function() {
-    var heroLost = false; // Set to true if the hero has lost
+    /* Check if heroLost flag is true (hero has lost) and disable the buttons */
+    var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
+
     if (heroLost) {
       var buttons = document.querySelectorAll('button[type="submit"]');
       buttons.forEach(function(button) {

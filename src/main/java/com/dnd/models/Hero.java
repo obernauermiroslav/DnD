@@ -169,11 +169,11 @@ public class Hero {
     }
 
     public int getBaseDefense() {
-        return 6;
+        return 7;
     }
 
     public int getBaseHealth() {
-        return 125;
+        return 130;
     }
     public int getSkillPoints() {
         return skillPoints;
@@ -220,8 +220,8 @@ public class Hero {
 
     public void upgradeHealth() {
         if (skillPoints > 0) {
-            health += 20;
-            permanentHealthUpgrades += 20;
+            health += 25;
+            permanentHealthUpgrades += 25;
             skillPoints -= 1;
         }
     }

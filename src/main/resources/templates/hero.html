@@ -13,7 +13,7 @@
     <h3>Welcome, <span th:if="${hero != null}" th:text="${hero.name}">Guest</span>!</h3>
     <div>
       <button class="btn btn-secondary" onclick="location.href='/shop'">Shop</button>
-      <button class="btn btn-secondary" onclick="location.href='/fight'">Fight</button>
+      <button class="btn btn-secondary" onclick="location.href='/fight'" th:disabled="${session.heroLost}">Fight</button>
     </div>
     <p>Skill points: <span th:if="${hero != null}" th:text="${hero.skillPoints}">0</span></p>
     <p th:if="${hero != null}">Health: <span th:text="${hero.health}"></span></p>
@@ -50,6 +50,14 @@
 </div>
 <div id="item-info-popup" class="item-popup"></div>
 <script th:inline="javascript">
+  var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
+
+  if (heroLost) {
+    var buttons = document.querySelectorAll('button[type="submit"]');
+    buttons.forEach(function(button) {
+      button.disabled = true;
+    });
+  }
   function handleItemHover(button) {
     const itemName = button.getAttribute('data-item-name');
     const itemType = button.getAttribute('data-item-type');

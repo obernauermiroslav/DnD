@@ -114,27 +114,29 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(necklace2);
 
 
-        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,120,0,"Heals for 30 points");
+        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,120,0,"Heals for 33 points");
         itemsRepository.save(potion);
 
 
-        Items spell1 = new Items(null, "Fire bolt", ItemType.SPELL, 0, 0,0,210,5,"Damages enemy for 20 points and ignores armor");
+        Items spell1 = new Items(null, "Fire bolt", ItemType.SPELL, 0, 0,0,210,5,"Damages enemy for 22 points and ignores armor");
         itemsRepository.save(spell1);
         Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,210,5,"Decreases enemy attack by 2 points");
         itemsRepository.save(spell2);
 
 
-        Enemies enemy1 = new Enemies(1L,"Great rat", 80,7,4);
+        Enemies enemy1 = new Enemies(1L,"Great rat", 85,8,4);
         enemiesRepository.save(enemy1);
-        Enemies enemy2 = new Enemies(2L,"Goblin", 155,15,6);
+        Enemies enemy2 = new Enemies(2L,"Goblin", 116,16,6);
         enemiesRepository.save(enemy2);
-        Enemies enemy3= new Enemies(3L,"Orc", 220,17,8);
+        Enemies enemy3= new Enemies(3L,"Orc", 225,18,8);
         enemiesRepository.save(enemy3);
-        Enemies enemy4= new Enemies(4L,"Troll", 270,20,11);
+        Enemies enemy4= new Enemies(4L,"Troll", 275,21,11);
         enemiesRepository.save(enemy4);
-        Enemies enemy5= new Enemies(5L,"Dragon", 330,24,14);
+        Enemies enemy5= new Enemies(5L,"Drake", 330,23,14);
         enemiesRepository.save(enemy5);
-        Enemies enemy6= new Enemies(6L,"Behemoth", 400,28,17);
+        Enemies enemy6= new Enemies(6L,"Behemoth", 420,28,17);
         enemiesRepository.save(enemy6);
+        Enemies enemy7= new Enemies(7L,"Lich", 220,30,14);
+        enemiesRepository.save(enemy7);
     }
 }

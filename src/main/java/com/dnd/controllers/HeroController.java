@@ -45,13 +45,13 @@ public class HeroController {
         } else {
             // Create a new hero with the given name
             hero = new Hero(heroName);
-            hero.setGold(450);
+            hero.setGold(600);
             hero.setMana(10);
             hero.setPotion(3);
             hero.setSkillPoints(3);
-            hero.setHealth(125);
+            hero.setHealth(130);
             hero.setAttack(8);
-            hero.setDefense(6);
+            hero.setDefense(7);
         }
         heroService.saveHero(hero);
         return "redirect:/hero";
