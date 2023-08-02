@@ -113,3 +113,6 @@ p2{
     position: relative;
 
 }
+.bought {
+    background-color: lightgreen; /* You can customize the style here */
+}

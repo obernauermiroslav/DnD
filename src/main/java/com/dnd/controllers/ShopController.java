@@ -13,8 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -62,6 +64,8 @@ public class ShopController {
         if (hero != null) {
             // Add the hero's gold to the model
             model.addAttribute("heroGold", hero.getGold());
+            model.addAttribute("equippedItems", hero.getEquippedItems());
+            model.addAttribute("hero", hero);
         } else {
             // Create a new Hero if not found in the service
             Hero newHero = new Hero();
@@ -71,10 +75,21 @@ public class ShopController {
             heroService.saveHero(newHero);
             // Add the newHero's gold to the model
             model.addAttribute("heroGold", newHero.getGold());
+            model.addAttribute("hero", hero);
         }
 
         // Return the shop view
         return "shop";
+    }
+
+    @GetMapping("/api/equipped-items")
+    @ResponseBody
+    public List<Items> getEquippedItems() {
+        Hero hero = heroService.getYourHero();
+        if (hero != null) {
+            return hero.getEquippedItems();
+        }
+        return Collections.emptyList();
     }
 
     @PostMapping("/shop/buy/{itemId}")

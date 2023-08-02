@@ -1,6 +1,7 @@
 package com.dnd.services;
 
 import com.dnd.models.Hero;
+import com.dnd.models.Items;
 import com.dnd.repositories.HeroRepository;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface HeroService {
     void deleteHero(Long id);
 
     Hero getYourHero();
+
+    List<Items> getEquippedItems(Long heroId);
 }

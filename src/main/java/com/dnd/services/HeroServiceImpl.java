@@ -1,6 +1,7 @@
 package com.dnd.services;
 
 import com.dnd.models.Hero;
+import com.dnd.models.Items;
 import com.dnd.repositories.HeroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,5 +65,16 @@ public class HeroServiceImpl implements HeroService {
     @Override
     public Hero getYourHero() {
         return heroRepository.findById(1L).orElse(null);
+    }
+
+    @Override
+    public List<Items> getEquippedItems(Long heroId) {
+        Optional<Hero> optionalHero = heroRepository.findById(heroId);
+        if (optionalHero.isPresent()) {
+            Hero hero = optionalHero.get();
+            return hero.getEquippedItems();
+        } else {
+            return null; // Return null or throw an exception if hero not found
+        }
     }
 }

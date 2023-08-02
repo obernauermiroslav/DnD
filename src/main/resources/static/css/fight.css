@@ -31,7 +31,6 @@ h2 {
     position: absolute;
     margin-top: -12px;
     margin-left: -220px;
-    padding: 20px;
 }
 
 .enemy-container {
@@ -41,10 +40,6 @@ h2 {
     padding: 20px;
 }
 
-.hero-info,
-.enemy-info {
-    padding: 10px;
-}
 
 .results {
     position: absolute;
