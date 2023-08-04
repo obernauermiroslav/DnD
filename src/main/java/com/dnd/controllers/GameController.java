@@ -135,6 +135,7 @@ public class GameController {
             hero.setHealth(hero.getHealth() + 100);
             hero.setMana(hero.getMana() + 5);
             hero.setSkillPoints(hero.getSkillPoints() + 2);
+            hero.setRunes((hero.getRunes() + 1));
             heroService.saveHero(hero);
 
             // Remove the defeated enemy from the database
@@ -331,6 +332,7 @@ public class GameController {
                             hero.setHealth(hero.getHealth() + 100);
                             hero.setMana(hero.getMana() + 5);
                             hero.setSkillPoints(hero.getSkillPoints() + 2);
+                            hero.setRunes((hero.getRunes() + 1));
                             heroService.saveHero(hero);
                             // Remove the defeated enemy from the database
                             enemiesService.deleteEnemy(enemy);

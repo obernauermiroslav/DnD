@@ -34,19 +34,36 @@
     </form>
     <p th:if="${hero != null}">Gold: <span th:text="${hero.gold}"></span></p>
     <p th:if="${hero != null}">Healing potion: <span th:text="${hero.potion}"></span></p>
+    <p th:if="${hero != null}">Runes: <span th:text="${hero.runes}"></span></p>
   </div>
-
   <div id="items-table">
     <h3>Equipped Items:</h3>
     <div class="equipped-items">
-      <p th:each="item : ${hero?.equippedItems}" th:if="${hero != null and item != null}"
-         class="item-button"
-         th:text="${item.name}"
-         th:attr="data-item-name=${item.name},data-effect=${item.effect},data-item-type=${item.type},data-attack-bonus=${item.attackBonus},data-defense-bonus=${item.defenseBonus},data-health-bonus=${item.healthBonus},data-mana-cost=${item.manaCost}">
-      </p>
+      <!-- Loop through equippedItems and create a new button for each item -->
+      <div th:each="item : ${hero?.equippedItems}" th:if="${hero != null and item != null}">
+        <div class="item-container">
+          <p class="item-button" th:text="${item.name}"
+             th:attr="data-item-name=${item.name},data-effect=${item.effect},data-item-type=${item.type},data-attack-bonus=${item.attackBonus},data-defense-bonus=${item.defenseBonus},data-health-bonus=${item.healthBonus},data-mana-cost=${item.manaCost}">
+          </p>
+          <!-- Render the upgrade button for each item -->
+          <form th:action="@{/hero/upgradeItem/{itemId}(itemId=${item.id})}" method="post"
+                th:unless="${item.type == 'SPELL' or item.type == 'RING' or item.type == 'NECKLACE'}"
+                class="button-container">
+            <button id="upgradeButton" type="submit" style="display: none">+</button>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
+
+
+
   <p id="upgradeMessage" th:text="${upgradeMessage}"></p>
-</div>
+  <div>
+    <p id="upgradeMessageItem" th:if="${not #strings.isEmpty(upgradeMessageItem)}" th:text="${upgradeMessageItem}"></p>
+  </div>
+
+
   <div id="item-pictures">
     <img id="myHero" src="/images/hero.jpg" alt="">
     <img class="item-picture" id="helmet-picture" src="/images/helmet.jpg" alt="Helmet" style="display: none;">
@@ -121,6 +138,7 @@
     } else {
     }
 
+
     const popup = document.getElementById('item-info-popup');
     popup.innerHTML = popupContent;
     popup.style.display = 'block';
@@ -159,21 +177,46 @@
       }
     });
   }
+  function updateItemPictures() {
+    const equippedItems = /*[[${hero?.equippedItems}]]*/ [];
+
+    const itemPictures = document.querySelectorAll('.item-picture');
+    itemPictures.forEach(picture => {
+      const itemType = picture.id.split('-')[0].toUpperCase();
+      const hasItem = equippedItems.some(item => item.type === itemType);
+
+      if (hasItem) {
+        picture.style.display = 'block';
+      } else {
+        picture.style.display = 'none';
+      }
+    });
+  }
 
   // Call the function to update item pictures on page load
-  document.addEventListener('DOMContentLoaded', function() {
-    updateItemPictures();
+  document.addEventListener('DOMContentLoaded', function () {
+    var itemButtons = document.querySelectorAll('.item-button');
+    itemButtons.forEach(function (button) {
+      var itemType = button.getAttribute('data-item-type');
+      var upgradeButton = button.parentElement.querySelector('#upgradeButton');
 
-    const itemButtons = document.querySelectorAll('.item-button');
-    itemButtons.forEach(button => {
-      button.addEventListener('mouseover', function() {
+      if (itemType !== 'SPELL' && itemType !== 'RING' && itemType !== 'NECKLACE') {
+        upgradeButton.style.display = 'block';
+      } else {
+        upgradeButton.style.display = 'none';
+      }
+
+      button.addEventListener('mouseover', function () {
         handleItemHover(button);
       });
 
-      button.addEventListener('mouseleave', function() {
+      button.addEventListener('mouseleave', function () {
         handleItemLeave();
       });
     });
+
+    // Call the function to update item pictures
+    updateItemPictures();
   });
 </script>
 </body>

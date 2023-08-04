@@ -23,13 +23,12 @@ body {
 #items-table{
     position: absolute;
     margin-left: 740px;
-    width: 170px;
-    padding: 20px;
+    width: 200px;
+    padding: 15px;
     border: 1px solid #ccc;
     margin-top: 100px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     list-style: none;
 }
 
@@ -49,8 +48,8 @@ body {
 
 #upgradeMessage{
     position: absolute;
-    margin-left: -1125px;
-    margin-top: -50px;
+    margin-left: -390px;
+    margin-top: 60px;
 }
 #item-info-popup{
     display: none;
@@ -148,3 +147,22 @@ body {
 .item-picture.highlight {
     border: 3px solid maroon; /* Add a border to the highlighted item picture */
 }
+
+
+.item-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    margin-right: 20px; /* Add some spacing between each item */
+}
+
+.item-button {
+    margin-right: 5px; /* Add some spacing between the button and the item name */
+}
+
+#upgradeMessageItem{
+    position: absolute;
+    margin-left:280px;
+    margin-top: 70px;
+    align-items: center;
+}
+

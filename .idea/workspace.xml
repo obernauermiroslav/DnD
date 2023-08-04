@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="changes to css,now it's better responsive to various length and width">
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added new resource - rune, it can be used for item upgrade">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/services/ItemsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/services/ItemsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/services/ItemsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/services/ItemsServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hero.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/hero.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +89,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/IdeaProjects/w40knew&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/IdeaProjects/DnDnew&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -192,7 +196,11 @@
       <workItem from="1690717054113" duration="11843000" />
       <workItem from="1690784732333" duration="29484000" />
       <workItem from="1690873522994" duration="29702000" />
-      <workItem from="1690958120072" duration="11303000" />
+      <workItem from="1690958120072" duration="16823000" />
+      <workItem from="1690992073953" duration="3738000" />
+      <workItem from="1691064551449" duration="12257000" />
+      <workItem from="1691134027507" duration="1649000" />
+      <workItem from="1691135910248" duration="15079000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -327,7 +335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690817159282</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="now it also shows currently equipped item for each item type and it shows if a spell is learned or not in the pop window">
+      <created>1690970508134</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1690970508135</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,6 +364,8 @@
     <MESSAGE value="added interface with pictures for hero and his items" />
     <MESSAGE value="connected pictures interface with table for equipped items and added hover over highlight effect for selected items" />
     <MESSAGE value="changes to css,now it's better responsive to various length and width" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes to css,now it's better responsive to various length and width" />
+    <MESSAGE value="now it also shows currently equipped item for each item type and it shows if a spell is learned or not in the pop window" />
+    <MESSAGE value="added new resource - rune, it can be used for item upgrade" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new resource - rune, it can be used for item upgrade" />
   </component>
 </project>

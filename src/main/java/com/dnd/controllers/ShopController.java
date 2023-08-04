@@ -104,7 +104,7 @@ public class ShopController {
                             .anyMatch(existingSpell -> existingSpell.getName().equals(itemToBuy.getName()));
 
                     if (hasSameSpell) {
-                        model.addAttribute("message", "You already have that spell!");
+                        model.addAttribute("message", "Spell learned already!");
                         List<Items> availableItems = shop.getAvailableItems();
                         model.addAttribute("items", availableItems);
                         model.addAttribute("heroGold", hero.getGold());
@@ -167,4 +167,5 @@ public class ShopController {
 
         return "shop";
     }
+
 }

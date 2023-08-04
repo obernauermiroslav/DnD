@@ -19,7 +19,7 @@ public class Hero {
     private int potion;
     private int spell;
     private int mana;
-
+    private int runes;
     private int skillPoints;
     private int permanentHealthUpgrades;
     private int permanentAttackUpgrades;
@@ -211,6 +211,14 @@ public class Hero {
 
     public void setHasShield(boolean hasShield) {
         this.hasShield = hasShield;
+    }
+
+    public int getRunes() {
+        return runes;
+    }
+
+    public void setRunes(int runes) {
+        this.runes = runes;
     }
 
 
