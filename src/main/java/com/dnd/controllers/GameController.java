@@ -131,9 +131,9 @@ public class GameController {
         String ineffectiveHeroAttackMessage = "";
         String ineffectiveEnemyAttackMessage = "";
         if (newEnemyHealth <= 0) {
-            hero.setGold(hero.getGold() + 150);
-            hero.setHealth(hero.getHealth() + 100);
-            hero.setMana(hero.getMana() + 5);
+            hero.setGold(hero.getGold() + 160);
+            hero.setHealth(hero.getHealth() + 120);
+            hero.setMana(hero.getMana() + 6);
             hero.setSkillPoints(hero.getSkillPoints() + 2);
             hero.setRunes((hero.getRunes() + 1));
             heroService.saveHero(hero);
@@ -203,7 +203,7 @@ public class GameController {
         int potionCount = hero.getPotion();
         if (potionCount > 0) {
             // Heal the hero
-            hero.setHealth(hero.getHealth() + 33);
+            hero.setHealth(hero.getHealth() + 35);
 
             // Reduce the number of healing potions by 1
             hero.setPotion(potionCount - 1);
@@ -323,14 +323,14 @@ public class GameController {
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
                     if (enemy != null) {
-                        int spellDamage = 22;
+                        int spellDamage = 25;
                         int newEnemyHealth = enemy.getHealth() - spellDamage;
 
                         // Ensure the health doesn't go below zero
                         if (newEnemyHealth <= 0) {
-                            hero.setGold(hero.getGold() + 150);
-                            hero.setHealth(hero.getHealth() + 100);
-                            hero.setMana(hero.getMana() + 5);
+                            hero.setGold(hero.getGold() + 160);
+                            hero.setHealth(hero.getHealth() + 120);
+                            hero.setMana(hero.getMana() + 6);
                             hero.setSkillPoints(hero.getSkillPoints() + 2);
                             hero.setRunes((hero.getRunes() + 1));
                             heroService.saveHero(hero);

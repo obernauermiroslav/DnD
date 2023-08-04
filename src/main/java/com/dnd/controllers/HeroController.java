@@ -95,13 +95,13 @@ public class HeroController {
                         // Upgrade attack for weapon and specific spell
                         itemToUpgrade.setAttackBonus(itemToUpgrade.getAttackBonus() + 1);
                         hero.setRunes(hero.getRunes() - 1);
-                        redirectAttributes.addFlashAttribute("upgradeMessageItem", "Weapon upgraded.");
+                        redirectAttributes.addFlashAttribute("upgradeMessageItem", itemToUpgrade.getName() + " upgraded: +1 attack.");
                     } else if (isArmorType(itemToUpgrade.getType())) {
                         // Upgrade health and defense for armor, cloak, gloves, trousers, helmet, shield, boots
                         itemToUpgrade.setHealthBonus(itemToUpgrade.getHealthBonus() + 2);
                         itemToUpgrade.setDefenseBonus(itemToUpgrade.getDefenseBonus() + 1);
                         hero.setRunes(hero.getRunes() - 1);
-                        redirectAttributes.addFlashAttribute("upgradeMessageItem", "Item upgraded.");
+                        redirectAttributes.addFlashAttribute("upgradeMessageItem", itemToUpgrade.getName() + " upgraded: +1 defence, +2 health.");
                     } else {
                         // For other item types, upgrading is not allowed, so do nothing
                     }
@@ -124,5 +124,4 @@ public class HeroController {
         }
         return "redirect:/hero";
     }
-
 }
