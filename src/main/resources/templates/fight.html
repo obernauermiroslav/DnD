@@ -41,6 +41,13 @@
   <p>Health: <span th:text="${enemy.health}"></span></p>
   <p>Attack: <span th:text="${enemy.attack}"></span></p>
   <p>Defense: <span th:text="${enemy.defence}"></span></p>
+  <div class="enemy-info-btn">
+    <button type="button" class="btn btn-secondary">Show Info</button>
+    <div class="enemy-info">
+      <!-- Add the enemy info here -->
+      <p th:text="${enemy.info}"></p>
+    </div>
+  </div>
 </div>
 <div class="results">
   <h2>Results:</h2>

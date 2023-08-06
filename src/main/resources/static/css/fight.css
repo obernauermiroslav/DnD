@@ -1,5 +1,5 @@
 body {
-    background-image: url('../images/background.jpg');
+    background-image: url('../images/background2.jpg');
     background-position: center;
     background-size: cover;
     display: flex;
@@ -91,6 +91,24 @@ h2 {
     margin-left: -170px;
     width: 70px;
     height: 25px;
+}
+.enemy-info {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    width: 200px;
+}
+
+/* Style for the button to show the hover window */
+.enemy-info-btn {
+    position: relative;
+}
+
+.enemy-info-btn:hover .enemy-info {
+    display: block;
 }
 
 

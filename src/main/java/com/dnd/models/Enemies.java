@@ -3,6 +3,8 @@ package com.dnd.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import javax.print.DocFlavor;
 import java.io.Serializable;
 @Entity
 @Table(name = "enemies")
@@ -11,18 +13,21 @@ public class Enemies implements Serializable {
     private int health;
     private int attack;
     private int defence;
+
+    private String info;
     @Id
     private Long id;
 
     public Enemies() {
     }
 
-    public Enemies(Long id, String name, int health, int attack, int defence) {
+    public Enemies(Long id, String name, int health, int attack, int defence, String info ) {
         this.id = id;
         this.name = name;
         this.health = health;
         this.attack = attack;
         this.defence = defence;
+        this.info = info;
     }
 
     public void setId(Long id) {
@@ -63,6 +68,14 @@ public class Enemies implements Serializable {
 
     public void setDefence(int defence) {
         this.defence = defence;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public String saveEnemyData() {
