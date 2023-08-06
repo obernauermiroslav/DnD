@@ -90,11 +90,22 @@ public class HeroServiceImpl implements HeroService {
             totalHealthBonus += item.getHealthBonus();
         }
 
-        // Update the hero's stats
+        // Update the hero's statsz
         hero.setAttack(hero.getBaseAttack() + totalAttackBonus);
         hero.setDefense(hero.getBaseDefense() + totalDefenseBonus);
-        hero.setHealth(hero.getBaseHealth() + totalHealthBonus);
+      //  hero.setHealth(hero.getHealth() + totalHealthBonus);
 
+    }
+    @Override
+    public void updateHeroEquippedItems(Long heroId, List<Items> equippedItems) {
+        Optional<Hero> optionalHero = heroRepository.findById(heroId);
+        if (optionalHero.isPresent()) {
+            Hero hero = optionalHero.get();
+            hero.setEquippedItems(equippedItems);
+            heroRepository.save(hero);
+        } else {
+            // Handle hero not found
+        }
     }
 }
 

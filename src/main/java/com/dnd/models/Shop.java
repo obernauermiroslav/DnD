@@ -28,5 +28,10 @@ public class Shop {
     public List<Items> getAvailableItems() {
         return availableItems;
     }
+
+    public void updateAvailableItems(List<Items> itemsFromDatabase) {
+        availableItems.clear();
+        availableItems.addAll(itemsFromDatabase);
+    }
 }
 

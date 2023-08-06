@@ -3,7 +3,6 @@ package com.dnd.controllers;
 import com.dnd.models.Hero;
 import com.dnd.models.ItemType;
 import com.dnd.models.Items;
-import com.dnd.repositories.HeroRepository;
 import com.dnd.services.HeroService;
 import com.dnd.services.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/hero")
@@ -23,6 +19,7 @@ public class HeroController {
 
     private final HeroService heroService;
     private final ItemsService itemsService;
+    private final Map<Long, Boolean> upgradedItemsMap = new HashMap<>();
 
     @Autowired
     public HeroController(HeroService heroService, ItemsService itemsService) {
@@ -60,7 +57,7 @@ public class HeroController {
             hero.setHealth(130);
             hero.setAttack(8);
             hero.setDefense(7);
-            hero.setRunes(1);
+            hero.setRunes(2);
         }
         heroService.saveHero(hero);
         return "redirect:/hero";
@@ -73,15 +70,20 @@ public class HeroController {
         return armorTypes.contains(itemType);
     }
 
-    @RequestMapping(value = "/upgradeItem/{itemId}", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/upgradeItem/{itemId}", method = { RequestMethod.GET, RequestMethod.POST })
     public String upgradeItem(@PathVariable Long itemId, RedirectAttributes redirectAttributes) {
         Hero hero = heroService.getYourHero();
         if (hero != null) {
+            // Fetch the latest hero stats from the database
+            hero = heroService.getHeroById(hero.getId()).orElse(null);
+
             // Check if the hero has at least one rune
             if (hero.getRunes() > 0) {
                 Items itemToUpgrade = null;
+                List<Items> equippedItems = heroService.getEquippedItems(hero.getId());
+
                 // Find the item in the equippedItems list
-                for (Items item : hero.getEquippedItems()) {
+                for (Items item : equippedItems) {
                     if (item.getId().equals(itemId)) {
                         itemToUpgrade = item;
                         break;
@@ -90,18 +92,54 @@ public class HeroController {
 
                 // Upgrade the item if found
                 if (itemToUpgrade != null) {
+
                     // Check the item type and apply upgrades based on the type
                     if (itemToUpgrade.getType() == ItemType.WEAPON) {
                         // Upgrade attack for weapon and specific spell
+                        int attackBonusBeforeUpgrade = itemToUpgrade.getAttackBonus();
                         itemToUpgrade.setAttackBonus(itemToUpgrade.getAttackBonus() + 1);
                         hero.setRunes(hero.getRunes() - 1);
-                        redirectAttributes.addFlashAttribute("upgradeMessageItem", itemToUpgrade.getName() + " upgraded: +1 attack.");
+                        redirectAttributes.addFlashAttribute("upgradeMessageItem",
+                                itemToUpgrade.getName() + " upgraded: +1 attack.");
+
+                        // Calculate the attack bonus difference after the upgrade
+                        int attackBonusDifference = itemToUpgrade.getAttackBonus() - attackBonusBeforeUpgrade;
+
+                        // Update the hero's attack using the actual current attack from the table plus the attack bonus difference
+                        hero.setAttack(hero.getAttack() + attackBonusDifference);
+
                     } else if (isArmorType(itemToUpgrade.getType())) {
-                        // Upgrade health and defense for armor, cloak, gloves, trousers, helmet, shield, boots
-                        itemToUpgrade.setHealthBonus(itemToUpgrade.getHealthBonus() + 2);
-                        itemToUpgrade.setDefenseBonus(itemToUpgrade.getDefenseBonus() + 1);
+                        // Check if the hero has already bought and upgraded this item
+                        boolean hasUpgradedItem = upgradedItemsMap.getOrDefault(itemId, false);
+
+                        // Store the health bonus before upgrading the armor
+                        int healthBonusBeforeUpgrade = itemToUpgrade.getHealthBonus();
+                        int defenseBonusBeforeUpgrade = itemToUpgrade.getDefenseBonus();
+
+                        // If the item has not been upgraded, add the full health bonus
+                        if (!hasUpgradedItem) {
+                            itemToUpgrade.setHealthBonus(itemToUpgrade.getHealthBonus() + 2); // Add the full health bonus
+                            itemToUpgrade.setDefenseBonus(itemToUpgrade.getDefenseBonus() + 1); // Add the full defense bonus
+                            upgradedItemsMap.put(itemId, true); // Mark the item as upgraded in the map
+                        } else {
+                            // If the item has been previously upgraded, add only the upgrade amount
+                            itemToUpgrade.setHealthBonus(itemToUpgrade.getHealthBonus() + 2); // Add only the upgrade amount for health
+                            itemToUpgrade.setDefenseBonus(itemToUpgrade.getDefenseBonus() + 1); // Add only the upgrade amount for defense
+                        }
+
                         hero.setRunes(hero.getRunes() - 1);
-                        redirectAttributes.addFlashAttribute("upgradeMessageItem", itemToUpgrade.getName() + " upgraded: +1 defence, +2 health.");
+                        redirectAttributes.addFlashAttribute("upgradeMessageItem",
+                                itemToUpgrade.getName() + " upgraded: +1 defense, +1 health.");
+
+                        // Calculate the health bonus difference after the upgrade
+                        int healthBonusDifference = itemToUpgrade.getHealthBonus() - healthBonusBeforeUpgrade;
+
+                        // Update the hero's health using the actual current health from the table plus the health bonus difference
+                        hero.setHealth(hero.getHealth() + healthBonusDifference);
+
+                        // Save the updated item using the ItemsService
+                        itemsService.saveItem(itemToUpgrade);
+
                     } else {
                         // For other item types, upgrading is not allowed, so do nothing
                     }
@@ -110,8 +148,7 @@ public class HeroController {
                     itemsService.saveItem(itemToUpgrade);
 
                     // Update the hero's stats based on equipped items
-                    heroService.updateHeroStats(hero);
-
+                    hero.updateStatsUpgrade();
                     heroService.saveHero(hero);
                 } else {
                     // Item not found in equippedItems list, handle this case accordingly

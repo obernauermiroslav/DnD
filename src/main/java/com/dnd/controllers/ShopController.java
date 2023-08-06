@@ -46,16 +46,11 @@ public class ShopController {
         }
     }
 
+
     @GetMapping("/shop")
     public String viewShop(Model model) {
-        if (!isShopInitialized) {
-            initializeShop();
-            isShopInitialized = true;
-        }
-
-        // Get the available items from the shop
-        List<Items> availableItems = shop.getAvailableItems();
-
+        // Fetch the latest items from the database
+        List<Items> availableItems = (List<Items>) itemsRepository.findAll();
         // Add the available items to the model
         model.addAttribute("items", availableItems);
 
@@ -75,12 +70,13 @@ public class ShopController {
             heroService.saveHero(newHero);
             // Add the newHero's gold to the model
             model.addAttribute("heroGold", newHero.getGold());
-            model.addAttribute("hero", hero);
+            model.addAttribute("hero", newHero); // Note: Update to newHero
         }
 
         // Return the shop view
         return "shop";
     }
+
 
     @GetMapping("/api/equipped-items")
     @ResponseBody
@@ -121,7 +117,9 @@ public class ShopController {
                             hero.unequipItem(existingItemOfType);
                         } else {
                             model.addAttribute("message", "You already have that item!");
-                            List<Items> availableItems = shop.getAvailableItems();
+                            // Fetch the latest items from the database
+                            List<Items> availableItems = (List<Items>) itemsRepository.findAll();
+                            // Add the available items to the model
                             model.addAttribute("items", availableItems);
                             model.addAttribute("heroGold", hero.getGold());
                             return "shop";
@@ -157,13 +155,15 @@ public class ShopController {
             model.addAttribute("message", "Item not found!");
         }
 
+        // Fetch the latest items from the database
+        List<Items> availableItems = (List<Items>) itemsRepository.findAll();
+        // Add the available items to the model
+        model.addAttribute("items", availableItems);
+
         Hero updatedHero = heroService.getYourHero();
         if (updatedHero != null) {
             model.addAttribute("heroGold", updatedHero.getGold());
         }
-
-        List<Items> availableItems = shop.getAvailableItems();
-        model.addAttribute("items", availableItems);
 
         return "shop";
     }

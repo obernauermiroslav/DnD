@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added new resource - rune, it can be used for item upgrade">
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="minor css changes and now correctly gives names to each upgraded item">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fight.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fight.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hero.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/hero.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +199,9 @@
       <workItem from="1690992073953" duration="3738000" />
       <workItem from="1691064551449" duration="12257000" />
       <workItem from="1691134027507" duration="1649000" />
-      <workItem from="1691135910248" duration="18481000" />
+      <workItem from="1691135910248" duration="18946000" />
+      <workItem from="1691221982603" duration="6355000" />
+      <workItem from="1691302043973" duration="10996000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -342,7 +350,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691156050064</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="minor css changes and now correctly gives names to each upgraded item">
+      <created>1691159965640</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1691159965640</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,6 +381,7 @@
     <MESSAGE value="changes to css,now it's better responsive to various length and width" />
     <MESSAGE value="now it also shows currently equipped item for each item type and it shows if a spell is learned or not in the pop window" />
     <MESSAGE value="added new resource - rune, it can be used for item upgrade" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new resource - rune, it can be used for item upgrade" />
+    <MESSAGE value="minor css changes and now correctly gives names to each upgraded item" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor css changes and now correctly gives names to each upgraded item" />
   </component>
 </project>

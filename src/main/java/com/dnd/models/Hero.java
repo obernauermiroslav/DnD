@@ -26,6 +26,28 @@ public class Hero {
     private int permanentDefenseUpgrades;
     private boolean hasShield;
 
+    @Transient
+    private Set<Long> purchasedItems = new HashSet<>();
+    @Transient
+    private Items newlyPurchasedItem; // New field to store the newly purchased item
+
+    public Items getUpgradedWeapon() {
+        return upgradedWeapon;
+    }
+
+    public void setUpgradedWeapon(Items upgradedWeapon) {
+        this.upgradedWeapon = upgradedWeapon;
+    }
+
+    @Transient
+    private Items upgradedWeapon;
+    public void setNewlyPurchasedItem(Items newlyPurchasedItem) {
+        this.newlyPurchasedItem = newlyPurchasedItem;
+    }
+    @Transient
+    private Set<Long> upgradedItemIds = new HashSet<>();
+
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "hero_equipped_items",
             joinColumns = @JoinColumn(name = "hero_id"),
@@ -50,6 +72,7 @@ public class Hero {
 
                 if (!hasSameSpell) {
                     equippedItems.add(item);
+                    newlyPurchasedItem = item; // Mark the item as newly purchased
                 }
             } else {
                 // For non-spell items, check for duplicates and equip the item
@@ -63,6 +86,7 @@ public class Hero {
                     unequipItem(existingItemOfType);
                 }
                 equippedItems.add(item);
+                newlyPurchasedItem = item; // Mark the item as newly purchased
             }
 
             updateStats();
@@ -70,9 +94,9 @@ public class Hero {
     }
 
 
-
     public void unequipItem(Items item) {
         equippedItems.remove(item);
+        purchasedItems.remove(item.getId()); // Remove the item from the purchasedItems set
         updateStats();
     }
 
@@ -85,19 +109,79 @@ public class Hero {
         for (Items item : equippedItems) {
             totalAttackBonus += item.getAttackBonus();
             totalDefenseBonus += item.getDefenseBonus();
-            totalHealthBonus += item.getHealthBonus();
+
+            // Check if the item has already been purchased to avoid adding full health bonus again
+            if (newlyPurchasedItem != null && item.equals(newlyPurchasedItem)) {
+                totalHealthBonus += item.getHealthBonus();
+            }
         }
 
         // Include permanent upgrades in the stats calculation
         totalAttackBonus += permanentAttackUpgrades;
         totalDefenseBonus += permanentDefenseUpgrades;
-        totalHealthBonus += permanentHealthUpgrades;
 
-        // Update the hero's attack, defense, and health stats
+        // If a weapon has been upgraded, subtract the old attack bonus and add the new bonus
+        if (upgradedWeapon != null) {
+            totalAttackBonus -= upgradedWeapon.getAttackBonus();
+            totalAttackBonus += upgradedWeapon.getAttackBonus();
+        }
+
+        // Update the hero's attack and defense stats
         this.attack = getBaseAttack() + totalAttackBonus;
         this.defense = getBaseDefense() + totalDefenseBonus;
-        this.health = getBaseHealth() + totalHealthBonus;
+
+        // Update the hero's health stat using the actual current health from the table plus the total health bonus
+        this.health = getHealth() + totalHealthBonus;
+
+        // Reset the newlyPurchasedItem after updating stats
+        newlyPurchasedItem = null;
     }
+
+    public void updateStatsUpgrade() {
+        int totalAttackBonus = 0;
+        int totalDefenseBonus = 0;
+        int totalHealthBonus = 0;
+
+        // Calculate total bonuses from equipped items
+        for (Items item : equippedItems) {
+            totalAttackBonus += item.getAttackBonus();
+            totalDefenseBonus += item.getDefenseBonus();
+
+            // Check if the item has already been purchased to avoid adding full health bonus again
+            if (newlyPurchasedItem != null && item.equals(newlyPurchasedItem)) {
+                totalHealthBonus += item.getHealthBonus();
+            }
+        }
+
+        // Include permanent upgrades in the stats calculation
+        totalAttackBonus += permanentAttackUpgrades;
+        totalDefenseBonus += permanentDefenseUpgrades;
+
+        // If a weapon has been upgraded, subtract the old attack bonus and add the new bonus
+        if (upgradedWeapon != null) {
+            totalAttackBonus -= upgradedWeapon.getAttackBonus();
+            totalAttackBonus += upgradedWeapon.getAttackBonus();
+        }
+
+        // Update the hero's attack and defense stats
+        this.attack = getBaseAttack() + totalAttackBonus;
+        this.defense = getBaseDefense() + totalDefenseBonus;
+
+        // Update the hero's health stat using the actual current health from the table plus the total health bonus
+        this.health = getHealth();
+
+        // Reset the newlyPurchasedItem after updating stats
+        newlyPurchasedItem = null;
+    }
+
+    public boolean hasUpgradedItem(Long itemId) {
+        return upgradedItemIds.contains(itemId);
+    }
+
+    public void markItemAsUpgraded(Long itemId) {
+        upgradedItemIds.add(itemId);
+    }
+
 
     public Hero() {
     }
@@ -173,7 +257,7 @@ public class Hero {
     }
 
     public int getBaseHealth() {
-        return 130;
+        return health; //
     }
     public int getSkillPoints() {
         return skillPoints;
@@ -228,8 +312,8 @@ public class Hero {
 
     public void upgradeHealth() {
         if (skillPoints > 0) {
-            health += 25;
-            permanentHealthUpgrades += 25;
+            health += 33;
+            permanentHealthUpgrades += 33;
             skillPoints -= 1;
         }
     }

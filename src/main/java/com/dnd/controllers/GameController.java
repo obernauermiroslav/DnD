@@ -3,6 +3,7 @@ package com.dnd.controllers;
 import com.dnd.models.Enemies;
 import com.dnd.models.Hero;
 import com.dnd.models.ItemType;
+import com.dnd.models.Items;
 import com.dnd.services.EnemiesService;
 import com.dnd.services.HeroService;
 import jakarta.servlet.http.HttpSession;
@@ -131,8 +132,7 @@ public class GameController {
         String ineffectiveHeroAttackMessage = "";
         String ineffectiveEnemyAttackMessage = "";
         if (newEnemyHealth <= 0) {
-            hero.setGold(hero.getGold() + 160);
-            hero.setHealth(hero.getHealth() + 120);
+            hero.setGold(hero.getGold() + 200);
             hero.setMana(hero.getMana() + 6);
             hero.setSkillPoints(hero.getSkillPoints() + 2);
             hero.setRunes((hero.getRunes() + 1));
@@ -202,8 +202,27 @@ public class GameController {
         // Check if the hero has at least one healing potion
         int potionCount = hero.getPotion();
         if (potionCount > 0) {
+            // Calculate the amount of health to be healed
+            int healingAmount = 35;
+
+            // Calculate the total health bonus from equipped items and permanent upgrades
+            int totalHealthBonus = 0;
+            for (Items item : hero.getEquippedItems()) {
+                totalHealthBonus += item.getHealthBonus();
+            }
+            totalHealthBonus += hero.getPermanentHealthUpgrades();
+
+            // Calculate the maximum health the hero can have
+            int maxHealth = hero.getBaseHealth() + totalHealthBonus;
+
+            // Calculate the remaining health the hero needs to reach the maximum
+            int remainingHealth = maxHealth - hero.getHealth();
+
+            // Determine the actual amount of health to be healed (minimum of 35 or the remaining health needed)
+            int actualHealingAmount = Math.min(healingAmount, remainingHealth);
+
             // Heal the hero
-            hero.setHealth(hero.getHealth() + 35);
+            hero.setHealth(hero.getHealth() + actualHealingAmount);
 
             // Reduce the number of healing potions by 1
             hero.setPotion(potionCount - 1);
@@ -211,7 +230,7 @@ public class GameController {
             // Update the hero's stats in the database
             heroService.saveHero(hero);
 
-            model.addAttribute("healMessage", "Healing potion gives you 33 health.");
+            model.addAttribute("healMessage", "Healing potion gives you " + actualHealingAmount + " health.");
         } else {
             model.addAttribute("healMessage", "Hero does not have any healing potion.");
         }
@@ -226,6 +245,7 @@ public class GameController {
         model.addAttribute("hero", hero);
         return "fight";
     }
+
 
     @PostMapping("/weakness")
     public String castWeakness(@RequestParam("heroId") Long heroId, Model model, HttpSession session) {
@@ -328,8 +348,7 @@ public class GameController {
 
                         // Ensure the health doesn't go below zero
                         if (newEnemyHealth <= 0) {
-                            hero.setGold(hero.getGold() + 160);
-                            hero.setHealth(hero.getHealth() + 120);
+                            hero.setGold(hero.getGold() + 200);
                             hero.setMana(hero.getMana() + 6);
                             hero.setSkillPoints(hero.getSkillPoints() + 2);
                             hero.setRunes((hero.getRunes() + 1));
