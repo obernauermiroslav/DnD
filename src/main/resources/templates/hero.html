@@ -55,15 +55,10 @@
       </div>
     </div>
   </div>
-
-
-
   <p id="upgradeMessage" th:text="${upgradeMessage}"></p>
   <div>
     <p id="upgradeMessageItem" th:if="${not #strings.isEmpty(upgradeMessageItem)}" th:text="${upgradeMessageItem}"></p>
   </div>
-
-
   <div id="item-pictures">
     <img id="myHero" src="/images/hero.jpg" alt="">
     <img class="item-picture" id="helmet-picture" src="/images/helmet.jpg" alt="Helmet" style="display: none;">
@@ -88,7 +83,6 @@
       button.disabled = true;
     });
   }
-
   function handleItemHover(button) {
     const itemName = button.getAttribute('data-item-name');
     const itemType = button.getAttribute('data-item-type');
@@ -138,7 +132,6 @@
     } else {
     }
 
-
     const popup = document.getElementById('item-info-popup');
     popup.innerHTML = popupContent;
     popup.style.display = 'block';
@@ -161,22 +154,6 @@
     });
   }
 
-  // Add this function to update the item pictures based on equipped items
-  function updateItemPictures() {
-    const equippedItems = /*[[${hero?.equippedItems}]]*/ [];
-z
-    const itemPictures = document.querySelectorAll('.item-picture');
-    itemPictures.forEach(picture => {
-      const itemType = picture.id.split('-')[0].toUpperCase();
-      const hasItem = equippedItems.some(item => item.type === itemType);
-
-      if (hasItem) {
-        picture.style.display = 'block';
-      } else {
-        picture.style.display = 'none';
-      }
-    });
-  }
   function updateItemPictures() {
     const equippedItems = /*[[${hero?.equippedItems}]]*/ [];
 

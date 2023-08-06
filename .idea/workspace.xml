@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added background pictures and some css and html changes">
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="made some small changes with css, html and hero attributes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Enemies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Enemies.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fight.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fight.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hero.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/hero.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +198,7 @@
       <workItem from="1691135910248" duration="18946000" />
       <workItem from="1691221982603" duration="6355000" />
       <workItem from="1691302043973" duration="19745000" />
-      <workItem from="1691329024883" duration="2566000" />
+      <workItem from="1691329024883" duration="9598000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -366,7 +368,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691320870940</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="added info button about enemies">
+      <created>1691331770097</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1691331770097</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,6 +402,8 @@
     <MESSAGE value="minor css changes and now correctly gives names to each upgraded item" />
     <MESSAGE value="corrected upgrade function for items and weapons" />
     <MESSAGE value="added background pictures and some css and html changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="added background pictures and some css and html changes" />
+    <MESSAGE value="added info button about enemies" />
+    <MESSAGE value="made some small changes with css, html and hero attributes" />
+    <option name="LAST_COMMIT_MESSAGE" value="made some small changes with css, html and hero attributes" />
   </component>
 </project>

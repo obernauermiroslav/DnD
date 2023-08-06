@@ -128,13 +128,13 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy1);
         Enemies enemy2 = new Enemies(2L,"Goblin", 116,16,6,"He is small, mean, armed with mace and can steal your money");
         enemiesRepository.save(enemy2);
-        Enemies enemy3= new Enemies(3L,"Orc", 225,18,8,"Armed with Greatsword and crude plate armor.");
+        Enemies enemy3= new Enemies(3L,"Orc", 225,18,9,"This fearless warrior is armed with greatsword and crude plate armor.");
         enemiesRepository.save(enemy3);
-        Enemies enemy4= new Enemies(4L,"Troll", 275,21,11,"He stinks, carries big two handed club and if he hits you, his smell will not be bothering you anymore.  ");
+        Enemies enemy4= new Enemies(4L,"Troll", 275,21,11,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy4);
         Enemies enemy5= new Enemies(5L,"Drake", 330,23,14,"Watch out, he breathes fire, his attacks ignores your armor, and cannot be blocked with shield.");
         enemiesRepository.save(enemy5);
-        Enemies enemy6= new Enemies(6L,"Behemoth", 420,28,17,"He looks angry and his long claws are thirsty for your blood.");
+        Enemies enemy6= new Enemies(6L,"Behemoth", 420,30,17,"He looks angry and his long claws are thirsty for your blood.");
         enemiesRepository.save(enemy6);
         Enemies enemy7= new Enemies(7L,"Lich", 220,30,14,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
         enemiesRepository.save(enemy7);
