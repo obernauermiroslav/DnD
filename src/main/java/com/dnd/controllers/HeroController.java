@@ -129,7 +129,7 @@ public class HeroController {
 
                         hero.setRunes(hero.getRunes() - 1);
                         redirectAttributes.addFlashAttribute("upgradeMessageItem",
-                                itemToUpgrade.getName() + " upgraded: +1 defense, +1 health.");
+                                itemToUpgrade.getName() + " upgraded: +1 defense, +2 health.");
 
                         // Calculate the health bonus difference after the upgrade
                         int healthBonusDifference = itemToUpgrade.getHealthBonus() - healthBonusBeforeUpgrade;

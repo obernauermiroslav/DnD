@@ -13,6 +13,8 @@ public class Hero {
 
     private String name;
     private int health;
+
+    private int maxHealth;
     private int attack;
     private int defense;
     private int gold;
@@ -184,6 +186,8 @@ public class Hero {
 
 
     public Hero() {
+        this.maxHealth = getHealth(); // You can set the initial max health value as per your requirements
+       ; // Initialize current health to the max health value
     }
 
     public Long getId() {
@@ -209,6 +213,15 @@ public class Hero {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
 
     public int getAttack() {
         return attack;

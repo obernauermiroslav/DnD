@@ -101,12 +101,22 @@ public class ShopController {
 
                     if (hasSameSpell) {
                         model.addAttribute("message", "Spell learned already!");
-                        List<Items> availableItems = shop.getAvailableItems();
-                        model.addAttribute("items", availableItems);
-                        model.addAttribute("heroGold", hero.getGold());
-                        return "shop";
+                    } else {
+                        // Buy the spell and update the hero's equipment
+                        int heroGold = hero.getGold();
+                        int itemPrice = itemToBuy.getPrice();
+
+                        if (heroGold >= itemPrice) {
+                            hero.setGold(heroGold - itemPrice);
+                            hero.equipItem(itemToBuy);
+                            heroService.updateHeroById(hero.getId(), hero);
+                            model.addAttribute("message", "Item purchased!");
+                        } else {
+                            model.addAttribute("message", "Not enough gold!");
+                        }
                     }
                 } else {
+                    // For non-spell items, proceed as before
                     Items existingItemOfType = hero.getEquippedItems().stream()
                             .filter(item -> item.getType() == itemToBuy.getType())
                             .findFirst()
@@ -125,28 +135,28 @@ public class ShopController {
                             return "shop";
                         }
                     }
-                }
 
-                int heroGold = hero.getGold();
-                int itemPrice = itemToBuy.getPrice();
+                    int heroGold = hero.getGold();
+                    int itemPrice = itemToBuy.getPrice();
 
-                if (heroGold >= itemPrice) {
-                    hero.setGold(heroGold - itemPrice);
+                    if (heroGold >= itemPrice) {
+                        // Update hero's equipment and gold
+                        if (itemToBuy.getType() == ItemType.SHIELD) {
+                            // Set hasShield to true since the hero bought a shield
+                            hero.setHasShield(true);
+                            hero.equipItem(itemToBuy);
+                        } else if (itemToBuy.getName().equals("Healing Potion")) {
+                            hero.setPotion(hero.getPotion() + 1);
+                        } else {
+                            hero.equipItem(itemToBuy);
+                        }
 
-                    if (itemToBuy.getType() == ItemType.SHIELD) {
-                        // Set hasShield to true since the hero bought a shield
-                        hero.setHasShield(true);
-                        hero.equipItem(itemToBuy);
-                    } else if (itemToBuy.getName().equals("Healing Potion")) {
-                        hero.setPotion(hero.getPotion() + 1);
+                        hero.setGold(heroGold - itemPrice);
+                        heroService.updateHeroById(hero.getId(), hero);
+                        model.addAttribute("message", "Item purchased!");
                     } else {
-                        hero.equipItem(itemToBuy);
+                        model.addAttribute("message", "Not enough gold!");
                     }
-
-                    heroService.updateHeroById(hero.getId(), hero);
-                    model.addAttribute("message", "Item purchased!");
-                } else {
-                    model.addAttribute("message", "Not enough gold!");
                 }
             } else {
                 model.addAttribute("message", "Hero not found!");

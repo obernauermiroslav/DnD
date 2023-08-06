@@ -1,7 +1,13 @@
 body {
+    background-image: url('../images/room.jpeg');
+    background-position: center 30%;
+    background-size: cover;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    /* Set the background color with opacity (partially transparent) */
+    background-color: rgba(0, 0, 0, 0.5);
+    background-repeat: no-repeat;
 }
 
 .container {
@@ -10,21 +16,23 @@ body {
 }
 
 #hero-table {
+    background-color: white;
     margin-left: -390px;
     position: absolute;
     width: 170px;
     padding: 10px;
     border: 1px solid #ccc;
-    margin-top: 100px;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 #items-table{
+    background-color: white;
     position: absolute;
     margin-left: 740px;
     width: 200px;
-    padding: 15px;
+    padding: 10px;
     border: 1px solid #ccc;
     margin-top: 100px;
     display: flex;
@@ -47,9 +55,13 @@ body {
 }
 
 #upgradeMessage{
+    padding: 3px;
+    background-color: white;
+    font-size: 18px;
+    color:black;
     position: absolute;
     margin-left: -390px;
-    margin-top: 60px;
+    margin-top: 50px;
 }
 #item-info-popup{
     display: none;
@@ -160,9 +172,13 @@ body {
 }
 
 #upgradeMessageItem{
+    padding: 3px;
+    background-color: white;
+    font-size: 18px;
+    color:black;
     position: absolute;
-    margin-left:250px;
-    margin-top: 70px;
+    margin-left:260px;
+    margin-top: 50px;
     align-items: center;
 }
 
