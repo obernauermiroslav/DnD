@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+
+import java.util.Objects;
+
 @Entity
 @Table(name = "items")
 public class Items {
@@ -16,9 +19,11 @@ public class Items {
     private String name;
     @Enumerated(EnumType.STRING)
     private ItemType type;
-    private int attackBonus; // Attack bonus provided by the item
-    private int defenseBonus; // Defense bonus provided by the item
+    private int attackBonus;
+    private int defenseBonus;
     private int healthBonus;
+
+    private int manaBonus;
     private int price;
     private int quantity;
     private int manaCost;
@@ -27,21 +32,15 @@ public class Items {
     public Items() {
     }
 
-    public int getManaCost() {
-        return manaCost;
-    }
 
-    public void setManaCost(int manaCost) {
-        this.manaCost = manaCost;
-    }
-
-    public Items(Long id, String name, ItemType type, int attackBonus, int defenseBonus, int healthBonus, int price, int manaCost, String effect) {
+    public Items(Long id, String name, ItemType type, int attackBonus, int defenseBonus, int healthBonus, int manaBonus, int price, int manaCost, String effect) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.attackBonus = attackBonus;
         this.defenseBonus = defenseBonus;
         this.healthBonus = healthBonus;
+        this.manaBonus = manaBonus;
         this.price = price;
         this.manaCost = manaCost;
         this.effect = effect;
@@ -85,6 +84,7 @@ public class Items {
     }
 
     public void setDefenseBonus(int defenseBonus) {
+
         this.defenseBonus = defenseBonus;
     }
 
@@ -93,7 +93,24 @@ public class Items {
     }
 
     public void setHealthBonus(int healthBonus) {
+
         this.healthBonus = healthBonus;
+    }
+
+    public int getManaBonus() {
+        return manaBonus;
+    }
+
+    public void setManaBonus(int manaBonus) {
+        this.manaBonus = manaBonus;
+    }
+
+    public int getManaCost() {
+        return manaCost;
+    }
+
+    public void setManaCost(int manaCost) {
+        this.manaCost = manaCost;
     }
 
     public int getPrice() {
@@ -123,13 +140,14 @@ public class Items {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Items)) return false;
-        Items item = (Items) o;
-        return id != null && id.equals(item.id);
+        if (o == null || getClass() != o.getClass()) return false;
+        Items items = (Items) o;
+        return Objects.equals(id, items.id);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id);
     }
+
 }

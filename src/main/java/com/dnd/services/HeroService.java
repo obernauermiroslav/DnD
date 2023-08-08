@@ -26,7 +26,7 @@ public interface HeroService {
     Hero getYourHero();
 
     List<Items> getEquippedItems(Long heroId);
-    void updateHeroStats(Hero hero);
+    //void updateHeroStats(Hero hero);
 
     void updateHeroEquippedItems(Long heroId, List<Items> equippedItems);
 

@@ -30,6 +30,9 @@ public class Hero {
 
     @Transient
     private Set<Long> purchasedItems = new HashSet<>();
+
+    @Transient
+    private Map<ItemType, Integer> itemTypeHealthBonuses = new HashMap<>();
     @Transient
     private Items newlyPurchasedItem; // New field to store the newly purchased item
 
@@ -74,7 +77,6 @@ public class Hero {
 
                 if (!hasSameSpell) {
                     equippedItems.add(item);
-                    newlyPurchasedItem = item; // Mark the item as newly purchased
                 }
             } else {
                 // For non-spell items, check for duplicates and equip the item
@@ -88,17 +90,24 @@ public class Hero {
                     unequipItem(existingItemOfType);
                 }
                 equippedItems.add(item);
-                newlyPurchasedItem = item; // Mark the item as newly purchased
             }
+
+            // Update health bonus for the item type
+            int itemTypeHealthBonus = itemTypeHealthBonuses.getOrDefault(item.getType(), 0);
+            itemTypeHealthBonus += item.getHealthBonus();
+            itemTypeHealthBonuses.put(item.getType(), itemTypeHealthBonus);
 
             updateStats();
         }
     }
 
-
     public void unequipItem(Items item) {
         equippedItems.remove(item);
-        purchasedItems.remove(item.getId()); // Remove the item from the purchasedItems set
+
+        int itemTypeHealthBonus = itemTypeHealthBonuses.getOrDefault(item.getType(), 0);
+        itemTypeHealthBonus -= item.getHealthBonus();
+        itemTypeHealthBonuses.put(item.getType(), itemTypeHealthBonus);
+
         updateStats();
     }
 
@@ -106,43 +115,34 @@ public class Hero {
         int totalAttackBonus = 0;
         int totalDefenseBonus = 0;
         int totalHealthBonus = 0;
+        int totalManaBonus = 0;
 
         // Calculate total bonuses from equipped items
         for (Items item : equippedItems) {
             totalAttackBonus += item.getAttackBonus();
             totalDefenseBonus += item.getDefenseBonus();
-
-            // Check if the item has already been purchased to avoid adding full health bonus again
-            if (newlyPurchasedItem != null && item.equals(newlyPurchasedItem)) {
-                totalHealthBonus += item.getHealthBonus();
-            }
+            totalHealthBonus += itemTypeHealthBonuses.getOrDefault(item.getType(), 0);
+            totalManaBonus += item.getManaBonus();
         }
 
         // Include permanent upgrades in the stats calculation
         totalAttackBonus += permanentAttackUpgrades;
         totalDefenseBonus += permanentDefenseUpgrades;
+        totalHealthBonus += permanentHealthUpgrades;
 
-        // If a weapon has been upgraded, subtract the old attack bonus and add the new bonus
-        if (upgradedWeapon != null) {
-            totalAttackBonus -= upgradedWeapon.getAttackBonus();
-            totalAttackBonus += upgradedWeapon.getAttackBonus();
-        }
-
-        // Update the hero's attack and defense stats
+        // Update the hero's attack, defense, and health stats
         this.attack = getBaseAttack() + totalAttackBonus;
         this.defense = getBaseDefense() + totalDefenseBonus;
-
-        // Update the hero's health stat using the actual current health from the table plus the total health bonus
-        this.health = getHealth() + totalHealthBonus;
-
-        // Reset the newlyPurchasedItem after updating stats
-        newlyPurchasedItem = null;
+        this.health = getBaseHealth() + totalHealthBonus;
+        this.mana = getMana() + totalManaBonus;
     }
+
 
     public void updateStatsUpgrade() {
         int totalAttackBonus = 0;
         int totalDefenseBonus = 0;
         int totalHealthBonus = 0;
+
 
         // Calculate total bonuses from equipped items
         for (Items item : equippedItems) {
@@ -270,7 +270,11 @@ public class Hero {
     }
 
     public int getBaseHealth() {
-        return health; //
+        return health;
+    }
+
+    public int getBaseMana(){
+        return mana;
     }
     public int getSkillPoints() {
         return skillPoints;
@@ -326,7 +330,7 @@ public class Hero {
     public void upgradeHealth() {
         if (skillPoints > 0) {
             health += 33;
-            permanentHealthUpgrades += 33;
+            //permanentHealthUpgrades += 33;
             skillPoints -= 1;
         }
     }
