@@ -133,7 +133,7 @@ public class Hero {
         // Update the hero's attack, defense, and health stats
         this.attack = getBaseAttack() + totalAttackBonus;
         this.defense = getBaseDefense() + totalDefenseBonus;
-        this.health = getBaseHealth() + totalHealthBonus;
+        maxHealth = getMaxHealth() + totalHealthBonus;
         this.mana = getMana() + totalManaBonus;
     }
 
@@ -186,8 +186,6 @@ public class Hero {
 
 
     public Hero() {
-        this.maxHealth = getHealth(); // You can set the initial max health value as per your requirements
-       ; // Initialize current health to the max health value
     }
 
     public Long getId() {
@@ -221,7 +219,6 @@ public class Hero {
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
     }
-
 
     public int getAttack() {
         return attack;
@@ -276,6 +273,21 @@ public class Hero {
     public int getBaseMana(){
         return mana;
     }
+    public int calculateMaxHealth() {
+        int totalHealthBonus = 0;
+
+        // Calculate total health bonus from equipped items
+        for (Items item : equippedItems) {
+            totalHealthBonus += itemTypeHealthBonuses.getOrDefault(item.getType(), 0);
+        }
+
+        // Include permanent health upgrades
+        totalHealthBonus += permanentHealthUpgrades;
+
+        // Calculate and return the initial max health value
+        return getMaxHealth() + totalHealthBonus;
+    }
+
     public int getSkillPoints() {
         return skillPoints;
     }
@@ -338,7 +350,7 @@ public class Hero {
 
     public void upgradeHealth() {
         if (skillPoints > 0) {
-            health += 30;
+            maxHealth += 30;
             //permanentHealthUpgrades += 30;
             skillPoints -= 1;
         }

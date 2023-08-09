@@ -55,6 +55,7 @@ public class HeroController {
             hero.setPotion(3);
             hero.setSkillPoints(4);
             hero.setHealth(130);
+            hero.setMaxHealth(130);
             hero.setAttack(8);
             hero.setDefense(7);
             hero.setRunes(3);
@@ -135,7 +136,7 @@ public class HeroController {
                         int healthBonusDifference = itemToUpgrade.getHealthBonus() - healthBonusBeforeUpgrade;
 
                         // Update the hero's health using the actual current health from the table plus the health bonus difference
-                        hero.setHealth(hero.getHealth() + healthBonusDifference);
+                        hero.setMaxHealth(hero.getMaxHealth() + healthBonusDifference);
 
                         // Save the updated item using the ItemsService
                         itemsService.saveItem(itemToUpgrade);

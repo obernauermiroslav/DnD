@@ -38,9 +38,14 @@ public class GameController {
     }
 
     @GetMapping("/fight")
-    public String showFightPage(Model model) {
+    public String showFightPage(Model model, HttpSession session) {
         // Load your hero from the hero table
         Hero hero = heroService.getYourHero();
+
+        // Store the max health without changing it during the fight
+        int maxHealth = hero.calculateMaxHealth();
+        hero.setMaxHealth(maxHealth);
+
         model.addAttribute("hero", hero);
 
         // Check if the session contains the current enemy ID
@@ -71,6 +76,8 @@ public class GameController {
         model.addAttribute("enemy", enemy);
         return "fight";
     }
+
+
 
     @PostMapping("/fight")
     public String fight(@RequestParam("heroId") Long heroId,
@@ -207,7 +214,7 @@ public class GameController {
         int potionCount = hero.getPotion();
         if (potionCount > 0) {
             // Calculate the amount of health to be healed
-            int healingAmount = 35;
+            int healingAmount = 30;
 
             // Calculate the total health bonus from equipped items and permanent upgrades
             int totalHealthBonus = 0;
@@ -222,12 +229,12 @@ public class GameController {
             // Calculate the remaining health the hero needs to reach the maximum
             int remainingHealth = maxHealth - hero.getHealth();
 
-            // Determine the actual amount of health to be healed (minimum of 35 or the remaining health needed)
+            // Determine the actual amount of health to be healed (minimum of 30 or the remaining health needed)
             int actualHealingAmount = Math.min(healingAmount, maxHealth - hero.getHealth());
 
 
             // Heal the hero
-            hero.setHealth(hero.getHealth() + actualHealingAmount);
+            hero.setHealth(Math.min(hero.getHealth() + actualHealingAmount,hero.getMaxHealth()));
 
             // Reduce the number of healing potions by 1
             hero.setPotion(potionCount - 1);
