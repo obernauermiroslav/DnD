@@ -351,7 +351,6 @@ public class Hero {
     public void upgradeHealth() {
         if (skillPoints > 0) {
             maxHealth += 30;
-            //permanentHealthUpgrades += 30;
             skillPoints -= 1;
         }
     }

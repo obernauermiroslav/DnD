@@ -207,42 +207,32 @@ public class GameController {
 
         if (hero == null) {
             model.addAttribute("message", "Hero not found");
-            return "Hero not found";
+            return "error"; // You might want to return an error page here
         }
 
         // Check if the hero has at least one healing potion
         int potionCount = hero.getPotion();
         if (potionCount > 0) {
-            // Calculate the amount of health to be healed
-            int healingAmount = 30;
+            // Calculate the amount of health that can be healed
+            int maxHealingAmount = hero.getMaxHealth() - hero.getHealth();
 
-            // Calculate the total health bonus from equipped items and permanent upgrades
-            int totalHealthBonus = 0;
-            for (Items item : hero.getEquippedItems()) {
-                totalHealthBonus += item.getHealthBonus();
+            // Ensure the healing amount is within the range of 0 to maxHealingAmount
+            int actualHealingAmount = Math.max(0, Math.min(30, maxHealingAmount));
+
+            if (actualHealingAmount > 0) {
+                // Heal the hero
+                hero.setHealth(hero.getHealth() + actualHealingAmount);
+
+                // Reduce the number of healing potions by 1
+                hero.setPotion(potionCount - 1);
+
+                // Update the hero's stats in the database
+                heroService.saveHero(hero);
+
+                model.addAttribute("healMessage", "Healing potion restores " + actualHealingAmount + " health.");
+            } else {
+                model.addAttribute("healMessage", "Hero's health is already full.");
             }
-            totalHealthBonus += 30;
-
-            // Calculate the maximum health the hero can have
-            int maxHealth = hero.getBaseHealth() + totalHealthBonus;
-
-            // Calculate the remaining health the hero needs to reach the maximum
-            int remainingHealth = maxHealth - hero.getHealth();
-
-            // Determine the actual amount of health to be healed (minimum of 30 or the remaining health needed)
-            int actualHealingAmount = Math.min(healingAmount, maxHealth - hero.getHealth());
-
-
-            // Heal the hero
-            hero.setHealth(Math.min(hero.getHealth() + actualHealingAmount,hero.getMaxHealth()));
-
-            // Reduce the number of healing potions by 1
-            hero.setPotion(potionCount - 1);
-
-            // Update the hero's stats in the database
-            heroService.saveHero(hero);
-
-            model.addAttribute("healMessage", "Healing potion gives you " + actualHealingAmount + " health.");
         } else {
             model.addAttribute("healMessage", "Hero does not have any healing potion.");
         }
@@ -297,15 +287,15 @@ public class GameController {
                             // Set the spell casting result message in the model to display it in the fight page
                             model.addAttribute("spellCastingResult", "You cast Weakness. Enemy's attack decreased by " + spellDamage + " points!");
                         } else {
-                            model.addAttribute("spellCastingResult", "No enemy to cast the spell on.");
+                            model.addAttribute("spellCastingResult", "Enemy's attack is on minimum.");
                         }
                         // Set the enemy attribute in the session to be used in the fight.html template
                         session.setAttribute("currentEnemy", enemy);
                     } else {
-                        model.addAttribute("spellCastingResult", "No enemy to cast the spell on.");
+                        model.addAttribute("spellCastingResult", "Enemy's attack is on minimum.");
                     }
                 } else {
-                    model.addAttribute("spellCastingResult", "No enemy to cast the spell on.");
+                    model.addAttribute("spellCastingResult", "Enemy's attack is on minimum.");
                 }
             } else {
                 model.addAttribute("spellCastingResult", "Not enough mana to cast Weakness.");

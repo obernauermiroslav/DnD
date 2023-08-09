@@ -122,7 +122,19 @@
         <p>Health Bonus: ${healthBonus}</p>
         <p>Effect: ${effect}</p>
       `;
-    } else if (itemType === 'HELMET' || itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK') {
+    } else if (itemType === 'CLOAK') {
+      const defenseBonus = button.getAttribute('data-defense-bonus');
+      const healthBonus = button.getAttribute('data-health-bonus');
+      const effect = button.getAttribute('data-effect');
+      popupContent += `
+        <p>Defense Bonus: ${defenseBonus}</p>
+        <p>Health Bonus: ${healthBonus}</p>
+      `;
+      if (effect) {
+        popupContent += `<p>Effect: ${effect}</p>
+        `;
+      }
+      } else if (itemType === 'HELMET' || itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK') {
       const defenseBonus = button.getAttribute('data-defense-bonus');
       const healthBonus = button.getAttribute('data-health-bonus');
       popupContent += `

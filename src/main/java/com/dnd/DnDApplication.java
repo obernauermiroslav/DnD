@@ -74,9 +74,9 @@ public class DnDApplication implements CommandLineRunner {
 
         Items cloak1 = new Items(null, "Cloak", ItemType.CLOAK, 0, 1,6,0,60,0,"");
         itemsRepository.save(cloak1);
-        Items cloak2 = new Items(null, "Enchanted Cloak", ItemType.CLOAK, 0, 3,12,0,100,0,"");
+        Items cloak2 = new Items(null, "Enchanted Cloak", ItemType.CLOAK, 0, 3,10,5,100,0,"+5 mana");
         itemsRepository.save(cloak2);
-        Items cloak3 = new Items(null, "Dragon Cloak", ItemType.CLOAK, 0, 5,17,0,130,0,"");
+        Items cloak3 = new Items(null, "Dragon Cloak", ItemType.CLOAK, 0, 5,18,0,135,0,"");
         itemsRepository.save(cloak3);
 
 
@@ -86,11 +86,11 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(weapon2);
         Items weapon3 = new Items(null, "Axe", ItemType.WEAPON, 4, 0,0,0,100,0,"");
         itemsRepository.save(weapon3);
-        Items weapon4 = new Items(null, "Hammer", ItemType.WEAPON, 6, 0,0,0,125,0,"");
+        Items weapon4 = new Items(null, "Morningstar", ItemType.WEAPON, 6, 0,0,0,125,0,"");
         itemsRepository.save(weapon4);
-        Items weapon5 = new Items(null, "Spear", ItemType.WEAPON, 8, 0,0,0,150,0,"");
+        Items weapon5 = new Items(null, "Halberd", ItemType.WEAPON, 8, 0,0,0,150,0,"");
         itemsRepository.save(weapon5);
-        Items weapon6 = new Items(null, "Morningstar", ItemType.WEAPON, 11, 0,0,0,210,0,"");
+        Items weapon6 = new Items(null, "Warhammer", ItemType.WEAPON, 11, 0,0,0,210,0,"");
         itemsRepository.save(weapon6);
 
 
@@ -103,22 +103,23 @@ public class DnDApplication implements CommandLineRunner {
         Items shield4 = new Items(null, "Fire Shield", ItemType.SHIELD, 0, 5,15,0,180,0,"15% chance to block enemy attack and can protect you against fire");
         itemsRepository.save(shield4);
 
-        Items ring1 = new Items(null, "Ring of Health", ItemType.RING, 0, 0,10,0,100,0,"+10 to health");
+
+        Items ring1 = new Items(null, "Ring of Health", ItemType.RING, 0, 0,15,0,100,0,"+15 health");
         itemsRepository.save(ring1);
-        Items ring2 = new Items(null, "Ring of Attack", ItemType.RING, 2, 0,0,0,100,0,"+2 to attack");
+        Items ring2 = new Items(null, "Ring of Attack", ItemType.RING, 2, 0,0,0,100,0,"+2 attack");
         itemsRepository.save(ring2);
-        Items ring3 = new Items(null, "Ring of Defence", ItemType.RING, 0, 2,0,0,100,0,"+2 to defence");
+        Items ring3 = new Items(null, "Ring of Defence", ItemType.RING, 0, 2,0,0,100,0,"+2 defence");
         itemsRepository.save(ring3);
-        Items ring4 = new Items(null, "Ring of Mana", ItemType.RING, 0, 0,0,10,100,0,"+10 to mana");
+        Items ring4 = new Items(null, "Ring of Mana", ItemType.RING, 0, 0,0,12,100,0,"+12 mana");
         itemsRepository.save(ring4);
 
-        Items necklace1 = new Items(null, "Necklace of Power", ItemType.NECKLACE, 1, 1,6,0,110,0,"+1 attack, +1 defence and +6 health");
+        Items necklace1 = new Items(null, "Necklace of Power", ItemType.NECKLACE, 1, 1,6,0,110,0,"+1 attack, +1 defence, +7 health");
         itemsRepository.save(necklace1);
-        Items necklace2 = new Items(null, "Necklace of Greater Power", ItemType.NECKLACE, 2, 2,12,0,150,0,"+2 attack,+2 defence and +12 health ");
+        Items necklace2 = new Items(null, "Necklace of Greater Power", ItemType.NECKLACE, 2, 2,12,0,150,0,"+2 attack,+2 defence, +13 health ");
         itemsRepository.save(necklace2);
 
 
-        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,0,120,0,"Heals for 35 points");
+        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,0,120,0,"Heals for 30 points");
         itemsRepository.save(potion);
 
 
@@ -128,9 +129,9 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(spell2);
 
 
-        Enemies enemy1 = new Enemies(1L,"Training Figurine", 50,10,3,"Everyone starts somewhere, try not to hit yourself.");
+        Enemies enemy1 = new Enemies(1L,"Training Figurine", 55,0,3,"Everyone starts somewhere, try not to hit yourself.");
         enemiesRepository.save(enemy1);
-        Enemies enemy2 = new Enemies(2L,"Great rat", 90,8,4,"Bigger and more dangerous that standard Rat, but should not be hard to kill.");
+        Enemies enemy2 = new Enemies(2L,"Great rat", 95,8,4,"Bigger and more dangerous that standard Rat, but should not be hard to kill.");
         enemiesRepository.save(enemy2);
         Enemies enemy3 = new Enemies(3L,"Goblin", 125,16,6,"He is small, mean, armed with mace and can steal your money");
         enemiesRepository.save(enemy3);
@@ -138,11 +139,11 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy4);
         Enemies enemy5= new Enemies(5L,"Troll", 275,21,11,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);
-        Enemies enemy6= new Enemies(6L,"Drake", 340,23,14,"Watch out, he breathes fire, his attacks ignores your armor, and cannot be blocked with shield.");
+        Enemies enemy6= new Enemies(6L,"Drake", 340,24,14,"Watch out, he breathes fire, his attacks ignores your armor, and cannot be blocked with shield.");
         enemiesRepository.save(enemy6);
         Enemies enemy7= new Enemies(7L,"Behemoth", 430,30,17,"He looks angry and his long claws are thirsty for your blood.");
         enemiesRepository.save(enemy7);
-        Enemies enemy8= new Enemies(8L,"Lich", 240,33,14,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
+        Enemies enemy8= new Enemies(8L,"Lich", 245,33,14,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
         enemiesRepository.save(enemy8);
     }
 }

@@ -31,12 +31,14 @@ body {
     position: absolute;
     margin-left: 740px;
     width: 200px;
+    height: 400px;
     padding: 10px;
     border: 1px solid #ccc;
     margin-top: 100px;
     display: flex;
     flex-direction: column;
     list-style: none;
+    overflow-x: auto;
 }
 
 .btn-secondary {

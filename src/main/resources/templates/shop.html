@@ -93,7 +93,7 @@
       <td th:if="${item.type == T(com.dnd.models.ItemType).CLOAK}">
         <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
           <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
+                 th:attr="data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}, data-effect=${item.effect}" />
           <span th:text="${item.name}">Item Name</span>
           <span th:text="'(' + ${item.price} + 'GP)'"></span>
         </form>
@@ -288,6 +288,19 @@
         <p>Health Bonus: ${healthBonus}</p>
         <p>Effect: ${effect}</p>
       `;
+  } else if (itemType === 'CLOAK') {
+    const defenseBonus = button.getAttribute('data-defense-bonus');
+    const healthBonus = button.getAttribute('data-health-bonus');
+    const effect = button.getAttribute('data-effect');
+
+    // Display cloak-specific information
+    popupContent += `
+        <p>Defense Bonus: ${defenseBonus}</p>
+        <p>Health Bonus: ${healthBonus}</p>
+      `;
+    if (effect) {
+      popupContent += `<p>Effect: ${effect}</p>`;
+    }
     } else if (itemType === 'HELMET' || itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK') {
       const defenseBonus = button.getAttribute('data-defense-bonus');
       const healthBonus = button.getAttribute('data-health-bonus');
@@ -296,8 +309,6 @@
         <p>Health Bonus: ${healthBonus}</p>
       `;
     } else {
-      // Handle any other item types here
-      // For now, we don't show any additional information for other types
     }
 
     const popup = document.getElementById('item-info-popup');
