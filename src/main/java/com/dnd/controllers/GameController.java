@@ -104,7 +104,11 @@ public class GameController {
             enemyAttack = Math.max(enemyAttack, 0);
         }
 
-        if (!enemy.getName().equalsIgnoreCase("drake") && !enemy.getName().equalsIgnoreCase("lich") && hero.hasShield() && Math.random() <= 0.15) {
+        // Check if the hero has the "Fire Shield" equipped and if the enemy is "Drake"
+        if (enemy.getName().equalsIgnoreCase("drake") && hero.hasFireShield() && Math.random() <= 0.15) {
+            enemyAttack = 0;
+            enemyAttackMessage = "You blocked dragon's attack with your Fire Shield!";
+        } else if (!enemy.getName().equalsIgnoreCase("drake") && !enemy.getName().equalsIgnoreCase("lich") && hero.hasShield() && Math.random() <= 0.15) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked the enemy's attack with your shield!";
         }
@@ -210,7 +214,7 @@ public class GameController {
             for (Items item : hero.getEquippedItems()) {
                 totalHealthBonus += item.getHealthBonus();
             }
-            totalHealthBonus += hero.getPermanentHealthUpgrades();
+            totalHealthBonus += 30;
 
             // Calculate the maximum health the hero can have
             int maxHealth = hero.getBaseHealth() + totalHealthBonus;
@@ -219,7 +223,8 @@ public class GameController {
             int remainingHealth = maxHealth - hero.getHealth();
 
             // Determine the actual amount of health to be healed (minimum of 35 or the remaining health needed)
-            int actualHealingAmount = Math.min(healingAmount, remainingHealth);
+            int actualHealingAmount = Math.min(healingAmount, maxHealth - hero.getHealth());
+
 
             // Heal the hero
             hero.setHealth(hero.getHealth() + actualHealingAmount);
@@ -405,7 +410,7 @@ public class GameController {
         if (hero != null && hero.getSkillPoints() > 0) {
             hero.upgradeHealth();
             heroService.saveHero(hero);
-            model.addAttribute("upgradeMessage", "Health upgraded by 33 points.");
+            model.addAttribute("upgradeMessage", "Health upgraded by 30 points.");
         } else {
             model.addAttribute("upgradeMessage", "Not enough skill points to upgrade health.");
         }

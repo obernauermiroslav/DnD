@@ -29,5 +29,4 @@ public interface HeroService {
     //void updateHeroStats(Hero hero);
 
     void updateHeroEquippedItems(Long heroId, List<Items> equippedItems);
-
 }

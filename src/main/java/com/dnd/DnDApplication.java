@@ -100,6 +100,8 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(shield2);
         Items shield3 = new Items(null, "Tower shield", ItemType.SHIELD, 0, 4,12,0,155,0,"15% chance to block enemy attack");
         itemsRepository.save(shield3);
+        Items shield4 = new Items(null, "Fire Shield", ItemType.SHIELD, 0, 5,15,0,180,0,"15% chance to block enemy attack and can protect you against fire");
+        itemsRepository.save(shield4);
 
         Items ring1 = new Items(null, "Ring of Health", ItemType.RING, 0, 0,10,0,100,0,"+10 to health");
         itemsRepository.save(ring1);
@@ -134,7 +136,7 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy3);
         Enemies enemy4= new Enemies(4L,"Orc", 235,18,9,"This fearless warrior is armed with greatsword and crude plate armor.");
         enemiesRepository.save(enemy4);
-        Enemies enemy5= new Enemies(5L,"Troll", 2785,21,11,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
+        Enemies enemy5= new Enemies(5L,"Troll", 275,21,11,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);
         Enemies enemy6= new Enemies(6L,"Drake", 340,23,14,"Watch out, he breathes fire, his attacks ignores your armor, and cannot be blocked with shield.");
         enemiesRepository.save(enemy6);

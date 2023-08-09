@@ -313,6 +313,15 @@ public class Hero {
     public void setHasShield(boolean hasShield) {
         this.hasShield = hasShield;
     }
+    public boolean hasFireShield() {
+        for (Items item : equippedItems) {
+            if (item.getType() == ItemType.SHIELD && item.getName().equalsIgnoreCase("Fire Shield")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public int getRunes() {
         return runes;
@@ -329,8 +338,8 @@ public class Hero {
 
     public void upgradeHealth() {
         if (skillPoints > 0) {
-            health += 33;
-            //permanentHealthUpgrades += 33;
+            health += 30;
+            //permanentHealthUpgrades += 30;
             skillPoints -= 1;
         }
     }

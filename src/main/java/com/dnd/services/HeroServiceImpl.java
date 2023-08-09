@@ -53,7 +53,6 @@ public class HeroServiceImpl implements HeroService {
 
             heroRepository.save(hero); // Save the updated hero to the database
         } else {
-            // Hero with the given ID not found, you can handle the error accordingly
         }
     }
 
