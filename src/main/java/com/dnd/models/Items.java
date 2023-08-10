@@ -22,7 +22,6 @@ public class Items {
     private int attackBonus;
     private int defenseBonus;
     private int healthBonus;
-
     private int manaBonus;
     private int price;
     private int quantity;
@@ -31,7 +30,6 @@ public class Items {
 
     public Items() {
     }
-
 
     public Items(Long id, String name, ItemType type, int attackBonus, int defenseBonus, int healthBonus, int manaBonus, int price, int manaCost, String effect) {
         this.id = id;
@@ -45,7 +43,6 @@ public class Items {
         this.manaCost = manaCost;
         this.effect = effect;
     }
-
 
     public Long getId() {
         return id;
@@ -149,5 +146,4 @@ public class Items {
     public int hashCode() {
         return Objects.hash(id);
     }
-
 }

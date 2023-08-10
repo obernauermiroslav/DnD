@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="corrected health calculation during healing, upgrade and update health, added current health/maximum health during fight">
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="corrected health calculation during healing, upgrade and update health, added current health/maximum health during fight, added some more effects to some items">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Enemies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Enemies.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Items.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Shop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hero.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/hero.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/shop.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +206,8 @@
       <workItem from="1691558131971" duration="8279000" />
       <workItem from="1691580289966" duration="4895000" />
       <workItem from="1691593700262" duration="5461000" />
-      <workItem from="1691601591894" duration="3841000" />
+      <workItem from="1691601591894" duration="4084000" />
+      <workItem from="1691648016353" duration="12543000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -405,14 +405,20 @@
       <option name="project" value="LOCAL" />
       <updated>1691584595353</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="corrected health calculation during healing, upgrade and update health, added current health/maximum health during fight, added some more effects to some items">
+      <created>1691605673620</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1691605673620</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress" />
     <MESSAGE value="started with new project, readme will be the next commit" />
     <MESSAGE value="added readme" />
     <MESSAGE value="some css changes and attribute changes for monsters and items" />
@@ -437,6 +443,7 @@
     <MESSAGE value="made some small changes with css, html and hero attributes, deleted some duplicated lines" />
     <MESSAGE value="added mana bonus to some items and corrected calculating health after buying item and upgrading health" />
     <MESSAGE value="corrected health calculation during healing, upgrade and update health, added current health/maximum health during fight" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrected health calculation during healing, upgrade and update health, added current health/maximum health during fight" />
+    <MESSAGE value="corrected health calculation during healing, upgrade and update health, added current health/maximum health during fight, added some more effects to some items" />
+    <option name="LAST_COMMIT_MESSAGE" value="corrected health calculation during healing, upgrade and update health, added current health/maximum health during fight, added some more effects to some items" />
   </component>
 </project>

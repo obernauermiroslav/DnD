@@ -46,7 +46,7 @@
              th:attr="data-item-name=${item.name},data-effect=${item.effect},data-item-type=${item.type},data-attack-bonus=${item.attackBonus},data-defense-bonus=${item.defenseBonus},data-health-bonus=${item.healthBonus},data-mana-cost=${item.manaCost}">
           </p>
           <!-- Render the upgrade button for each item -->
-          <form th:action="@{/hero/upgradeItem/{itemId}(itemId=${item.id})}" method="post"
+          <form th:action="@{/hero/upgradeItem/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()"
                 th:unless="${item.type == 'SPELL' or item.type == 'RING' or item.type == 'NECKLACE'}"
                 class="button-container">
             <button id="upgradeButton" type="submit" style="display: none">+</button>
@@ -83,6 +83,27 @@
       button.disabled = true;
     });
   }
+  function saveScrollPosition() {
+    // Save the current scroll position in the session storage
+    const scrollPosition = document.getElementById('items-table').scrollTop;
+    sessionStorage.setItem('scrollPosition', scrollPosition.toString());
+  }
+
+  function restoreScrollPosition() {
+    // Retrieve the saved scroll position from the session storage
+    const scrollPosition = sessionStorage.getItem('scrollPosition');
+    if (scrollPosition !== null) {
+      // Scroll the table container to the saved position
+      document.getElementById('items-table').scrollTop = parseInt(scrollPosition);
+      // Remove the saved position after restoring it
+      sessionStorage.removeItem('scrollPosition');
+    }
+  }
+
+  // Restore the scroll position when the page loads
+  window.onload = function() {
+    restoreScrollPosition();
+  };
   function handleItemHover(button) {
     const itemName = button.getAttribute('data-item-name');
     const itemType = button.getAttribute('data-item-type');

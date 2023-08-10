@@ -3,8 +3,6 @@ package com.dnd.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
-import javax.print.DocFlavor;
 import java.io.Serializable;
 @Entity
 @Table(name = "enemies")

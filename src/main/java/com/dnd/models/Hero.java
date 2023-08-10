@@ -10,10 +10,8 @@ public class Hero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private int health;
-
     private int maxHealth;
     private int attack;
     private int defense;
@@ -26,6 +24,7 @@ public class Hero {
     private int permanentHealthUpgrades;
     private int permanentAttackUpgrades;
     private int permanentDefenseUpgrades;
+    private int permanentManaUpgrades;
     private boolean hasShield;
 
     @Transient
@@ -77,6 +76,8 @@ public class Hero {
 
                 if (!hasSameSpell) {
                     equippedItems.add(item);
+                    purchasedItems.add(item.getId()); // Mark item as purchased
+                    updateStats();
                 }
             } else {
                 // For non-spell items, check for duplicates and equip the item
@@ -89,15 +90,15 @@ public class Hero {
                     // Unequip the existing item of the same type
                     unequipItem(existingItemOfType);
                 }
+                // Update health bonus for the item type
+                int itemTypeHealthBonus = itemTypeHealthBonuses.getOrDefault(item.getType(), 0);
+                itemTypeHealthBonus += item.getHealthBonus();
+                itemTypeHealthBonuses.put(item.getType(), itemTypeHealthBonus);
+
                 equippedItems.add(item);
+                purchasedItems.add(item.getId()); // Mark item as purchased
+                updateStats();
             }
-
-            // Update health bonus for the item type
-            int itemTypeHealthBonus = itemTypeHealthBonuses.getOrDefault(item.getType(), 0);
-            itemTypeHealthBonus += item.getHealthBonus();
-            itemTypeHealthBonuses.put(item.getType(), itemTypeHealthBonus);
-
-            updateStats();
         }
     }
 
@@ -122,7 +123,11 @@ public class Hero {
             totalAttackBonus += item.getAttackBonus();
             totalDefenseBonus += item.getDefenseBonus();
             totalHealthBonus += itemTypeHealthBonuses.getOrDefault(item.getType(), 0);
-            totalManaBonus += item.getManaBonus();
+
+            // Check if the item has already been purchased to avoid adding the mana bonus again
+            if (purchasedItems.contains(item.getId())) {
+                totalManaBonus += item.getManaBonus();
+            }
         }
 
         // Include permanent upgrades in the stats calculation
@@ -137,7 +142,6 @@ public class Hero {
         this.mana = getMana() + totalManaBonus;
     }
 
-
     public void updateStatsUpgrade() {
         int totalAttackBonus = 0;
         int totalDefenseBonus = 0;
@@ -149,8 +153,8 @@ public class Hero {
             totalAttackBonus += item.getAttackBonus();
             totalDefenseBonus += item.getDefenseBonus();
 
-            // Check if the item has already been purchased to avoid adding full health bonus again
-            if (newlyPurchasedItem != null && item.equals(newlyPurchasedItem)) {
+            // Check if the item has already been purchased to avoid adding full health and mana bonuses again
+            if (purchasedItems.contains(item.getId())) {
                 totalHealthBonus += item.getHealthBonus();
             }
         }
@@ -183,7 +187,6 @@ public class Hero {
     public void markItemAsUpgraded(Long itemId) {
         upgradedItemIds.add(itemId);
     }
-
 
     public Hero() {
     }
@@ -293,10 +296,12 @@ public class Hero {
     }
 
     public void setSkillPoints(int skillPoints) {
+
         this.skillPoints = skillPoints;
     }
 
     public int getPermanentHealthUpgrades() {
+
         return permanentHealthUpgrades;
     }
     public void setPermanentHealthUpgrades(int permanentHealthUpgrades) {
@@ -304,6 +309,7 @@ public class Hero {
     }
 
     public int getPermanentAttackUpgrades() {
+
         return permanentAttackUpgrades;
     }
 
@@ -312,11 +318,19 @@ public class Hero {
     }
 
     public int getPermanentDefenseUpgrades() {
+
         return permanentDefenseUpgrades;
     }
 
     public void setPermanentDefenseUpgrades(int permanentDefenseUpgrades) {
         this.permanentDefenseUpgrades = permanentDefenseUpgrades;
+    }
+    public int getPermanentManaUpgrades() {
+        return permanentManaUpgrades;
+    }
+
+    public void setPermanentManaUpgrades(int permanentManaUpgrades) {
+        this.permanentManaUpgrades = permanentManaUpgrades;
     }
     public boolean hasShield() {
         return hasShield;
@@ -334,7 +348,6 @@ public class Hero {
         return false;
     }
 
-
     public int getRunes() {
         return runes;
     }
@@ -343,7 +356,6 @@ public class Hero {
         this.runes = runes;
     }
 
-
     public Hero(String name) {
         this.name = name;
     }
@@ -351,6 +363,7 @@ public class Hero {
     public void upgradeHealth() {
         if (skillPoints > 0) {
             maxHealth += 30;
+            health += 30;
             skillPoints -= 1;
         }
     }
@@ -376,5 +389,4 @@ public class Hero {
             skillPoints -= 1;
         }
     }
-
 }
