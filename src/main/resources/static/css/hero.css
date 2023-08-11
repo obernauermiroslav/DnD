@@ -160,13 +160,31 @@ body {
     margin-left: -65px;
     margin-top: 175px;
 }
+#spell-picture-firebolt{
+    position: absolute;
+    margin-left: 400px;
+    margin-top: 450px;
+    height: 50px;
+    width: 50px;
+}
+#spell-picture-weakness{
+    position: absolute;
+    margin-left: 340px;
+    margin-top: 450px;
+    height: 50px;
+    width: 50px;
+}
 .item-button:hover {
     background-color: #f2f2f2;
 }
 
 .item-picture.highlight {
-    border: 3px solid maroon; /* Add a border to the highlighted item picture */
+    border: 3px ridge maroon; /* Add a border to the highlighted item picture */
 }
+.spell-picture.highlight {
+    border: 3px inset maroon; /* You can adjust the style as needed */
+}
+
 
 .item-container {
     display: flex;

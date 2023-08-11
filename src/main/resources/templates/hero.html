@@ -40,7 +40,7 @@
     <h3>Equipped Items:</h3>
     <div class="equipped-items">
       <!-- Loop through equippedItems and create a new button for each item -->
-      <div th:each="item : ${hero?.equippedItems}" th:if="${hero != null and item != null}">
+      <div th:each="item : ${hero?.equippedItems}" th:if="${hero != null and item != null and item.type != 'SPELL'}">
         <div class="item-container">
           <p class="item-button" th:text="${item.name}"
              th:attr="data-item-name=${item.name},data-effect=${item.effect},data-item-type=${item.type},data-attack-bonus=${item.attackBonus},data-defense-bonus=${item.defenseBonus},data-health-bonus=${item.healthBonus},data-mana-cost=${item.manaCost}">
@@ -55,6 +55,7 @@
       </div>
     </div>
   </div>
+
   <p id="upgradeMessage" th:text="${upgradeMessage}"></p>
   <div>
     <p id="upgradeMessageItem" th:if="${not #strings.isEmpty(upgradeMessageItem)}" th:text="${upgradeMessageItem}"></p>
@@ -71,6 +72,9 @@
     <img class="item-picture" id="cloak-picture" src="/images/cloak.jpg" alt="Cloak" style="display: none;">
     <img class="item-picture" id="weapon-picture" src="/images/weapon.jpg" alt="Weapon" style="display: none;">
     <img class="item-picture" id="shield-picture" src="/images/shield.jpg" alt="Shield" style="display: none;">
+    <img class="item-picture spell-picture" id="spell-picture-firebolt" src="/images/firebolt.png" alt="Firebolt" style="display: none;">
+    <img class="item-picture spell-picture" id="spell-picture-weakness" src="/images/weakness.png" alt="Weakness" style="display: none;">
+
   </div>
 <div id="item-info-popup" class="item-popup"></div>
 </div>
@@ -119,6 +123,13 @@
         <p>Effect: ${effect}</p>
         <p>Mana Cost: ${manaCost}</p>
       `;
+
+      // Highlight the corresponding spell picture
+      const spellName = itemName.toLowerCase();
+      const spellPicture = document.getElementById(`spell-picture-${spellName}`);
+      if (spellPicture) {
+        spellPicture.classList.add('highlight');
+      }
     } else if (itemType === 'NECKLACE') {
       const effect = button.getAttribute('data-effect');
       popupContent += `
@@ -189,19 +200,39 @@
 
   function updateItemPictures() {
     const equippedItems = /*[[${hero?.equippedItems}]]*/ [];
+    const spellNames = equippedItems
+            .filter(item => item.type === 'SPELL')
+            .map(item => item.name.toLowerCase());
 
     const itemPictures = document.querySelectorAll('.item-picture');
     itemPictures.forEach(picture => {
       const itemType = picture.id.split('-')[0].toUpperCase();
-      const hasItem = equippedItems.some(item => item.type === itemType);
 
-      if (hasItem) {
-        picture.style.display = 'block';
+      if (itemType === 'SPELL') {
+        const spellName = picture.id.split('-')[2].toLowerCase();
+        const hasSpell = spellNames.includes(spellName);
+
+        if (hasSpell) {
+          picture.style.display = 'block';
+          picture.src = `/images/${spellName}.png`;
+        } else {
+          picture.style.display = 'none';
+        }
       } else {
-        picture.style.display = 'none';
+        const hasItem = equippedItems.some(item => item.type === itemType);
+
+        if (hasItem) {
+          picture.style.display = 'block';
+        } else {
+          picture.style.display = 'none';
+        }
       }
     });
   }
+
+
+
+
 
   // Call the function to update item pictures on page load
   document.addEventListener('DOMContentLoaded', function () {

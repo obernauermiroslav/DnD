@@ -331,7 +331,7 @@ public class GameController {
 
         // Check if the hero has equipped the "Fire bolt" spell
         boolean hasFireBoltSpell = hero.getEquippedItems().stream()
-                .anyMatch(item -> item.getName().equals("Fire bolt") && item.getType() == ItemType.SPELL);
+                .anyMatch(item -> item.getName().equals("Firebolt") && item.getType() == ItemType.SPELL);
 
         // If the hero has the "Fire bolt" spell equipped, perform the spell casting logic
         if (hasFireBoltSpell) {
