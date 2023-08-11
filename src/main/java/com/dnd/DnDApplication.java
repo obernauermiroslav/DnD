@@ -123,12 +123,14 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(potion);
 
 
-        Items spell1 = new Items(null, "Firebolt", ItemType.SPELL, 0, 0,0,0,210,5,"Damages enemy for 25 points and ignores armor");
+        Items spell1 = new Items(null, "Firebolt", ItemType.SPELL, 0, 0,0,0,210,5,"Damages enemy for 26 points and ignores armor");
         itemsRepository.save(spell1);
         Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy attack by 2 points");
         itemsRepository.save(spell2);
-        Items spell3 = new Items(null, "Sunder_Armor", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy defence by 2 points");
+        Items spell3 = new Items(null, "Sunder Armor", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy defence by 2 points");
         itemsRepository.save(spell3);
+        Items spell4 = new Items(null, "Healing", ItemType.SPELL, 0, 0,0,0,210,7,"Heals for 20 points");
+        itemsRepository.save(spell4);
 
 
         Enemies enemy1 = new Enemies(1L,"Training Figurine", 55,0,3,"Everyone starts somewhere, try not to hit yourself.");

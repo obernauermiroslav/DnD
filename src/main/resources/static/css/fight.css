@@ -81,21 +81,28 @@ h2 {
 #firebolt{
     position: absolute;
     margin-top: 38px;
-    margin-left: -100px;
+    margin-left: -145px;
     width: 60px;
+    height: 25px;
+}
+#healing{
+    position: absolute;
+    margin-top: 38px;
+    margin-left: 25px;
+    width: 70px;
     height: 25px;
 }
 #weakness{
     position: absolute;
     margin-top: 38px;
-    margin-left: -10px;
+    margin-left: -60px;
     width: 70px;
     height: 25px;
 }
 #sunder_armor{
     position: absolute;
     margin-top: 38px;
-    margin-left: -200px;
+    margin-left: -240px;
     width: 100px;
     height: 25px;
 }
@@ -105,7 +112,7 @@ h2 {
     border: 1px solid #ccc;
     padding: 5px;
     z-index: 1;
-    width: 170px;
+    width: 200px;
 }
 
 /* Style for the button to show the hover window */

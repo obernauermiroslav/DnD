@@ -37,7 +37,7 @@
     <p th:if="${hero != null}">Runes: <span th:text="${hero.runes}"></span></p>
   </div>
   <div id="items-table">
-    <h3>Equipped Items:</h3>
+    <h3>Inventory & Spells:</h3>
     <div class="equipped-items">
       <!-- Loop through equippedItems and create a new button for each item -->
       <div th:each="item : ${hero?.equippedItems}" th:if="${hero != null and item != null and item.type != 'SPELL'}">
@@ -74,8 +74,8 @@
     <img class="item-picture" id="shield-picture" src="/images/shield.jpg" alt="Shield" style="display: none;">
     <img class="item-picture spell-picture" id="spell-picture-firebolt" src="/images/firebolt.png" alt="Firebolt" style="display: none;">
     <img class="item-picture spell-picture" id="spell-picture-weakness" src="/images/weakness.png" alt="Weakness" style="display: none;">
-    <img class="item-picture spell-picture" id="spell-picture-sunder_armor" src="/images/sunder_armor.png.png" alt="Weakness" style="display: none;">
-
+    <img class="item-picture spell-picture" id="spell-picture-sunder_armor" src="/images/sunder_armor.png" alt="Sunder Armor" style="display: none;">
+    <img class="item-picture spell-picture" id="spell-picture-healing" src="/images/healing.png" alt="Healing" style="display: none;">
   </div>
 <div id="item-info-popup" class="item-popup"></div>
 </div>
@@ -127,7 +127,7 @@
 
       // Highlight the corresponding spell picture
       const spellName = itemName.toLowerCase();
-      const spellPicture = document.getElementById(`spell-picture-${spellName}`);
+      const spellPicture = document.getElementById(`spell-picture-${spellName.replace(/\s+/g, '_')}`);
       if (spellPicture) {
         spellPicture.classList.add('highlight');
       }
@@ -210,12 +210,12 @@
       const itemType = picture.id.split('-')[0].toUpperCase();
 
       if (itemType === 'SPELL') {
-        const spellName = picture.id.split('-')[2].toLowerCase();
+        const spellName = picture.id.split('-')[2].toLowerCase().replace(/_/g, ' ');
         const hasSpell = spellNames.includes(spellName);
 
         if (hasSpell) {
           picture.style.display = 'block';
-          picture.src = `/images/${spellName}.png`;
+          picture.src = `/images/${spellName.replace(/\s+/g, '_')}.png`;
         } else {
           picture.style.display = 'none';
         }
@@ -230,11 +230,6 @@
       }
     });
   }
-
-
-
-
-
   // Call the function to update item pictures on page load
   document.addEventListener('DOMContentLoaded', function () {
     var itemButtons = document.querySelectorAll('.item-button');

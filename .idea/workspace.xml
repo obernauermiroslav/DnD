@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="now it correctly highlights spell pictures when hover over spell name">
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added new spell sunder armor that can decreased enemy defence">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" afterDir="false" />
@@ -207,7 +207,8 @@
       <workItem from="1691593700262" duration="5461000" />
       <workItem from="1691601591894" duration="4084000" />
       <workItem from="1691648016353" duration="31254000" />
-      <workItem from="1691735748939" duration="8573000" />
+      <workItem from="1691735748939" duration="8784000" />
+      <workItem from="1691756800078" duration="9102000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -426,14 +427,27 @@
       <option name="project" value="LOCAL" />
       <updated>1691743016853</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="added new spell sunder armor that can decreased enemy defence">
+      <created>1691746361867</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1691746361867</updated>
+    </task>
+    <task id="LOCAL-00033" summary="added new spell sunder armor that can decreased enemy defence">
+      <created>1691746377971</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1691746377971</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="some css changes and attribute changes for monsters and items" />
     <MESSAGE value="added new spell: weakness, that can be used to decrease enemy attack + some minor css and html changes" />
     <MESSAGE value="added various changes to html and css as well as new information hover window for item description" />
     <MESSAGE value="added better responsive css for all pages, and new skill system" />
@@ -458,6 +472,7 @@
     <MESSAGE value="corrected health calculation during healing, upgrade and update health, added current health/maximum health during fight, added some more effects to some items" />
     <MESSAGE value="added scrollbar to list of equipped items and some css, html changes" />
     <MESSAGE value="now it correctly highlights spell pictures when hover over spell name" />
-    <option name="LAST_COMMIT_MESSAGE" value="now it correctly highlights spell pictures when hover over spell name" />
+    <MESSAGE value="added new spell sunder armor that can decreased enemy defence" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new spell sunder armor that can decreased enemy defence" />
   </component>
 </project>

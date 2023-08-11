@@ -268,10 +268,6 @@ public class GameController {
         if (hasWeaknessSpell) {
             int weaknessManaCost = 5; // Define the mana cost for Weakness spell
             if (hero.getMana() >= weaknessManaCost) {
-                // Deduct the mana cost from the hero's total mana points
-                hero.setMana(hero.getMana() - weaknessManaCost);
-                heroService.saveHero(hero);
-
                 Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
@@ -281,11 +277,13 @@ public class GameController {
 
                         // Ensure the attack doesn't go below zero
                         if (newEnemyAttack >= 0) {
+                            hero.setMana(hero.getMana() - weaknessManaCost);
+                            heroService.saveHero(hero);
                             enemy.setAttack(newEnemyAttack);
                             enemiesService.saveEnemy(enemy);
 
                             // Set the spell casting result message in the model to display it in the fight page
-                            model.addAttribute("spellCastingResult", "You cast Weakness. Enemy's attack decreased by " + spellDamage + " points!");
+                            model.addAttribute("spellCastingResult", "You cast Weakness. Enemy's attack is decreased by " + spellDamage + " points!");
                         } else {
                             model.addAttribute("spellCastingResult", "Enemy's attack is on minimum.");
                         }
@@ -301,7 +299,7 @@ public class GameController {
                 model.addAttribute("spellCastingResult", "Not enough mana to cast Weakness.");
             }
         } else {
-            model.addAttribute("spellCastingResult", "You don't have the Weakness spell equipped.");
+            model.addAttribute("spellCastingResult", "You do not know how to cast Weakness.");
         }
 
         // Load the enemy from the service and add it to the model
@@ -327,16 +325,12 @@ public class GameController {
 
         // Check if the hero has equipped the "Weakness" spell
         boolean hasSunder_ArmorSpell = hero.getEquippedItems().stream()
-                .anyMatch(item -> item.getName().equals("Sunder_Armor") && item.getType() == ItemType.SPELL);
+                .anyMatch(item -> item.getName().equals("Sunder Armor") && item.getType() == ItemType.SPELL);
 
         // If the hero has the "Sunder_Armor" spell equipped, perform the spell casting logic
         if (hasSunder_ArmorSpell) {
             int sunder_armorManaCost = 5; // Define the mana cost for Sunder_Armor spell
             if (hero.getMana() >= sunder_armorManaCost) {
-                // Deduct the mana cost from the hero's total mana points
-                hero.setMana(hero.getMana() - sunder_armorManaCost);
-                heroService.saveHero(hero);
-
                 Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
@@ -346,11 +340,14 @@ public class GameController {
 
                         // Ensure the attack doesn't go below zero
                         if (newEnemyDefence >= 0) {
+                            hero.setMana(hero.getMana() - sunder_armorManaCost);
+                            heroService.saveHero(hero);
+
                             enemy.setDefence(newEnemyDefence);
                             enemiesService.saveEnemy(enemy);
 
                             // Set the spell casting result message in the model to display it in the fight page
-                            model.addAttribute("spellCastingResult", "You cast Sunder Armor. Enemy's defence decreased by " + spellDamage + " points!");
+                            model.addAttribute("spellCastingResult", "You cast Sunder Armor. Enemy's defence is decreased by " + spellDamage + " points!");
                         } else {
                             model.addAttribute("spellCastingResult", "Enemy's defence is on minimum.");
                         }
@@ -366,7 +363,7 @@ public class GameController {
                 model.addAttribute("spellCastingResult", "Not enough mana to cast Sunder Armor.");
             }
         } else {
-            model.addAttribute("spellCastingResult", "You don't have the Sunder Armor spell equipped.");
+            model.addAttribute("spellCastingResult", "You do not know how to cast Sunder Armor.");
         }
 
         // Load the enemy from the service and add it to the model
@@ -380,7 +377,70 @@ public class GameController {
         return "fight";
     }
 
+    @PostMapping("/healing")
+    public String castHealing(@RequestParam("heroId") Long heroId, Model model, HttpSession session) {
+        // Load the hero from the database using the heroId received from the form
+        Optional<Hero> heroOptional = heroService.getHeroById(heroId);
+        Hero hero = heroOptional.orElse(null);
 
+        if (hero == null) {
+            model.addAttribute("errorMessage", "Hero not found");
+            return "error-page";
+        }
+
+        // Check if the hero has equipped the "Weakness" spell
+        boolean hasHealingSpell = hero.getEquippedItems().stream()
+                .anyMatch(item -> item.getName().equals("Healing") && item.getType() == ItemType.SPELL);
+
+        // If the hero has the "Healing" spell equipped, perform the spell casting logic
+        if (hasHealingSpell) {
+            int healingManaCost = 7; // Define the mana cost for Healing spell
+            if (hero.getMana() >= healingManaCost) {
+                Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
+                if (currentEnemyId != null) {
+                    Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
+                    if (enemy != null) {
+                        int healAmount = 22;
+                        int newHeroHealth = hero.getHealth() + healAmount;
+
+                        if (hero.getHealth() == hero.getMaxHealth()) {
+                            model.addAttribute("spellCastingResult", "No need to cast Healing, your health is on maximum. .");
+                        } else {
+                            hero.setMana(hero.getMana() - healingManaCost);
+                            int actualHealAmount = Math.min(healAmount, hero.getMaxHealth() - hero.getHealth());
+                            hero.setHealth(hero.getHealth() + actualHealAmount);
+
+                            heroService.saveHero(hero);
+
+                            // Set the spell casting result message in the model to display it in the fight page
+                            model.addAttribute("spellCastingResult", "You cast Healing. You are healed by " + actualHealAmount + " points!");
+
+                            // Set the enemy attribute in the session to be used in the fight.html template
+                            session.setAttribute("currentEnemy", enemy);
+                        }
+                    } else {
+                        model.addAttribute("spellCastingResult", "An error occurred.");
+                    }
+                } else {
+                    model.addAttribute("spellCastingResult", "An error occurred.");
+                }
+            } else {
+                model.addAttribute("spellCastingResult", "Not enough mana to cast Healing.");
+            }
+        } else {
+            model.addAttribute("spellCastingResult", "You do not know how to cast Healing.");
+        }
+
+        // Load the enemy from the service and add it to the model
+        Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
+        if (currentEnemyId != null) {
+            Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
+            model.addAttribute("enemy", enemy);
+        }
+
+        model.addAttribute("hero", hero);
+        return "fight";
+    }
 
     @PostMapping("/firebolt")
     public String castFirebolt(@RequestParam("heroId") Long heroId,
@@ -411,7 +471,7 @@ public class GameController {
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
                     if (enemy != null) {
-                        int spellDamage = 25;
+                        int spellDamage = 26;
                         int newEnemyHealth = enemy.getHealth() - spellDamage;
 
                         // Ensure the health doesn't go below zero
@@ -450,10 +510,10 @@ public class GameController {
                     model.addAttribute("spellCastingResult", "No enemy to cast the spell on.");
                 }
             } else {
-                model.addAttribute("spellCastingResult", "Not enough mana to cast Fire bolt.");
+                model.addAttribute("spellCastingResult", "Not enough mana to cast Firebolt.");
             }
         } else {
-            model.addAttribute("spellCastingResult", "You don't have the Fire bolt spell equipped.");
+            model.addAttribute("spellCastingResult", "You do not know how to cast Firebolt.");
         }
 
         // Load the enemy from the service and add it to the model
