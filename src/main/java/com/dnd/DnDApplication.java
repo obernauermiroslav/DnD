@@ -74,7 +74,7 @@ public class DnDApplication implements CommandLineRunner {
 
         Items cloak1 = new Items(null, "Cloak", ItemType.CLOAK, 0, 1,6,0,60,0,"");
         itemsRepository.save(cloak1);
-        Items cloak2 = new Items(null, "Enchanted Cloak", ItemType.CLOAK, 0, 3,10,5,100,0,"+5 mana");
+        Items cloak2 = new Items(null, "Enchanted Cloak", ItemType.CLOAK, 0, 3,10,6,100,0,"+5 mana");
         itemsRepository.save(cloak2);
         Items cloak3 = new Items(null, "Dragon Cloak", ItemType.CLOAK, 0, 5,18,0,135,0,"");
         itemsRepository.save(cloak3);
@@ -129,7 +129,7 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(spell2);
         Items spell3 = new Items(null, "Sunder Armor", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy defence by 2 points");
         itemsRepository.save(spell3);
-        Items spell4 = new Items(null, "Healing", ItemType.SPELL, 0, 0,0,0,210,7,"Heals for 20 points");
+        Items spell4 = new Items(null, "Healing", ItemType.SPELL, 0, 0,0,0,210,7,"Heals for 25 points");
         itemsRepository.save(spell4);
 
 
@@ -143,7 +143,7 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy4);
         Enemies enemy5= new Enemies(5L,"Troll", 275,21,11,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);
-        Enemies enemy6= new Enemies(6L,"Drake", 340,24,14,"Watch out, he breathes fire, his attacks ignores your armor, and cannot be blocked with shield.");
+        Enemies enemy6= new Enemies(6L,"Drake", 340,24,14,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
         enemiesRepository.save(enemy6);
         Enemies enemy7= new Enemies(7L,"Behemoth", 430,30,17,"He looks angry and his long claws are thirsty for your blood.");
         enemiesRepository.save(enemy7);

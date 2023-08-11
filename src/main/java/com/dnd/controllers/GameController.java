@@ -77,8 +77,6 @@ public class GameController {
         return "fight";
     }
 
-
-
     @PostMapping("/fight")
     public String fight(@RequestParam("heroId") Long heroId,
                         @RequestParam("enemyId") Long enemyId,
@@ -197,7 +195,6 @@ public class GameController {
         return "fight";
     }
 
-
     @PostMapping("/heal")
     public String healHero(@RequestParam("heroId") Long heroId,
                            Model model,
@@ -248,7 +245,6 @@ public class GameController {
         return "fight";
     }
 
-
     @PostMapping("/weakness")
     public String castWeakness(@RequestParam("heroId") Long heroId, Model model, HttpSession session) {
         // Load the hero from the database using the heroId received from the form
@@ -290,7 +286,7 @@ public class GameController {
                         // Set the enemy attribute in the session to be used in the fight.html template
                         session.setAttribute("currentEnemy", enemy);
                     } else {
-                        model.addAttribute("spellCastingResult", "Enemy's attack is on minimum.");
+                        model.addAttribute("spellCastingResult", "No enemy to cast the Weakness on.");
                     }
                 } else {
                     model.addAttribute("spellCastingResult", "Enemy's attack is on minimum.");
@@ -354,7 +350,7 @@ public class GameController {
                         // Set the enemy attribute in the session to be used in the fight.html template
                         session.setAttribute("currentEnemy", enemy);
                     } else {
-                        model.addAttribute("spellCastingResult", "Enemy's defence is on minimum.");
+                        model.addAttribute("spellCastingResult", "No enemy to cast Sunder Armor on.");
                     }
                 } else {
                     model.addAttribute("spellCastingResult", "Enemy's defence is on minimum.");
@@ -394,13 +390,13 @@ public class GameController {
 
         // If the hero has the "Healing" spell equipped, perform the spell casting logic
         if (hasHealingSpell) {
-            int healingManaCost = 7; // Define the mana cost for Healing spell
+            int healingManaCost = 6; // Define the mana cost for Healing spell
             if (hero.getMana() >= healingManaCost) {
                 Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
                     if (enemy != null) {
-                        int healAmount = 22;
+                        int healAmount = 25;
                         int newHeroHealth = hero.getHealth() + healAmount;
 
                         if (hero.getHealth() == hero.getMaxHealth()) {
@@ -419,10 +415,10 @@ public class GameController {
                             session.setAttribute("currentEnemy", enemy);
                         }
                     } else {
-                        model.addAttribute("spellCastingResult", "An error occurred.");
+                        model.addAttribute("spellCastingResult", "No need to cast Healing, you have won.");
                     }
                 } else {
-                    model.addAttribute("spellCastingResult", "An error occurred.");
+                    model.addAttribute("spellCastingResult", "Error occured.");
                 }
             } else {
                 model.addAttribute("spellCastingResult", "Not enough mana to cast Healing.");
@@ -502,7 +498,7 @@ public class GameController {
                         // Set the spell casting result message in the model to display it in the fight page
                         model.addAttribute("spellCastingResult", "You cast Firebolt for " + spellDamage + " damage!");
                     } else {
-                        model.addAttribute("spellCastingResult", "No enemy to cast the spell on.");
+                        model.addAttribute("spellCastingResult", "No enemy to cast the Firebolt on.");
                     }
                     // Set the enemy attribute in the session to be used in the fight.html template
                     session.setAttribute("currentEnemy", enemy);

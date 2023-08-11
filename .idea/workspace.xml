@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added new spell sunder armor that can decreased enemy defence">
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment="added new spell: healing that can heal hero + corrected messages for spell use">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fight.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fight.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hero.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/hero.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +205,7 @@
       <workItem from="1691601591894" duration="4084000" />
       <workItem from="1691648016353" duration="31254000" />
       <workItem from="1691735748939" duration="8784000" />
-      <workItem from="1691756800078" duration="9102000" />
+      <workItem from="1691756800078" duration="13872000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -441,14 +438,20 @@
       <option name="project" value="LOCAL" />
       <updated>1691746377971</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="added new spell: healing that can heal hero + corrected messages for spell use">
+      <created>1691766964500</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1691766964500</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added new spell: weakness, that can be used to decrease enemy attack + some minor css and html changes" />
     <MESSAGE value="added various changes to html and css as well as new information hover window for item description" />
     <MESSAGE value="added better responsive css for all pages, and new skill system" />
     <MESSAGE value="added pop-up window for items , made better skill points redistribution system and some css and html changes for better view" />
@@ -473,6 +476,7 @@
     <MESSAGE value="added scrollbar to list of equipped items and some css, html changes" />
     <MESSAGE value="now it correctly highlights spell pictures when hover over spell name" />
     <MESSAGE value="added new spell sunder armor that can decreased enemy defence" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new spell sunder armor that can decreased enemy defence" />
+    <MESSAGE value="added new spell: healing that can heal hero + corrected messages for spell use" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new spell: healing that can heal hero + corrected messages for spell use" />
   </component>
 </project>
