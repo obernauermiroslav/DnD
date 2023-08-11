@@ -314,6 +314,72 @@ public class GameController {
         model.addAttribute("hero", hero);
         return "fight";
     }
+    @PostMapping("/sunder_armor")
+    public String castSunderArmor(@RequestParam("heroId") Long heroId, Model model, HttpSession session) {
+        // Load the hero from the database using the heroId received from the form
+        Optional<Hero> heroOptional = heroService.getHeroById(heroId);
+        Hero hero = heroOptional.orElse(null);
+
+        if (hero == null) {
+            model.addAttribute("errorMessage", "Hero not found");
+            return "error-page";
+        }
+
+        // Check if the hero has equipped the "Weakness" spell
+        boolean hasSunder_ArmorSpell = hero.getEquippedItems().stream()
+                .anyMatch(item -> item.getName().equals("Sunder_Armor") && item.getType() == ItemType.SPELL);
+
+        // If the hero has the "Sunder_Armor" spell equipped, perform the spell casting logic
+        if (hasSunder_ArmorSpell) {
+            int sunder_armorManaCost = 5; // Define the mana cost for Sunder_Armor spell
+            if (hero.getMana() >= sunder_armorManaCost) {
+                // Deduct the mana cost from the hero's total mana points
+                hero.setMana(hero.getMana() - sunder_armorManaCost);
+                heroService.saveHero(hero);
+
+                Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
+                if (currentEnemyId != null) {
+                    Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
+                    if (enemy != null) {
+                        int spellDamage = 2;
+                        int newEnemyDefence = enemy.getDefence() - spellDamage;
+
+                        // Ensure the attack doesn't go below zero
+                        if (newEnemyDefence >= 0) {
+                            enemy.setDefence(newEnemyDefence);
+                            enemiesService.saveEnemy(enemy);
+
+                            // Set the spell casting result message in the model to display it in the fight page
+                            model.addAttribute("spellCastingResult", "You cast Sunder Armor. Enemy's defence decreased by " + spellDamage + " points!");
+                        } else {
+                            model.addAttribute("spellCastingResult", "Enemy's defence is on minimum.");
+                        }
+                        // Set the enemy attribute in the session to be used in the fight.html template
+                        session.setAttribute("currentEnemy", enemy);
+                    } else {
+                        model.addAttribute("spellCastingResult", "Enemy's defence is on minimum.");
+                    }
+                } else {
+                    model.addAttribute("spellCastingResult", "Enemy's defence is on minimum.");
+                }
+            } else {
+                model.addAttribute("spellCastingResult", "Not enough mana to cast Sunder Armor.");
+            }
+        } else {
+            model.addAttribute("spellCastingResult", "You don't have the Sunder Armor spell equipped.");
+        }
+
+        // Load the enemy from the service and add it to the model
+        Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
+        if (currentEnemyId != null) {
+            Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
+            model.addAttribute("enemy", enemy);
+        }
+
+        model.addAttribute("hero", hero);
+        return "fight";
+    }
+
 
 
     @PostMapping("/firebolt")

@@ -167,6 +167,13 @@ body {
     height: 50px;
     width: 50px;
 }
+#spell-picture-sunder_armor{
+    position: absolute;
+    margin-left: 280px;
+    margin-top: 450px;
+    height: 52px;
+    width: 52px;
+}
 #spell-picture-weakness{
     position: absolute;
     margin-left: 340px;

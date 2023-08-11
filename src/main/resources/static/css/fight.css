@@ -88,8 +88,15 @@ h2 {
 #weakness{
     position: absolute;
     margin-top: 38px;
-    margin-left: -170px;
+    margin-left: -10px;
     width: 70px;
+    height: 25px;
+}
+#sunder_armor{
+    position: absolute;
+    margin-top: 38px;
+    margin-left: -200px;
+    width: 100px;
     height: 25px;
 }
 .enemy-info {

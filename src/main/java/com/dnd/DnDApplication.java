@@ -127,6 +127,8 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(spell1);
         Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy attack by 2 points");
         itemsRepository.save(spell2);
+        Items spell3 = new Items(null, "Sunder_Armor", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy defence by 2 points");
+        itemsRepository.save(spell3);
 
 
         Enemies enemy1 = new Enemies(1L,"Training Figurine", 55,0,3,"Everyone starts somewhere, try not to hit yourself.");
