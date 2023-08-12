@@ -36,7 +36,7 @@
   </form>
 </div>
 <div class="hero-container">
-  <h2>Your Hero:</h2>
+  <h2><span th:text="${hero.name}"></span></h2>
   <p>Health: <span th:text="${hero.health}"></span> / <span th:text="${hero.maxHealth}"></span></p>
   <p>Attack: <span th:text="${hero.attack}"></span></p>
   <p>Defense: <span th:text="${hero.defense}"></span></p>
@@ -44,8 +44,7 @@
   <p>Healing potion: <span th:text="${hero.potion}"></span></p>
 </div>
 <div class="enemy-container" th:if="${enemy != null}">
-  <h2>Enemy:</h2>
-  <p>Name: <span th:text="${enemy.name}"></span></p>
+  <h2><span th:text="${enemy.name}"></span></h2>
   <p>Health: <span th:text="${enemy.health}"></span></p>
   <p>Attack: <span th:text="${enemy.attack}"></span></p>
   <p>Defense: <span th:text="${enemy.defence}"></span></p>

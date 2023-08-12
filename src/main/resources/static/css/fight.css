@@ -11,49 +11,59 @@ body {
 
 h1 {
     position: absolute;
-    margin-top: -460px;
+    margin-top: -510px;
     color: black;
-
 }
 
 h2 {
     color: black;
-    margin-top: 20px;
+    margin-top: -5px;
 }
-
 
 .container-wrapper {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     max-width: 800px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .hero-container {
     position: absolute;
-    margin-top: -12px;
-    margin-left: -220px;
+    margin-top: -57px;
+    margin-left: -160px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 3px inset #ccc;
+    padding: 7px;
+    align-items: center;
 }
 
 .enemy-container {
     position: absolute;
-    margin-top: -27px;
-    margin-left: 230px;
-
+    margin-top: -105px;
+    margin-left: 150px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 3px inset #ccc;
+    padding: 6px;
+    width: 130px;
+    align-items: center;
 }
-
 
 .results {
     position: absolute;
-    margin-top: 400px;
-    margin-left: -80px;
+    margin-top: 385px;
+    margin-left: 5px;
     max-width: 800px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 5px double #ccc;
+    padding: 3px;
+    width: 280px;
+    height: 170px;
 }
 
 #buttons {
     position: absolute;
-    margin-top: -350px;
+    margin-top: -420px;
     display: inline-flex;
     gap: 10px;
     padding: 30px;
@@ -61,7 +71,7 @@ h2 {
 
 .btn-secondary form {
     position: absolute;
-    margin-top: -500px;
+    margin-top: -550px;
     padding: 15px 30px;
     min-width: 150px;
     min-height: 50px;
@@ -80,49 +90,52 @@ h2 {
 }
 #firebolt{
     position: absolute;
-    margin-top: 38px;
-    margin-left: -145px;
+    margin-top: 30px;
+    margin-left: -155px;
     width: 60px;
     height: 25px;
 }
 #healing{
     position: absolute;
-    margin-top: 38px;
-    margin-left: 25px;
+    margin-top: 30px;
+    margin-left: 15px;
     width: 70px;
     height: 25px;
 }
 #weakness{
     position: absolute;
-    margin-top: 38px;
-    margin-left: -60px;
+    margin-top: 30px;
+    margin-left: -70px;
     width: 70px;
     height: 25px;
 }
 #sunder_armor{
     position: absolute;
-    margin-top: 38px;
-    margin-left: -240px;
+    margin-top: 30px;
+    margin-left: -250px;
     width: 100px;
     height: 25px;
 }
 .enemy-info {
     display: none;
     position: absolute;
+    margin-top: -130px;
+    margin-left: 160px;
     border: 1px solid #ccc;
-    padding: 5px;
-    z-index: 1;
     width: 200px;
+    padding: 5px;
 }
 
 /* Style for the button to show the hover window */
 .enemy-info-btn {
     position: relative;
+    z-index: 1;
 }
 
 .enemy-info-btn:hover .enemy-info {
     display: block;
     background-color: rgba(255, 255, 255, 0.2);
+    border: 5px outset #ccc;
 }
 
 

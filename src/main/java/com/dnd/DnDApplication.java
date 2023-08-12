@@ -133,7 +133,7 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(spell4);
 
 
-        Enemies enemy1 = new Enemies(1L,"Training Figurine", 55,0,3,"Everyone starts somewhere, try not to hit yourself.");
+        Enemies enemy1 = new Enemies(1L,"Figurine", 55,0,3,"Everyone starts somewhere, try not to hit yourself.");
         enemiesRepository.save(enemy1);
         Enemies enemy2 = new Enemies(2L,"Great rat", 95,8,4,"Bigger and more dangerous that standard Rat, but should not be hard to kill.");
         enemiesRepository.save(enemy2);

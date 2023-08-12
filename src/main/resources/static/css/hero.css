@@ -20,7 +20,7 @@ body {
     position: absolute;
     width: 170px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 5px double #ccc;
     margin-top: 80px;
     display: flex;
     flex-direction: column;
@@ -33,7 +33,7 @@ body {
     width: 200px;
     height: 300px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 5px inset #ccc;
     margin-top: 100px;
     display: flex;
     flex-direction: column;
