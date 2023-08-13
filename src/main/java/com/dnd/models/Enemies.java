@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class Enemies implements Serializable {
     private String name;
     private int health;
+    private int maxHealth;
     private int attack;
     private int defence;
 
@@ -19,10 +20,11 @@ public class Enemies implements Serializable {
     public Enemies() {
     }
 
-    public Enemies(Long id, String name, int health, int attack, int defence, String info ) {
+    public Enemies(Long id, String name, int health,int maxHealth, int attack, int defence, String info ) {
         this.id = id;
         this.name = name;
         this.health = health;
+        this.maxHealth = maxHealth;
         this.attack = attack;
         this.defence = defence;
         this.info = info;
@@ -50,6 +52,14 @@ public class Enemies implements Serializable {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public int getAttack() {

@@ -76,30 +76,6 @@ public class HeroServiceImpl implements HeroService {
             return null; // Return null or throw an exception if hero not found
         }
     }
-/*
-    @Override
-    public void updateHeroStats(Hero hero) {
-        int totalAttackBonus = 0;
-        int totalDefenseBonus = 0;
-        int totalHealthBonus = 0;
-        int totalManaBonus = 0;
-
-        // Calculate the total stats from equipped items
-        for (Items item : hero.getEquippedItems()) {
-            totalAttackBonus += item.getAttackBonus();
-            totalDefenseBonus += item.getDefenseBonus();
-            totalHealthBonus += item.getHealthBonus();
-            totalManaBonus += item.getManaBonus();
-        }
-
-        // Update the hero's stats
-        hero.setAttack(hero.getBaseAttack() + totalAttackBonus);
-        hero.setDefense(hero.getBaseDefense() + totalDefenseBonus);
-        hero.setMana(hero.getBaseMana() + totalManaBonus);
-      //  hero.setHealth(hero.getHealth() + totalHealthBonus);
-
-    }
-*/
 
     @Override
     public void updateHeroEquippedItems(Long heroId, List<Items> equippedItems) {

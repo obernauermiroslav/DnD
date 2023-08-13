@@ -1,6 +1,8 @@
 package com.dnd.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
+
 import java.util.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class Hero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private int health;
     private int maxHealth;

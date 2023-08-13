@@ -45,14 +45,32 @@
 </div>
 <div class="enemy-container" th:if="${enemy != null}">
   <h2><span th:text="${enemy.name}"></span></h2>
-  <p>Health: <span th:text="${enemy.health}"></span></p>
+  <p>Health: <span th:text="${enemy.health} + '/' + ${enemy.maxHealth}"></span></p>
   <p>Attack: <span th:text="${enemy.attack}"></span></p>
   <p>Defense: <span th:text="${enemy.defence}"></span></p>
   <div class="enemy-info-btn">
-    <button type="button" class="btn btn-secondary">Show Info</button>
+    <button type="button" class="btn btn-secondary" id="showInfoBtn">Show Info</button>
     <div class="enemy-info">
       <!-- Add the enemy info here -->
       <p th:text="${enemy.info}"></p>
+      <!DOCTYPE html>
+      <html>
+      <head>
+      </head>
+      <body>
+      <div id="enemy-pictures">
+        <img class="enemy-picture" id="figurine" src="/images/figurine.jpg" alt="dummy" style="display: none; width: 220px; height: 180px;">
+        <img class="enemy-picture" id="giant_rat" src="/images/giant_rat.png" alt="rat" style="display: none; width: 220px; height: 180px;">
+        <img class="enemy-picture" id="goblin" src="/images/goblin.jpg" alt="goblin" style="display: none; width: 160px; height: 230px;">
+        <img class="enemy-picture" id="orc" src="/images/orc.jpeg" alt="orc" style="display: none; width: 160px; height: 230px;">
+        <img class="enemy-picture" id="troll" src="/images/troll.jpg" alt="troll" style="display: none; width: 200px; height: 230px;">
+        <img class="enemy-picture" id="drake" src="/images/drake.jpg" alt="drake" style="display: none; width: 220px; height: 180px;">
+        <img class="enemy-picture" id="behemoth" src="/images/behemoth.jpg" alt="behemoth" style="display: none; width: 220px; height: 180px;">
+        <img class="enemy-picture" id="lich" src="/images/lich.jpg" alt="lich" style="display: none; width: 170px; height: 230px;">
+      </div>
+      </body>
+      </html>
+
     </div>
   </div>
 </div>
@@ -66,6 +84,7 @@
   <p id="fightResultIE" th:text="${ineffectiveEnemyAttackMessage}"></p>
   <p id="fightResultS" th:text="${spellCastingResult}"></p>
 </div>
+
 <script th:inline="javascript">
   document.addEventListener('DOMContentLoaded', function() {
     /* Check if heroLost flag is true (hero has lost) and disable the buttons */
@@ -84,7 +103,28 @@
         }
       }
     }
+
+    const showInfoBtn = document.getElementById('showInfoBtn');
+    const enemyPictures = document.getElementById('enemy-pictures');
+    const enemyName = /*[[${enemy.name}]]*/ ''; // Get the enemy name from the model
+
+    showInfoBtn.addEventListener('mouseover', function() {
+      const imageId = enemyName.replace(' ', '_').toLowerCase();
+      const image = enemyPictures.querySelector(`#${imageId}`);
+      if (image) {
+        image.style.display = 'block';
+      }
+    });
+
+    showInfoBtn.addEventListener('mouseout', function() {
+      const imageId = enemyName.replace(' ', '_').toLowerCase();
+      const image = enemyPictures.querySelector(`#${imageId}`);
+      if (image) {
+        image.style.display = 'none';
+      }
+    });
   });
+
   function toggleFormVisibility() {
     const spellForms = document.querySelectorAll('.spellCast');
     spellForms.forEach(form => {
@@ -92,7 +132,5 @@
     });
   }
 </script>
-
-
 </body>
 </html>

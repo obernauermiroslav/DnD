@@ -43,7 +43,12 @@ public class HeroController {
     }
 
     @PostMapping("/save")
-    public String saveHero(@RequestParam("heroName") String heroName) {
+    public String saveHero(@RequestParam("heroName") String heroName, Model model) {
+        if (heroName.length() > 12) {
+            model.addAttribute("heroNameError", "Hero name must be a maximum of 12 characters");
+            return "main"; // Replace with the actual template name
+        }
+
         Hero hero = heroService.getYourHero();
         if (hero != null) {
             hero.setName(heroName);
@@ -51,7 +56,7 @@ public class HeroController {
             // Create a new hero with the given name
             hero = new Hero(heroName);
             hero.setGold(500);
-            hero.setMana(111);
+            hero.setMana(11);
             hero.setPotion(2);
             hero.setSkillPoints(3);
             hero.setHealth(130);
