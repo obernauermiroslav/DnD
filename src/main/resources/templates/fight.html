@@ -29,11 +29,12 @@
     <button id="firebolt" class=" btn btn-secondary" type="submit">Firebolt</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <form id="fight" class="btn btn-secondary"  action="/fight" method="post">
+  <form id="fight" class="btn btn-secondary" action="/fight" method="post">
     <input type="hidden" name="heroId" th:value="${hero.id}">
     <input type="hidden" name="enemyId" th:if="${enemy != null}" th:value="${enemy.id}">
-    <input type="submit" value="Fight!" th:if="${enemy != null}">
+    <input type="submit" value="Fight!" th:if="${enemy != null}" style="cursor: url(https://cur.cursors-4u.net/games/gam-4/gam376.cur), auto !important;">
   </form>
+
 </div>
 <div class="hero-container">
   <h2><span th:text="${hero.name}"></span></h2>
@@ -51,7 +52,6 @@
   <div class="enemy-info-btn">
     <button type="button" class="btn btn-secondary" id="showInfoBtn">Show Info</button>
     <div class="enemy-info">
-      <!-- Add the enemy info here -->
       <p th:text="${enemy.info}"></p>
       <!DOCTYPE html>
       <html>
@@ -70,7 +70,6 @@
       </div>
       </body>
       </html>
-
     </div>
   </div>
 </div>

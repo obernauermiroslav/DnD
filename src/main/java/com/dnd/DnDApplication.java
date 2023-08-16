@@ -137,17 +137,17 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy1);
         Enemies enemy2 = new Enemies(2L,"Giant rat", 95,95,8,4,"Bigger and more dangerous that standard Rat, but should not be hard to kill.");
         enemiesRepository.save(enemy2);
-        Enemies enemy3 = new Enemies(3L,"Goblin", 125,125,16,6,"He is small, mean, armed with mace and can steal your money");
+        Enemies enemy3 = new Enemies(3L,"Goblin", 145,145,15,7,"He is small, mean, armed with mace and can steal your money");
         enemiesRepository.save(enemy3);
-        Enemies enemy4= new Enemies(4L,"Orc", 235,235,18,9,"This fearless warrior is armed with greatsword and crude plate armor.");
+        Enemies enemy4= new Enemies(4L,"Orc", 235,235,18,10,"This fearless warrior is armed with greatsword and leather armor.");
         enemiesRepository.save(enemy4);
-        Enemies enemy5= new Enemies(5L,"Troll", 275,275,21,11,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
+        Enemies enemy5= new Enemies(5L,"Troll", 280,280,21,12,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);
-        Enemies enemy6= new Enemies(6L,"Drake", 340,340,24,14,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
+        Enemies enemy6= new Enemies(6L,"Drake", 345,345,24,14,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
         enemiesRepository.save(enemy6);
-        Enemies enemy7= new Enemies(7L,"Behemoth", 430,430,30,17,"He looks angry and his long claws are thirsty for your blood.");
+        Enemies enemy7= new Enemies(7L,"Behemoth", 435,435,30,17,"He looks angry and his long claws are thirsty for your blood.");
         enemiesRepository.save(enemy7);
-        Enemies enemy8= new Enemies(8L,"Lich", 245,245,33,14,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
+        Enemies enemy8= new Enemies(8L,"Lich", 250,250,33,15,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
         enemiesRepository.save(enemy8);
     }
 }

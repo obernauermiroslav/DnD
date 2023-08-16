@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment=" corrected css and html mistakes and errors, added &#10; borders and changed positions of some elements">
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment=" added pictures for each enemy, added maximum health for each enemy">
+      <change afterPath="$PROJECT_DIR$/src/main/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/spell.cur" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/react/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/react/Index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Enemies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Enemies.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/models/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/services/HeroServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fight.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fight.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main.html" afterDir="false" />
     </list>
@@ -47,10 +50,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="CSS File" />
         <option value="HTML File" />
         <option value="Class" />
         <option value="JavaScript File" />
+        <option value="package.json" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -75,30 +79,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelOrder2": "2",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RequestMappingsPanelWidth2": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/PC/ATeam-Java-NextJS-Quiz-Builder",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "99115c68b67b47a711ae1b43791d45fe",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/ATeam-Java-NextJS-Quiz-Builder&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;99115c68b67b47a711ae1b43791d45fe&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\PC\IdeaProjects\DnDnew\src\main\resources\static\images" />
@@ -215,7 +219,12 @@
       <workItem from="1691822738117" duration="2732000" />
       <workItem from="1691851196166" duration="7979000" />
       <workItem from="1691910162700" duration="5586000" />
-      <workItem from="1691929977439" duration="11974000" />
+      <workItem from="1691929977439" duration="14737000" />
+      <workItem from="1691995216355" duration="1792000" />
+      <workItem from="1692000653911" duration="11480000" />
+      <workItem from="1692033088885" duration="52000" />
+      <workItem from="1692082775214" duration="1474000" />
+      <workItem from="1692184053763" duration="12556000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -469,14 +478,31 @@
       <option name="project" value="LOCAL" />
       <updated>1691860000508</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary=" added pictures for each enemy, added maximum health for each enemy">
+      <created>1691942965375</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1691942965375</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added pop-up window for items , made better skill points redistribution system and some css and html changes for better view" />
     <MESSAGE value="now you can give your hero your own name that will be displayed + minor css and html changes" />
     <MESSAGE value="added 2 new item types -ring, necklace" />
     <MESSAGE value="added new condition check when fighting with shield, it gives hero 15% chance to block every enemy attack , if the enemy is not a dragon + when hero dies, it disables all attack and spell buttons" />
@@ -501,6 +527,7 @@
     <MESSAGE value="added new spell: healing that can heal hero + corrected messages for spell use" />
     <MESSAGE value=" corrected messages for spell use after victory" />
     <MESSAGE value=" corrected css and html mistakes and errors, added &#10; borders and changed positions of some elements" />
-    <option name="LAST_COMMIT_MESSAGE" value=" corrected css and html mistakes and errors, added &#10; borders and changed positions of some elements" />
+    <MESSAGE value=" added pictures for each enemy, added maximum health for each enemy" />
+    <option name="LAST_COMMIT_MESSAGE" value=" added pictures for each enemy, added maximum health for each enemy" />
   </component>
 </project>

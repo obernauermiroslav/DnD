@@ -6,12 +6,16 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    background-repeat: no-repeat;
+}
+
+html body {
+    cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), pointer !important;
 }
 
 .container {
     display: flex;
     justify-content: center;
+    cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), pointer !important;
 }
 
 #hero-table {
@@ -51,6 +55,7 @@ body {
     cursor: pointer;
     transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Add a smooth transition effect for background color and box shadow */
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a shadow effect (horizontal offset, vertical offset, blur radius, color) */
+
 }
 
 /* Clicking effect when the button is being clicked */
@@ -62,6 +67,7 @@ body {
 .btn-secondary:hover {
     background-color: #ddd; /* Change to a different background color on hover */
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Add a larger shadow on hover */
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 
 #upgradeMessage{
@@ -89,21 +95,25 @@ body {
     position: absolute;
     margin-left: 52px;
     margin-top: -37px;
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 #attack{
     position: absolute;
     margin-left: 52px;
     margin-top: -37px;
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 #defense{
     position: absolute;
     margin-left: 52px;
     margin-top: -37px;
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 #mana{
     position: absolute;
     margin-left: 52px;
     margin-top: -37px;
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 #myHero{
     position: absolute;
@@ -190,6 +200,7 @@ body {
 }
 .item-button:hover {
     background-color: #f2f2f2;
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 
 .item-picture.highlight {
@@ -219,4 +230,7 @@ body {
     margin-left:260px;
     margin-top: 50px;
     align-items: center;
+}
+#upgradeButton{
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }

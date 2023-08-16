@@ -7,9 +7,11 @@
 
 th, td {
     padding: 5px;
+
 }
 th{
     padding-top: 25px;
+
 }
 
 body {
@@ -22,6 +24,7 @@ body {
     justify-content: center;
     height: 100vh;
     z-index: -1;
+    cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.ani), url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), auto !important;
 }
 
 h1 {
@@ -60,9 +63,10 @@ p2{
     margin-top: -40px;
     width: 300px;
     height: 330px;
-    border: 1px solid black;
+    border: 4px inset chocolate;
     overflow-x: auto;
     z-index: 1;
+
 }
 
 .btn {
@@ -70,6 +74,7 @@ p2{
     margin-top: -485px;
     position: absolute;
     margin-left: -220px;
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 
 }
 
@@ -80,6 +85,7 @@ p2{
     gap: 5px;
     padding: 10px;
     white-space: nowrap;
+
 }
 
 .item-row form {
@@ -90,6 +96,7 @@ p2{
     align-items: center;
     border: 1px solid #ccc;
     padding: 10px;
+
 }
 
 .item-row form input[type="submit"] {
@@ -97,17 +104,20 @@ p2{
     color: #fff;
     border: none;
     padding: 10px 10px;
-    cursor: pointer;
+
+
 }
 
 .item-row form input[type="submit"]:hover {
     background-color: white;
+
+
 }
 
 #item-info-popup {
     display: none;
     position: absolute;
-    border: 1px solid #ccc;
+    border: 4px inset chocolate;
     padding: 10px;
     z-index: 1;
     border-radius: 5px;
@@ -117,11 +127,14 @@ p2{
     background-color: rgba(255, 255, 255, 0.6);
 }
 
-/* Position the popup below the "Buy" button */
+
 .item-table form {
     position: relative;
 
 }
 .bought {
-    background-color: lightgreen; /* You can customize the style here */
+    background-color: lightgreen;
+}
+.item-button{
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam374.cur), auto !important;
 }
