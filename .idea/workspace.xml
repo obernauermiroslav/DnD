@@ -4,18 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment=" added pictures for each enemy, added maximum health for each enemy">
-      <change afterPath="$PROJECT_DIR$/src/main/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/spell.cur" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/react/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/react/Index.js" afterDir="false" />
+    <list default="true" id="580a1517-53ce-4c09-8e8d-6dac30fcda1f" name="Changes" comment=" added custom cursor images for various objects, body, buttons">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/DnDApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dnd/controllers/HeroController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/fight.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/hero.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/shop.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fight.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fight.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main.html" afterDir="false" />
     </list>
@@ -34,12 +31,7 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="DnD" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -71,6 +63,9 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2T0SzKmy7fiqCicKOkjCY0eGd6L" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -91,7 +86,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/ATeam-Java-NextJS-Quiz-Builder&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/IdeaProjects/DnDnew&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -108,7 +104,20 @@
       <recent name="C:\Users\PC\IdeaProjects\DnDnew\src\main\resources\static\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.DnDApplication">
+  <component name="RunManager" selected="Application.DnDApplication">
+    <configuration name="DnDApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dnd.DnDApplication" />
+      <module name="DnD.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dnd.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DndSchemaManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.dnd.sql.DndSchemaManager" />
       <module name="DnD.main" />
@@ -168,8 +177,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Game" />
+        <item itemvalue="Application.DnDApplication" />
         <item itemvalue="Application.DndSchemaManager" />
+        <item itemvalue="Application.Game" />
         <item itemvalue="Application.sql" />
       </list>
     </recent_temporary>
@@ -224,7 +234,10 @@
       <workItem from="1692000653911" duration="11480000" />
       <workItem from="1692033088885" duration="52000" />
       <workItem from="1692082775214" duration="1474000" />
-      <workItem from="1692184053763" duration="12556000" />
+      <workItem from="1692184053763" duration="12776000" />
+      <workItem from="1692202344483" duration="7000" />
+      <workItem from="1692261692340" duration="2330000" />
+      <workItem from="1692280774107" duration="5789000" />
     </task>
     <task id="LOCAL-00001" summary="Started with new game where you fight with monsters, you have your inventory, can buy items from shop&#10;still in progress">
       <created>1690386145579</created>
@@ -485,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691942965375</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary=" added custom cursor images for various objects, body, buttons">
+      <created>1692197893929</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1692197893929</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +523,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="now you can give your hero your own name that will be displayed + minor css and html changes" />
     <MESSAGE value="added 2 new item types -ring, necklace" />
     <MESSAGE value="added new condition check when fighting with shield, it gives hero 15% chance to block every enemy attack , if the enemy is not a dragon + when hero dies, it disables all attack and spell buttons" />
     <MESSAGE value="added new condition when fighting, certain enemies will ignore your armor and you cannot block their attack + some minor changes to html" />
@@ -528,6 +547,7 @@
     <MESSAGE value=" corrected messages for spell use after victory" />
     <MESSAGE value=" corrected css and html mistakes and errors, added &#10; borders and changed positions of some elements" />
     <MESSAGE value=" added pictures for each enemy, added maximum health for each enemy" />
-    <option name="LAST_COMMIT_MESSAGE" value=" added pictures for each enemy, added maximum health for each enemy" />
+    <MESSAGE value=" added custom cursor images for various objects, body, buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value=" added custom cursor images for various objects, body, buttons" />
   </component>
 </project>

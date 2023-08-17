@@ -103,7 +103,7 @@ h2 {
     margin-left: -155px;
     width: 60px;
     height: 25px;
-    cursor: url('http://localhost:3000/images/spell.cur'), auto !important;
+    cursor: url('../images/spell.cur'), auto !important;
 }
 #healing{
     position: absolute;
@@ -111,7 +111,7 @@ h2 {
     margin-left: 15px;
     width: 70px;
     height: 25px;
-    cursor: url('http://localhost:3000/images/spell.cur'), auto !important;
+    cursor: url('../images/spell.cur'), auto !important;
 }
 #weakness{
     position: absolute;
