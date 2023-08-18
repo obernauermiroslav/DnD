@@ -9,24 +9,24 @@
 <div id="buttons">
   <button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
   <form id="healForm" action="/heal" method="post">
-    <button type="submit" class="btn btn-secondary">Use Healing potion</button>
+    <button type="submit" class="btn btn-secondary" data-effect="Heals you for 30 health">Use Healing potion</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
   <button type="button" class="btn btn-secondary" onclick="toggleFormVisibility()">Spells</button>
   <form class="spellCast" action="/healing" method="post" style="display: none;">
-    <button id="healing" class=" btn btn-secondary" type="submit">Healing</button>
+    <button id="healing" class="btn btn-secondary" type="submit" data-effect="Heals you for 25 health">Healing</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
   <form class="spellCast" action="/weakness" method="post" style="display: none;">
-    <button id="weakness" class=" btn btn-secondary" type="submit">Weakness</button>
+    <button id="weakness" class="btn btn-secondary" type="submit" data-effect="Weakens the enemy's attack by 3">Weakness</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
   <form class="spellCast" action="/sunder_armor" method="post" style="display: none;">
-    <button id="sunder_armor" class=" btn btn-secondary" type="submit">Sunder Armor</button>
+    <button id="sunder_armor" class="btn btn-secondary" type="submit" data-effect="Reduces enemy's defense by 3">Sunder Armor</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
   <form class="spellCast" action="/firebolt" method="post" style="display: none;">
-    <button id="firebolt" class=" btn btn-secondary" type="submit">Firebolt</button>
+    <button id="firebolt" class="btn btn-secondary" type="submit" data-effect="Deals 30 damage and ignores armor">Firebolt</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
   <form id="fight" class="btn btn-secondary" action="/fight" method="post">
@@ -121,6 +121,25 @@
       if (image) {
         image.style.display = 'none';
       }
+    });
+  });
+
+  const buttons = document.querySelectorAll('.btn-secondary[data-effect]');
+  const tooltip = document.createElement('div');
+  tooltip.classList.add('tooltip');
+  document.body.appendChild(tooltip);
+
+  buttons.forEach(button => {
+    button.addEventListener('mouseover', function(e) {
+      const effect = e.target.getAttribute('data-effect');
+      tooltip.innerText = effect;
+      tooltip.style.top = `${e.clientY + 10}px`;
+      tooltip.style.left = `${e.clientX + 30}px`;
+      tooltip.style.display = 'block';
+    });
+
+    button.addEventListener('mouseout', function() {
+      tooltip.style.display = 'none';
     });
   });
 

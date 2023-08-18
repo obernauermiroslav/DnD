@@ -70,7 +70,6 @@ h2 {
     display: inline-flex;
     gap: 10px;
     padding: 30px;
-
 }
 
 .btn-secondary{
@@ -86,12 +85,10 @@ h2 {
     border: none;
     border-radius: 5px;
     background-color: #ccc;
-
 }
 
 .btn-secondary form input[type="submit"] {
     display: none;
-
 }
 
 .btn-secondary form:hover {
@@ -150,8 +147,14 @@ h2 {
     background-color: rgba(255, 255, 255, 0.2);
     border: 8px outset silver;
     border-radius: 5px;
-
 }
 
-
-
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 15px;
+    display: none;
+  }
