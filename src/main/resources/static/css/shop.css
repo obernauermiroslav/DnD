@@ -62,6 +62,9 @@ button.btn:hover {
 p1, p2 {
     font-size: 17px;
 }
+p1{
+    margin-bottom: 5px;
+}
 
 .table-container {
     position: absolute;
