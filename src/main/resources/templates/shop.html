@@ -5,10 +5,13 @@
   <link rel="stylesheet" type="text/css" href="/css/shop.css">
 </head>
 <body>
+<div id="mainTable">
 <h1>Welcome to the Shop</h1>
 <button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
-<h2>Available Items:</h2>
 <p1>Gold: <span th:text="${heroGold}"></span></p1>
+<p2 th:if="${message}" th:text="${message}"></p2>
+<h2>Available Items:</h2>
+</div>
 <div class="table-container" id="scrollable-table">
   <table class="item-table">
     <th>Healing Potion</th>
@@ -146,7 +149,7 @@
   </table>
 </div>
 <div id="item-info-popup" class="item-popup"></div>
-<p2 th:if="${message}" th:text="${message}"></p2>
+
 
 <script th:inline="javascript">
   function saveScrollPosition() {

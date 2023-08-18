@@ -143,13 +143,13 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy4);
         Enemies enemy5= new Enemies(5L,"Troll", 280,280,21,12,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);
-        Enemies enemy6= new Enemies(6L,"Drake", 345,345,24,14,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
+        Enemies enemy6= new Enemies(6L,"Drake", 345,345,25,14,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
         enemiesRepository.save(enemy6);
         Enemies enemy7= new Enemies(7L,"Behemoth", 435,435,30,17,"He looks angry and his long claws are thirsty for your blood.");
         enemiesRepository.save(enemy7);
-        Enemies enemy8= new Enemies(8L,"Lich", 250,250,33,15,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
+        Enemies enemy8= new Enemies(8L,"Lich", 275,275,34,15,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
         enemiesRepository.save(enemy8);
-        Enemies enemy9= new Enemies(9L,"Dragon", 500,500,37,19,"Winged death.");
+        Enemies enemy9= new Enemies(9L,"Dragon", 525,525,41,20,"Winged death, let's hope you are ready.");
         enemiesRepository.save(enemy9);
     }
 }

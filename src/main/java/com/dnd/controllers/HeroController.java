@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.*;
 
 @Controller
@@ -55,9 +54,9 @@ public class HeroController {
         } else {
             // Create a new hero with the given name
             hero = new Hero(heroName);
-            hero.setGold(800);
-            hero.setMana(51);
-            hero.setPotion(12);
+            hero.setGold(500);
+            hero.setMana(11);
+            hero.setPotion(2);
             hero.setSkillPoints(3);
             hero.setHealth(130);
             hero.setMaxHealth(130);
@@ -111,7 +110,8 @@ public class HeroController {
                         // Calculate the attack bonus difference after the upgrade
                         int attackBonusDifference = itemToUpgrade.getAttackBonus() - attackBonusBeforeUpgrade;
 
-                        // Update the hero's attack using the actual current attack from the table plus the attack bonus difference
+                        // Update the hero's attack using the actual current attack from the table plus
+                        // the attack bonus difference
                         hero.setAttack(hero.getAttack() + attackBonusDifference);
 
                     } else if (isArmorType(itemToUpgrade.getType())) {
@@ -124,13 +124,17 @@ public class HeroController {
 
                         // If the item has not been upgraded, add the full health bonus
                         if (!hasUpgradedItem) {
-                            itemToUpgrade.setHealthBonus(itemToUpgrade.getHealthBonus() + 2); // Add the full health bonus
-                            itemToUpgrade.setDefenseBonus(itemToUpgrade.getDefenseBonus() + 1); // Add the full defense bonus
+                            itemToUpgrade.setHealthBonus(itemToUpgrade.getHealthBonus() + 2); // Add the full health
+                                                                                              // bonus
+                            itemToUpgrade.setDefenseBonus(itemToUpgrade.getDefenseBonus() + 1); // Add the full defense
+                                                                                                // bonus
                             upgradedItemsMap.put(itemId, true); // Mark the item as upgraded in the map
                         } else {
                             // If the item has been previously upgraded, add only the upgrade amount
-                            itemToUpgrade.setHealthBonus(itemToUpgrade.getHealthBonus() + 2); // Add only the upgrade amount for health
-                            itemToUpgrade.setDefenseBonus(itemToUpgrade.getDefenseBonus() + 1); // Add only the upgrade amount for defense
+                            itemToUpgrade.setHealthBonus(itemToUpgrade.getHealthBonus() + 2); // Add only the upgrade
+                                                                                              // amount for health
+                            itemToUpgrade.setDefenseBonus(itemToUpgrade.getDefenseBonus() + 1); // Add only the upgrade
+                                                                                                // amount for defense
                         }
 
                         hero.setRunes(hero.getRunes() - 1);
@@ -140,7 +144,8 @@ public class HeroController {
                         // Calculate the health bonus difference after the upgrade
                         int healthBonusDifference = itemToUpgrade.getHealthBonus() - healthBonusBeforeUpgrade;
 
-                        // Update the hero's health using the actual current health from the table plus the health bonus difference
+                        // Update the hero's health using the actual current health from the table plus
+                        // the health bonus difference
                         hero.setMaxHealth(hero.getMaxHealth() + healthBonusDifference);
 
                         // Save the updated item using the ItemsService

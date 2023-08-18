@@ -19,25 +19,27 @@ html body {
 }
 
 #hero-table {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
     margin-left: -390px;
     position: absolute;
     width: 170px;
     padding: 10px;
     border: 5px double #ccc;
+    border-radius: 10px;
     margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 #items-table{
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
     position: absolute;
     margin-left: 740px;
     width: 200px;
     height: 300px;
     padding: 10px;
-    border: 5px inset #ccc;
+    border: 8px inset white;
+    border-radius: 5px;
     margin-top: 100px;
     display: flex;
     flex-direction: column;
@@ -119,6 +121,8 @@ html body {
     position: absolute;
     margin-left: -1px;
     margin-top: 170px;
+    border-radius: 5px;
+    border: 3px solid white;
 }
 #helmet-picture{
     position: absolute;
@@ -132,12 +136,12 @@ html body {
 }
 #necklace-picture{
     position: absolute;
-    margin-left: 170px;
+    margin-left: 174px;
     margin-top: 190px;
 }
 #gloves-picture{
     position: absolute;
-    margin-left: 170px;
+    margin-left: 174px;
     margin-top: 255px;
 }
 #trousers-picture{
@@ -152,7 +156,7 @@ html body {
 }
 #shield-picture{
     position: absolute;
-    margin-left: 170px;
+    margin-left: 174px;
     margin-top: 320px;
 }
 #boots-picture{
@@ -162,13 +166,13 @@ html body {
 }
 #ring-picture{
     position: absolute;
-    margin-left: 170px;
+    margin-left: 174px;
     margin-top: 384px;
 }
 #cloak-picture{
     position: absolute;
     margin-left: -65px;
-    margin-top: 175px;
+    margin-top: 180px;
 }
 #spell-picture-firebolt{
     position: absolute;

@@ -57,7 +57,8 @@ h2 {
     margin-left: -10px;
     max-width: 800px;
     background-color: rgba(255, 255, 255, 0.2);
-    border: 5px double #ccc;
+    border: 7px double #ccc;
+    border-radius: 5px;
     padding: 3px;
     width: 280px;
     height: 170px;
@@ -139,17 +140,16 @@ h2 {
     padding: 5px;
 }
 
-/* Style for the button to show the hover window */
 .enemy-info-btn {
     position: relative;
     z-index: 1;
-
 }
 
 .enemy-info-btn:hover .enemy-info {
     display: block;
     background-color: rgba(255, 255, 255, 0.2);
-    border: 5px outset #ccc;
+    border: 8px outset silver;
+    border-radius: 5px;
 
 }
 

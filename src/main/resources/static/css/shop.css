@@ -7,11 +7,10 @@
 
 th, td {
     padding: 5px;
-
 }
+
 th{
     padding-top: 25px;
-
 }
 
 body {
@@ -27,55 +26,63 @@ body {
     cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.ani), url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), auto !important;
 }
 
-h1 {
-    color:white;
+#mainTable {
+    position: absolute;
+    margin-top: -480px;
+    margin-left: 35px;
     text-align: center;
-    margin-top: -550px;
-    margin-left: 13px;
+    padding: 6px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 5px double #ddd;
+    border-radius: 5px;
+    max-width: 600px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
 }
 
-p1{
-    color:white;
-    position: absolute;
-    margin-left: -105px;
-    margin-top: -485px;
+h1 {
+margin-top: -3px;
+    margin-bottom: 5px;
+    font-size: 20px;
 }
 
 h2 {
-    margin-left: -100px;
     position: absolute;
-    width: 280px;
-    color:white;
-    text-align: center;
-    margin-top: -400px;
+    margin-top: 78px;
+    margin-left: 22px;
+    font-size: 20px; 
 }
 
-p2{
-    color:white;
-    position: absolute;
-    margin-left: 145px;
-    margin-top: -485px;
+
+button.btn:hover {
+    background-color: white;
+}
+
+p1, p2 {
+    font-size: 17px;
 }
 
 .table-container {
     position: absolute;
     margin-left: 30px;
-    margin-top: -40px;
+    margin-top: -10px;
     width: 300px;
     height: 330px;
-    border: 4px inset chocolate;
+    border-radius: 5px;
+    border: 6px double black;
     overflow-x: auto;
     z-index: 1;
-
 }
 
 .btn {
+    padding: 7px 10px;
+    border-radius: 5px;
     justify-content: center;
-    margin-top: -485px;
+    margin-top:75px;
+    margin-left: -65px;
     position: absolute;
-    margin-left: -220px;
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
-
 }
 
 .item-table {
@@ -85,7 +92,6 @@ p2{
     gap: 5px;
     padding: 10px;
     white-space: nowrap;
-
 }
 
 .item-row form {
@@ -96,7 +102,6 @@ p2{
     align-items: center;
     border: 1px solid #ccc;
     padding: 10px;
-
 }
 
 .item-row form input[type="submit"] {
@@ -104,37 +109,33 @@ p2{
     color: #fff;
     border: none;
     padding: 10px 10px;
-
-
 }
 
 .item-row form input[type="submit"]:hover {
     background-color: white;
-
-
 }
 
 #item-info-popup {
     display: none;
     position: absolute;
-    border: 4px inset chocolate;
+    border: 5px double black;
     padding: 10px;
     z-index: 1;
-    border-radius: 5px;
+    border-radius: 6px;
     max-width: 200px;
-    margin-left: 600px;
-    margin-top: -70px;
+    margin-left: 580px;
+    margin-top: -40px;
     background-color: rgba(255, 255, 255, 0.6);
 }
 
-
 .item-table form {
     position: relative;
-
 }
+
 .bought {
     background-color: lightgreen;
 }
+
 .item-button{
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam374.cur), auto !important;
 }

@@ -262,13 +262,13 @@ public class GameController {
 
         // If the hero has the "Weakness" spell equipped, perform the spell casting logic
         if (hasWeaknessSpell) {
-            int weaknessManaCost = 5; // Define the mana cost for Weakness spell
+            int weaknessManaCost = 7; // Define the mana cost for Weakness spell
             if (hero.getMana() >= weaknessManaCost) {
                 Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
                     if (enemy != null) {
-                        int spellDamage = 2;
+                        int spellDamage = 3;
                         int newEnemyAttack = enemy.getAttack() - spellDamage;
 
                         // Ensure the attack doesn't go below zero
@@ -325,13 +325,13 @@ public class GameController {
 
         // If the hero has the "Sunder_Armor" spell equipped, perform the spell casting logic
         if (hasSunder_ArmorSpell) {
-            int sunder_armorManaCost = 5; // Define the mana cost for Sunder_Armor spell
+            int sunder_armorManaCost = 7; // Define the mana cost for Sunder_Armor spell
             if (hero.getMana() >= sunder_armorManaCost) {
                 Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
                     if (enemy != null) {
-                        int spellDamage = 2;
+                        int spellDamage = 3;
                         int newEnemyDefence = enemy.getDefence() - spellDamage;
 
                         // Ensure the attack doesn't go below zero
@@ -457,7 +457,7 @@ public class GameController {
 
         // If the hero has the "Fire bolt" spell equipped, perform the spell casting logic
         if (hasFireBoltSpell) {
-            int fireBoltManaCost = 5; // Define the mana cost for Fire bolt spell
+            int fireBoltManaCost = 6; // Define the mana cost for Fire bolt spell
             if (hero.getMana() >= fireBoltManaCost) {
                 // Deduct the mana cost from the hero's total mana points
                 hero.setMana(hero.getMana() - fireBoltManaCost);
@@ -467,7 +467,7 @@ public class GameController {
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
                     if (enemy != null) {
-                        int spellDamage = 26;
+                        int spellDamage = 30;
                         int newEnemyHealth = enemy.getHealth() - spellDamage;
 
                         // Ensure the health doesn't go below zero
