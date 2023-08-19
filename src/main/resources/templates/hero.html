@@ -78,6 +78,7 @@
     <img class="item-picture spell-picture" id="spell-picture-healing" src="/images/healing.png" alt="Healing" style="display: none;">
   </div>
 <div id="item-info-popup" class="item-popup"></div>
+<p id="bonusMessage" th:if="${bonusMessage}" th:utext="${bonusMessage}"></p>
 </div>
 <script th:inline="javascript">
   var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model

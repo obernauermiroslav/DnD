@@ -32,7 +32,7 @@ body {
     margin-left: 35px;
     text-align: center;
     padding: 6px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.5);
     border: 5px double #ddd;
     border-radius: 5px;
     max-width: 600px;
@@ -50,7 +50,7 @@ margin-top: -3px;
 h2 {
     position: absolute;
     margin-top: 78px;
-    margin-left: 22px;
+    margin-left: 29px;
     font-size: 20px; 
 }
 
@@ -60,9 +60,10 @@ button.btn:hover {
 }
 
 p1, p2 {
-    font-size: 17px;
+    font-size: 18px;
 }
 p1{
+    
     margin-bottom: 5px;
 }
 

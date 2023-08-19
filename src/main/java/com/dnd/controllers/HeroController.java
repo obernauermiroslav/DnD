@@ -54,9 +54,9 @@ public class HeroController {
         } else {
             // Create a new hero with the given name
             hero = new Hero(heroName);
-            hero.setGold(500);
+            hero.setGold(600);
             hero.setMana(11);
-            hero.setPotion(2);
+            hero.setPotion(3);
             hero.setSkillPoints(3);
             hero.setHealth(130);
             hero.setMaxHealth(130);
@@ -105,7 +105,11 @@ public class HeroController {
                         itemToUpgrade.setAttackBonus(itemToUpgrade.getAttackBonus() + 1);
                         hero.setRunes(hero.getRunes() - 1);
                         redirectAttributes.addFlashAttribute("upgradeMessageItem",
-                                itemToUpgrade.getName() + " upgraded: +1 attack.");
+                        itemToUpgrade.getName() + " upgraded:\n+1 attack.");
+
+
+
+
 
                         // Calculate the attack bonus difference after the upgrade
                         int attackBonusDifference = itemToUpgrade.getAttackBonus() - attackBonusBeforeUpgrade;

@@ -140,12 +140,17 @@ public class GameController {
         String heroAttackMessage = "";
         String ineffectiveHeroAttackMessage = "";
         String ineffectiveEnemyAttackMessage = "";
+        String bonusMessage = "";
         if (newEnemyHealth <= 0) {
             hero.setGold(hero.getGold() + 200);
             hero.setMana(hero.getMana() + 6);
             hero.setSkillPoints(hero.getSkillPoints() + 2);
             hero.setRunes((hero.getRunes() + 1));
             heroService.saveHero(hero);
+            bonusMessage = "Congratulations! You have won the fight and received:<br>" +
+                           "+200 Gold, +6 Mana, +2 Skill Points, +1 Rune";
+
+    model.addAttribute("bonusMessage", bonusMessage);
 
             // Remove the defeated enemy from the database
             enemiesService.deleteEnemy(enemy);
@@ -161,6 +166,7 @@ public class GameController {
                 fightResult = "You have won the game! Congratulations!";
                 model.addAttribute("noMoreEnemies", true);
             }
+            
         } else if (newHeroHealth <= 0) {
             fightResult = "You have lost!";
             model.addAttribute("heroLost", true);
@@ -469,6 +475,7 @@ public class GameController {
                     if (enemy != null) {
                         int spellDamage = 30;
                         int newEnemyHealth = enemy.getHealth() - spellDamage;
+                        String bonusMessage = "";
 
                         // Ensure the health doesn't go below zero
                         if (newEnemyHealth <= 0) {
@@ -477,6 +484,13 @@ public class GameController {
                             hero.setSkillPoints(hero.getSkillPoints() + 2);
                             hero.setRunes((hero.getRunes() + 1));
                             heroService.saveHero(hero);
+                            bonusMessage = "Congratulations! You have won the fight and received bonuses:<br>" +
+            "+200 Gold<br>" +
+            "+6 Mana<br>" +
+            "+2 Skill Points<br>" +
+            "+1 Rune";
+
+    model.addAttribute("bonusMessage", bonusMessage);
                             // Remove the defeated enemy from the database
                             enemiesService.deleteEnemy(enemy);
 

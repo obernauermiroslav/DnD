@@ -9,12 +9,12 @@
 <div id="buttons">
   <button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
   <form id="healForm" action="/heal" method="post">
-    <button type="submit" class="btn btn-secondary" data-effect="Heals you for 30 health">Use Healing potion</button>
+    <button type="submit" class="btn btn-secondary" data-effect="Heals you up to 30 health">Use Healing potion</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
   <button type="button" class="btn btn-secondary" onclick="toggleFormVisibility()">Spells</button>
   <form class="spellCast" action="/healing" method="post" style="display: none;">
-    <button id="healing" class="btn btn-secondary" type="submit" data-effect="Heals you for 25 health">Healing</button>
+    <button id="healing" class="btn btn-secondary" type="submit" data-effect="Heals you up to 25 health">Healing</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
   <form class="spellCast" action="/weakness" method="post" style="display: none;">
