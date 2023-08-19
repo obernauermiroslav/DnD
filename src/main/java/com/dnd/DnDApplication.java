@@ -106,9 +106,9 @@ public class DnDApplication implements CommandLineRunner {
 
         Items ring1 = new Items(null, "Ring of Health", ItemType.RING, 0, 0,15,0,100,0,"+15 health");
         itemsRepository.save(ring1);
-        Items ring2 = new Items(null, "Ring of Attack", ItemType.RING, 2, 0,0,0,100,0,"+2 attack");
+        Items ring2 = new Items(null, "Ring of Attack", ItemType.RING, 3, 0,0,0,120,0,"+3 attack");
         itemsRepository.save(ring2);
-        Items ring3 = new Items(null, "Ring of Defence", ItemType.RING, 0, 2,0,0,100,0,"+2 defence");
+        Items ring3 = new Items(null, "Ring of Defence", ItemType.RING, 0, 3,0,0,120,0,"+3 defence");
         itemsRepository.save(ring3);
         Items ring4 = new Items(null, "Ring of Mana", ItemType.RING, 0, 0,0,12,100,0,"+12 mana");
         itemsRepository.save(ring4);
@@ -119,17 +119,17 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(necklace2);
 
 
-        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,0,120,0,"Heals for 30 points");
+        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,0,120,0,"Heals up to 30 health");
         itemsRepository.save(potion);
 
 
-        Items spell1 = new Items(null, "Firebolt", ItemType.SPELL, 0, 0,0,0,210,5,"Damages enemy for 26 points and ignores armor");
+        Items spell1 = new Items(null, "Firebolt", ItemType.SPELL, 0, 0,0,0,210,5,"Damages enemy for 30 points and ignores armor");
         itemsRepository.save(spell1);
-        Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy attack by 2 points");
+        Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy attack by 3 points");
         itemsRepository.save(spell2);
-        Items spell3 = new Items(null, "Sunder Armor", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy defence by 2 points");
+        Items spell3 = new Items(null, "Sunder Armor", ItemType.SPELL, 0, 0,0,0,210,5,"Decreases enemy defence by 3 points");
         itemsRepository.save(spell3);
-        Items spell4 = new Items(null, "Healing", ItemType.SPELL, 0, 0,0,0,210,7,"Heals for 25 points");
+        Items spell4 = new Items(null, "Healing", ItemType.SPELL, 0, 0,0,0,210,7,"Heals up to 25 health");
         itemsRepository.save(spell4);
 
 

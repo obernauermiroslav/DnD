@@ -55,8 +55,7 @@
       </div>
     </div>
   </div>
-
-  <p id="upgradeMessage" th:text="${upgradeMessage}"></p>
+  <p id="upgradeMessage" th:if="${upgradeMessage}" th:text="${upgradeMessage}"></p>
   <div>
     <p id="upgradeMessageItem" th:if="${not #strings.isEmpty(upgradeMessageItem)}" th:text="${upgradeMessageItem}"></p>
   </div>
@@ -110,6 +109,7 @@
   window.onload = function() {
     restoreScrollPosition();
   };
+
   function handleItemHover(button) {
     const itemName = button.getAttribute('data-item-name');
     const itemType = button.getAttribute('data-item-type');

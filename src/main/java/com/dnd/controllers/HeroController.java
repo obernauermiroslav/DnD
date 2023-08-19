@@ -107,10 +107,6 @@ public class HeroController {
                         redirectAttributes.addFlashAttribute("upgradeMessageItem",
                         itemToUpgrade.getName() + " upgraded:\n+1 attack.");
 
-
-
-
-
                         // Calculate the attack bonus difference after the upgrade
                         int attackBonusDifference = itemToUpgrade.getAttackBonus() - attackBonusBeforeUpgrade;
 
