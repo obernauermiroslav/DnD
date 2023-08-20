@@ -65,20 +65,20 @@ html body {
     background-color: #ccc;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Add a smooth transition effect for background color and box shadow */
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a shadow effect (horizontal offset, vertical offset, blur radius, color) */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; 
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
 
 }
 
-/* Clicking effect when the button is being clicked */
+
 .btn-secondary:active {
-    background-color: #aaa; /* Change to a different background color when clicked */
+    background-color: #aaa; 
 }
 
-/* Hover effect when the button is being hovered */
+
 .btn-secondary:hover {
-    background-color: #ddd; /* Change to a different background color on hover */
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Add a larger shadow on hover */
+    background-color: #ddd;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); 
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 
@@ -227,21 +227,21 @@ html body {
 }
 
 .item-picture.highlight {
-    border: 3px ridge maroon; /* Add a border to the highlighted item picture */
+    border: 3px ridge maroon; 
 }
 .spell-picture.highlight {
-    border: 3px inset maroon; /* You can adjust the style as needed */
+    border: 3px inset maroon; 
 }
 
 
 .item-container {
     display: flex;
-    align-items: center; /* Align items vertically in the center */
-    margin-right: 20px; /* Add some spacing between each item */
+    align-items: center; 
+    margin-right: 20px; 
 }
 
 .item-button {
-    margin-right: 5px; /* Add some spacing between the button and the item name */
+    margin-right: 5px; 
 }
 
 #upgradeMessageItem{

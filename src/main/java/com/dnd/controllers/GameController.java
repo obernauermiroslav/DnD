@@ -66,7 +66,8 @@ public class GameController {
         // Use the current enemy ID to get the enemy
         Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
 
-        // If the enemy is null or there are no more enemies to fight, display the victory message
+        // If the enemy is null or there are no more enemies to fight, display the
+        // victory message
         if (enemy == null) {
             model.addAttribute("noMoreEnemies", true);
             model.addAttribute("fightResult", "You have won the game! Congratulations!");
@@ -79,9 +80,10 @@ public class GameController {
 
     @PostMapping("/fight")
     public String fight(@RequestParam("heroId") Long heroId,
-                        @RequestParam("enemyId") Long enemyId,
-                        Model model) {
-        // Load your hero and the enemy from their respective tables using the IDs received from the form
+            @RequestParam("enemyId") Long enemyId,
+            Model model) {
+        // Load your hero and the enemy from their respective tables using the IDs
+        // received from the form
         Optional<Hero> heroOptional = heroService.getHeroById(heroId);
         Hero hero = heroOptional.orElse(null);
 
@@ -95,7 +97,8 @@ public class GameController {
         int enemyAttack;
         String enemyAttackMessage = "";
         if (enemy.getName().equalsIgnoreCase("Lich") || enemy.getName().equalsIgnoreCase("Drake")) {
-            // Lich and Dragon ignore hero armor, so the default attack will be just the enemy's attack
+            // Lich and Dragon ignore hero armor, so the default attack will be just the
+            // enemy's attack
             heroAttack = hero.getAttack() - enemy.getDefence();
             enemyAttack = enemy.getAttack();
             enemyAttackMessage = enemy.getName() + "'s attack bypasses your armor!";
@@ -113,7 +116,8 @@ public class GameController {
         if (enemy.getName().equalsIgnoreCase("drake") && hero.hasFireShield() && Math.random() <= 0.15) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked dragon's attack with your Fire Shield!";
-        } else if (!enemy.getName().equalsIgnoreCase("drake") && !enemy.getName().equalsIgnoreCase("lich") && hero.hasShield() && Math.random() <= 0.15) {
+        } else if (!enemy.getName().equalsIgnoreCase("drake") && !enemy.getName().equalsIgnoreCase("lich")
+                && hero.hasShield() && Math.random() <= 0.15) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked the enemy's attack with your shield!";
         }
@@ -129,28 +133,30 @@ public class GameController {
         heroService.saveHero(hero);
         enemiesService.saveEnemy(enemy);
 
-        // Set the hero and enemy as model attributes to display their updated health on the fight page
+        // Set the hero and enemy as model attributes to display their updated health on
+        // the fight page
         model.addAttribute("hero", hero);
         model.addAttribute("enemy", enemy);
         model.addAttribute("heroAttack", heroAttack);
         model.addAttribute("enemyAttack", enemyAttack);
 
-        // Determine the fight result message based on hero's and enemy's health after the fight
+        // Determine the fight result message based on hero's and enemy's health after
+        // the fight
         String fightResult;
         String heroAttackMessage = "";
         String ineffectiveHeroAttackMessage = "";
         String ineffectiveEnemyAttackMessage = "";
         String bonusMessage = "";
         if (newEnemyHealth <= 0) {
-            hero.setGold(hero.getGold() + 200);
+            hero.setGold(hero.getGold() + 210);
             hero.setMana(hero.getMana() + 6);
             hero.setSkillPoints(hero.getSkillPoints() + 2);
             hero.setRunes((hero.getRunes() + 1));
             heroService.saveHero(hero);
             bonusMessage = "You have won the fight and received:<br>" +
-                           "+200 Gold, +6 Mana, +2 Skill Points, +1 Rune";
+                    "+210 Gold, +6 Mana, +2 Skill Points, +1 Rune";
 
-    model.addAttribute("bonusMessage", bonusMessage);
+            model.addAttribute("bonusMessage", bonusMessage);
 
             // Remove the defeated enemy from the database
             enemiesService.deleteEnemy(enemy);
@@ -166,7 +172,7 @@ public class GameController {
                 fightResult = "You have won the game! Congratulations!";
                 model.addAttribute("noMoreEnemies", true);
             }
-            
+
         } else if (newHeroHealth <= 0) {
             fightResult = "You have lost!";
             model.addAttribute("heroLost", true);
@@ -203,8 +209,8 @@ public class GameController {
 
     @PostMapping("/heal")
     public String healHero(@RequestParam("heroId") Long heroId,
-                           Model model,
-                           HttpSession session) {
+            Model model,
+            HttpSession session) {
         Optional<Hero> heroOptional = heroService.getHeroById(heroId);
         Hero hero = heroOptional.orElse(null);
 
@@ -266,7 +272,8 @@ public class GameController {
         boolean hasWeaknessSpell = hero.getEquippedItems().stream()
                 .anyMatch(item -> item.getName().equals("Weakness") && item.getType() == ItemType.SPELL);
 
-        // If the hero has the "Weakness" spell equipped, perform the spell casting logic
+        // If the hero has the "Weakness" spell equipped, perform the spell casting
+        // logic
         if (hasWeaknessSpell) {
             int weaknessManaCost = 7; // Define the mana cost for Weakness spell
             if (hero.getMana() >= weaknessManaCost) {
@@ -284,8 +291,10 @@ public class GameController {
                             enemy.setAttack(newEnemyAttack);
                             enemiesService.saveEnemy(enemy);
 
-                            // Set the spell casting result message in the model to display it in the fight page
-                            model.addAttribute("spellCastingResult", "You cast Weakness. Enemy's attack is decreased by " + spellDamage + " points!");
+                            // Set the spell casting result message in the model to display it in the fight
+                            // page
+                            model.addAttribute("spellCastingResult",
+                                    "You cast Weakness. Enemy's attack is decreased by " + spellDamage + " points!");
                         } else {
                             model.addAttribute("spellCastingResult", "Enemy's attack is on minimum.");
                         }
@@ -314,6 +323,7 @@ public class GameController {
         model.addAttribute("hero", hero);
         return "fight";
     }
+
     @PostMapping("/sunder_armor")
     public String castSunderArmor(@RequestParam("heroId") Long heroId, Model model, HttpSession session) {
         // Load the hero from the database using the heroId received from the form
@@ -329,7 +339,8 @@ public class GameController {
         boolean hasSunder_ArmorSpell = hero.getEquippedItems().stream()
                 .anyMatch(item -> item.getName().equals("Sunder Armor") && item.getType() == ItemType.SPELL);
 
-        // If the hero has the "Sunder_Armor" spell equipped, perform the spell casting logic
+        // If the hero has the "Sunder_Armor" spell equipped, perform the spell casting
+        // logic
         if (hasSunder_ArmorSpell) {
             int sunder_armorManaCost = 7; // Define the mana cost for Sunder_Armor spell
             if (hero.getMana() >= sunder_armorManaCost) {
@@ -348,8 +359,11 @@ public class GameController {
                             enemy.setDefence(newEnemyDefence);
                             enemiesService.saveEnemy(enemy);
 
-                            // Set the spell casting result message in the model to display it in the fight page
-                            model.addAttribute("spellCastingResult", "You cast Sunder Armor. Enemy's defence is decreased by " + spellDamage + " points!");
+                            // Set the spell casting result message in the model to display it in the fight
+                            // page
+                            model.addAttribute("spellCastingResult",
+                                    "You cast Sunder Armor. Enemy's defence is decreased by " + spellDamage
+                                            + " points!");
                         } else {
                             model.addAttribute("spellCastingResult", "Enemy's defence is on minimum.");
                         }
@@ -406,7 +420,8 @@ public class GameController {
                         int newHeroHealth = hero.getHealth() + healAmount;
 
                         if (hero.getHealth() == hero.getMaxHealth()) {
-                            model.addAttribute("spellCastingResult", "No need to cast Healing, your health is on maximum. .");
+                            model.addAttribute("spellCastingResult",
+                                    "No need to cast Healing, your health is on maximum. .");
                         } else {
                             hero.setMana(hero.getMana() - healingManaCost);
                             int actualHealAmount = Math.min(healAmount, hero.getMaxHealth() - hero.getHealth());
@@ -414,8 +429,10 @@ public class GameController {
 
                             heroService.saveHero(hero);
 
-                            // Set the spell casting result message in the model to display it in the fight page
-                            model.addAttribute("spellCastingResult", "You cast Healing. You are healed by " + actualHealAmount + " points!");
+                            // Set the spell casting result message in the model to display it in the fight
+                            // page
+                            model.addAttribute("spellCastingResult",
+                                    "You cast Healing. You are healed by " + actualHealAmount + " points!");
 
                             // Set the enemy attribute in the session to be used in the fight.html template
                             session.setAttribute("currentEnemy", enemy);
@@ -446,8 +463,8 @@ public class GameController {
 
     @PostMapping("/firebolt")
     public String castFirebolt(@RequestParam("heroId") Long heroId,
-                            Model model,
-                            HttpSession session) {
+            Model model,
+            HttpSession session) {
         // Load the hero from the database using the heroId received from the form
         Optional<Hero> heroOptional = heroService.getHeroById(heroId);
         Hero hero = heroOptional.orElse(null);
@@ -461,7 +478,8 @@ public class GameController {
         boolean hasFireBoltSpell = hero.getEquippedItems().stream()
                 .anyMatch(item -> item.getName().equals("Firebolt") && item.getType() == ItemType.SPELL);
 
-        // If the hero has the "Fire bolt" spell equipped, perform the spell casting logic
+        // If the hero has the "Fire bolt" spell equipped, perform the spell casting
+        // logic
         if (hasFireBoltSpell) {
             int fireBoltManaCost = 6; // Define the mana cost for Fire bolt spell
             if (hero.getMana() >= fireBoltManaCost) {
@@ -479,18 +497,15 @@ public class GameController {
 
                         // Ensure the health doesn't go below zero
                         if (newEnemyHealth <= 0) {
-                            hero.setGold(hero.getGold() + 200);
+                            hero.setGold(hero.getGold() + 210);
                             hero.setMana(hero.getMana() + 6);
                             hero.setSkillPoints(hero.getSkillPoints() + 2);
                             hero.setRunes((hero.getRunes() + 1));
                             heroService.saveHero(hero);
                             bonusMessage = "You have won the fight and received:<br>" +
-            "+200 Gold<br>" +
-            "+6 Mana<br>" +
-            "+2 Skill Points<br>" +
-            "+1 Rune";
+                                    "+210 Gold, +6 Mana, +2 Skill Points, +1 Rune";
 
-    model.addAttribute("bonusMessage", bonusMessage);
+                            model.addAttribute("bonusMessage", bonusMessage);
                             // Remove the defeated enemy from the database
                             enemiesService.deleteEnemy(enemy);
 
@@ -501,7 +516,8 @@ public class GameController {
                                 model.addAttribute("enemy", nextEnemy);
                             } else {
                                 // Handle the case where there are no more enemies in the database
-                                model.addAttribute("noMoreEnemies", true); // Add a flag to indicate there are no more enemies
+                                model.addAttribute("noMoreEnemies", true); // Add a flag to indicate there are no more
+                                                                           // enemies
                             }
                             return "redirect:/hero"; // Redirect to the hero page if the enemy is defeated
                         }
@@ -509,7 +525,8 @@ public class GameController {
                         enemy.setHealth(newEnemyHealth);
                         enemiesService.saveEnemy(enemy);
 
-                        // Set the spell casting result message in the model to display it in the fight page
+                        // Set the spell casting result message in the model to display it in the fight
+                        // page
                         model.addAttribute("spellCastingResult", "You cast Firebolt for " + spellDamage + " damage!");
                     } else {
                         model.addAttribute("spellCastingResult", "No enemy to cast the Firebolt on.");
@@ -550,6 +567,7 @@ public class GameController {
         model.addAttribute("hero", hero);
         return "hero";
     }
+
     @PostMapping("/upgradeMana")
     public String upgradeMana(Model model) {
         Hero hero = heroService.getYourHero();

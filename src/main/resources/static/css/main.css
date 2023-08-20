@@ -8,15 +8,15 @@ body {
     justify-content: center;
     height: 100vh;
     margin-left: -200px;
-    cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.ani), url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), auto !important;
+    cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), auto !important;
 }
 
-/* Add top margin to the h1 element */
+
 h1 {
     margin-top: 20px;
 }
 
-/* Style the form elements */
+
 form {
     display: flex;
     flex-direction: column;

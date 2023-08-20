@@ -141,15 +141,17 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy3);
         Enemies enemy4= new Enemies(4L,"Orc", 235,235,18,10,"This fearless warrior is armed with greatsword and leather armor.");
         enemiesRepository.save(enemy4);
-        Enemies enemy5= new Enemies(5L,"Troll", 280,280,21,12,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
+        Enemies enemy5= new Enemies(5L,"Troll", 280,280,22,12,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);
-        Enemies enemy6= new Enemies(6L,"Drake", 345,345,25,14,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
+        Enemies enemy6= new Enemies(6L,"Drake", 345,345,26,14,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
         enemiesRepository.save(enemy6);
-        Enemies enemy7= new Enemies(7L,"Behemoth", 435,435,30,17,"He looks angry and his long claws are thirsty for your blood.");
+        Enemies enemy7= new Enemies(7L,"Minotaur", 380,380,27,15,"Beware his horns and 2-handed axe");
         enemiesRepository.save(enemy7);
-        Enemies enemy8= new Enemies(8L,"Lich", 275,275,34,15,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
+        Enemies enemy8= new Enemies(8L,"Behemoth", 435,435,31,17,"He looks angry and his long claws are thirsty for your blood.");
         enemiesRepository.save(enemy8);
-        Enemies enemy9= new Enemies(9L,"Dragon", 525,525,41,20,"Winged death, let's hope you are ready.");
+        Enemies enemy9= new Enemies(9L,"Lich", 275,275,34,15,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
         enemiesRepository.save(enemy9);
+        Enemies enemy10= new Enemies(10L,"Dragon", 525,525,41,20,"Winged death, let's hope you are ready.");
+        enemiesRepository.save(enemy10);
     }
 }
