@@ -147,7 +147,7 @@ public class GameController {
             hero.setSkillPoints(hero.getSkillPoints() + 2);
             hero.setRunes((hero.getRunes() + 1));
             heroService.saveHero(hero);
-            bonusMessage = "Congratulations! You have won the fight and received:<br>" +
+            bonusMessage = "You have won the fight and received:<br>" +
                            "+200 Gold, +6 Mana, +2 Skill Points, +1 Rune";
 
     model.addAttribute("bonusMessage", bonusMessage);
@@ -484,7 +484,7 @@ public class GameController {
                             hero.setSkillPoints(hero.getSkillPoints() + 2);
                             hero.setRunes((hero.getRunes() + 1));
                             heroService.saveHero(hero);
-                            bonusMessage = "Congratulations! You have won the fight and received bonuses:<br>" +
+                            bonusMessage = "You have won the fight and received:<br>" +
             "+200 Gold<br>" +
             "+6 Mana<br>" +
             "+2 Skill Points<br>" +
