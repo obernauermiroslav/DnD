@@ -41,6 +41,11 @@ public class HeroController {
         }
     }
 
+    @GetMapping("/readmeHero")
+    public String showReadmeHeroPage() {
+        return "readmeHero";
+    }
+
     @PostMapping("/save")
     public String saveHero(@RequestParam("heroName") String heroName, Model model) {
         if (heroName.length() > 10) {
@@ -105,7 +110,7 @@ public class HeroController {
                         itemToUpgrade.setAttackBonus(itemToUpgrade.getAttackBonus() + 1);
                         hero.setRunes(hero.getRunes() - 1);
                         redirectAttributes.addFlashAttribute("upgradeMessageItem",
-                        itemToUpgrade.getName() + " upgraded:\n+1 attack.");
+                                itemToUpgrade.getName() + " upgraded:\n+1 attack.");
 
                         // Calculate the attack bonus difference after the upgrade
                         int attackBonusDifference = itemToUpgrade.getAttackBonus() - attackBonusBeforeUpgrade;

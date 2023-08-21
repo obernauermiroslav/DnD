@@ -5,9 +5,13 @@
   <link rel="stylesheet" type="text/css" href="/css/shop.css">
 </head>
 <body>
+  <div class="button-container">
+    <button class="btn btn-secondary readme" onclick="location.href='/readmeShop'">Readme</button>
+    <button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
+    <button class="btn btn-secondary" onclick="location.href='/fight'" th:disabled="${session.heroLost}">Fight</button>
+    </div>
 <div id="mainTable">
 <h1>Welcome to the Shop</h1>
-<button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
 <p1>Gold: <span th:text="${heroGold}"></span></p1>
 <p2 th:if="${message}" th:text="${message}"></p2>
 <h2>Available Items:</h2>
@@ -149,6 +153,7 @@
   </table>
 </div>
 <div id="item-info-popup" class="item-popup"></div>
+
 
 
 <script th:inline="javascript">

@@ -37,6 +37,12 @@ public class GameController {
         return "main"; // Return the name of the main.html template
     }
 
+
+    @GetMapping("/readmeFight")
+    public String showReadmeFightPage() {
+        return "readmeFight"; 
+    }
+
     @GetMapping("/fight")
     public String showFightPage(Model model, HttpSession session) {
         // Load your hero from the hero table

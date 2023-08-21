@@ -11,7 +11,8 @@
 <div class="container">
   <div id="hero-table">
     <h3>Welcome, <span th:if="${hero != null}" th:text="${hero.name}">Guest</span>!</h3>
-    <div>
+    <div id="buttons">
+      <button class="btn btn-secondary" onclick="location.href='/hero/readmeHero'" style="cursor: url(https://cur.cursors-4u.net/games/gam-11/gam1070.png), auto !important;">Readme</button>
       <button class="btn btn-secondary" onclick="location.href='/shop'">Shop</button>
       <button class="btn btn-secondary" onclick="location.href='/fight'" th:disabled="${session.heroLost}">Fight</button>
     </div>
@@ -79,6 +80,7 @@
 <div id="item-info-popup" class="item-popup"></div>
 <p id="bonusMessage" th:if="${bonusMessage}" th:utext="${bonusMessage}"></p>
 </div>
+
 <script th:inline="javascript">
   var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
 

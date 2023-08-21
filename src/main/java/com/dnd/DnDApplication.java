@@ -151,7 +151,7 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy8);
         Enemies enemy9= new Enemies(9L,"Lich", 275,275,34,15,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
         enemiesRepository.save(enemy9);
-        Enemies enemy10= new Enemies(10L,"Dragon", 525,525,41,20,"Winged death, let's hope you are ready.");
+        Enemies enemy10= new Enemies(10L,"Dragon", 525,525,41,21,"Winged death, let's hope you are ready.");
         enemiesRepository.save(enemy10);
     }
 }

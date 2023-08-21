@@ -76,6 +76,10 @@ public class ShopController {
         // Return the shop view
         return "shop";
     }
+    @GetMapping("/readmeShop")
+    public String showReadmeShopPage() {
+        return "readmeShop"; 
+    }
 
 
     @GetMapping("/api/equipped-items")

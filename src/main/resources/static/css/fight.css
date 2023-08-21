@@ -101,7 +101,7 @@ h2 {
 #firebolt{
     position: absolute;
     margin-top: 30px;
-    margin-left: -155px;
+    margin-left: -195px;
     width: 60px;
     height: 25px;
     cursor: url('../images/spell.cur'), auto !important;
@@ -109,7 +109,7 @@ h2 {
 #healing{
     position: absolute;
     margin-top: 30px;
-    margin-left: 15px;
+    margin-left: -25px;
     width: 70px;
     height: 25px;
     cursor: url('../images/spell.cur'), auto !important;
@@ -117,7 +117,7 @@ h2 {
 #weakness{
     position: absolute;
     margin-top: 30px;
-    margin-left: -70px;
+    margin-left: -110px;
     width: 70px;
     height: 25px;
     cursor: url('../images/spell.cur'), auto !important;
@@ -125,7 +125,7 @@ h2 {
 #sunder_armor{
     position: absolute;
     margin-top: 30px;
-    margin-left: -250px;
+    margin-left: -290px;
     width: 100px;
     height: 25px;
     cursor: url('../images/spell.cur'), auto !important;
@@ -146,6 +146,18 @@ h2 {
 }
 
 .enemy-info-btn:hover .enemy-info {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 8px outset silver;
+    border-radius: 5px;
+}
+.enemy-info.active {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 8px outset silver;
+    border-radius: 5px;
+}
+.enemy-picture.active {
     display: block;
     background-color: rgba(255, 255, 255, 0.2);
     border: 8px outset silver;
