@@ -139,7 +139,7 @@ public class GameController {
             enemySpecialAttackMessage = "";
         }
         if (enemy.getName().equalsIgnoreCase("minotaur") && Math.random() <= 0.20) {
-            // Medusa's special attack: 20% chance to deal + 6 attack
+            // Minotaur's special attack: 20% chance to deal + 6 attack
             enemyAttack = (enemy.getAttack() + 6) - hero.getDefense();
             enemySpecialAttackMessage = enemy.getName() + "'s raging attack deals + 6 attack!";
         } else if (enemySpecialAttackMessage.isEmpty()) {
@@ -147,11 +147,19 @@ public class GameController {
             enemySpecialAttackMessage = "";
         }
         if (enemy.getName().equalsIgnoreCase("behemoth") && Math.random() <= 0.30 && enemy.getHealth() <= 150 ) {
-            // Medusa's special attack: 30% chance to deal double damage
+            // Behemoth's special attack: 30% chance to deal double damage when <= 150 health
             enemyAttack = (enemy.getAttack() + enemy.getAttack()) - hero.getDefense();
             enemySpecialAttackMessage = enemy.getName() + " gathered his remaining strength and furiously attacks you for double damage !";
         } else if (enemySpecialAttackMessage.isEmpty()) {
             // Default special attack message (empty if not triggered)
+            enemySpecialAttackMessage = "";
+        }
+        if (enemy.getName().equalsIgnoreCase("figurine") && Math.random() <= 0.50 ) {
+            // Figurine's special attack: 50% chance to return hero 10 damage
+            enemyAttack = (enemy.getAttack() + 10);
+            enemySpecialAttackMessage =" You hit yourself for 10 damage, keep practising or you will not survive in real fight!";
+        } else if (enemySpecialAttackMessage.isEmpty()) {
+            // Default special attack message (empty if not triggered) 
             enemySpecialAttackMessage = "";
         }
 
