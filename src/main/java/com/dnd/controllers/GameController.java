@@ -102,7 +102,7 @@ public class GameController {
         int heroAttack;
         int enemyAttack;
         String enemyAttackMessage = "";
-        if (enemy.getName().equalsIgnoreCase("Lich") || enemy.getName().equalsIgnoreCase("Drake")) {
+        if (enemy.getName().equalsIgnoreCase("lich") || enemy.getName().equalsIgnoreCase("drake")) {
             // Lich and Dragon ignore hero armor, so the default attack will be just the
             // enemy's attack
             heroAttack = hero.getAttack() - enemy.getDefence();
@@ -126,6 +126,12 @@ public class GameController {
                 && hero.hasShield() && Math.random() <= 0.15) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked the enemy's attack with your shield!";
+        }
+
+        if (enemy.getName().equalsIgnoreCase("goblin") && hero.getGold() > 0 && Math.random() <= 0.30) {
+            int stolenGold = Math.min(15, hero.getGold()); // Maximum 15 gold can be stolen
+            hero.setGold(hero.getGold() - stolenGold);
+            model.addAttribute("stolenGold", stolenGold);
         }
 
         int newEnemyHealth = enemy.getHealth() - heroAttack;

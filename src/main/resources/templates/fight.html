@@ -77,6 +77,7 @@
   <p id="fightResultIH" th:text="${ineffectiveHeroAttackMessage}"></p>
   <p id="fightResultIE" th:text="${ineffectiveEnemyAttackMessage}"></p>
   <p id="fightResultS" th:text="${spellCastingResult}"></p>
+  <p th:if="${stolenGold}">Goblin stole <span th:text="${stolenGold}"></span> gold from you!</p>
 </div>
 </body>
 </html>
