@@ -129,16 +129,33 @@ public class GameController {
             enemyAttackMessage = "You blocked the enemy's attack with your shield!";
         }
 
-        if (enemy.getName().equalsIgnoreCase("medusa") && Math.random() <= 0.20) {
-            // Medusa's special attack: 20% chance to deal +5 attack
-            enemyAttack = (enemy.getAttack() + 5) - hero.getDefense();
-            enemySpecialAttackMessage = enemy.getName() + "'s mesmerizing gaze deals + 5 attack!";
+        if (enemy.getName().equalsIgnoreCase("medusa") && Math.random() <= 0.15) {
+            // Medusa's special attack: can turn hero to a stone for 1 round, so his attack is 0 
+            enemyAttack = (enemy.getAttack()) - hero.getDefense();
+            heroAttack = 0;
+            enemySpecialAttackMessage = enemy.getName() + "'s mesmerizing gaze turns you to a stone for 1 round!";
+        } else if (enemySpecialAttackMessage.isEmpty()) {
+            // Default special attack message (empty if not triggered)
+            enemySpecialAttackMessage = "";
+        }
+        if (enemy.getName().equalsIgnoreCase("minotaur") && Math.random() <= 0.20) {
+            // Medusa's special attack: 20% chance to deal + 6 attack
+            enemyAttack = (enemy.getAttack() + 6) - hero.getDefense();
+            enemySpecialAttackMessage = enemy.getName() + "'s raging attack deals + 6 attack!";
+        } else if (enemySpecialAttackMessage.isEmpty()) {
+            // Default special attack message (empty if not triggered)
+            enemySpecialAttackMessage = "";
+        }
+        if (enemy.getName().equalsIgnoreCase("behemoth") && Math.random() <= 0.30 && enemy.getHealth() <= 150 ) {
+            // Medusa's special attack: 30% chance to deal double damage
+            enemyAttack = (enemy.getAttack() + enemy.getAttack()) - hero.getDefense();
+            enemySpecialAttackMessage = enemy.getName() + " gathered his remaining strength and furiously attacks you for double damage !";
         } else if (enemySpecialAttackMessage.isEmpty()) {
             // Default special attack message (empty if not triggered)
             enemySpecialAttackMessage = "";
         }
 
-        if (enemy.getName().equalsIgnoreCase("goblin") && hero.getGold() > 0 && Math.random() <= 0.30) {
+        if (enemy.getName().equalsIgnoreCase("goblin") && hero.getGold() > 0 && Math.random() <= 0.25) {
             int stolenGold = Math.min(15, hero.getGold()); // Maximum 15 gold can be stolen
             hero.setGold(hero.getGold() - stolenGold);
             model.addAttribute("stolenGold", stolenGold);

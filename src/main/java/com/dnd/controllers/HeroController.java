@@ -60,7 +60,7 @@ public class HeroController {
             // Create a new hero with the given name
             hero = new Hero(heroName);
             hero.setGold(700);
-            hero.setMana(21);
+            hero.setMana(20);
             hero.setPotion(3);
             hero.setSkillPoints(3);
             hero.setHealth(130);
