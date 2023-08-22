@@ -61,7 +61,7 @@ button.btn:hover {
 
 p1,
 p2 {
-  font-size: 19px;
+  font-size: 17px;
 }
 p1 {
   margin-bottom: 5px;
@@ -94,8 +94,6 @@ p1 {
     cursor: url(https://cur.cursors-4u.net/games/gam-11/gam1070.png), auto !important;
   }
   
-
-
 .button-container {
   padding: 6px;
   border: 5px double black;

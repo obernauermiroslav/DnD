@@ -62,6 +62,7 @@
         <img class="enemy-picture" id="drake" src="/images/drake.jpg" alt="drake" style="display: none; width: 220px; height: 180px;">
         <img class="enemy-picture" id="minotaur" src="/images/minotaur.png" alt="minotaur" style="display: none; width: 160px; height: 230px;">
         <img class="enemy-picture" id="behemoth" src="/images/behemoth.jpg" alt="behemoth" style="display: none; width: 220px; height: 180px;">
+        <img class="enemy-picture" id="medusa" src="/images/medusa.png" alt="medusa" style="display: none; width: 200px; height: 230px;">
         <img class="enemy-picture" id="lich" src="/images/lich.jpg" alt="lich" style="display: none; width: 170px; height: 230px;">
         <img class="enemy-picture" id="dragon" src="/images/dragon.png" alt="dragon" style="display: none; width: 220px; height: 180px;">
       </div>
@@ -74,6 +75,7 @@
   <p id="fightResult" th:text="${fightResult}"></p>
   <p id="fightResultH" th:text="${heroAttackMessage}"></p>
   <p id="fightResultE" th:text="${enemyAttackMessage}"></p>
+  <p id="fightResultES" th:text="${enemySpecialAttackMessage}"></p>
   <p id="fightResultIH" th:text="${ineffectiveHeroAttackMessage}"></p>
   <p id="fightResultIE" th:text="${ineffectiveEnemyAttackMessage}"></p>
   <p id="fightResultS" th:text="${spellCastingResult}"></p>

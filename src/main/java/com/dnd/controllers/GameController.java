@@ -102,12 +102,13 @@ public class GameController {
         int heroAttack;
         int enemyAttack;
         String enemyAttackMessage = "";
-        if (enemy.getName().equalsIgnoreCase("lich") || enemy.getName().equalsIgnoreCase("drake")) {
+        String enemySpecialAttackMessage = "";
+        if (enemy.getName().equalsIgnoreCase("Lich") || enemy.getName().equalsIgnoreCase("drake")) {
             // Lich and Dragon ignore hero armor, so the default attack will be just the
             // enemy's attack
             heroAttack = hero.getAttack() - enemy.getDefence();
             enemyAttack = enemy.getAttack();
-            enemyAttackMessage = enemy.getName() + "'s attack bypasses your armor!";
+            enemySpecialAttackMessage = enemy.getName() + "'s attack bypasses your armor!";
         } else {
             // Normal attack calculation considering hero's armor
             heroAttack = hero.getAttack() - enemy.getDefence();
@@ -126,6 +127,15 @@ public class GameController {
                 && hero.hasShield() && Math.random() <= 0.15) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked the enemy's attack with your shield!";
+        }
+
+        if (enemy.getName().equalsIgnoreCase("medusa") && Math.random() <= 0.20) {
+            // Medusa's special attack: 20% chance to deal +5 attack
+            enemyAttack = (enemy.getAttack() + 5) - hero.getDefense();
+            enemySpecialAttackMessage = enemy.getName() + "'s mesmerizing gaze deals + 5 attack!";
+        } else if (enemySpecialAttackMessage.isEmpty()) {
+            // Default special attack message (empty if not triggered)
+            enemySpecialAttackMessage = "";
         }
 
         if (enemy.getName().equalsIgnoreCase("goblin") && hero.getGold() > 0 && Math.random() <= 0.30) {
@@ -213,6 +223,7 @@ public class GameController {
         model.addAttribute("fightResult", fightResult);
         model.addAttribute("heroAttackMessage", heroAttackMessage);
         model.addAttribute("enemyAttackMessage", enemyAttackMessage);
+        model.addAttribute("enemySpecialAttackMessage", enemySpecialAttackMessage);
         model.addAttribute("ineffectiveHeroAttackMessage", ineffectiveHeroAttackMessage);
         model.addAttribute("ineffectiveEnemyAttackMessage", ineffectiveEnemyAttackMessage);
 

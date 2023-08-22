@@ -145,13 +145,15 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy5);
         Enemies enemy6= new Enemies(6L,"Drake", 345,345,26,14,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
         enemiesRepository.save(enemy6);
-        Enemies enemy7= new Enemies(7L,"Minotaur", 380,380,27,15,"Beware his horns and 2-handed axe");
+        Enemies enemy7= new Enemies(7L,"Minotaur", 380,380,27,15,"Beware his horns, 2-handed axe and RAGE!");
         enemiesRepository.save(enemy7);
         Enemies enemy8= new Enemies(8L,"Behemoth", 435,435,31,17,"He looks angry and his long claws are thirsty for your blood.");
         enemiesRepository.save(enemy8);
-        Enemies enemy9= new Enemies(9L,"Lich", 275,275,34,15,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
+        Enemies enemy9= new Enemies(9L,"Medusa", 400,400,30,16,"Once a beautiful woman, now she can turn you into a stone with one look.");
         enemiesRepository.save(enemy9);
-        Enemies enemy10= new Enemies(10L,"Dragon", 525,525,41,21,"Winged death, let's hope you are ready.");
+        Enemies enemy10= new Enemies(10L,"Lich", 285,285,34,15,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
         enemiesRepository.save(enemy10);
+        Enemies enemy11= new Enemies(11L,"Dragon", 530,530,42,21,"Winged death, let's hope you are ready.");
+        enemiesRepository.save(enemy11);
     }
 }
