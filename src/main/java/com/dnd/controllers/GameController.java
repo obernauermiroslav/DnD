@@ -567,7 +567,8 @@ public class GameController {
                                 model.addAttribute("noMoreEnemies", true); // Add a flag to indicate there are no more
                                                                            // enemies
                             }
-                            return "redirect:/hero"; // Redirect to the hero page if the enemy is defeated
+                            model.addAttribute("hero", hero);
+                            return "hero"; // Redirect to the hero page if the enemy is defeated
                         }
 
                         enemy.setHealth(newEnemyHealth);
