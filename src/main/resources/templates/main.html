@@ -9,9 +9,24 @@
 <h1>Hail to you champion, what shall we call you?</h1>
 <form action="/hero/save" method="post">
     <input type="text" name="heroName" placeholder="Enter hero name" value="Warrior" required maxlength="10">
+    <div class="starting-bonus">
+        <p>Choose a starting bonus:</p>
+        <label>
+            <input type="radio" name="startingBonus" value="health" checked> Health + 30
+        </label>
+        <label>
+            <input type="radio" name="startingBonus" value="attack"> Attack + 2
+        </label>
+        <label>
+            <input type="radio" name="startingBonus" value="mana"> Mana + 10
+        </label>
+    </div>
     <button type="submit">Start Game</button>
     <div th:if="${heroNameError}" class="error-message">
         <p th:text="${heroNameError}"></p>
+    </div>
+    <div th:if="${startingBonusError}" class="error-message">
+        <p th:text="${startingBonusError}"></p>
     </div>
 </form>
 </body>

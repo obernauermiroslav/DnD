@@ -19,6 +19,7 @@ public class HeroController {
     private final HeroService heroService;
     private final ItemsService itemsService;
     private final Map<Long, Boolean> upgradedItemsMap = new HashMap<>();
+    private boolean startingBonusApplied = false;
 
     @Autowired
     public HeroController(HeroService heroService, ItemsService itemsService) {
@@ -47,19 +48,20 @@ public class HeroController {
     }
 
     @PostMapping("/save")
-    public String saveHero(@RequestParam("heroName") String heroName, Model model) {
+    public String saveHero(@RequestParam("heroName") String heroName,
+            @RequestParam("startingBonus") String startingBonus, Model model) {
         if (heroName.length() > 10) {
             model.addAttribute("heroNameError", "Hero name must be a maximum of 10 characters");
             return "main";
         }
-
+    
         Hero hero = heroService.getYourHero();
-        if (hero != null) {
-            hero.setName(heroName);
-        } else {
+        boolean isNewHero = false; // Flag to check if the hero is new
+    
+        if (hero == null) {
             // Create a new hero with the given name
             hero = new Hero(heroName);
-            hero.setGold(700);
+            hero.setGold(710);
             hero.setMana(20);
             hero.setPotion(3);
             hero.setSkillPoints(3);
@@ -68,10 +70,27 @@ public class HeroController {
             hero.setAttack(8);
             hero.setDefense(7);
             hero.setRunes(3);
+            isNewHero = true; // Mark the hero as new
+        } else {
+            hero.setName(heroName);
         }
+    
+        if (isNewHero) {
+            // Apply the chosen starting bonus only for new heroes
+            if ("health".equals(startingBonus)) {
+                hero.setHealth(hero.getHealth() + 35);
+                hero.setMaxHealth(hero.getMaxHealth() + 35);
+            } else if ("attack".equals(startingBonus)) {
+                hero.setAttack(hero.getAttack() + 2);
+            } else if ("mana".equals(startingBonus)) {
+                hero.setMana(hero.getMana() + 12);
+            }
+        }
+    
         heroService.saveHero(hero);
         return "redirect:/hero";
     }
+    
 
     private boolean isArmorType(ItemType itemType) {
         Set<ItemType> armorTypes = new HashSet<>(Arrays.asList(ItemType.ARMOR, ItemType.CLOAK, ItemType.GLOVES,

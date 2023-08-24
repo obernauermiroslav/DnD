@@ -120,16 +120,16 @@ public class GameController {
         }
 
         // Check if the hero has the "Fire Shield" equipped and if the enemy is "Drake"
-        if (enemy.getName().equalsIgnoreCase("drake") && hero.hasFireShield() && Math.random() <= 0.15) {
+        if (enemy.getName().equalsIgnoreCase("drake") && hero.hasFireShield() && Math.random() <= 0.16) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked dragon's attack with your Fire Shield!";
         } else if (!enemy.getName().equalsIgnoreCase("drake") && !enemy.getName().equalsIgnoreCase("lich")
-                && hero.hasShield() && Math.random() <= 0.15) {
+                && hero.hasShield() && Math.random() <= 0.16) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked the enemy's attack with your shield!";
         }
 
-        if (enemy.getName().equalsIgnoreCase("medusa") && Math.random() <= 0.15) {
+        if (enemy.getName().equalsIgnoreCase("medusa") && Math.random() <= 0.17) {
             // Medusa's special attack: can turn hero to a stone for 1 round, so his attack is 0 
             enemyAttack = (enemy.getAttack()) - hero.getDefense();
             heroAttack = 0;
@@ -138,7 +138,7 @@ public class GameController {
             // Default special attack message (empty if not triggered)
             enemySpecialAttackMessage = "";
         }
-        if (enemy.getName().equalsIgnoreCase("minotaur") && Math.random() <= 0.20) {
+        if (enemy.getName().equalsIgnoreCase("minotaur") && Math.random() <= 0.21) {
             // Minotaur's special attack: 20% chance to deal + 6 attack
             enemyAttack = (enemy.getAttack() + 6) - hero.getDefense();
             enemySpecialAttackMessage = enemy.getName() + "'s raging attack deals + 6 attack!";
@@ -154,17 +154,17 @@ public class GameController {
             // Default special attack message (empty if not triggered)
             enemySpecialAttackMessage = "";
         }
-        if (enemy.getName().equalsIgnoreCase("figurine") && Math.random() <= 0.50 ) {
-            // Figurine's special attack: 50% chance to return hero 10 damage
-            enemyAttack = (enemy.getAttack() + 10);
-            enemySpecialAttackMessage =" You hit yourself for 10 damage, keep practising or you will not survive in real fight!";
+        if (enemy.getName().equalsIgnoreCase("figurine") && Math.random() <= 0.40 ) {
+            // Figurine's special attack: 40% chance to return hero 10 damage
+            enemyAttack = (enemy.getAttack() + 6);
+            enemySpecialAttackMessage =" You hit yourself for 6 damage, keep practising or you will not survive in real fight!";
         } else if (enemySpecialAttackMessage.isEmpty()) {
             // Default special attack message (empty if not triggered) 
             enemySpecialAttackMessage = "";
         }
 
         if (enemy.getName().equalsIgnoreCase("goblin") && hero.getGold() > 0 && Math.random() <= 0.25) {
-            int stolenGold = Math.min(15, hero.getGold()); // Maximum 15 gold can be stolen
+            int stolenGold = Math.min(12, hero.getGold()); // Maximum 12 gold can be stolen
             hero.setGold(hero.getGold() - stolenGold);
             model.addAttribute("stolenGold", stolenGold);
         }

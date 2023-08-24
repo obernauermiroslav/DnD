@@ -1,382 +1,544 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Hero Shop</title>
-  <link rel="stylesheet" type="text/css" href="/css/shop.css">
-</head>
-<body>
-  <div class="button-container">
-    <button class="btn btn-secondary readme" onclick="location.href='/readmeShop'">Readme</button>
-    <button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
-    <button class="btn btn-secondary" onclick="location.href='/fight'" th:disabled="${session.heroLost}">Fight</button>
+  <head>
+    <title>Hero Shop</title>
+    <link rel="stylesheet" type="text/css" href="/css/shop.css" />
+  </head>
+  <body>
+    <div class="button-container">
+      <button
+        class="btn btn-secondary readme"
+        onclick="location.href='/readmeShop'"
+      >
+        Readme
+      </button>
+      <button class="btn btn-secondary" onclick="location.href='/hero'">
+        Hero
+      </button>
+      <button
+        class="btn btn-secondary"
+        onclick="location.href='/fight'"
+        th:disabled="${session.heroLost}"
+      >
+        Fight
+      </button>
     </div>
-<div id="mainTable">
-<h1>Welcome to the Shop</h1>
-<p1>Gold: <span th:text="${heroGold}"></span></p1>
-<p2 th:if="${message}" th:text="${message}"></p2>
-<h2>Available Items:</h2>
-</div>
-<div class="table-container" id="scrollable-table">
-  <table class="item-table">
-    <th>Healing Potion</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).POTION}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect} , data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Spells</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).SPELL}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect}, data-price=${item.price}, data-mana-cost=${item.manaCost}, data-attack-bonus=${item.attackBonus}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Helmets</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).HELMET}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Armor</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).ARMOR}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type},  data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Trousers</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).TROUSERS}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Gloves</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).GLOVES}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Boots</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).BOOTS}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Cloak</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).CLOAK}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}, data-effect=${item.effect}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Weapons</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).WEAPON}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-attack-bonus=${item.attackBonus}, data-item-type=${item.type}, data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Shields</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).SHIELD}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Rings</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).RING}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type},data-effect=${item.effect},  data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-    <th>Necklaces</th>
-    <tr th:each="item : ${items}">
-      <td th:if="${item.type == T(com.dnd.models.ItemType).NECKLACE}">
-        <form th:action="@{/shop/buy/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()">
-          <input type="submit" value="Buy" class="item-button"
-                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type},data-effect=${item.effect}, data-price=${item.price}" />
-          <span th:text="${item.name}">Item Name</span>
-          <span th:text="'(' + ${item.price} + 'GP)'"></span>
-        </form>
-      </td>
-    </tr>
-  </table>
-</div>
-<div id="item-info-popup" class="item-popup"></div>
+    <div id="mainTable">
+      <h1>Welcome to the Shop</h1>
+      <p1>Gold: <span id="gold" th:text="${heroGold}"></span></p1>
+      <p2 id="message" th:if="${message}" th:text="${message}"></p2>
+      <h2>Available Items:</h2>
+    </div>
+    <div class="table-container" id="scrollable-table">
+      <table class="item-table">
+        <th>Healing Potion</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).POTION}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect} , data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Spells</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).SPELL}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect}, data-price=${item.price}, data-mana-cost=${item.manaCost}, data-attack-bonus=${item.attackBonus}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Helmets</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).HELMET}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Armor</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).ARMOR}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type},  data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Trousers</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).TROUSERS}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Gloves</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).GLOVES}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Boots</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).BOOTS}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Cloak</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).CLOAK}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}, data-effect=${item.effect}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Weapons</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).WEAPON}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-attack-bonus=${item.attackBonus}, data-item-type=${item.type}, data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Shields</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).SHIELD}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Rings</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).RING}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type},data-effect=${item.effect},  data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+        <th>Necklaces</th>
+        <tr th:each="item : ${items}">
+          <td th:if="${item.type == T(com.dnd.models.ItemType).NECKLACE}">
+            <form
+              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
+              method="post"
+              onsubmit="saveScrollPosition()"
+            >
+              <input
+                type="submit"
+                value="Buy"
+                class="item-button"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type},data-effect=${item.effect}, data-price=${item.price}"
+              />
+              <span th:text="${item.name}">Item Name</span>
+              <span th:text="'(' + ${item.price} + 'GP)'"></span>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="item-info-popup" class="item-popup"></div>
 
-
-
-<script th:inline="javascript">
-  function saveScrollPosition() {
-    // Save the current scroll position in the session storage
-    const scrollPosition = document.getElementById('scrollable-table').scrollTop;
-    sessionStorage.setItem('scrollPosition', scrollPosition.toString());
-  }
-
-  function restoreScrollPosition() {
-    // Retrieve the saved scroll position from the session storage
-    const scrollPosition = sessionStorage.getItem('scrollPosition');
-    if (scrollPosition !== null) {
-      // Scroll the table container to the saved position
-      document.getElementById('scrollable-table').scrollTop = parseInt(scrollPosition);
-      // Remove the saved position after restoring it
-      sessionStorage.removeItem('scrollPosition');
-    }
-  }
-
-  // Restore the scroll position when the page loads
-  window.onload = function() {
-    restoreScrollPosition();
-  };
-
-  async function fetchEquippedItems() {
-    try {
-      const response = await fetch('/api/equipped-items');
-      if (!response.ok) {
-        throw new Error('Failed to fetch equipped items');
+    <script th:inline="javascript">
+      function saveScrollPosition() {
+        // Save the current scroll position in the session storage
+        const scrollPosition =
+          document.getElementById("scrollable-table").scrollTop;
+        sessionStorage.setItem("scrollPosition", scrollPosition.toString());
       }
-      const equippedItems = await response.json();
-      return equippedItems;
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  }
 
-  function isSpellAlreadyLearned(equippedItems, itemName) {
-    return equippedItems.some(item => item.type === 'SPELL' && item.name === itemName);
-  }
-
-  async function handleItemHover(button) {
-    const itemName = button.getAttribute('data-item-name');
-    const itemType = button.getAttribute('data-item-type');
-    const price = button.getAttribute('data-price');
-    const equippedItems = await fetchEquippedItems();
-    const equippedItemsOfType = equippedItems.filter(item => item.type === itemType);
-
-    let popupContent = ``;
-
-    // Check if there are any equipped items of the corresponding type
-    if (equippedItemsOfType.length > 0) {
-      // Exclude "currently equipped" for potion and spell items
-      if (itemType !== 'POTION' && itemType !== 'SPELL') {
-        // Display "Currently equipped" for other item types that are not potion or spell
-        equippedItemsOfType.forEach(item => {
-          popupContent += `<p>Currently equipped: ${item.name}</p>`;
-          popupContent += `
-          <p>Name: ${itemName}</p>
-          <p>Price: ${price} GP</p>
-          <!-- Add other information for each equipped item -->
-        `;
-        });
-      } else if (itemType === 'SPELL') {
-        // Show "Spell already learned" message for spell items
-        if (isSpellAlreadyLearned(equippedItemsOfType, itemName)) {
-          popupContent += `<p>Spell already learned</p>`;
-          popupContent += `
-          <p>Name: ${itemName}</p>
-          <!-- Add other information for each equipped item -->
-        `;
-        } else {
-          // Show default information for other spell items
-          const effect = button.getAttribute('data-effect');
-          const manaCost = button.getAttribute('data-mana-cost');
-          popupContent += `
-          <p>Name: ${itemName}</p>
-          <p>Price: ${price} GP</p>
-
-        `;
+      function restoreScrollPosition() {
+        // Retrieve the saved scroll position from the session storage
+        const scrollPosition = sessionStorage.getItem("scrollPosition");
+        if (scrollPosition !== null) {
+          // Scroll the table container to the saved position
+          document.getElementById("scrollable-table").scrollTop =
+            parseInt(scrollPosition);
+          // Remove the saved position after restoring it
+          sessionStorage.removeItem("scrollPosition");
         }
-      } else {
-        // Display common information for potion items
-        equippedItemsOfType.forEach(item => {
-          popupContent += `
+      }
+
+      // Restore the scroll position when the page loads
+      window.onload = function () {
+        restoreScrollPosition();
+      };
+
+      async function fetchEquippedItems() {
+        try {
+          const response = await fetch("/api/equipped-items");
+          if (!response.ok) {
+            throw new Error("Failed to fetch equipped items");
+          }
+          const equippedItems = await response.json();
+          return equippedItems;
+        } catch (error) {
+          console.error(error);
+          return [];
+        }
+      }
+
+      function isSpellAlreadyLearned(equippedItems, itemName) {
+        return equippedItems.some(
+          (item) => item.type === "SPELL" && item.name === itemName
+        );
+      }
+
+      async function handleItemHover(button) {
+        const itemName = button.getAttribute("data-item-name");
+        const itemType = button.getAttribute("data-item-type");
+        const price = button.getAttribute("data-price");
+        const equippedItems = await fetchEquippedItems();
+        const equippedItemsOfType = equippedItems.filter(
+          (item) => item.type === itemType
+        );
+
+        let popupContent = ``;
+
+        // Check if there are any equipped items of the corresponding type
+        if (equippedItemsOfType.length > 0) {
+          // Exclude "currently equipped" for potion and spell items
+          if (itemType !== "POTION" && itemType !== "SPELL") {
+            // Display "Currently equipped" for other item types that are not potion or spell
+            equippedItemsOfType.forEach((item) => {
+              popupContent += `<p>Currently equipped: ${item.name}</p>`;
+              popupContent += `
           <p>Name: ${itemName}</p>
           <p>Price: ${price} GP</p>
           <!-- Add other information for each equipped item -->
         `;
-        });
-      }
-    } else {
-      // Show "No equipped" message for other item types only
-      if (itemType !== 'POTION' && itemType !== 'SPELL') {
-        popupContent += `<p>No equipped ${itemType}</p>`;
-      }
-      popupContent += `
+            });
+          } else if (itemType === "SPELL") {
+            // Show "Spell already learned" message for spell items
+            if (isSpellAlreadyLearned(equippedItemsOfType, itemName)) {
+              popupContent += `<p>Spell already learned</p>`;
+              popupContent += `
+          <p>Name: ${itemName}</p>
+          <!-- Add other information for each equipped item -->
+        `;
+            } else {
+              // Show default information for other spell items
+              const effect = button.getAttribute("data-effect");
+              const manaCost = button.getAttribute("data-mana-cost");
+              popupContent += `
+          <p>Name: ${itemName}</p>
+          <p>Price: ${price} GP</p>
+
+        `;
+            }
+          } else {
+            // Display common information for potion items
+            equippedItemsOfType.forEach((item) => {
+              popupContent += `
+          <p>Name: ${itemName}</p>
+          <p>Price: ${price} GP</p>
+          <!-- Add other information for each equipped item -->
+        `;
+            });
+          }
+        } else {
+          // Show "No equipped" message for other item types only
+          if (itemType !== "POTION" && itemType !== "SPELL") {
+            popupContent += `<p>No equipped ${itemType}</p>`;
+          }
+          popupContent += `
       <p>Name: ${itemName}</p>
       <p>Price: ${price} GP</p>
       <!-- Add other information for each equipped item -->
     `;
-    }
+        }
 
-
-  if (itemType === 'POTION') {
-      const effect = button.getAttribute('data-effect');
-      popupContent += `
+        if (itemType === "POTION") {
+          const effect = button.getAttribute("data-effect");
+          popupContent += `
         <p>Effect: ${effect}</p>
       `;
-    } else if (itemType === 'NECKLACE') {
-        const effect = button.getAttribute('data-effect');
-        popupContent += `
+        } else if (itemType === "NECKLACE") {
+          const effect = button.getAttribute("data-effect");
+          popupContent += `
         <p>Effect: ${effect}</p>
       `;
-      } else if (itemType === 'RING') {
-        const effect = button.getAttribute('data-effect');
-        popupContent += `
+        } else if (itemType === "RING") {
+          const effect = button.getAttribute("data-effect");
+          popupContent += `
         <p>Effect: ${effect}</p>
       `;
-    } else if (itemType === 'SPELL') {
-      const effect = button.getAttribute('data-effect');
-      const manaCost = button.getAttribute('data-mana-cost');
-      popupContent += `
+        } else if (itemType === "SPELL") {
+          const effect = button.getAttribute("data-effect");
+          const manaCost = button.getAttribute("data-mana-cost");
+          popupContent += `
         <p>Effect: ${effect}</p>
         <p>Mana Cost: ${manaCost}</p>
       `;
-    } else if (itemType === 'WEAPON') {
-      const attackBonus = button.getAttribute('data-attack-bonus');
-      popupContent += `
+        } else if (itemType === "WEAPON") {
+          const attackBonus = button.getAttribute("data-attack-bonus");
+          popupContent += `
         <p>Attack Bonus: ${attackBonus}</p>
       `;
-    } else if (itemType === 'SHIELD') {
-        const defenseBonus = button.getAttribute('data-defense-bonus');
-        const healthBonus = button.getAttribute('data-health-bonus');
-        const effect = button.getAttribute('data-effect');
-        popupContent += `
+        } else if (itemType === "SHIELD") {
+          const defenseBonus = button.getAttribute("data-defense-bonus");
+          const healthBonus = button.getAttribute("data-health-bonus");
+          const effect = button.getAttribute("data-effect");
+          popupContent += `
         <p>Defense Bonus: ${defenseBonus}</p>
         <p>Health Bonus: ${healthBonus}</p>
         <p>Effect: ${effect}</p>
       `;
-  } else if (itemType === 'CLOAK') {
-    const defenseBonus = button.getAttribute('data-defense-bonus');
-    const healthBonus = button.getAttribute('data-health-bonus');
-    const effect = button.getAttribute('data-effect');
+        } else if (itemType === "CLOAK") {
+          const defenseBonus = button.getAttribute("data-defense-bonus");
+          const healthBonus = button.getAttribute("data-health-bonus");
+          const effect = button.getAttribute("data-effect");
 
-    // Display cloak-specific information
-    popupContent += `
+          // Display cloak-specific information
+          popupContent += `
         <p>Defense Bonus: ${defenseBonus}</p>
         <p>Health Bonus: ${healthBonus}</p>
       `;
-    if (effect) {
-      popupContent += `<p>Effect: ${effect}</p>`;
-    }
-    } else if (itemType === 'HELMET' || itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK') {
-      const defenseBonus = button.getAttribute('data-defense-bonus');
-      const healthBonus = button.getAttribute('data-health-bonus');
-      popupContent += `
+          if (effect) {
+            popupContent += `<p>Effect: ${effect}</p>`;
+          }
+        } else if (
+          itemType === "HELMET" ||
+          itemType === "ARMOR" ||
+          itemType === "TROUSERS" ||
+          itemType === "GLOVES" ||
+          itemType === "BOOTS" ||
+          itemType === "CLOAK"
+        ) {
+          const defenseBonus = button.getAttribute("data-defense-bonus");
+          const healthBonus = button.getAttribute("data-health-bonus");
+          popupContent += `
         <p>Defense Bonus: ${defenseBonus}</p>
         <p>Health Bonus: ${healthBonus}</p>
       `;
-    } else {
-    }
+        } else {
+        }
 
-    const popup = document.getElementById('item-info-popup');
-    popup.innerHTML = popupContent;
-    popup.style.display = 'block';
-  }
+        const popup = document.getElementById("item-info-popup");
+        popup.innerHTML = popupContent;
+        popup.style.display = "block";
+      }
 
-  function handleItemLeave() {
-    const popup = document.getElementById('item-info-popup');
-    popup.style.display = 'none';
-  }
+      function handleItemLeave() {
+        const popup = document.getElementById("item-info-popup");
+        popup.style.display = "none";
+      }
 
-  /*
+      /*
   function disablePageReload(event) {
     event.preventDefault();
   }
-
-  // Function to fetch and replace data without reloading the page
-  async function fetchAndReplaceData(actionUrl, targetElementId) {
-    try {
-      const response = await fetch(actionUrl);
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const newData = await response.text();
-      const targetElement = document.getElementById(targetElementId);
-      targetElement.innerHTML = newData;
-      // You can also call restoreScrollPosition() here if needed
-      restoreScrollPosition();
-    } catch (error) {
-      console.error(error);
-    }
-  }
 */
-  // Attach event listeners to each "Buy" button to handle click event
-  document.addEventListener('DOMContentLoaded', function() {
-    const buyButtons = document.querySelectorAll('.item-table .item-button');
-    buyButtons.forEach(button => {
-      button.addEventListener('click', async function(event) {
-        // Prevent the default form submission behavior
-      //  disablePageReload(event);
-        const itemId = button.getAttribute('data-item-id');
-        const itemType = button.getAttribute('data-item-type');
-        // Use the provided action URL and target element ID
-        const actionUrl = "/shop/buy/{itemId}";
-        const targetElementId = 'scrollable-table';
+      // Function to fetch and replace data without reloading the page
+      async function fetchAndReplaceData(actionUrl, targetElementId) {
+    try {
+        const response = await fetch(actionUrl);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data. Status: ${response.status} ${response.statusText}`);
+        }
+        const responseData = await response.json();
+        const targetElement = document.getElementById(targetElementId);
 
-        // Fetch and replace data without reloading the page
-      //  await fetchAndReplaceData(actionUrl, targetElementId);
-      });
+        if (targetElement) {
+            targetElement.innerHTML = responseData.htmlContent; // Assuming your response contains HTML content
+        }
 
-      button.addEventListener('mouseover', function() {
-        handleItemHover(button);
-      });
+        restoreScrollPosition();
+    } catch (error) {
+        console.error("Error fetching and replacing data:", error);
+    }
+}
 
-      button.addEventListener('mouseleave', function() {
-        handleItemLeave();
-      });
+
+
+
+      function postData(event, itemId) {
+    event.preventDefault();
+
+    fetch(`/shop/buy/${itemId}`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+        },
+    })
+    .then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error("Failed to fetch data");
+        }
+    })
+    .then(heroData => {
+        const goldElement = document.getElementById('gold');
+        const messageElement = document.getElementById('message');
+
+        if (goldElement) {
+            goldElement.textContent = heroData.heroGold;
+        }
+
+        if (messageElement) {
+            messageElement.textContent = heroData.message || "";
+        }
+    })
+    .catch(error => {
+        console.error("Error updating UI:", error);
     });
-  });
-</script>
-</body>
+}
+
+
+      // Attach event listeners to each "Buy" button to handle click event
+      document.addEventListener("DOMContentLoaded", function () {
+        const buyButtons = document.querySelectorAll(
+          ".item-table .item-button"
+        );
+        buyButtons.forEach((button) => {
+          button.addEventListener("click", async function (event) {
+            // Prevent the default form submission behavior
+            //disablePageReload(event);
+            const itemId = button.getAttribute("data-item-id");
+            const itemType = button.getAttribute("data-item-type");
+            // Use the provided action URL and target element ID
+            const actionUrlTemplate = "/shop/buy/{itemId}";
+            const actionUrl = actionUrlTemplate.replace("{itemId}", itemId);
+            const targetElementId = "scrollable-table";
+
+            // Fetch and replace data without reloading the page
+            await fetchAndReplaceData(actionUrl, targetElementId);
+          });
+
+          button.addEventListener("mouseover", function () {
+            handleItemHover(button);
+          });
+
+          button.addEventListener("mouseleave", function () {
+            handleItemLeave();
+          });
+        });
+      });
+    </script>
+  </body>
 </html>

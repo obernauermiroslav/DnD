@@ -17,7 +17,7 @@
       <button class="btn btn-secondary" onclick="location.href='/fight'" th:disabled="${session.heroLost}">Fight</button>
     </div>
     <p>Skill points: <span th:if="${hero != null}" th:text="${hero.skillPoints}">0</span></p>
-    <p th:if="${hero != null}">Health: <span th:text="${hero.maxHealth}"></span></p>
+    <p th:if="${hero != null}">Health: <span th:text="${hero.health}"></span> / <span th:text="${hero.maxHealth}"></span></p>
     <form action="/upgradeHealth" method="post" class="button-container">
       <button id="health" type="submit">+</button>
     </form>

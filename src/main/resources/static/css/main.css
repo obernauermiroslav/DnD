@@ -44,6 +44,30 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
+   
     background-color: #0056b3;
+    cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
+}
+
+.starting-bonus {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    
+}
+
+.starting-bonus p {
+    font-weight: bold;
+    margin-bottom: 5px;
+    
+}
+
+.starting-bonus label {
+    display: block;
+    margin-bottom: 7px;
+    cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), auto !important;
+}
+
+.starting-bonus input[type="radio"] {
+    margin-right: 5px;
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }

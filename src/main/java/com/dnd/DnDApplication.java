@@ -74,7 +74,7 @@ public class DnDApplication implements CommandLineRunner {
 
         Items cloak1 = new Items(null, "Cloak", ItemType.CLOAK, 0, 1,6,0,60,0,"");
         itemsRepository.save(cloak1);
-        Items cloak2 = new Items(null, "Enchanted Cloak", ItemType.CLOAK, 0, 3,10,6,100,0,"+5 mana");
+        Items cloak2 = new Items(null, "Enchanted Cloak", ItemType.CLOAK, 0, 3,10,6,100,0,"+6 mana");
         itemsRepository.save(cloak2);
         Items cloak3 = new Items(null, "Dragon Cloak", ItemType.CLOAK, 0, 5,18,0,135,0,"");
         itemsRepository.save(cloak3);
@@ -94,13 +94,13 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(weapon6);
 
 
-        Items shield1 = new Items(null, "Small shield", ItemType.SHIELD, 0, 2,7,0,90,0,"15% chance to block enemy attack");
+        Items shield1 = new Items(null, "Small shield", ItemType.SHIELD, 0, 2,7,0,90,0,"16% chance to block enemy attack");
         itemsRepository.save(shield1);
-        Items shield2 = new Items(null, "Medium shield", ItemType.SHIELD, 0, 3,10,0,125,0,"15% chance to block enemy attack");
+        Items shield2 = new Items(null, "Medium shield", ItemType.SHIELD, 0, 3,10,0,125,0,"16% chance to block enemy attack");
         itemsRepository.save(shield2);
-        Items shield3 = new Items(null, "Tower shield", ItemType.SHIELD, 0, 4,12,0,155,0,"15% chance to block enemy attack");
+        Items shield3 = new Items(null, "Tower shield", ItemType.SHIELD, 0, 4,12,0,155,0,"16% chance to block enemy attack");
         itemsRepository.save(shield3);
-        Items shield4 = new Items(null, "Fire Shield", ItemType.SHIELD, 0, 5,15,0,180,0,"15% chance to block enemy attack and can protect you against fire");
+        Items shield4 = new Items(null, "Fire Shield", ItemType.SHIELD, 0, 5,15,0,180,0,"16% chance to block enemy attack and can protect you against fire");
         itemsRepository.save(shield4);
 
 
