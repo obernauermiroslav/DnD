@@ -43,6 +43,7 @@ public class HeroController {
 
         // Fetch the chosenBonus from session and add it to the model
         String chosenBonus = (String) session.getAttribute("chosenBonus");
+        session.setAttribute("chosenBonus", chosenBonus);
         model.addAttribute("chosenBonus", chosenBonus);
 
         return "hero";

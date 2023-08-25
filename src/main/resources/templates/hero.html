@@ -13,8 +13,7 @@
     <h3 id="heroName">
       <span th:if="${hero != null}">
           <span th:text="${hero.name}"></span>
-          <span th:if="${chosenBonus == 'warrior'}"> the warrior</span>
-          <span th:if="${chosenBonus == 'mage'}"> the mage</span>
+          <span id="chosenBonus"></span>
       </span>
       <span th:unless="${hero != null}">Guest</span>
   </h3>
@@ -209,7 +208,14 @@
     });
   }
 
-  const chosenBonus = sessionStorage.getItem('chosenBonus');
+  var chosenBonus = sessionStorage.getItem('chosenBonus');
+
+    // Show the appropriate span based on the chosenBonus value
+    if (chosenBonus === 'warrior') {
+        document.getElementById('chosenBonus').textContent = '- warrior';
+    } else if (chosenBonus === 'mage') {
+        document.getElementById('chosenBonus').textContent = '- mage';
+    }
 
   function updateItemPictures() {
     const equippedItems = /*[[${hero?.equippedItems}]]*/ [];
@@ -254,6 +260,8 @@
       }
     });
   }
+
+  
   // Call the function to update item pictures on page load
   document.addEventListener('DOMContentLoaded', function () {
     var itemButtons = document.querySelectorAll('.item-button');
