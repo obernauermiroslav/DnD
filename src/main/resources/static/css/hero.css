@@ -132,12 +132,12 @@ html body {
     margin-top: 110px;
     border-radius: 5px;
     border: 2px solid white;
-    width: 170px;
-    height: 290px;
+    width: 175px;
+    height: 295px;
 }
 #helmet-picture{
     position: absolute;
-    margin-left: 130px;
+    margin-left: 135px;
     margin-top: 46px;
 }
 #armor-picture{
@@ -147,12 +147,12 @@ html body {
 }
 #necklace-picture{
     position: absolute;
-    margin-left: 255px;
+    margin-left: 260px;
     margin-top: 120px;
 }
 #gloves-picture{
     position: absolute;
-    margin-left: 255px;
+    margin-left: 260px;
     margin-top: 190px;
 }
 #trousers-picture{
@@ -167,17 +167,17 @@ html body {
 }
 #shield-picture{
     position: absolute;
-    margin-left: 255px;
+    margin-left: 260px;
     margin-top: 260px;
 }
 #boots-picture{
     position: absolute;
-    margin-left: 135px;
-    margin-top: 423px;
+    margin-left: 140px;
+    margin-top: 415px;
 }
 #ring-picture{
     position: absolute;
-    margin-left: 255px;
+    margin-left: 260px;
     margin-top: 330px;
 }
 #cloak-picture{
@@ -233,7 +233,6 @@ html body {
     border: 3px inset maroon; 
 }
 
-
 .item-container {
     display: flex;
     align-items: center; 
@@ -261,10 +260,10 @@ html body {
 }
 #bonusMessage{
     background-color: rgba(255, 255, 255, 0.4);
-    margin-top: 16px;
+    margin-top: 33px;
     margin-left: 160px;
     position: absolute;
-    width: 330px;
+    width: 650px;
     padding: 5px;
     border-radius: 7px;
     border: 5px double #ccc;

@@ -10,7 +10,14 @@
 <body>
 <div class="container">
   <div id="hero-table">
-    <h3>Welcome, <span th:if="${hero != null}" th:text="${hero.name}">Guest</span>!</h3>
+    <h3 id="heroName">
+      <span th:if="${hero != null}">
+          <span th:text="${hero.name}"></span>
+          <span th:if="${chosenBonus == 'warrior'}"> the warrior</span>
+          <span th:if="${chosenBonus == 'mage'}"> the mage</span>
+      </span>
+      <span th:unless="${hero != null}">Guest</span>
+  </h3>
     <div id="buttons">
       <button class="btn btn-secondary" onclick="location.href='/hero/readmeHero'" style="cursor: url(https://cur.cursors-4u.net/games/gam-11/gam1070.png), auto !important;">Readme</button>
       <button class="btn btn-secondary" onclick="location.href='/shop'">Shop</button>
@@ -202,6 +209,8 @@
     });
   }
 
+  const chosenBonus = sessionStorage.getItem('chosenBonus');
+
   function updateItemPictures() {
     const equippedItems = /*[[${hero?.equippedItems}]]*/ [];
     const spellNames = equippedItems
@@ -211,6 +220,18 @@
     const itemPictures = document.querySelectorAll('.item-picture');
     itemPictures.forEach(picture => {
       const itemType = picture.id.split('-')[0].toUpperCase();
+
+      const heroImage = document.getElementById('myHero');
+
+      if (chosenBonus === 'warrior') {
+        heroImage.src = '/images/warrior.jpg';
+      
+    } else if (chosenBonus === 'mage') {
+        heroImage.src = '/images/mage.jpg';
+       
+    } else {
+        heroImage.src = '/images/hero.jpg';
+    }
 
       if (itemType === 'SPELL') {
         const spellName = picture.id.split('-')[2].toLowerCase().replace(/_/g, ' ');

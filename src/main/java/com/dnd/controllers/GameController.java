@@ -79,7 +79,10 @@ public class GameController {
             model.addAttribute("fightResult", "You have won the game! Congratulations!");
             return "fight";
         }
-
+        /* 
+        String chosenBonus = (String) session.getAttribute("chosenBonus");
+        model.addAttribute("chosenBonus", chosenBonus);
+         */
         model.addAttribute("enemy", enemy);
         return "fight";
     }
@@ -195,13 +198,26 @@ public class GameController {
         String ineffectiveEnemyAttackMessage = "";
         String bonusMessage = "";
         if (newEnemyHealth <= 0) {
-            hero.setGold(hero.getGold() + 210);
-            hero.setMana(hero.getMana() + 6);
-            hero.setSkillPoints(hero.getSkillPoints() + 2);
-            hero.setRunes((hero.getRunes() + 1));
-            heroService.saveHero(hero);
-            bonusMessage = "You have won the fight and received:<br>" +
-                    "+210 Gold, +6 Mana, +2 Skill Points, +1 Rune";
+            String chosenBonus = (String) session.getAttribute("chosenBonus");
+            if ("warrior".equals(chosenBonus)) {
+                hero.setGold(hero.getGold() + 200);
+                hero.setMaxHealth(hero.getMaxHealth() + 15 );
+                hero.setHealth(hero.getHealth() + 15 );
+                hero.setSkillPoints(hero.getSkillPoints() + 1);
+                hero.setRunes(hero.getRunes() + 3);
+                heroService.saveHero(hero);
+                bonusMessage = "You have won the fight and received: + 220 Gold, + 15 health, + 1 Skill Point, + 3 Runes";
+
+            } else if ("mage".equals(chosenBonus)) {
+                // Update the bonuses for the mage here
+                // For example:
+                hero.setGold(hero.getGold() + 200);
+                hero.setMana(hero.getMana() + 12);
+                hero.setSkillPoints(hero.getSkillPoints() + 3);
+                hero.setRunes(hero.getRunes() + 1);
+                heroService.saveHero(hero);
+                bonusMessage = "You have won the fight and received: + 200 Gold, + 12 Mana, + 3 Skill Points , + 1 rune";                      
+            }
 
             model.addAttribute("bonusMessage", bonusMessage);
 
@@ -545,13 +561,27 @@ public class GameController {
 
                         // Ensure the health doesn't go below zero
                         if (newEnemyHealth <= 0) {
-                            hero.setGold(hero.getGold() + 210);
-                            hero.setMana(hero.getMana() + 6);
-                            hero.setSkillPoints(hero.getSkillPoints() + 2);
-                            hero.setRunes((hero.getRunes() + 1));
-                            heroService.saveHero(hero);
-                            bonusMessage = "You have won the fight and received:<br>" +
-                                    "+210 Gold, +6 Mana, +2 Skill Points, +1 Rune";
+                            String chosenBonus = (String) session.getAttribute("chosenBonus");
+                            if ("warrior".equals(chosenBonus)) {
+                                hero.setGold(hero.getGold() + 220);
+                                hero.setMaxHealth(hero.getMaxHealth() + 16 );
+                                hero.setHealth(hero.getHealth() + 16 );
+                                hero.setSkillPoints(hero.getSkillPoints() + 1);
+                                hero.setRunes(hero.getRunes() + 3);
+                                heroService.saveHero(hero);
+                                bonusMessage = "You have won the fight and received: + 220 Gold, + 16 health,  + 1 Skill Point, + 3 Runes";
+                
+                            } else if ("mage".equals(chosenBonus)) {
+                                // Update the bonuses for the mage here
+                                // For example:
+                                hero.setGold(hero.getGold() + 200);
+                                hero.setMana(hero.getMana() + 13);
+                                hero.setSkillPoints(hero.getSkillPoints() + 3);
+                                hero.setRunes(hero.getRunes() + 1);
+                                heroService.saveHero(hero);
+                                bonusMessage = "You have won the fight and received: + 200 Gold, + 13 Mana, + 3 Skill Points , + 1 rune";                      
+                            }
+                
 
                             model.addAttribute("bonusMessage", bonusMessage);
                             // Remove the defeated enemy from the database

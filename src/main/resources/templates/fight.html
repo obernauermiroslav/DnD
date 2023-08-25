@@ -31,6 +31,7 @@
     <input type="hidden" name="heroId" value="1" />
   </form>
   <form id="fight" class="btn btn-secondary" action="/fight" method="post">
+    <input type="hidden" name="startingBonus" value="${startingBonus}" />
     <input type="hidden" name="heroId" th:value="${hero.id}">
     <input type="hidden" name="enemyId" th:if="${enemy != null}" th:value="${enemy.id}">
     <input type="submit" value="Fight!" th:if="${enemy != null}" style="cursor: url(https://cur.cursors-4u.net/games/gam-4/gam376.cur), auto !important;">

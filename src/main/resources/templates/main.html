@@ -10,26 +10,25 @@
     <form action="/hero/save" method="post">
         <input type="text" name="heroName" placeholder="Enter hero name" value="Warrior" required maxlength="10">
 
-
         <div class="starting-bonus">
             <label>
-                <input type="radio" name="startingBonus" value="warrior" checked onchange="changeHeroImage(this.value)"> 
+                <input type="radio" name="startingBonus" value="warrior" required onchange="changeHero(this.value)"> 
                 Warrior <br>
                 <br>
                 starting bonus:<br>
-                + 50 health<br>
+                + 60 health<br>
                 + 2 attack<br>
                 + 2 defense<br>
                 + 2 runes 
             </label>
             <label>
-                <input type="radio" name="startingBonus" value="mage"  onchange="changeHeroImage(this.value)"> 
+                <input type="radio" name="startingBonus" value="mage" required onchange="changeHero(this.value)"> 
                 Mage <br>
                 <br>
                 starting bonus:<br>
-                + 25 heath<br>
+                + 25 health<br>
                 + 50 mana<br>
-                + 2 skill points
+                + 3 skill points
             </label>
         </div>
         <button type="submit">Start Game</button>
@@ -39,28 +38,18 @@
         <div th:if="${startingBonusError}" class="error-message">
             <p th:text="${startingBonusError}"></p>
         </div>
-        
     </form>
     <script>
-        function changeHeroImage(selectedBonus) {
-            const warriorRadio = document.querySelector('input[value="warrior"]');
-            const mageRadio = document.querySelector('input[value="mage"]');
-            const bonusType = selectedBonus === 'warrior' ? 'warrior' : 'mage';
+    function changeHero(selectedBonus) {
+        sessionStorage.setItem('chosenBonus', selectedBonus);
 
-            warriorRadio.checked = selectedBonus === 'warrior';
-            mageRadio.checked = selectedBonus === 'mage';
+        const otherRadioButton = document.querySelector(`input[type="radio"][value="${selectedBonus === 'warrior' ? 'mage' : 'warrior'}"]`);
+            otherRadioButton.disabled = true;
 
-            const warriorDiv = document.querySelector('[th:if="${startingBonus == \'warrior\'}"]');
-            const mageDiv = document.querySelector('[th:if="${startingBonus == \'mage\'}"]');
-
-            if (bonusType === 'warrior') {
-                warriorDiv.style.display = 'block';
-                mageDiv.style.display = 'none';
-            } else {
-                warriorDiv.style.display = 'none';
-                mageDiv.style.display = 'block';
-            }
-        }
-    </script>
+            // Enable the chosen radio button
+            const chosenRadioButton = document.querySelector(`input[type="radio"][value="${selectedBonus}"]`);
+            chosenRadioButton.disabled = false;
+    }
+</script>
 </body>
 </html>

@@ -5,6 +5,7 @@ import com.dnd.models.ItemType;
 import com.dnd.models.Items;
 import com.dnd.services.HeroService;
 import com.dnd.services.ItemsService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,20 +27,25 @@ public class HeroController {
         this.heroService = heroService;
         this.itemsService = itemsService;
     }
+    
 
     @GetMapping
-    public String viewHero(Model model) {
+    public String viewHero(Model model, HttpSession session) {
         Hero hero = heroService.getYourHero();
         if (hero != null) {
             model.addAttribute("hero", hero);
-            return "hero";
         } else {
             // Create a new hero with default attributes if no hero exists
             Hero newHero = new Hero();
             heroService.saveHero(newHero);
             model.addAttribute("hero", newHero);
-            return "hero";
         }
+
+        // Fetch the chosenBonus from session and add it to the model
+        String chosenBonus = (String) session.getAttribute("chosenBonus");
+        model.addAttribute("chosenBonus", chosenBonus);
+
+        return "hero";
     }
 
     @GetMapping("/readmeHero")
@@ -49,7 +55,7 @@ public class HeroController {
 
     @PostMapping("/save")
     public String saveHero(@RequestParam("heroName") String heroName,
-            @RequestParam("startingBonus") String startingBonus, Model model) {
+            @RequestParam("startingBonus") String startingBonus, Model model, HttpSession session) {
         if (heroName.length() > 10) {
             model.addAttribute("heroNameError", "Hero name must be a maximum of 10 characters");
             return "main";
@@ -78,8 +84,8 @@ public class HeroController {
         if (isNewHero) {
             // Apply the chosen starting bonus only for new heroes
             if ("warrior".equals(startingBonus)) {
-                hero.setHealth(hero.getHealth() + 50);
-                hero.setMaxHealth(hero.getMaxHealth() + 50);
+                hero.setHealth(hero.getHealth() + 60);
+                hero.setMaxHealth(hero.getMaxHealth() + 60);
                 hero.setAttack(hero.getAttack() + 2);
                 hero.setDefense(hero.getDefense() + 2);
                 hero.setBaseAttack(hero.getBaseAttack() + 2);
@@ -90,11 +96,12 @@ public class HeroController {
                 hero.setHealth(hero.getHealth() + 25);
                 hero.setMaxHealth(hero.getMaxHealth() + 25);
                 hero.setMana(hero.getMana() + 50);
-                hero.setSkillPoints(3);
+                hero.setSkillPoints(4);
                 model.addAttribute("mage", "mage bonuses:");
         }}
     
-        model.addAttribute("startingBonus", startingBonus);
+        session.setAttribute("chosenBonus", startingBonus);
+         model.addAttribute("startingBonus", startingBonus);
         heroService.saveHero(hero);
         return "redirect:/hero";
     }
