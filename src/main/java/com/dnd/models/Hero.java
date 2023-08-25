@@ -26,6 +26,8 @@ public class Hero {
     private int permanentDefenseUpgrades;
     private int permanentManaUpgrades;
     private boolean hasShield;
+    private int baseAttack = 8;
+    private int baseDefense = 7;
 
     @Transient
     private Set<Long> purchasedItems = new HashSet<>();
@@ -45,17 +47,16 @@ public class Hero {
 
     @Transient
     private Items upgradedWeapon;
+
     public void setNewlyPurchasedItem(Items newlyPurchasedItem) {
         this.newlyPurchasedItem = newlyPurchasedItem;
     }
+
     @Transient
     private Set<Long> upgradedItemIds = new HashSet<>();
 
-
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "hero_equipped_items",
-            joinColumns = @JoinColumn(name = "hero_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id"))
+    @JoinTable(name = "hero_equipped_items", joinColumns = @JoinColumn(name = "hero_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Items> equippedItems = new ArrayList<>();
 
     public List<Items> getEquippedItems() {
@@ -124,7 +125,8 @@ public class Hero {
             totalDefenseBonus += item.getDefenseBonus();
             totalHealthBonus += itemTypeHealthBonuses.getOrDefault(item.getType(), 0);
 
-            // Check if the item has already been purchased to avoid adding the mana bonus again
+            // Check if the item has already been purchased to avoid adding the mana bonus
+            // again
             if (purchasedItems.contains(item.getId())) {
                 totalManaBonus += item.getManaBonus();
             }
@@ -147,13 +149,13 @@ public class Hero {
         int totalDefenseBonus = 0;
         int totalHealthBonus = 0;
 
-
         // Calculate total bonuses from equipped items
         for (Items item : equippedItems) {
             totalAttackBonus += item.getAttackBonus();
             totalDefenseBonus += item.getDefenseBonus();
 
-            // Check if the item has already been purchased to avoid adding full health and mana bonuses again
+            // Check if the item has already been purchased to avoid adding full health and
+            // mana bonuses again
             if (purchasedItems.contains(item.getId())) {
                 totalHealthBonus += item.getHealthBonus();
             }
@@ -163,7 +165,8 @@ public class Hero {
         totalAttackBonus += permanentAttackUpgrades;
         totalDefenseBonus += permanentDefenseUpgrades;
 
-        // If a weapon has been upgraded, subtract the old attack bonus and add the new bonus
+        // If a weapon has been upgraded, subtract the old attack bonus and add the new
+        // bonus
         if (upgradedWeapon != null) {
             totalAttackBonus -= upgradedWeapon.getAttackBonus();
             totalAttackBonus += upgradedWeapon.getAttackBonus();
@@ -173,7 +176,8 @@ public class Hero {
         this.attack = getBaseAttack() + totalAttackBonus;
         this.defense = getBaseDefense() + totalDefenseBonus;
 
-        // Update the hero's health stat using the actual current health from the table plus the total health bonus
+        // Update the hero's health stat using the actual current health from the table
+        // plus the total health bonus
         this.health = getHealth();
 
         // Reset the newlyPurchasedItem after updating stats
@@ -238,6 +242,7 @@ public class Hero {
     public void setDefense(int defense) {
         this.defense = defense;
     }
+
     public int getGold() {
         return gold;
     }
@@ -261,21 +266,31 @@ public class Hero {
     public void setMana(int mana) {
         this.mana = mana;
     }
+
+    public void setBaseAttack(int baseAttack) {
+        this.baseAttack = baseAttack;
+    }
+
     public int getBaseAttack() {
-        return 8;
+        return baseAttack;
+    }
+
+    public void setBaseDefense(int baseDefense) {
+        this.baseDefense = baseDefense;
     }
 
     public int getBaseDefense() {
-        return 7;
+        return baseDefense;
     }
 
     public int getBaseHealth() {
         return health;
     }
 
-    public int getBaseMana(){
+    public int getBaseMana() {
         return mana;
     }
+
     public int calculateMaxHealth() {
         int totalHealthBonus = 0;
 
@@ -304,6 +319,7 @@ public class Hero {
 
         return permanentHealthUpgrades;
     }
+
     public void setPermanentHealthUpgrades(int permanentHealthUpgrades) {
         this.permanentHealthUpgrades = permanentHealthUpgrades;
     }
@@ -325,6 +341,7 @@ public class Hero {
     public void setPermanentDefenseUpgrades(int permanentDefenseUpgrades) {
         this.permanentDefenseUpgrades = permanentDefenseUpgrades;
     }
+
     public int getPermanentManaUpgrades() {
         return permanentManaUpgrades;
     }
@@ -332,6 +349,7 @@ public class Hero {
     public void setPermanentManaUpgrades(int permanentManaUpgrades) {
         this.permanentManaUpgrades = permanentManaUpgrades;
     }
+
     public boolean hasShield() {
         return hasShield;
     }
@@ -339,6 +357,7 @@ public class Hero {
     public void setHasShield(boolean hasShield) {
         this.hasShield = hasShield;
     }
+
     public boolean hasFireShield() {
         for (Items item : equippedItems) {
             if (item.getType() == ItemType.SHIELD && item.getName().equalsIgnoreCase("Fire Shield")) {
@@ -363,10 +382,11 @@ public class Hero {
     public void upgradeHealth() {
         if (skillPoints > 0) {
             maxHealth += 30;
-          //  health += 30;
+            // health += 30;
             skillPoints -= 1;
         }
     }
+
     public void upgradeMana() {
         if (skillPoints > 0) {
             mana += 5;

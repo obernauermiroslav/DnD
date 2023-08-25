@@ -128,10 +128,12 @@ html body {
 }
 #myHero{
     position: absolute;
-    margin-left: 75px;
+    margin-left: 73px;
     margin-top: 110px;
     border-radius: 5px;
     border: 2px solid white;
+    width: 170px;
+    height: 290px;
 }
 #helmet-picture{
     position: absolute;

@@ -62,14 +62,14 @@ public class HeroController {
             // Create a new hero with the given name
             hero = new Hero(heroName);
             hero.setGold(710);
-            hero.setMana(20);
-            hero.setPotion(3);
-            hero.setSkillPoints(3);
+            hero.setMana(0);
+            hero.setPotion(2);
+            hero.setSkillPoints(1);
             hero.setHealth(130);
             hero.setMaxHealth(130);
             hero.setAttack(8);
             hero.setDefense(7);
-            hero.setRunes(3);
+            hero.setRunes(1);
             isNewHero = true; // Mark the hero as new
         } else {
             hero.setName(heroName);
@@ -77,16 +77,24 @@ public class HeroController {
     
         if (isNewHero) {
             // Apply the chosen starting bonus only for new heroes
-            if ("health".equals(startingBonus)) {
-                hero.setHealth(hero.getHealth() + 35);
-                hero.setMaxHealth(hero.getMaxHealth() + 35);
-            } else if ("attack".equals(startingBonus)) {
+            if ("warrior".equals(startingBonus)) {
+                hero.setHealth(hero.getHealth() + 50);
+                hero.setMaxHealth(hero.getMaxHealth() + 50);
                 hero.setAttack(hero.getAttack() + 2);
-            } else if ("mana".equals(startingBonus)) {
-                hero.setMana(hero.getMana() + 12);
-            }
-        }
+                hero.setDefense(hero.getDefense() + 2);
+                hero.setBaseAttack(hero.getBaseAttack() + 2);
+                hero.setBaseDefense(hero.getBaseDefense() + 2);
+                hero.setRunes(3);
+                model.addAttribute("warrior", "warrior bonuses:");
+            } else if ("mage".equals(startingBonus)) {
+                hero.setHealth(hero.getHealth() + 25);
+                hero.setMaxHealth(hero.getMaxHealth() + 25);
+                hero.setMana(hero.getMana() + 50);
+                hero.setSkillPoints(3);
+                model.addAttribute("mage", "mage bonuses:");
+        }}
     
+        model.addAttribute("startingBonus", startingBonus);
         heroService.saveHero(hero);
         return "redirect:/hero";
     }

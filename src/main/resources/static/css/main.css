@@ -39,7 +39,7 @@ button[type="submit"] {
     font-size: 16px;
     background-color: #007BFF;
     color: #fff;
-    border: 1px double darkblue;
+    border: 5px double darkblue;
     border-radius: 5px;
 }
 
@@ -50,9 +50,19 @@ button[type="submit"]:hover {
 }
 
 .starting-bonus {
+    border: 5px double black;
+    padding: 20px;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
     margin-top: 5px;
     margin-bottom: 10px;
-    
+}
+.starting-bonus label {
+    display: flex;
+    flex-direction: column;
+    border: 3px double #ccc; /* Add border style */
+    padding: 10px; /* Add padding for spacing */
 }
 
 .starting-bonus p {

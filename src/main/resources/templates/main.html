@@ -6,28 +6,61 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
-<h1>Hail to you champion, what shall we call you?</h1>
-<form action="/hero/save" method="post">
-    <input type="text" name="heroName" placeholder="Enter hero name" value="Warrior" required maxlength="10">
-    <div class="starting-bonus">
-        <p>Choose a starting bonus:</p>
-        <label>
-            <input type="radio" name="startingBonus" value="health" checked> Health + 30
-        </label>
-        <label>
-            <input type="radio" name="startingBonus" value="attack"> Attack + 2
-        </label>
-        <label>
-            <input type="radio" name="startingBonus" value="mana"> Mana + 10
-        </label>
-    </div>
-    <button type="submit">Start Game</button>
-    <div th:if="${heroNameError}" class="error-message">
-        <p th:text="${heroNameError}"></p>
-    </div>
-    <div th:if="${startingBonusError}" class="error-message">
-        <p th:text="${startingBonusError}"></p>
-    </div>
-</form>
+    <h1>Hail to you champion, choose your name and profession</h1>
+    <form action="/hero/save" method="post">
+        <input type="text" name="heroName" placeholder="Enter hero name" value="Warrior" required maxlength="10">
+
+
+        <div class="starting-bonus">
+            <label>
+                <input type="radio" name="startingBonus" value="warrior" checked onchange="changeHeroImage(this.value)"> 
+                Warrior <br>
+                <br>
+                starting bonus:<br>
+                + 50 health<br>
+                + 2 attack<br>
+                + 2 defense<br>
+                + 2 runes 
+            </label>
+            <label>
+                <input type="radio" name="startingBonus" value="mage"  onchange="changeHeroImage(this.value)"> 
+                Mage <br>
+                <br>
+                starting bonus:<br>
+                + 25 heath<br>
+                + 50 mana<br>
+                + 2 skill points
+            </label>
+        </div>
+        <button type="submit">Start Game</button>
+        <div th:if="${heroNameError}" class="error-message">
+            <p th:text="${heroNameError}"></p>
+        </div>
+        <div th:if="${startingBonusError}" class="error-message">
+            <p th:text="${startingBonusError}"></p>
+        </div>
+        
+    </form>
+    <script>
+        function changeHeroImage(selectedBonus) {
+            const warriorRadio = document.querySelector('input[value="warrior"]');
+            const mageRadio = document.querySelector('input[value="mage"]');
+            const bonusType = selectedBonus === 'warrior' ? 'warrior' : 'mage';
+
+            warriorRadio.checked = selectedBonus === 'warrior';
+            mageRadio.checked = selectedBonus === 'mage';
+
+            const warriorDiv = document.querySelector('[th:if="${startingBonus == \'warrior\'}"]');
+            const mageDiv = document.querySelector('[th:if="${startingBonus == \'mage\'}"]');
+
+            if (bonusType === 'warrior') {
+                warriorDiv.style.display = 'block';
+                mageDiv.style.display = 'none';
+            } else {
+                warriorDiv.style.display = 'none';
+                mageDiv.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
