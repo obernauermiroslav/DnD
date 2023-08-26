@@ -152,9 +152,14 @@
       `;
     } else if (itemType === 'WEAPON') {
       const attackBonus = button.getAttribute('data-attack-bonus');
+      const effect = button.getAttribute('data-effect');
       popupContent += `
         <p>Attack Bonus: ${attackBonus}</p>
       `;
+      if (effect) {
+        popupContent += `<p>Effect: ${effect}</p>
+        `;
+      }
     } else if (itemType === 'SHIELD') {
       const defenseBonus = button.getAttribute('data-defense-bonus');
       const healthBonus = button.getAttribute('data-health-bonus');
@@ -164,7 +169,7 @@
         <p>Health Bonus: ${healthBonus}</p>
         <p>Effect: ${effect}</p>
       `;
-    } else if (itemType === 'CLOAK') {
+    } else if (itemType === 'HELMET' || itemType === 'CLOAK') {
       const defenseBonus = button.getAttribute('data-defense-bonus');
       const healthBonus = button.getAttribute('data-health-bonus');
       const effect = button.getAttribute('data-effect');
@@ -176,7 +181,7 @@
         popupContent += `<p>Effect: ${effect}</p>
         `;
       }
-      } else if (itemType === 'HELMET' || itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK') {
+      } else if ( itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK') {
       const defenseBonus = button.getAttribute('data-defense-bonus');
       const healthBonus = button.getAttribute('data-health-bonus');
       popupContent += `
@@ -212,9 +217,9 @@
 
     // Show the appropriate span based on the chosenBonus value
     if (chosenBonus === 'warrior') {
-        document.getElementById('chosenBonus').textContent = '- warrior';
+        document.getElementById('chosenBonus').textContent = 'the Warrior';
     } else if (chosenBonus === 'mage') {
-        document.getElementById('chosenBonus').textContent = '- mage';
+        document.getElementById('chosenBonus').textContent = 'the Mage';
     }
 
   function updateItemPictures() {

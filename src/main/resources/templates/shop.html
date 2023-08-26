@@ -81,7 +81,7 @@
                 type="submit"
                 value="Buy"
                 class="item-button"
-                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price} , data-effect=${item.effect}"
               />
               <span th:text="${item.name}">Item Name</span>
               <span th:text="'(' + ${item.price} + 'GP)'"></span>
@@ -195,7 +195,7 @@
                 type="submit"
                 value="Buy"
                 class="item-button"
-                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-attack-bonus=${item.attackBonus}, data-item-type=${item.type}, data-price=${item.price}"
+                th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-attack-bonus=${item.attackBonus}, data-item-type=${item.type}, data-price=${item.price}, data-effect=${item.effect}"
               />
               <span th:text="${item.name}">Item Name</span>
               <span th:text="'(' + ${item.price} + 'GP)'"></span>
@@ -396,9 +396,13 @@
       `;
         } else if (itemType === "WEAPON") {
           const attackBonus = button.getAttribute("data-attack-bonus");
+          const effect = button.getAttribute("data-effect");
           popupContent += `
         <p>Attack Bonus: ${attackBonus}</p>
       `;
+      if (effect) {
+            popupContent += `<p>Effect: ${effect}</p>`;
+          }
         } else if (itemType === "SHIELD") {
           const defenseBonus = button.getAttribute("data-defense-bonus");
           const healthBonus = button.getAttribute("data-health-bonus");
@@ -421,8 +425,20 @@
           if (effect) {
             popupContent += `<p>Effect: ${effect}</p>`;
           }
+        } else if (itemType === "HELMET") {
+          const defenseBonus = button.getAttribute("data-defense-bonus");
+          const healthBonus = button.getAttribute("data-health-bonus");
+          const effect = button.getAttribute("data-effect");
+
+          // Display cloak-specific information
+          popupContent += `
+        <p>Defense Bonus: ${defenseBonus}</p>
+        <p>Health Bonus: ${healthBonus}</p>
+      `;
+          if (effect) {
+            popupContent += `<p>Effect: ${effect}</p>`;
+          }
         } else if (
-          itemType === "HELMET" ||
           itemType === "ARMOR" ||
           itemType === "TROUSERS" ||
           itemType === "GLOVES" ||
