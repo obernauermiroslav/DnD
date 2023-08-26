@@ -8,25 +8,27 @@
 <body>
     <h1>Hail to you champion, choose your name and profession</h1>
     <form action="/hero/save" method="post">
-        <input type="text" name="heroName" placeholder="Enter hero name" value="Warrior" required maxlength="10">
+        <input type="text" name="heroName" placeholder="Enter hero name" value="name" required maxlength="10">
 
         <div class="starting-bonus">
             <label>
-                <input type="radio" name="startingBonus" value="warrior" required onchange="changeHero(this.value)"> 
+                <input type="radio" name="startingBonus" value="warrior" required 
+                       onchange="changeHero(this.value)"> 
                 Warrior <br>
                 <br>
                 starting bonus:<br>
-                + 60 health<br>
+                + 65 health<br>
                 + 2 attack<br>
                 + 2 defense<br>
                 + 2 runes 
             </label>
             <label>
-                <input type="radio" name="startingBonus" value="mage" required onchange="changeHero(this.value)"> 
+                <input type="radio" name="startingBonus" value="mage" required 
+                       onchange="changeHero(this.value)"> 
                 Mage <br>
                 <br>
                 starting bonus:<br>
-                + 25 health<br>
+                + 30 health<br>
                 + 50 mana<br>
                 + 3 skill points
             </label>
@@ -40,16 +42,35 @@
         </div>
     </form>
     <script>
-    function changeHero(selectedBonus) {
-        sessionStorage.setItem('chosenBonus', selectedBonus);
-
-        const otherRadioButton = document.querySelector(`input[type="radio"][value="${selectedBonus === 'warrior' ? 'mage' : 'warrior'}"]`);
+        // Check if a profession is already chosen and disable the other
+        const chosenBonus = sessionStorage.getItem('chosenBonus');
+        if (chosenBonus) {
+            const radioButtons = document.querySelectorAll('input[type="radio"][name="startingBonus"]');
+            for (const radioButton of radioButtons) {
+                if (radioButton.value === chosenBonus) {
+                    radioButton.checked = true;
+                }
+            }
+            
+            // Disable the other choice
+            const otherBonus = chosenBonus === 'warrior' ? 'mage' : 'warrior';
+            const otherRadioButton = document.querySelector(`input[type="radio"][value="${otherBonus}"]`);
             otherRadioButton.disabled = true;
-
-            // Enable the chosen radio button
-            const chosenRadioButton = document.querySelector(`input[type="radio"][value="${selectedBonus}"]`);
-            chosenRadioButton.disabled = false;
-    }
-</script>
+        }
+        
+        function changeHero(selectedBonus) {
+            sessionStorage.setItem('chosenBonus', selectedBonus);
+            
+            const radioButtons = document.querySelectorAll('input[type="radio"][name="startingBonus"]');
+            for (const radioButton of radioButtons) {
+                radioButton.disabled = false;
+            }
+            
+            // Disable the other choice
+            const otherBonus = selectedBonus === 'warrior' ? 'mage' : 'warrior';
+            const otherRadioButton = document.querySelector(`input[type="radio"][value="${otherBonus}"]`);
+            otherRadioButton.disabled = true;
+        }
+    </script>
 </body>
 </html>

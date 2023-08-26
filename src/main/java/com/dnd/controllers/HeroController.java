@@ -85,8 +85,8 @@ public class HeroController {
         if (isNewHero) {
             // Apply the chosen starting bonus only for new heroes
             if ("warrior".equals(startingBonus)) {
-                hero.setHealth(hero.getHealth() + 60);
-                hero.setMaxHealth(hero.getMaxHealth() + 60);
+                hero.setHealth(hero.getHealth() + 65);
+                hero.setMaxHealth(hero.getMaxHealth() + 65);
                 hero.setAttack(hero.getAttack() + 2);
                 hero.setDefense(hero.getDefense() + 2);
                 hero.setBaseAttack(hero.getBaseAttack() + 2);
@@ -94,8 +94,8 @@ public class HeroController {
                 hero.setRunes(3);
                 model.addAttribute("warrior", "warrior bonuses:");
             } else if ("mage".equals(startingBonus)) {
-                hero.setHealth(hero.getHealth() + 25);
-                hero.setMaxHealth(hero.getMaxHealth() + 25);
+                hero.setHealth(hero.getHealth() + 30);
+                hero.setMaxHealth(hero.getMaxHealth() + 30);
                 hero.setMana(hero.getMana() + 50);
                 hero.setSkillPoints(4);
                 model.addAttribute("mage", "mage bonuses:");

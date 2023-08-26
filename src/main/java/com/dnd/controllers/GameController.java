@@ -200,7 +200,7 @@ public class GameController {
         if (newEnemyHealth <= 0) {
             String chosenBonus = (String) session.getAttribute("chosenBonus");
             if ("warrior".equals(chosenBonus)) {
-                hero.setGold(hero.getGold() + 200);
+                hero.setGold(hero.getGold() + 220);
                 hero.setMaxHealth(hero.getMaxHealth() + 15 );
                 hero.setHealth(hero.getHealth() + 15 );
                 hero.setSkillPoints(hero.getSkillPoints() + 1);
