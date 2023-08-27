@@ -34,6 +34,10 @@
     <button id="death_ray" class="btn btn-secondary" type="submit" data-effect="Deals 100 damage and ignores armor">Death Ray</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
+  <form class="spellCast" action="/lifesteal" method="post" style="display: none;">
+    <button id="life_steal" class="btn btn-secondary" type="submit" data-effect="Steals up to 15 health from living enemy and gives it to you">Life Steal</button>
+    <input type="hidden" name="heroId" value="1" />
+  </form>
   <form id="fight" class="btn btn-secondary" action="/fight" method="post">
     <input type="hidden" name="startingBonus" value="${startingBonus}" />
     <input type="hidden" name="heroId" th:value="${hero.id}">

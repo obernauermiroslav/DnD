@@ -137,15 +137,17 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(spell2);
         Items spell3 = new Items(null, "Sunder Armor", ItemType.SPELL, 0, 0,0,0,210,7,"Decreases enemy defence by 3 points");
         itemsRepository.save(spell3);
-        Items spell4 = new Items(null, "Healing", ItemType.SPELL, 0, 0,0,0,210,6,"Heals up to 25 health");
+        Items spell4 = new Items(null, "Healing", ItemType.SPELL, 0, 0,0,0,200,6,"Heals up to 25 health");
         itemsRepository.save(spell4);
         Items spell5 = new Items(null, "Death Ray", ItemType.SPELL, 0, 0,0,0,730,15,"Causes heavy damage 100 points to enemy and ignores armor");
         itemsRepository.save(spell5);
+        Items spell6 = new Items(null, "Life Steal", ItemType.SPELL, 0, 0,0,0,220,8,"Steals up to 20 health from living enemy and heals you");
+        itemsRepository.save(spell6);
 
 
         Enemies enemy1 = new Enemies(1L,"Figurine", 55,55,0,3,"Yes, it's a Training figurine...everyone starts somewhere, try not to hit yourself.");
         enemiesRepository.save(enemy1);
-        Enemies enemy2 = new Enemies(2L,"Giant rat", 95,95,8,4,"Bigger and more dangerous that standard Rat, but should not be hard to kill.");
+        Enemies enemy2 = new Enemies(2L,"Giant rat", 95,95,10,4,"Bigger and more dangerous that standard Rat, but should not be hard to kill.");
         enemiesRepository.save(enemy2);
         Enemies enemy3 = new Enemies(3L,"Goblin", 145,145,15,7,"He is small, mean, armed with mace and can steal your money if you are not carefull.");
         enemiesRepository.save(enemy3);

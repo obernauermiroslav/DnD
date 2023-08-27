@@ -96,7 +96,7 @@ public class HeroController {
             } else if ("mage".equals(startingBonus)) {
                 hero.setHealth(hero.getHealth() + 30);
                 hero.setMaxHealth(hero.getMaxHealth() + 30);
-                hero.setMana(hero.getMana() + 50);
+                hero.setMana(hero.getMana() + 55);
                 hero.setSkillPoints(4);
                 model.addAttribute("mage", "mage bonuses:");
         }}

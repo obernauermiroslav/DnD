@@ -102,7 +102,7 @@ h2 {
 #firebolt{
     position: absolute;
     margin-top: 30px;
-    margin-left: -225px;
+    margin-left: -265px;
     width: 60px;
     height: 25px;
     cursor: url('../images/spell.cur'), auto !important;
@@ -110,7 +110,7 @@ h2 {
 #healing{
     position: absolute;
     margin-top: 30px;
-    margin-left: 25px;
+    margin-left: 55px;
     width: 70px;
     height: 25px;
     cursor: url('../images/spell.cur'), auto !important;
@@ -118,7 +118,7 @@ h2 {
 #weakness{
     position: absolute;
     margin-top: 30px;
-    margin-left: -60px;
+    margin-left: -105px;
     width: 70px;
     height: 25px;
     cursor: url('../images/spell.cur'), auto !important;
@@ -126,7 +126,7 @@ h2 {
 #sunder_armor{
     position: absolute;
     margin-top: 30px;
-    margin-left: -320px;
+    margin-left: -360px;
     width: 100px;
     height: 25px;
     cursor: url('../images/spell.cur'), auto !important;
@@ -134,7 +134,15 @@ h2 {
 #death_ray{
     position: absolute;
     margin-top: 30px;
-    margin-left: -170px;
+    margin-left: -60px;
+    width: 70px;
+    height: 25px;
+    cursor: url('../images/spell.cur'), auto !important;
+}
+#life_steal{
+    position: absolute;
+    margin-top: 30px;
+    margin-left: -220px;
     width: 70px;
     height: 25px;
     cursor: url('../images/spell.cur'), auto !important;
