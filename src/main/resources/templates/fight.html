@@ -30,6 +30,10 @@
     <button id="firebolt" class="btn btn-secondary" type="submit" data-effect="Deals 30 damage and ignores armor">Firebolt</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
+  <form class="spellCast" action="/deathray" method="post" style="display: none;">
+    <button id="death_ray" class="btn btn-secondary" type="submit" data-effect="Deals 100 damage and ignores armor">Death Ray</button>
+    <input type="hidden" name="heroId" value="1" />
+  </form>
   <form id="fight" class="btn btn-secondary" action="/fight" method="post">
     <input type="hidden" name="startingBonus" value="${startingBonus}" />
     <input type="hidden" name="heroId" th:value="${hero.id}">

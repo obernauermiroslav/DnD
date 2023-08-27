@@ -123,7 +123,7 @@ public class GameController {
         }
 
         // Check if the hero has the "Fire Shield" equipped and if the enemy is "Drake"
-        if (enemy.getName().equalsIgnoreCase("drake") && hero.hasFireShield() && Math.random() <= 0.16) {
+        if (enemy.getName().equalsIgnoreCase("drake") && hero.hasFireShield() && Math.random() <= 0.18) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked dragon's attack with your Fire Shield!";
         } else if (!enemy.getName().equalsIgnoreCase("drake") && !enemy.getName().equalsIgnoreCase("lich")
@@ -132,7 +132,7 @@ public class GameController {
             enemyAttackMessage = "You blocked the enemy's attack with your shield!";
         }
 
-        if (enemy.getName().equalsIgnoreCase("medusa") && Math.random() <= 0.17) {
+        if (enemy.getName().equalsIgnoreCase("medusa") && Math.random() <= 0.18) {
             // Medusa's special attack: can turn hero to a stone for 1 round, so his attack is 0 
             enemyAttack = (enemy.getAttack()) - hero.getDefense();
             heroAttack = 0;
@@ -141,24 +141,24 @@ public class GameController {
             // Default special attack message (empty if not triggered)
             enemySpecialAttackMessage = "";
         }
-        if (enemy.getName().equalsIgnoreCase("minotaur") && Math.random() <= 0.21) {
-            // Minotaur's special attack: 20% chance to deal + 6 attack
-            enemyAttack = (enemy.getAttack() + 6) - hero.getDefense();
-            enemySpecialAttackMessage = enemy.getName() + "'s raging attack deals + 6 attack!";
+        if (enemy.getName().equalsIgnoreCase("minotaur") && Math.random() <= 0.22) {
+            // Minotaur's special attack: 22% chance to deal + 6 attack
+            enemyAttack = (enemy.getAttack() + 7) - hero.getDefense();
+            enemySpecialAttackMessage = enemy.getName() + "'s raging attack deals + 7 attack!";
         } else if (enemySpecialAttackMessage.isEmpty()) {
             // Default special attack message (empty if not triggered)
             enemySpecialAttackMessage = "";
         }
-        if (enemy.getName().equalsIgnoreCase("behemoth") && Math.random() <= 0.30 && enemy.getHealth() <= 150 ) {
-            // Behemoth's special attack: 30% chance to deal double damage when <= 150 health
+        if (enemy.getName().equalsIgnoreCase("behemoth") && Math.random() <= 0.30 && enemy.getHealth() <= 155 ) {
+            // Behemoth's special attack: 30% chance to deal double damage when <= 155 health
             enemyAttack = (enemy.getAttack() + enemy.getAttack()) - hero.getDefense();
             enemySpecialAttackMessage = enemy.getName() + " gathered his remaining strength and furiously attacks you for double damage !";
         } else if (enemySpecialAttackMessage.isEmpty()) {
             // Default special attack message (empty if not triggered)
             enemySpecialAttackMessage = "";
         }
-        if (enemy.getName().equalsIgnoreCase("figurine") && Math.random() <= 0.40 ) {
-            // Figurine's special attack: 40% chance to return hero 10 damage
+        if (enemy.getName().equalsIgnoreCase("figurine") && Math.random() <= 0.38 ) {
+            // Figurine's special attack: 38% chance to return hero 10 damage
             enemyAttack = (enemy.getAttack() + 6);
             enemySpecialAttackMessage =" You hit yourself for 6 damage, keep practising or you will not survive in real fight!";
         } else if (enemySpecialAttackMessage.isEmpty()) {
@@ -166,7 +166,7 @@ public class GameController {
             enemySpecialAttackMessage = "";
         }
 
-        if (enemy.getName().equalsIgnoreCase("goblin") && hero.getGold() > 0 && Math.random() <= 0.25) {
+        if (enemy.getName().equalsIgnoreCase("goblin") && hero.getGold() > 0 && Math.random() <= 0.23) {
             int stolenGold = Math.min(12, hero.getGold()); // Maximum 12 gold can be stolen
             hero.setGold(hero.getGold() - stolenGold);
             model.addAttribute("stolenGold", stolenGold);
@@ -556,7 +556,7 @@ public class GameController {
                 if (currentEnemyId != null) {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
                     if (enemy != null) {
-                        int spellDamage = 33;
+                        int spellDamage = 30;
                         int newEnemyHealth = enemy.getHealth() - spellDamage;
                         String bonusMessage = "";
 
@@ -575,12 +575,12 @@ public class GameController {
                             } else if ("mage".equals(chosenBonus)) {
                                 // Update the bonuses for the mage here
                                 // For example:
-                                hero.setGold(hero.getGold() + 210);
-                                hero.setMana(hero.getMana() + 13);
+                                hero.setGold(hero.getGold() + 220);
+                                hero.setMana(hero.getMana() + 18);
                                 hero.setSkillPoints(hero.getSkillPoints() + 3);
                                 hero.setRunes(hero.getRunes() + 1);
                                 heroService.saveHero(hero);
-                                bonusMessage = "You have won the fight and received: + 210 Gold, + 13 Mana, + 3 Skill Points , + 1 rune";                      
+                                bonusMessage = "You have won the fight and received: + 220 Gold, + 18 Mana, + 3 Skill Points , + 1 rune";                      
                             }
                 
 
@@ -621,6 +621,114 @@ public class GameController {
             }
         } else {
             model.addAttribute("spellCastingResult", "You do not know how to cast Firebolt.");
+        }
+
+        // Load the enemy from the service and add it to the model
+        Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
+        if (currentEnemyId != null) {
+            Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
+            model.addAttribute("enemy", enemy);
+        }
+
+        model.addAttribute("hero", hero);
+        return "fight";
+    }
+
+    @PostMapping("/deathray")
+    public String castDeathray(@RequestParam("heroId") Long heroId,
+            Model model,
+            HttpSession session) {
+        // Load the hero from the database using the heroId received from the form
+        Optional<Hero> heroOptional = heroService.getHeroById(heroId);
+        Hero hero = heroOptional.orElse(null);
+
+        if (hero == null) {
+            model.addAttribute("errorMessage", "Hero not found");
+            return "error-page";
+        }
+
+        // Check if the hero has equipped the "Death ray" spell
+        boolean hasDeathRaySpell = hero.getEquippedItems().stream()
+                .anyMatch(item -> item.getName().equals("Death Ray") && item.getType() == ItemType.SPELL);
+
+        // If the hero has the "Fire bolt" spell equipped, perform the spell casting
+        // logic
+        if (hasDeathRaySpell) {
+            int deathRayManaCost = 15; // Define the mana cost for Death Ray spell
+            if (hero.getMana() >= deathRayManaCost) {
+                // Deduct the mana cost from the hero's total mana points
+                hero.setMana(hero.getMana() - deathRayManaCost);
+                heroService.saveHero(hero);
+
+                Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
+                if (currentEnemyId != null) {
+                    Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
+                    if (enemy != null) {
+                        int spellDamage = 100;
+                        int newEnemyHealth = enemy.getHealth() - spellDamage;
+                        String bonusMessage = "";
+
+                        // Ensure the health doesn't go below zero
+                        if (newEnemyHealth <= 0) {
+                            String chosenBonus = (String) session.getAttribute("chosenBonus");
+                            if ("warrior".equals(chosenBonus)) {
+                                hero.setGold(hero.getGold() + 230);
+                                hero.setMaxHealth(hero.getMaxHealth() + 16 );
+                                hero.setHealth(hero.getHealth() + 16 );
+                                hero.setSkillPoints(hero.getSkillPoints() + 1);
+                                hero.setRunes(hero.getRunes() + 3);
+                                heroService.saveHero(hero);
+                                bonusMessage = "You have won the fight and received: + 230 Gold, + 16 health,  + 1 Skill Point, + 3 Runes";
+                
+                            } else if ("mage".equals(chosenBonus)) {
+                                // Update the bonuses for the mage here
+                                // For example:
+                                hero.setGold(hero.getGold() + 220);
+                                hero.setMana(hero.getMana() + 18);
+                                hero.setSkillPoints(hero.getSkillPoints() + 3);
+                                hero.setRunes(hero.getRunes() + 1);
+                                heroService.saveHero(hero);
+                                bonusMessage = "You have won the fight and received: + 220 Gold, + 18 Mana, + 3 Skill Points , + 1 rune";                      
+                            }
+                
+
+                            model.addAttribute("bonusMessage", bonusMessage);
+                            // Remove the defeated enemy from the database
+                            enemiesService.deleteEnemy(enemy);
+
+                            // Get the next enemy for the next fight
+                            Enemies nextEnemy = enemiesService.getNextEnemy();
+                            if (nextEnemy != null) {
+                                session.setAttribute("currentEnemyId", nextEnemy.getId());
+                                model.addAttribute("enemy", nextEnemy);
+                            } else {
+                                // Handle the case where there are no more enemies in the database
+                                model.addAttribute("noMoreEnemies", true); // Add a flag to indicate there are no more
+                                                                           // enemies
+                            }
+                            model.addAttribute("hero", hero);
+                            return "hero"; // Redirect to the hero page if the enemy is defeated
+                        }
+
+                        enemy.setHealth(newEnemyHealth);
+                        enemiesService.saveEnemy(enemy);
+
+                        // Set the spell casting result message in the model to display it in the fight
+                        // page
+                        model.addAttribute("spellCastingResult", "You cast Death Ray for " + spellDamage + " damage!");
+                    } else {
+                        model.addAttribute("spellCastingResult", "No enemy to cast the Death Ray on.");
+                    }
+                    // Set the enemy attribute in the session to be used in the fight.html template
+                    session.setAttribute("currentEnemy", enemy);
+                } else {
+                    model.addAttribute("spellCastingResult", "No enemy to cast the spell on.");
+                }
+            } else {
+                model.addAttribute("spellCastingResult", "Not enough mana to cast Death Ray.");
+            }
+        } else {
+            model.addAttribute("spellCastingResult", "You do not know how to cast Death Ray.");
         }
 
         // Load the enemy from the service and add it to the model

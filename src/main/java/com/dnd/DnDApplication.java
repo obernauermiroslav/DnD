@@ -106,7 +106,7 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(shield2);
         Items shield3 = new Items(null, "Tower shield", ItemType.SHIELD, 0, 4,16,0,155,0,"16% chance to block enemy attack");
         itemsRepository.save(shield3);
-        Items shield4 = new Items(null, "Fire Shield", ItemType.SHIELD, 0, 5,20,0,190,0,"16% chance to block enemy attack and can protect you against fire");
+        Items shield4 = new Items(null, "Fire Shield", ItemType.SHIELD, 0, 5,20,0,190,0,"18% chance to block enemy attack and can protect you against fire");
         itemsRepository.save(shield4);
 
 
@@ -131,7 +131,7 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(potion);
 
 
-        Items spell1 = new Items(null, "Firebolt", ItemType.SPELL, 0, 0,0,0,210,6,"Damages enemy for 33 points and ignores armor");
+        Items spell1 = new Items(null, "Firebolt", ItemType.SPELL, 0, 0,0,0,210,6,"Damages enemy for 30 points and ignores armor");
         itemsRepository.save(spell1);
         Items spell2 = new Items(null, "Weakness", ItemType.SPELL, 0, 0,0,0,210,7,"Decreases enemy attack by 3 points");
         itemsRepository.save(spell2);
@@ -139,6 +139,8 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(spell3);
         Items spell4 = new Items(null, "Healing", ItemType.SPELL, 0, 0,0,0,210,6,"Heals up to 25 health");
         itemsRepository.save(spell4);
+        Items spell5 = new Items(null, "Death Ray", ItemType.SPELL, 0, 0,0,0,730,15,"Causes heavy damage 100 points to enemy and ignores armor");
+        itemsRepository.save(spell5);
 
 
         Enemies enemy1 = new Enemies(1L,"Figurine", 55,55,0,3,"Yes, it's a Training figurine...everyone starts somewhere, try not to hit yourself.");
@@ -149,19 +151,19 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy3);
         Enemies enemy4= new Enemies(4L,"Orc", 235,235,18,10,"This fearless warrior is armed with greatsword and leather armor.");
         enemiesRepository.save(enemy4);
-        Enemies enemy5= new Enemies(5L,"Troll", 280,280,22,12,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
+        Enemies enemy5= new Enemies(5L,"Troll", 290,290,22,13,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);
-        Enemies enemy6= new Enemies(6L,"Drake", 345,345,26,14,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
+        Enemies enemy6= new Enemies(6L,"Drake", 345,345,26,15,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
         enemiesRepository.save(enemy6);
-        Enemies enemy7= new Enemies(7L,"Minotaur", 380,380,27,15,"Beware his horns, 2-handed axe and RAGE!");
+        Enemies enemy7= new Enemies(7L,"Minotaur", 380,380,27,16,"Beware his horns, 2-handed axe and RAGE!");
         enemiesRepository.save(enemy7);
-        Enemies enemy8= new Enemies(8L,"Behemoth", 435,435,31,17,"He looks angry and his long claws are thirsty for your blood.");
+        Enemies enemy8= new Enemies(8L,"Behemoth", 435,435,31,19,"He looks angry and his long claws are thirsty for your blood.");
         enemiesRepository.save(enemy8);
-        Enemies enemy9= new Enemies(9L,"Medusa", 400,400,30,16,"Once a beautiful woman, now she can turn you into a stone with one look.");
+        Enemies enemy9= new Enemies(9L,"Medusa", 400,400,30,17,"Once a beautiful woman, now she can turn you into a stone with one look.");
         enemiesRepository.save(enemy9);
-        Enemies enemy10= new Enemies(10L,"Lich", 285,285,34,15,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
+        Enemies enemy10= new Enemies(10L,"Lich", 285,285,34,16,"This undead mage ignores your armor, and his attacks cannot be blocked with shield.");
         enemiesRepository.save(enemy10);
-        Enemies enemy11= new Enemies(11L,"Dragon", 530,530,42,21,"Winged death, let's hope you are ready.");
+        Enemies enemy11= new Enemies(11L,"Dragon", 530,530,42,23,"Winged death, let's hope you are ready.");
         enemiesRepository.save(enemy11);
     }
 }
