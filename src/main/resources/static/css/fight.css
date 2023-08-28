@@ -128,11 +128,15 @@ h2 {
 .enemy-info {
     display: none;
     position: absolute;
-    margin-top: -130px;
+    margin-top: -140px;
     margin-left: 160px;
     border: 1px solid #ccc;
     width: 220px;
-    padding: 5px;
+    padding: 7px;
+}
+
+.enemy-info p{
+    margin-bottom: 10px;
 }
 
 #showInfoBtn{
