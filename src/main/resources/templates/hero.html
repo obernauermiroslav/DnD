@@ -1,299 +1,471 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hero</title>
-  <link rel="stylesheet" type="text/css" href="/css/hero.css">
-</head>
-<body>
-<div class="container">
-  <div id="hero-table">
-    <h3 id="heroName">
-      <span th:if="${hero != null}">
-          <span th:text="${hero.name}"></span>
-          <span id="chosenBonus"></span>
-      </span>
-      <span th:unless="${hero != null}">Guest</span>
-  </h3>
-    <div id="buttons">
-      <button class="btn btn-secondary" onclick="location.href='/hero/readmeHero'" style="cursor: url(https://cur.cursors-4u.net/games/gam-11/gam1070.png), auto !important;">Readme</button>
-      <button class="btn btn-secondary" onclick="location.href='/shop'">Shop</button>
-      <button class="btn btn-secondary" onclick="location.href='/fight'" th:disabled="${session.heroLost}">Fight</button>
-    </div>
-    <p>Skill points: <span th:if="${hero != null}" th:text="${hero.skillPoints}">0</span></p>
-    <p th:if="${hero != null}">Health: <span th:text="${hero.health}"></span> / <span th:text="${hero.maxHealth}"></span></p>
-    <form action="/upgradeHealth" method="post" class="button-container">
-      <button id="health" type="submit">+</button>
-    </form>
-    <p th:if="${hero != null}">Attack: <span th:text="${hero.attack}"></span></p>
-    <form action="/upgradeAttack" method="post" class="button-container">
-      <button id="attack" type="submit">+</button>
-    </form>
-    <p th:if="${hero != null}">Defense: <span th:text="${hero.defense}"></span></p>
-    <form action="/upgradeDefense" method="post" class="button-container">
-      <button id="defense" type="submit">+</button>
-    </form>
-    <p th:if="${hero != null}">Mana: <span th:text="${hero.mana}"></span></p>
-    <form action="/upgradeMana" method="post" class="button-container">
-      <button id="mana" type="submit">+</button>
-    </form>
-    <p th:if="${hero != null}">Gold: <span th:text="${hero.gold}"></span></p>
-    <p th:if="${hero != null}">Healing potion: <span th:text="${hero.potion}"></span></p>
-    <p th:if="${hero != null}">Runes: <span th:text="${hero.runes}"></span></p>
-  </div>
-  <div id="items-table">
-    <h3>Inventory & Spells:</h3>
-    <div class="equipped-items">
-      <!-- Loop through equippedItems and create a new button for each item -->
-      <div th:each="item : ${hero?.equippedItems}" th:if="${hero != null and item != null and item.type != 'SPELL'}">
-        <div class="item-container">
-          <p class="item-button" th:text="${item.name}"
-             th:attr="data-item-name=${item.name},data-effect=${item.effect},data-item-type=${item.type},data-attack-bonus=${item.attackBonus},data-defense-bonus=${item.defenseBonus},data-health-bonus=${item.healthBonus},data-mana-cost=${item.manaCost}">
-          </p>
-          <!-- Render the upgrade button for each item -->
-          <form th:action="@{/hero/upgradeItem/{itemId}(itemId=${item.id})}" method="post" onsubmit="saveScrollPosition()"
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero</title>
+    <link rel="stylesheet" type="text/css" href="/css/hero.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="hero-table">
+        <h3 id="heroName">
+          <span th:if="${hero != null}">
+            <span th:text="${hero.name}"></span>
+            <span id="chosenBonus"></span>
+          </span>
+          <span th:unless="${hero != null}">Guest</span>
+        </h3>
+        <div id="buttons">
+          <button
+            class="btn btn-secondary"
+            onclick="location.href='/hero/readmeHero'"
+            style="
+              cursor: url(https://cur.cursors-4u.net/games/gam-11/gam1070.png),
+                auto !important;
+            "
+          >
+            Readme
+          </button>
+          <button class="btn btn-secondary" onclick="location.href='/shop'">
+            Shop
+          </button>
+          <button
+            class="btn btn-secondary"
+            onclick="location.href='/fight'"
+            th:disabled="${session.heroLost}"
+          >
+            Fight
+          </button>
+        </div>
+        <p>
+          Skill points:
+          <span th:if="${hero != null}" th:text="${hero.skillPoints}">0</span>
+        </p>
+        <p th:if="${hero != null}">
+          Health: <span th:text="${hero.health}"></span> /
+          <span th:text="${hero.maxHealth}"></span>
+        </p>
+        <form action="/upgradeHealth" method="post" class="button-container">
+          <button id="health" type="submit">+</button>
+        </form>
+        <p th:if="${hero != null}">
+          Attack: <span th:text="${hero.attack}"></span>
+        </p>
+        <form action="/upgradeAttack" method="post" class="button-container">
+          <button id="attack" type="submit">+</button>
+        </form>
+        <p th:if="${hero != null}">
+          Defense: <span th:text="${hero.defense}"></span>
+        </p>
+        <form action="/upgradeDefense" method="post" class="button-container">
+          <button id="defense" type="submit">+</button>
+        </form>
+        <p th:if="${hero != null}">
+          Mana: <span th:text="${hero.mana}"></span>
+        </p>
+        <form action="/upgradeMana" method="post" class="button-container">
+          <button id="mana" type="submit">+</button>
+        </form>
+        <p th:if="${hero != null}">
+          Gold: <span th:text="${hero.gold}"></span>
+        </p>
+        <p th:if="${hero != null}">
+          Healing potion: <span th:text="${hero.potion}"></span>
+        </p>
+        <p th:if="${hero != null}">
+          Runes: <span th:text="${hero.runes}"></span>
+        </p>
+      </div>
+      <div id="items-table">
+        <h3>Inventory & Spells:</h3>
+        <div class="equipped-items">
+          <!-- Loop through equippedItems and create a new button for each item -->
+          <div
+            th:each="item : ${hero?.equippedItems}"
+            th:if="${hero != null and item != null and item.type != 'SPELL'}"
+          >
+            <div class="item-container">
+              <p
+                class="item-button"
+                th:text="${item.name}"
+                th:attr="data-item-name=${item.name},data-effect=${item.effect},data-item-type=${item.type},data-attack-bonus=${item.attackBonus},data-defense-bonus=${item.defenseBonus},data-health-bonus=${item.healthBonus},data-mana-cost=${item.manaCost}"
+              ></p>
+              <!-- Render the upgrade button for each item -->
+              <form
+                th:action="@{/hero/upgradeItem/{itemId}(itemId=${item.id})}"
+                method="post"
+                onsubmit="saveScrollPosition()"
                 th:unless="${item.type == 'SPELL' or item.type == 'RING' or item.type == 'NECKLACE'}"
-                class="button-container">
-            <button id="upgradeButton" type="submit" style="display: none">+</button>
-          </form>
+                class="button-container"
+              >
+                <button id="upgradeButton" type="submit" style="display: none">
+                  +
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
+      <p
+        id="upgradeMessage"
+        th:if="${upgradeMessage}"
+        th:text="${upgradeMessage}"
+      ></p>
+      <div>
+        <p
+          id="upgradeMessageItem"
+          th:if="${not #strings.isEmpty(upgradeMessageItem)}"
+          th:text="${upgradeMessageItem}"
+        ></p>
+      </div>
+      <div id="item-pictures">
+        <img id="myHero" src="/images/hero.jpg" alt="" />
+        <img
+          class="item-picture"
+          id="helmet-picture"
+          src="/images/helmet.jpg"
+          alt="Helmet"
+          style="display: none"
+        />
+        <img
+          class="item-picture"
+          id="armor-picture"
+          src="/images/armor.jpg"
+          alt="Armor"
+          style="display: none"
+        />
+        <img
+          class="item-picture"
+          id="trousers-picture"
+          src="/images/trousers.jpg"
+          alt="Trousers"
+          style="display: none"
+        />
+        <img
+          class="item-picture"
+          id="gloves-picture"
+          src="/images/gloves.jpg"
+          alt="Gloves"
+          style="display: none"
+        />
+        <img
+          class="item-picture"
+          id="necklace-picture"
+          src="/images/necklace.jpg"
+          alt="Necklace"
+          style="display: none"
+        />
+        <img
+          class="item-picture"
+          id="ring-picture"
+          src="/images/ring.jpg"
+          alt="Ring"
+          style="display: none"
+        />
+        <img
+          class="item-picture"
+          id="boots-picture"
+          src="/images/boots.jpg"
+          alt="Boots"
+          style="display: none"
+        />
+        <img
+          class="item-picture"
+          id="cloak-picture"
+          src="/images/cloak.jpg"
+          alt="Cloak"
+          style="display: none"
+        />
+        <img
+          class="item-picture"
+          id="weapon-picture"
+          src="/images/weapon.jpg"
+          alt="Weapon"
+          style="display: none"
+        />
+        <img
+          class="item-picture"
+          id="shield-picture"
+          src="/images/shield.jpg"
+          alt="Shield"
+          style="display: none"
+        />
+        <img
+          class="item-picture spell-picture"
+          id="spell-picture-firebolt"
+          src="/images/firebolt.png"
+          alt="Firebolt"
+          style="display: none"
+        />
+        <img
+          class="item-picture spell-picture"
+          id="spell-picture-weakness"
+          src="/images/weakness.png"
+          alt="Weakness"
+          style="display: none"
+        />
+        <img
+          class="item-picture spell-picture"
+          id="spell-picture-sunder_armor"
+          src="/images/sunder_armor.png"
+          alt="Sunder Armor"
+          style="display: none"
+        />
+        <img
+          class="item-picture spell-picture"
+          id="spell-picture-healing"
+          src="/images/healing.png"
+          alt="Healing"
+          style="display: none"
+        />
+        <img
+          class="item-picture spell-picture"
+          id="spell-picture-death_ray"
+          src="/images/death_ray.png"
+          alt="Death Ray"
+          style="display: none"
+        />
+        <img
+          class="item-picture spell-picture"
+          id="spell-picture-life_steal"
+          src="/images/life_steal.png"
+          alt="Life Steal"
+          style="display: none"
+        />
+      </div>
+      <div id="item-info-popup" class="item-popup"></div>
+      <p
+        id="bonusMessage"
+        th:if="${bonusMessage}"
+        th:utext="${bonusMessage}"
+      ></p>
     </div>
-  </div>
-  <p id="upgradeMessage" th:if="${upgradeMessage}" th:text="${upgradeMessage}"></p>
-  <div>
-    <p id="upgradeMessageItem" th:if="${not #strings.isEmpty(upgradeMessageItem)}" th:text="${upgradeMessageItem}"></p>
-  </div>
-  <div id="item-pictures">
-    <img id="myHero" src="/images/hero.jpg" alt="">
-    <img class="item-picture" id="helmet-picture" src="/images/helmet.jpg" alt="Helmet" style="display: none;">
-    <img class="item-picture" id="armor-picture" src="/images/armor.jpg" alt="Armor" style="display: none;">
-    <img class="item-picture" id="trousers-picture" src="/images/trousers.jpg" alt="Trousers" style="display: none;">
-    <img class="item-picture" id="gloves-picture" src="/images/gloves.jpg" alt="Gloves" style="display: none;">
-    <img class="item-picture" id="necklace-picture" src="/images/necklace.jpg" alt="Necklace" style="display: none;">
-    <img class="item-picture" id="ring-picture" src="/images/ring.jpg" alt="Ring" style="display: none;">
-    <img class="item-picture" id="boots-picture" src="/images/boots.jpg" alt="Boots" style="display: none;">
-    <img class="item-picture" id="cloak-picture" src="/images/cloak.jpg" alt="Cloak" style="display: none;">
-    <img class="item-picture" id="weapon-picture" src="/images/weapon.jpg" alt="Weapon" style="display: none;">
-    <img class="item-picture" id="shield-picture" src="/images/shield.jpg" alt="Shield" style="display: none;">
-    <img class="item-picture spell-picture" id="spell-picture-firebolt" src="/images/firebolt.png" alt="Firebolt" style="display: none;">
-    <img class="item-picture spell-picture" id="spell-picture-weakness" src="/images/weakness.png" alt="Weakness" style="display: none;">
-    <img class="item-picture spell-picture" id="spell-picture-sunder_armor" src="/images/sunder_armor.png" alt="Sunder Armor" style="display: none;">
-    <img class="item-picture spell-picture" id="spell-picture-healing" src="/images/healing.png" alt="Healing" style="display: none;">
-    <img class="item-picture spell-picture" id="spell-picture-death_ray" src="/images/death_ray.png" alt="Death Ray" style="display: none;">
-    <img class="item-picture spell-picture" id="spell-picture-life_steal" src="/images/life_steal.png" alt="Life Steal" style="display: none;">
-  </div>
-<div id="item-info-popup" class="item-popup"></div>
-<p id="bonusMessage" th:if="${bonusMessage}" th:utext="${bonusMessage}"></p>
-</div>
 
-<script th:inline="javascript">
-  var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
+    <script th:inline="javascript">
+      var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
 
-  if (heroLost) {
-    var buttons = document.querySelectorAll('button[type="submit"]');
-    buttons.forEach(function(button) {
-      button.disabled = true;
-    });
-  }
-  function saveScrollPosition() {
-    // Save the current scroll position in the session storage
-    const scrollPosition = document.getElementById('items-table').scrollTop;
-    sessionStorage.setItem('scrollPosition', scrollPosition.toString());
-  }
+      if (heroLost) {
+        var buttons = document.querySelectorAll('button[type="submit"]');
+        buttons.forEach(function (button) {
+          button.disabled = true;
+        });
+      }
+      function saveScrollPosition() {
+        // Save the current scroll position in the session storage
+        const scrollPosition = document.getElementById("items-table").scrollTop;
+        sessionStorage.setItem("scrollPosition", scrollPosition.toString());
+      }
 
-  function restoreScrollPosition() {
-    // Retrieve the saved scroll position from the session storage
-    const scrollPosition = sessionStorage.getItem('scrollPosition');
-    if (scrollPosition !== null) {
-      // Scroll the table container to the saved position
-      document.getElementById('items-table').scrollTop = parseInt(scrollPosition);
-      // Remove the saved position after restoring it
-      sessionStorage.removeItem('scrollPosition');
-    }
-  }
+      function restoreScrollPosition() {
+        // Retrieve the saved scroll position from the session storage
+        const scrollPosition = sessionStorage.getItem("scrollPosition");
+        if (scrollPosition !== null) {
+          // Scroll the table container to the saved position
+          document.getElementById("items-table").scrollTop =
+            parseInt(scrollPosition);
+          // Remove the saved position after restoring it
+          sessionStorage.removeItem("scrollPosition");
+        }
+      }
 
-  // Restore the scroll position when the page loads
-  window.onload = function() {
-    restoreScrollPosition();
-  };
+      // Restore the scroll position when the page loads
+      window.onload = function () {
+        restoreScrollPosition();
+      };
 
-  function handleItemHover(button) {
-    const itemName = button.getAttribute('data-item-name');
-    const itemType = button.getAttribute('data-item-type');
+      function handleItemHover(button) {
+        const itemName = button.getAttribute("data-item-name");
+        const itemType = button.getAttribute("data-item-type");
 
-    let popupContent = `
+        let popupContent = `
       <p>Name: ${itemName}</p>
     `;
 
-    if (itemType === 'SPELL') {
-      const effect = button.getAttribute('data-effect');
-      const manaCost = button.getAttribute('data-mana-cost');
-      popupContent += `
+        if (itemType === "SPELL") {
+          const effect = button.getAttribute("data-effect");
+          const manaCost = button.getAttribute("data-mana-cost");
+          popupContent += `
         <p>Effect: ${effect}</p>
         <p>Mana Cost: ${manaCost}</p>
       `;
 
-      // Highlight the corresponding spell picture
-      const spellName = itemName.toLowerCase();
-      const spellPicture = document.getElementById(`spell-picture-${spellName.replace(/\s+/g, '_')}`);
-      if (spellPicture) {
-        spellPicture.classList.add('highlight');
-      }
-    } else if (itemType === 'NECKLACE') {
-      const effect = button.getAttribute('data-effect');
-      popupContent += `
+          // Highlight the corresponding spell picture
+          const spellName = itemName.toLowerCase();
+          const spellPicture = document.getElementById(
+            `spell-picture-${spellName.replace(/\s+/g, "_")}`
+          );
+          if (spellPicture) {
+            spellPicture.classList.add("highlight");
+          }
+        } else if (itemType === "NECKLACE") {
+          const effect = button.getAttribute("data-effect");
+          popupContent += `
         <p>Effect: ${effect}</p>
       `;
-    } else if (itemType === 'RING') {
-      const effect = button.getAttribute('data-effect');
-      popupContent += `
+        } else if (itemType === "RING") {
+          const effect = button.getAttribute("data-effect");
+          popupContent += `
         <p>Effect: ${effect}</p>
       `;
-    } else if (itemType === 'WEAPON') {
-      const attackBonus = button.getAttribute('data-attack-bonus');
-      const effect = button.getAttribute('data-effect');
-      popupContent += `
+        } else if (itemType === "WEAPON") {
+          const attackBonus = button.getAttribute("data-attack-bonus");
+          const effect = button.getAttribute("data-effect");
+          popupContent += `
         <p>Attack Bonus: ${attackBonus}</p>
       `;
-      if (effect) {
-        popupContent += `<p>Effect: ${effect}</p>
+          if (effect) {
+            popupContent += `<p>Effect: ${effect}</p>
         `;
-      }
-    } else if (itemType === 'SHIELD') {
-      const defenseBonus = button.getAttribute('data-defense-bonus');
-      const healthBonus = button.getAttribute('data-health-bonus');
-      const effect = button.getAttribute('data-effect');
-      popupContent += `
+          }
+        } else if (itemType === "SHIELD") {
+          const defenseBonus = button.getAttribute("data-defense-bonus");
+          const healthBonus = button.getAttribute("data-health-bonus");
+          const effect = button.getAttribute("data-effect");
+          popupContent += `
         <p>Defense Bonus: ${defenseBonus}</p>
         <p>Health Bonus: ${healthBonus}</p>
         <p>Effect: ${effect}</p>
       `;
-    } else if (itemType === 'HELMET' || itemType === 'CLOAK') {
-      const defenseBonus = button.getAttribute('data-defense-bonus');
-      const healthBonus = button.getAttribute('data-health-bonus');
-      const effect = button.getAttribute('data-effect');
-      popupContent += `
+        } else if (itemType === "HELMET" || itemType === "CLOAK") {
+          const defenseBonus = button.getAttribute("data-defense-bonus");
+          const healthBonus = button.getAttribute("data-health-bonus");
+          const effect = button.getAttribute("data-effect");
+          popupContent += `
         <p>Defense Bonus: ${defenseBonus}</p>
         <p>Health Bonus: ${healthBonus}</p>
       `;
-      if (effect) {
-        popupContent += `<p>Effect: ${effect}</p>
+          if (effect) {
+            popupContent += `<p>Effect: ${effect}</p>
         `;
-      }
-      } else if ( itemType === 'ARMOR' || itemType === 'TROUSERS' || itemType === 'GLOVES' || itemType === 'BOOTS' || itemType === 'CLOAK') {
-      const defenseBonus = button.getAttribute('data-defense-bonus');
-      const healthBonus = button.getAttribute('data-health-bonus');
-      popupContent += `
+          }
+        } else if (
+          itemType === "ARMOR" ||
+          itemType === "TROUSERS" ||
+          itemType === "GLOVES" ||
+          itemType === "BOOTS" ||
+          itemType === "CLOAK"
+        ) {
+          const defenseBonus = button.getAttribute("data-defense-bonus");
+          const healthBonus = button.getAttribute("data-health-bonus");
+          popupContent += `
         <p>Defense Bonus: ${defenseBonus}</p>
         <p>Health Bonus: ${healthBonus}</p>
       `;
-    } else {
-    }
-
-    const popup = document.getElementById('item-info-popup');
-    popup.innerHTML = popupContent;
-    popup.style.display = 'block';
-
-    // Display the corresponding item picture based on the item type
-    const itemPicture = document.getElementById(`${itemType.toLowerCase()}-picture`);
-    if (itemPicture) {
-      itemPicture.classList.add('highlight'); // Add the 'highlight' class to apply the highlighting style
-    }
-  }
-
-  function handleItemLeave() {
-    const popup = document.getElementById('item-info-popup');
-    popup.style.display = 'none';
-
-    // Remove the 'highlight' class to remove the highlighting style from all item pictures
-    const itemPictures = document.querySelectorAll('.item-picture');
-    itemPictures.forEach(picture => {
-      picture.classList.remove('highlight');
-    });
-  }
-
-  var chosenBonus = sessionStorage.getItem('chosenBonus');
-
-    // Show the appropriate span based on the chosenBonus value
-    if (chosenBonus === 'warrior') {
-        document.getElementById('chosenBonus').textContent = 'the Warrior';
-    } else if (chosenBonus === 'mage') {
-        document.getElementById('chosenBonus').textContent = 'the Mage';
-    }
-
-  function updateItemPictures() {
-    const equippedItems = /*[[${hero?.equippedItems}]]*/ [];
-    const spellNames = equippedItems
-            .filter(item => item.type === 'SPELL')
-            .map(item => item.name.toLowerCase());
-
-    const itemPictures = document.querySelectorAll('.item-picture');
-    itemPictures.forEach(picture => {
-      const itemType = picture.id.split('-')[0].toUpperCase();
-
-      const heroImage = document.getElementById('myHero');
-
-      if (chosenBonus === 'warrior') {
-        heroImage.src = '/images/warrior.jpg';
-      
-    } else if (chosenBonus === 'mage') {
-        heroImage.src = '/images/mage.jpg';
-       
-    } else {
-        heroImage.src = '/images/hero.jpg';
-    }
-
-      if (itemType === 'SPELL') {
-        const spellName = picture.id.split('-')[2].toLowerCase().replace(/_/g, ' ');
-        const hasSpell = spellNames.includes(spellName);
-
-        if (hasSpell) {
-          picture.style.display = 'block';
-          picture.src = `/images/${spellName.replace(/\s+/g, '_')}.png`;
         } else {
-          picture.style.display = 'none';
         }
-      } else {
-        const hasItem = equippedItems.some(item => item.type === itemType);
 
-        if (hasItem) {
-          picture.style.display = 'block';
-        } else {
-          picture.style.display = 'none';
+        const popup = document.getElementById("item-info-popup");
+        popup.innerHTML = popupContent;
+        popup.style.display = "block";
+
+        // Display the corresponding item picture based on the item type
+        const itemPicture = document.getElementById(
+          `${itemType.toLowerCase()}-picture`
+        );
+        if (itemPicture) {
+          itemPicture.classList.add("highlight"); // Add the 'highlight' class to apply the highlighting style
         }
       }
-    });
-  }
 
-  
-  // Call the function to update item pictures on page load
-  document.addEventListener('DOMContentLoaded', function () {
-    var itemButtons = document.querySelectorAll('.item-button');
-    itemButtons.forEach(function (button) {
-      var itemType = button.getAttribute('data-item-type');
-      var upgradeButton = button.parentElement.querySelector('#upgradeButton');
+      function handleItemLeave() {
+        const popup = document.getElementById("item-info-popup");
+        popup.style.display = "none";
 
-      if (itemType !== 'SPELL' && itemType !== 'RING' && itemType !== 'NECKLACE') {
-        upgradeButton.style.display = 'block';
-      } else {
-        upgradeButton.style.display = 'none';
+        // Remove the 'highlight' class to remove the highlighting style from all item pictures
+        const itemPictures = document.querySelectorAll(".item-picture");
+        itemPictures.forEach((picture) => {
+          picture.classList.remove("highlight");
+        });
       }
 
-      button.addEventListener('mouseover', function () {
-        handleItemHover(button);
-      });
+      var chosenBonus = sessionStorage.getItem("chosenBonus");
 
-      button.addEventListener('mouseleave', function () {
-        handleItemLeave();
-      });
-    });
+      // Show the appropriate span based on the chosenBonus value
+      if (chosenBonus === "warrior") {
+        document.getElementById("chosenBonus").textContent = "the Warrior";
+      } else if (chosenBonus === "mage") {
+        document.getElementById("chosenBonus").textContent = "the Mage";
+      }
 
-    // Call the function to update item pictures
-    updateItemPictures();
-  });
-</script>
-</body>
+      function updateItemPictures() {
+        const equippedItems = /*[[${hero?.equippedItems}]]*/ [];
+        const spellNames = equippedItems
+          .filter((item) => item.type === "SPELL")
+          .map((item) => item.name.toLowerCase());
+
+        const itemPictures = document.querySelectorAll(".item-picture");
+        itemPictures.forEach((picture) => {
+          const itemType = picture.id.split("-")[0].toUpperCase();
+
+          const heroImage = document.getElementById("myHero");
+
+          if (chosenBonus === "warrior") {
+            heroImage.src = "/images/warrior.jpg";
+          } else if (chosenBonus === "mage") {
+            heroImage.src = "/images/mage.jpg";
+          } else {
+            heroImage.src = "/images/hero.jpg";
+          }
+
+          if (itemType === "SPELL") {
+            const spellName = picture.id
+              .split("-")[2]
+              .toLowerCase()
+              .replace(/_/g, " ");
+            const hasSpell = spellNames.includes(spellName);
+
+            if (hasSpell) {
+              picture.style.display = "block";
+              picture.src = `/images/${spellName.replace(/\s+/g, "_")}.png`;
+            } else {
+              picture.style.display = "none";
+            }
+          } else {
+            const hasItem = equippedItems.some(
+              (item) => item.type === itemType
+            );
+
+            if (hasItem) {
+              picture.style.display = "block";
+            } else {
+              picture.style.display = "none";
+            }
+          }
+        });
+      }
+
+      // Call the function to update item pictures on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        var itemButtons = document.querySelectorAll(".item-button");
+        itemButtons.forEach(function (button) {
+          var itemType = button.getAttribute("data-item-type");
+          var upgradeButton =
+            button.parentElement.querySelector("#upgradeButton");
+
+          if (
+            itemType !== "SPELL" &&
+            itemType !== "RING" &&
+            itemType !== "NECKLACE"
+          ) {
+            upgradeButton.style.display = "block";
+          } else {
+            upgradeButton.style.display = "none";
+          }
+
+          button.addEventListener("mouseover", function () {
+            handleItemHover(button);
+          });
+
+          button.addEventListener("mouseleave", function () {
+            handleItemLeave();
+          });
+        });
+
+        // Call the function to update item pictures
+        updateItemPictures();
+      });
+    </script>
+  </body>
 </html>

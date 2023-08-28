@@ -400,7 +400,7 @@
           popupContent += `
         <p>Attack Bonus: ${attackBonus}</p>
       `;
-      if (effect) {
+          if (effect) {
             popupContent += `<p>Effect: ${effect}</p>`;
           }
         } else if (itemType === "SHIELD") {
@@ -471,60 +471,58 @@
 */
       // Function to fetch and replace data without reloading the page
       async function fetchAndReplaceData(actionUrl, targetElementId) {
-    try {
-        const response = await fetch(actionUrl);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data. Status: ${response.status} ${response.statusText}`);
-        }
-        const responseData = await response.json();
-        const targetElement = document.getElementById(targetElementId);
+        try {
+          const response = await fetch(actionUrl);
+          if (!response.ok) {
+            throw new Error(
+              `Failed to fetch data. Status: ${response.status} ${response.statusText}`
+            );
+          }
+          const responseData = await response.json();
+          const targetElement = document.getElementById(targetElementId);
 
-        if (targetElement) {
+          if (targetElement) {
             targetElement.innerHTML = responseData.htmlContent; // Assuming your response contains HTML content
+          }
+
+          restoreScrollPosition();
+        } catch (error) {
+          console.error("Error fetching and replacing data:", error);
         }
-
-        restoreScrollPosition();
-    } catch (error) {
-        console.error("Error fetching and replacing data:", error);
-    }
-}
-
-
-
+      }
 
       function postData(event, itemId) {
-    event.preventDefault();
+        event.preventDefault();
 
-    fetch(`/shop/buy/${itemId}`, {
-        method: "POST",
-        headers: {
+        fetch(`/shop/buy/${itemId}`, {
+          method: "POST",
+          headers: {
             "content-type": "application/json",
-        },
-    })
-    .then(response => {
-        if (response.status === 200) {
-            return response.json();
-        } else {
-            throw new Error("Failed to fetch data");
-        }
-    })
-    .then(heroData => {
-        const goldElement = document.getElementById('gold');
-        const messageElement = document.getElementById('message');
+          },
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              return response.json();
+            } else {
+              throw new Error("Failed to fetch data");
+            }
+          })
+          .then((heroData) => {
+            const goldElement = document.getElementById("gold");
+            const messageElement = document.getElementById("message");
 
-        if (goldElement) {
-            goldElement.textContent = heroData.heroGold;
-        }
+            if (goldElement) {
+              goldElement.textContent = heroData.heroGold;
+            }
 
-        if (messageElement) {
-            messageElement.textContent = heroData.message || "";
-        }
-    })
-    .catch(error => {
-        console.error("Error updating UI:", error);
-    });
-}
-
+            if (messageElement) {
+              messageElement.textContent = heroData.message || "";
+            }
+          })
+          .catch((error) => {
+            console.error("Error updating UI:", error);
+          });
+      }
 
       // Attach event listeners to each "Buy" button to handle click event
       document.addEventListener("DOMContentLoaded", function () {

@@ -1,76 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Main page</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  </head>
+  <body>
     <h1>Hail to you champion, choose your name and profession</h1>
     <form action="/hero/save" method="post">
-        <input type="text" name="heroName" placeholder="Enter hero name" value="" required maxlength="10">
+      <input
+        type="text"
+        name="heroName"
+        placeholder="Enter hero name"
+        value=""
+        required
+        maxlength="10"
+      />
 
-        <div class="starting-bonus">
-            <label>
-                <input type="radio" name="startingBonus" value="warrior" required 
-                       onchange="changeHero(this.value)"> 
-                Warrior <br>
-                <br>
-                starting bonus:<br>
-                + 65 health<br>
-                + 2 attack<br>
-                + 2 defense<br>
-                + 2 runes 
-            </label>
-            <label>
-                <input type="radio" name="startingBonus" value="mage" required 
-                       onchange="changeHero(this.value)"> 
-                Mage <br>
-                <br>
-                starting bonus:<br>
-                + 30 health<br>
-                + 55 mana<br>
-                + 3 skill points
-            </label>
-        </div>
-        <button type="submit">Start Game</button>
-        <div th:if="${heroNameError}" class="error-message">
-            <p th:text="${heroNameError}"></p>
-        </div>
-        <div th:if="${startingBonusError}" class="error-message">
-            <p th:text="${startingBonusError}"></p>
-        </div>
+      <div class="starting-bonus">
+        <label>
+          <input
+            type="radio"
+            name="startingBonus"
+            value="warrior"
+            required
+            onchange="changeHero(this.value)"
+          />
+          Warrior <br />
+          <br />
+          starting bonus:<br />
+          + 65 health<br />
+          + 2 attack<br />
+          + 2 defense<br />
+          + 2 runes
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="startingBonus"
+            value="mage"
+            required
+            onchange="changeHero(this.value)"
+          />
+          Mage <br />
+          <br />
+          starting bonus:<br />
+          + 30 health<br />
+          + 55 mana<br />
+          + 3 skill points
+        </label>
+      </div>
+      <button type="submit">Start Game</button>
+      <div th:if="${heroNameError}" class="error-message">
+        <p th:text="${heroNameError}"></p>
+      </div>
+      <div th:if="${startingBonusError}" class="error-message">
+        <p th:text="${startingBonusError}"></p>
+      </div>
     </form>
     <script>
-        // Check if a profession is already chosen and disable the other
-        const chosenBonus = sessionStorage.getItem('chosenBonus');
-        if (chosenBonus) {
-            const radioButtons = document.querySelectorAll('input[type="radio"][name="startingBonus"]');
-            for (const radioButton of radioButtons) {
-                if (radioButton.value === chosenBonus) {
-                    radioButton.checked = true;
-                }
-            }
-            
-            // Disable the other choice
-            const otherBonus = chosenBonus === 'warrior' ? 'mage' : 'warrior';
-            const otherRadioButton = document.querySelector(`input[type="radio"][value="${otherBonus}"]`);
-            otherRadioButton.disabled = true;
+      // Check if a profession is already chosen and disable the other
+      const chosenBonus = sessionStorage.getItem("chosenBonus");
+      if (chosenBonus) {
+        const radioButtons = document.querySelectorAll(
+          'input[type="radio"][name="startingBonus"]'
+        );
+        for (const radioButton of radioButtons) {
+          if (radioButton.value === chosenBonus) {
+            radioButton.checked = true;
+          }
         }
-        
-        function changeHero(selectedBonus) {
-            sessionStorage.setItem('chosenBonus', selectedBonus);
-            
-            const radioButtons = document.querySelectorAll('input[type="radio"][name="startingBonus"]');
-            for (const radioButton of radioButtons) {
-                radioButton.disabled = false;
-            }
-            
-            // Disable the other choice
-            const otherBonus = selectedBonus === 'warrior' ? 'mage' : 'warrior';
-            const otherRadioButton = document.querySelector(`input[type="radio"][value="${otherBonus}"]`);
-            otherRadioButton.disabled = true;
+
+        // Disable the other choice
+        const otherBonus = chosenBonus === "warrior" ? "mage" : "warrior";
+        const otherRadioButton = document.querySelector(
+          `input[type="radio"][value="${otherBonus}"]`
+        );
+        otherRadioButton.disabled = true;
+      }
+
+      function changeHero(selectedBonus) {
+        sessionStorage.setItem("chosenBonus", selectedBonus);
+
+        const radioButtons = document.querySelectorAll(
+          'input[type="radio"][name="startingBonus"]'
+        );
+        for (const radioButton of radioButtons) {
+          radioButton.disabled = false;
         }
+
+        // Disable the other choice
+        const otherBonus = selectedBonus === "warrior" ? "mage" : "warrior";
+        const otherRadioButton = document.querySelector(
+          `input[type="radio"][value="${otherBonus}"]`
+        );
+        otherRadioButton.disabled = true;
+      }
     </script>
-</body>
+  </body>
 </html>
