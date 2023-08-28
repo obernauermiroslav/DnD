@@ -68,9 +68,10 @@ public class HeroController {
         if (hero == null) {
             // Create a new hero with the given name
             hero = new Hero(heroName);
-            hero.setGold(710);
+            hero.setGold(600);
             hero.setMana(0);
-            hero.setPotion(2);
+            hero.setHealingPotion(1);
+            hero.setManaPotion(0);
             hero.setSkillPoints(1);
             hero.setHealth(130);
             hero.setMaxHealth(130);
@@ -91,6 +92,7 @@ public class HeroController {
                 hero.setDefense(hero.getDefense() + 2);
                 hero.setBaseAttack(hero.getBaseAttack() + 2);
                 hero.setBaseDefense(hero.getBaseDefense() + 2);
+                hero.setHealingPotion(2);
                 hero.setRunes(3);
                 model.addAttribute("warrior", "warrior bonuses:");
             } else if ("mage".equals(startingBonus)) {
@@ -98,6 +100,7 @@ public class HeroController {
                 hero.setMaxHealth(hero.getMaxHealth() + 30);
                 hero.setMana(hero.getMana() + 55);
                 hero.setSkillPoints(4);
+                hero.setManaPotion(2);
                 model.addAttribute("mage", "mage bonuses:");
         }}
     

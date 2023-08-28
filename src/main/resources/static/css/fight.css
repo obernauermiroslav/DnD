@@ -42,29 +42,40 @@ h2 {
     align-items: center;
 }
 
+.hero-container h2,
+.hero-container p {
+    margin-bottom: -2px;
+}
+
 .enemy-container {
     position: absolute;
-    margin-top: -81px;
+    margin-top: -80px;
     margin-left: 153px;
     background-color: rgba(255, 255, 255, 0.2);
     border: 3px inset #ccc;
-    padding: 6px;
+    padding: 7px;
     width: 130px;
-    height: 215px;
+    height: 213px;
     align-items: center;
 }
+
+.enemy-container h2,
+.enemy-container p {
+    margin-bottom: -2px;
+}
+
 
 .results {
     position: absolute;
     margin-top: 365px;
-    margin-left: -10px;
+    margin-left: -9px;
     margin-bottom: 2px;
     max-width: 800px;
     background-color: rgba(255, 255, 255, 0.2);
     border: 7px double #ccc;
     border-radius: 5px;
     padding: 5px;
-    width: 280px;
+    width: 285px;
     height: 180px;
 }
 
@@ -97,56 +108,23 @@ h2 {
 
 .btn-secondary form:hover {
     background-color: #aaa;
+}
 
-}
-#firebolt{
+#spells {
     position: absolute;
-    margin-top: 30px;
-    margin-left: -265px;
-    width: 60px;
-    height: 25px;
+    margin-top: -355px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .spellCast{
+    margin-left: 5px;
+  }
+
+  .spellCast button {
     cursor: url('../images/spell.cur'), auto !important;
-}
-#healing{
-    position: absolute;
-    margin-top: 30px;
-    margin-left: 55px;
-    width: 70px;
-    height: 25px;
-    cursor: url('../images/spell.cur'), auto !important;
-}
-#weakness{
-    position: absolute;
-    margin-top: 30px;
-    margin-left: -105px;
-    width: 70px;
-    height: 25px;
-    cursor: url('../images/spell.cur'), auto !important;
-}
-#sunder_armor{
-    position: absolute;
-    margin-top: 30px;
-    margin-left: -360px;
-    width: 100px;
-    height: 25px;
-    cursor: url('../images/spell.cur'), auto !important;
-}
-#death_ray{
-    position: absolute;
-    margin-top: 30px;
-    margin-left: -60px;
-    width: 70px;
-    height: 25px;
-    cursor: url('../images/spell.cur'), auto !important;
-}
-#life_steal{
-    position: absolute;
-    margin-top: 30px;
-    margin-left: -220px;
-    width: 70px;
-    height: 25px;
-    cursor: url('../images/spell.cur'), auto !important;
-}
+  }
+
 .enemy-info {
     display: none;
     position: absolute;
@@ -157,9 +135,8 @@ h2 {
     padding: 5px;
 }
 
-.enemy-info-btn {
-    position: relative;
-    z-index: 1;
+#showInfoBtn{
+    margin-top: 70px;
 }
 
 .enemy-info-btn:hover .enemy-info {
@@ -185,7 +162,7 @@ h2 {
     position: absolute;
     background-color: #333;
     color: #fff;
-    padding: 5px;
+    padding: 6px;
     border-radius: 8px;
     font-size: 15px;
     display: none;

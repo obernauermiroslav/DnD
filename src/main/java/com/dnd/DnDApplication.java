@@ -127,8 +127,10 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(necklace3);
 
 
-        Items potion = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,0,120,0,"Heals up to 30 health");
-        itemsRepository.save(potion);
+        Items potion1 = new Items(null, "Healing Potion", ItemType.POTION, 0, 0,0,0,120,0,"Heals up to 30 health");
+        itemsRepository.save(potion1);
+        Items potion2 = new Items(null, "Mana Potion", ItemType.POTION, 0, 0,0,0,100,0,"Restores 20 mana");
+        itemsRepository.save(potion2);
 
 
         Items spell1 = new Items(null, "Firebolt", ItemType.SPELL, 0, 0,0,0,210,6,"Damages enemy for 30 points and ignores armor");
@@ -145,13 +147,13 @@ public class DnDApplication implements CommandLineRunner {
         itemsRepository.save(spell6);
 
 
-        Enemies enemy1 = new Enemies(1L,"Figurine", 55,55,0,3,"Yes, it's a Training figurine...everyone starts somewhere, try not to hit yourself.");
+        Enemies enemy1 = new Enemies(1L,"Figurine", 60,60,0,4,"Yes, it's a Training figurine...everyone starts somewhere, try not to hit yourself.");
         enemiesRepository.save(enemy1);
-        Enemies enemy2 = new Enemies(2L,"Giant rat", 95,95,10,4,"Bigger and more dangerous that standard Rat, but should not be hard to kill.");
+        Enemies enemy2 = new Enemies(2L,"Giant rat", 105,105,12,5,"Bigger and more dangerous that standard Rat, but should not be hard to kill.");
         enemiesRepository.save(enemy2);
-        Enemies enemy3 = new Enemies(3L,"Goblin", 145,145,15,7,"He is small, mean, armed with mace and can steal your money if you are not carefull.");
+        Enemies enemy3 = new Enemies(3L,"Goblin", 150,150,16,8,"He is small, mean, armed with mace and can steal your money if you are not carefull.");
         enemiesRepository.save(enemy3);
-        Enemies enemy4= new Enemies(4L,"Orc", 235,235,18,10,"This fearless warrior is armed with greatsword and leather armor.");
+        Enemies enemy4= new Enemies(4L,"Orc", 235,235,19,10,"This fearless warrior is armed with greatsword and leather armor.");
         enemiesRepository.save(enemy4);
         Enemies enemy5= new Enemies(5L,"Troll", 290,290,22,13,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);

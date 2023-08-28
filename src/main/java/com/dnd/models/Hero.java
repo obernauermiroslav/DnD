@@ -16,7 +16,8 @@ public class Hero {
     private int attack;
     private int defense;
     private int gold;
-    private int potion;
+    private int healingPotion;
+    private int manaPotion;
     private int spell;
     private int mana;
     private int runes;
@@ -251,12 +252,20 @@ public class Hero {
         this.gold = gold;
     }
 
-    public int getPotion() {
-        return potion;
+    public int getHealingPotion() {
+        return healingPotion;
     }
 
-    public void setPotion(int potion) {
-        this.potion = potion;
+    public void setHealingPotion(int healingPotion) {
+        this.healingPotion = healingPotion;
+    }
+
+    public int getManaPotion() {
+        return manaPotion;
+    }
+
+    public void setManaPotion(int manaPotion) {
+        this.manaPotion = manaPotion;
     }
 
     public int getMana() {

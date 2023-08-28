@@ -47,7 +47,8 @@ public class HeroServiceImpl implements HeroService {
             hero.setHealth(updatedHero.getHealth());
             hero.setMana(updatedHero.getMana());
             hero.setGold(updatedHero.getGold());
-            hero.setPotion(updatedHero.getPotion());
+            hero.setHealingPotion(updatedHero.getHealingPotion());
+            hero.setManaPotion(updatedHero.getManaPotion());
             hero.setSkillPoints(updatedHero.getSkillPoints());
             // ... Update other attributes as needed ...
 

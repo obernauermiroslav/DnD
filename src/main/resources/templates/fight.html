@@ -13,7 +13,19 @@
     <button type="submit" class="btn btn-secondary" data-effect="Heals you up to 30 health">Use Healing potion</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <button type="button" class="btn btn-secondary" onclick="toggleFormVisibility()">Spells</button>
+  <form id="manaForm" action="/mana" method="post">
+    <button type="submit" class="btn btn-secondary" data-effect="Restores 20 mana">Use Mana potion</button>
+    <input type="hidden" name="heroId" value="1" />
+  </form>
+  <form id="fight" class="btn btn-secondary" action="/fight" method="post">
+    <input type="hidden" name="startingBonus" value="${startingBonus}" />
+    <input type="hidden" name="heroId" th:value="${hero.id}">
+    <input type="hidden" name="enemyId" th:if="${enemy != null}" th:value="${enemy.id}">
+    <input type="submit" value="Fight!" th:if="${enemy != null}" style="cursor: url(https://cur.cursors-4u.net/games/gam-4/gam376.cur), auto !important;">
+  </form>
+</div>
+<div id="spells">
+<button type="button"  class="btn btn-secondary" onclick="toggleFormVisibility()">Spells</button>
   <form class="spellCast" action="/healing" method="post" style="display: none;">
     <button id="healing" class="btn btn-secondary" type="submit" data-effect="Heals you up to 25 health">Healing</button>
     <input type="hidden" name="heroId" value="1" />
@@ -38,12 +50,6 @@
     <button id="life_steal" class="btn btn-secondary" type="submit" data-effect="Steals up to 15 health from living enemy and gives it to you">Life Steal</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <form id="fight" class="btn btn-secondary" action="/fight" method="post">
-    <input type="hidden" name="startingBonus" value="${startingBonus}" />
-    <input type="hidden" name="heroId" th:value="${hero.id}">
-    <input type="hidden" name="enemyId" th:if="${enemy != null}" th:value="${enemy.id}">
-    <input type="submit" value="Fight!" th:if="${enemy != null}" style="cursor: url(https://cur.cursors-4u.net/games/gam-4/gam376.cur), auto !important;">
-  </form>
 </div>
 <div class="hero-container">
   <h2><span th:text="${hero.name}"></span></h2>
@@ -51,7 +57,8 @@
   <p>Attack: <span th:text="${hero.attack}"></span></p>
   <p>Defense: <span th:text="${hero.defense}"></span></p>
   <p>Mana: <span th:text="${hero.mana}"></span></p>
-  <p>Healing potion: <span th:text="${hero.potion}"></span></p>
+  <p>Healing potion: <span th:text="${hero.healingPotion}"></span></p>
+  <p>Mana potion: <span th:text="${hero.manaPotion}"></span></p>
 </div>
 <div class="enemy-container" th:if="${enemy != null}">
   <h2><span th:text="${enemy.name}"></span></h2>

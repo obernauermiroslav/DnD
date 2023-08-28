@@ -150,8 +150,11 @@ public class ShopController {
                             hero.setHasShield(true);
                             hero.equipItem(itemToBuy);
                         } else if (itemToBuy.getName().equals("Healing Potion")) {
-                            hero.setPotion(hero.getPotion() + 1);
-                        } else {
+                            hero.setHealingPotion(hero.getHealingPotion() + 1);
+                        } else if (itemToBuy.getName().equals("Mana Potion")) {
+                            hero.setManaPotion(hero.getManaPotion() + 1);
+                        } 
+                        else {
                             hero.equipItem(itemToBuy);
                         }
 

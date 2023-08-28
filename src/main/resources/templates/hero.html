@@ -72,7 +72,10 @@
           Gold: <span th:text="${hero.gold}"></span>
         </p>
         <p th:if="${hero != null}">
-          Healing potion: <span th:text="${hero.potion}"></span>
+          Healing potion: <span th:text="${hero.healingPotion}"></span>
+        </p>
+        <p th:if="${hero != null}">
+          Mana potion: <span th:text="${hero.manaPotion}"></span>
         </p>
         <p th:if="${hero != null}">
           Runes: <span th:text="${hero.runes}"></span>
