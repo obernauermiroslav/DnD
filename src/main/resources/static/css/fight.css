@@ -34,10 +34,10 @@ h2 {
 .hero-container {
     width: 135px;
     position: absolute;
-    margin-top: -80px;
+    margin-top: -83px;
     margin-left: -163px;
     background-color: rgba(255, 255, 255, 0.2);
-    border: 3px inset #ccc;
+    border: 4px double #ccc;
     padding: 7px;
     align-items: center;
 }
@@ -49,10 +49,10 @@ h2 {
 
 .enemy-container {
     position: absolute;
-    margin-top: -80px;
+    margin-top: -83px;
     margin-left: 153px;
     background-color: rgba(255, 255, 255, 0.2);
-    border: 3px inset #ccc;
+    border: 4px double #ccc;
     padding: 7px;
     width: 130px;
     height: 213px;
@@ -67,7 +67,7 @@ h2 {
 
 .results {
     position: absolute;
-    margin-top: 365px;
+    margin-top: 367px;
     margin-left: -9px;
     margin-bottom: 2px;
     max-width: 800px;
@@ -90,6 +90,7 @@ h2 {
 .btn-secondary{
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
+
 
 .btn-secondary form {
     position: absolute;

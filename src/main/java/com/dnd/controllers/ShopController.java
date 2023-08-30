@@ -8,6 +8,7 @@ import com.dnd.repositories.HeroRepository;
 import com.dnd.repositories.ItemsRepository;
 import com.dnd.services.HeroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -92,6 +94,103 @@ public class ShopController {
         return Collections.emptyList();
     }
 
+    @PostMapping("/get/shop/buy/{itemId}")
+public ResponseEntity buyItem(@PathVariable Long itemId) {
+    var response = new HashMap<String, Object>();
+
+    Items itemToBuy = itemsRepository.findById(itemId).orElse(null);
+    if (itemToBuy != null) {
+        Hero hero = heroService.getYourHero();
+        if (hero != null) {
+            // Check if the hero already has the same spell equipped
+            if (itemToBuy.getType() == ItemType.SPELL) {
+                boolean hasSameSpell = hero.getEquippedItems().stream()
+                        .anyMatch(existingSpell -> existingSpell.getName().equals(itemToBuy.getName()));
+
+                if (hasSameSpell) {
+                    response.put("message", "Spell learned already!");
+                } else {
+                    // Buy the spell and update the hero's equipment
+                    int heroGold = hero.getGold();
+                    int itemPrice = itemToBuy.getPrice();
+
+                    if (heroGold >= itemPrice) {
+                        hero.setGold(heroGold - itemPrice);
+                        hero.equipItem(itemToBuy);
+                        heroService.updateHeroById(hero.getId(), hero);
+                        response.put("message", "Item purchased!");
+                    } else {
+                        response.put("message", "Not enough gold!");
+                    }
+                }
+            } else {
+                // For non-spell items, proceed as before
+                Items existingItemOfType = hero.getEquippedItems().stream()
+                        .filter(item -> item.getType() == itemToBuy.getType())
+                        .findFirst()
+                        .orElse(null);
+
+                if (existingItemOfType != null) {
+                    if (!existingItemOfType.getName().equals(itemToBuy.getName())) {
+                        hero.unequipItem(existingItemOfType);
+                    } else {
+                        response.put("message", "You already have that item!");
+                        // Fetch the latest items from the database
+                        List<Items> availableItems = (List<Items>) itemsRepository.findAll();
+                        // Add the available items to the model
+                        response.put("items", availableItems);
+                        response.put("heroGold", hero.getGold());
+                       return ResponseEntity.ok(response);
+                    }
+                }
+
+                int heroGold = hero.getGold();
+                int itemPrice = itemToBuy.getPrice();
+
+                if (heroGold >= itemPrice) {
+                    // Update hero's equipment and gold
+                    if (itemToBuy.getType() == ItemType.SHIELD) {
+                        // Set hasShield to true since the hero bought a shield
+                        hero.setHasShield(true);
+                        hero.equipItem(itemToBuy);
+                    } else if (itemToBuy.getName().equals("Healing Potion")) {
+                        hero.setHealingPotion(hero.getHealingPotion() + 1);
+                    } else if (itemToBuy.getName().equals("Mana Potion")) {
+                        hero.setManaPotion(hero.getManaPotion() + 1);
+                    } 
+                    else {
+                        hero.equipItem(itemToBuy);
+                    }
+
+                    hero.setGold(heroGold - itemPrice);
+                    heroService.updateHeroById(hero.getId(), hero);
+                    response.put("message", "Item purchased!");
+                } else {
+                    response.put("message", "Not enough gold!");
+                }
+            }
+        } else {
+            response.put("message", "Hero not found!");
+        }
+    } else {
+        response.put("message", "Item not found!");
+    }
+
+    // Fetch the latest items from the database
+    List<Items> availableItems = (List<Items>) itemsRepository.findAll();
+    // Add the available items to the model
+    response.put("items", availableItems);
+
+    Hero updatedHero = heroService.getYourHero();
+    if (updatedHero != null) {
+        response.put("heroGold", updatedHero.getGold());
+    }
+
+    return ResponseEntity.ok(response);
+}
+
+
+/* 
     @PostMapping("/shop/buy/{itemId}")
     public String buyItem(@PathVariable Long itemId, Model model) {
         Items itemToBuy = itemsRepository.findById(itemId).orElse(null);
@@ -184,4 +283,5 @@ public class ShopController {
 
         return "shop";
     }
+    */
 }

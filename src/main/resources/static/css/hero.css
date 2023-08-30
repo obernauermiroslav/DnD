@@ -243,7 +243,6 @@ html body {
 }
 
 .item-button:hover {
-    background-color: #f2f2f2;
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 
@@ -263,6 +262,11 @@ html body {
 .item-button {
     margin-right: 5px; 
 }
+
+.item-container:hover {
+    transform: scale(1.07);
+    transition: transform 0.2s ease-in-out; 
+  }
 
 #upgradeMessageItem{
     padding: 5px;

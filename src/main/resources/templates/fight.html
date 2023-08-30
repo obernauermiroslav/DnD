@@ -10,11 +10,11 @@
   <button onclick="location.href='/readmeFight'" style="cursor: url(https://cur.cursors-4u.net/games/gam-11/gam1070.png), auto !important;">Readme</button>
   <button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
   <form id="healForm" action="/heal" method="post">
-    <button type="submit" class="btn btn-secondary" data-effect="Heals you up to 30 health">Use Healing potion</button>
-    <input type="hidden" name="heroId" value="1" />
+    <button type="submit" class="btn btn-secondary" data-effect="Heals you up to 30 health" style="cursor: url('../images/health.cur'), auto !important;">Use Healing potion</button>
+    <input type="hidden" name="heroId" value="1"  />
   </form>
   <form id="manaForm" action="/mana" method="post">
-    <button type="submit" class="btn btn-secondary" data-effect="Restores 20 mana">Use Mana potion</button>
+    <button type="submit" class="btn btn-secondary" data-effect="Restores 20 mana" style="cursor: url('../images/mana.cur'), auto !important;" >Use Mana potion</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
   <form id="fight" class="btn btn-secondary" action="/fight" method="post">
@@ -47,7 +47,7 @@
     <input type="hidden" name="heroId" value="1" />
   </form>
   <form class="spellCast" action="/lifesteal" method="post" style="display: none;">
-    <button id="life_steal" class="btn btn-secondary" type="submit" data-effect="Steals up to 15 health from living enemy and gives it to you">Life Steal</button>
+    <button id="life_steal" class="btn btn-secondary" type="submit" data-effect="Steals up to 20 health from living enemy and heals you">Life Steal</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
 </div>
@@ -122,7 +122,7 @@
     const showInfoBtn = document.getElementById('showInfoBtn');
     const enemyInfo = document.querySelector('.enemy-info');
     const enemyPictures = document.getElementById('enemy-pictures');
-    const enemyName = /*[[${enemy.name}]]*/ ''; // Get the enemy name from the model
+    const enemyName = /*[[${enemy.name}]]*/ ''; 
 
     showInfoBtn.addEventListener('mouseover', function() {
       const imageId = enemyName.replace(' ', '_').toLowerCase();
