@@ -271,7 +271,11 @@ html body {
     transition: transform 0.2s ease-in-out; 
   }
 
+<<<<<<< HEAD
   #upgradeMessageItem {
+=======
+#upgradeMessageItem{
+>>>>>>> 721c10fa67cb24f19505402d3514049fadc0cd10
     padding: 5px;
     border: 2px double white;
     background-color: rgba(255, 255, 255, 0.4);
