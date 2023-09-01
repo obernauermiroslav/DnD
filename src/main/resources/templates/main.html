@@ -6,13 +6,14 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
   </head>
   <body>
+    <div id="container">
     <h1>Hail to you champion, choose your name and profession</h1>
     <form action="/hero/save" method="post">
       <input
         type="text"
         name="heroName"
         placeholder="Enter hero name"
-        value=""
+        value="Hero"
         required
         maxlength="10"
       />
@@ -60,6 +61,7 @@
         <p th:text="${startingBonusError}"></p>
       </div>
     </form>
+  </div>
     <script>
       // Check if a profession is already chosen and disable the other
       const chosenBonus = sessionStorage.getItem("chosenBonus");

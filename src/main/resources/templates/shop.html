@@ -34,13 +34,10 @@
         <th>Healing Potion</th>
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).POTION}">
-            <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
-            >
+            <form></form>
               <input
-                type="submit"
+                th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+                type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect} , data-price=${item.price}"
@@ -54,12 +51,10 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).SPELL}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+              type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect}, data-price=${item.price}, data-mana-cost=${item.manaCost}, data-attack-bonus=${item.attackBonus}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}"
@@ -73,12 +68,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).HELMET}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+             
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+              type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price} , data-effect=${item.effect}"
@@ -92,12 +86,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).ARMOR}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+            
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+                type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type},  data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
@@ -111,12 +104,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).TROUSERS}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+             
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+              type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
@@ -130,12 +122,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).GLOVES}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+            
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+                type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
@@ -149,12 +140,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).BOOTS}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+            
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+                type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
@@ -168,12 +158,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).CLOAK}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+            
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+                type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}, data-effect=${item.effect}"
@@ -187,12 +176,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).WEAPON}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+            
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+                type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-attack-bonus=${item.attackBonus}, data-item-type=${item.type}, data-price=${item.price}, data-effect=${item.effect}"
@@ -206,12 +194,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).SHIELD}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+            
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+                type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type}, data-effect=${item.effect}, data-defense-bonus=${item.defenseBonus}, data-health-bonus=${item.healthBonus}, data-price=${item.price}"
@@ -225,12 +212,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).RING}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+            
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+                type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type},data-effect=${item.effect},  data-price=${item.price}"
@@ -244,12 +230,11 @@
         <tr th:each="item : ${items}">
           <td th:if="${item.type == T(com.dnd.models.ItemType).NECKLACE}">
             <form
-              th:action="@{/shop/buy/{itemId}(itemId=${item.id})}"
-              method="post"
-              onsubmit="saveScrollPosition()"
+            
             >
               <input
-                type="submit"
+              th:onclick="'javascript:postData(event, ' + ${item.id} + ')'"
+                type="button"
                 value="Buy"
                 class="item-button"
                 th:attr="data-item-id=${item.id},data-item-name=${item.name}, data-item-type=${item.type},data-effect=${item.effect}, data-price=${item.price}"
@@ -482,7 +467,7 @@
           const targetElement = document.getElementById(targetElementId);
 
           if (targetElement) {
-            targetElement.innerHTML = responseData.htmlContent; // Assuming your response contains HTML content
+            targetElement.innerHTML = responseData.htmlContent;
           }
 
           restoreScrollPosition();
@@ -492,37 +477,34 @@
       }
 
       function postData(event, itemId) {
-        event.preventDefault();
+    event.preventDefault();
 
-        fetch(`/shop/buy/${itemId}`, {
-          method: "POST",
-          headers: {
+    fetch(`get/shop/buy/${itemId}`, {
+        method: "POST",
+        headers: {
             "content-type": "application/json",
-          },
-        })
-          .then((response) => {
-            if (response.status === 200) {
-              return response.json();
-            } else {
-              throw new Error("Failed to fetch data");
-            }
-          })
-          .then((heroData) => {
-            const goldElement = document.getElementById("gold");
-            const messageElement = document.getElementById("message");
+        },
+    })
+    .then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error("Failed to fetch data");
+        }
+    })
+    .then(heroData => {
+        const goldElement = document.getElementById("gold");
+        const messageElement = document.getElementById("message");
+       
+        goldElement.innerHTML = `${heroData.heroGold}<br>${heroData.message}`;
 
-            if (goldElement) {
-              goldElement.textContent = heroData.heroGold;
-            }
+          
+    })
+    .catch(error => {
+        console.error("Error updating UI:", error);
+    });
+}
 
-            if (messageElement) {
-              messageElement.textContent = heroData.message || "";
-            }
-          })
-          .catch((error) => {
-            console.error("Error updating UI:", error);
-          });
-      }
 
       // Attach event listeners to each "Buy" button to handle click event
       document.addEventListener("DOMContentLoaded", function () {
