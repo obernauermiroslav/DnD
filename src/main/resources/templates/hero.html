@@ -112,13 +112,13 @@
         </div>
       </div>
       <p id="upgradeMessage" th:if="${upgradeMessage}" style="display: flex; align-items: center;">
-        <img src="/images/helmetright.png" alt="Image description" style="width: 55px; height: 55px; margin-right: 10px;">
         <span th:text="${upgradeMessage}"></span>
+        <img src="/images/helmet.png" alt="Image description" style="width: 55px; height: 55px; margin-left: 10px;">
       </p>
       <div>
         <p id="upgradeMessageItem" th:if="${not #strings.isEmpty(upgradeMessageItem)}" style="display: flex; align-items: center;">
-          <span th:text="${upgradeMessageItem}"></span>
-          <img src="/images/helmetleft.png" alt="Image description" style="width: 55px; height: 55px; margin-right: 10px;">
+          <span th:text="${upgradeMessageItem}   "></span>
+          <img src="/images/helmet.png" alt="Image description" style="width: 55px; height: 55px; margin-left: 10px;">
         </p>
         
       </div>
@@ -239,9 +239,8 @@
       </div>
       <div id="item-info-popup" class="item-popup"></div>
       <p id="bonusMessage" th:if="${bonusMessage}" style="display: flex; align-items: center;">
-        <img src="/images/victory.jpeg" alt="Image description" style="width: 45; height: 45px; margin-right: 10px;">
         <span th:utext="${bonusMessage}"></span>
-        <img src="/images/victory.jpeg" alt="Image description" style="width: 45px; height: 45px; margin-right: 10px;">
+        <img src="/images/helmet.png" alt="Image description" style="width: 45px; height: 45px; margin-left: 10px;">
       </p>
       
     </div>

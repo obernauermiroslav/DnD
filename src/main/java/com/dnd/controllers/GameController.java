@@ -105,7 +105,7 @@ public class GameController {
         int enemyAttack;
         String enemyAttackMessage = "";
         String enemySpecialAttackMessage = "";
-        if (enemy.getName().equalsIgnoreCase("Lich") || enemy.getName().equalsIgnoreCase("drake")) {
+        if (enemy.getName().equalsIgnoreCase("Lich") || enemy.getName().equalsIgnoreCase("Elemental")) {
             // Lich and Dragon ignore hero armor, so the default attack will be just the
             // enemy's attack
             heroAttack = hero.getAttack() - enemy.getDefence();
@@ -122,10 +122,10 @@ public class GameController {
         }
 
         // Check if the hero has the "Fire Shield" equipped and if the enemy is "Drake"
-        if (enemy.getName().equalsIgnoreCase("drake") && hero.hasFireShield() && Math.random() <= 0.18) {
+        if (enemy.getName().equalsIgnoreCase("Elemental") && hero.hasFireShield() && Math.random() <= 0.18) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked dragon's attack with your Fire Shield!";
-        } else if (!enemy.getName().equalsIgnoreCase("drake") && !enemy.getName().equalsIgnoreCase("lich")
+        } else if (!enemy.getName().equalsIgnoreCase("Elemental") && !enemy.getName().equalsIgnoreCase("lich")
                 && hero.hasShield() && Math.random() <= 0.16) {
             enemyAttack = 0;
             enemyAttackMessage = "You blocked the enemy's attack with your shield!";
@@ -712,9 +712,9 @@ public class GameController {
                     Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
 
                     if (enemy != null) {
-                        if (enemy.getName().equalsIgnoreCase("drake")) {
+                        if (enemy.getName().equalsIgnoreCase("elemental")) {
                             model.addAttribute("spellCastingResult",
-                                    "Firebolt cannot be cast on 'fire' drake");
+                                    "Firebolt cannot be cast on 'fire' elemental");
                         } else {
                             // Deduct the mana cost from the hero's total mana points
                             hero.setMana(hero.getMana() - fireBoltManaCost);

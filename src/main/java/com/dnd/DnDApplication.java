@@ -157,7 +157,7 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy4);
         Enemies enemy5= new Enemies(5L,"Troll", 290,290,22,13,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);
-        Enemies enemy6= new Enemies(6L,"Drake", 345,345,26,15,"Watch out, he breathes fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
+        Enemies enemy6= new Enemies(6L,"Elemental", 345,345,26,15,"Being of pure fire, his attacks ignore your armor, and cannot be blocked with normal shield.");
         enemiesRepository.save(enemy6);
         Enemies enemy7= new Enemies(7L,"Minotaur", 380,380,27,16,"Beware his horns, 2-handed axe and RAGE!");
         enemiesRepository.save(enemy7);

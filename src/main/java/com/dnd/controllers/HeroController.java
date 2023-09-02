@@ -89,10 +89,10 @@ public class HeroController {
                 hero.setHealth(hero.getHealth() + 65);
                 hero.setMaxHealth(hero.getMaxHealth() + 65);
                 hero.setAttack(hero.getAttack() + 2);
-                hero.setDefense(hero.getDefense() + 2);
+                hero.setDefense(hero.getDefense() + 3);
                 hero.setBaseAttack(hero.getBaseAttack() + 2);
-                hero.setBaseDefense(hero.getBaseDefense() + 2);
-                hero.setHealingPotion(2);
+                hero.setBaseDefense(hero.getBaseDefense() + 3);
+                hero.setHealingPotion(3);
                 hero.setRunes(3);
                 model.addAttribute("warrior", "warrior bonuses:");
             } else if ("mage".equals(startingBonus)) {
@@ -148,7 +148,7 @@ public class HeroController {
                         itemToUpgrade.setAttackBonus(itemToUpgrade.getAttackBonus() + 1);
                         hero.setRunes(hero.getRunes() - 1);
                         redirectAttributes.addFlashAttribute("upgradeMessageItem",
-                                itemToUpgrade.getName() + " upgraded:\n+1 attack.");
+                                itemToUpgrade.getName() + " upgraded:\n+1 attack.  ");
 
                         // Calculate the attack bonus difference after the upgrade
                         int attackBonusDifference = itemToUpgrade.getAttackBonus() - attackBonusBeforeUpgrade;
@@ -182,7 +182,7 @@ public class HeroController {
 
                         hero.setRunes(hero.getRunes() - 1);
                         redirectAttributes.addFlashAttribute("upgradeMessageItem",
-                                itemToUpgrade.getName() + " upgraded: +1 defense, +2 health.");
+                                itemToUpgrade.getName() + " upgraded: +1 defense, +2 health.  ");
 
                         // Calculate the health bonus difference after the upgrade
                         int healthBonusDifference = itemToUpgrade.getHealthBonus() - healthBonusBeforeUpgrade;

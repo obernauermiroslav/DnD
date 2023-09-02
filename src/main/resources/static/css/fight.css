@@ -32,52 +32,78 @@ h2 {
 }
 
 .hero-container {
-    width: 135px;
+    width: 273px;
+    height: 330px;
     position: absolute;
-    margin-top: -83px;
-    margin-left: -163px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 4px double #ccc;
-    padding: 7px;
+    margin-top: -35px;
+    margin-left: -610px;
+    background-image: url('/images/ram4.png'); /* Change to the URL of your new background image */
+    background-size: cover; /* Adjust the sizing of the background image */
+    background-repeat: no-repeat;
+    padding: 5px;
     align-items: center;
+    z-index: -1;
+    
 }
+
 
 .hero-container h2,
 .hero-container p {
-    margin-bottom: -2px;
+    margin-left: 90px;
+    margin-top: 40px; 
+    margin-bottom: -25px;
 }
 
 .enemy-container {
+    width: 273px;
+    height: 330px;
     position: absolute;
-    margin-top: -83px;
-    margin-left: 153px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 4px double #ccc;
-    padding: 7px;
-    width: 130px;
-    height: 213px;
+    margin-top: -35px;
+    margin-left: 650px;
+    background-image: url('/images/ram4.png'); /* Change to the URL of your new background image */
+    background-size: cover; /* Adjust the sizing of the background image */
+    background-repeat: no-repeat;
+    padding: 5px;
     align-items: center;
+    z-index: 0;
+    
 }
 
 .enemy-container h2,
 .enemy-container p {
-    margin-bottom: -2px;
+    margin-left: 90px;
+    margin-top: 40px; 
+    margin-bottom: -25px;
 }
 
 
 .results {
+    background-image: url('/images/stone2.png'); /* Change to the URL of your new background image */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     position: absolute;
-    margin-top: 367px;
-    margin-left: -9px;
+    margin-top: -115px;
+    margin-left: 20px;
     margin-bottom: 2px;
     max-width: 800px;
     background-color: rgba(255, 255, 255, 0.2);
-    border: 7px double #ccc;
     border-radius: 5px;
-    padding: 5px;
-    width: 285px;
-    height: 180px;
+    padding: 15px;
+    width: 265px;
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Center-align text within the div */
 }
+
+.results h2,
+.results p {
+    margin: 3px; /* Add some spacing between elements if needed */
+}
+
+
 
 #buttons {
     position: absolute;
@@ -126,49 +152,73 @@ h2 {
     cursor: url('../images/spell.cur'), auto !important;
   }
 
-.enemy-info {
-    display: none;
-    position: absolute;
-    margin-top: -140px;
-    margin-left: 160px;
-    border: 1px solid #ccc;
-    width: 220px;
-    padding: 7px;
+
+
+  .enemy-info {
+    background-image: url('/images/ram2.png'); /* Change to the URL of your new background image */
+    background-size: cover; /* Adjust the sizing of the background image */
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center; /* Vertically center align items */
+    overflow: hidden;
+    width: 390px;
+    margin-left: -370px;
+    margin-top: -25px;
+    height: 265px;
 }
 
-.enemy-info p{
-    margin-bottom: 10px;
+.enemy-info .enemy-picture {
+    margin-left: 50px; /* Add spacing between images */
+    margin-top: -110px;
+    width: 140px; /* Set a fixed width for all images */
+    height: 140px; /* Set a fixed height for all images */
+}
+
+#dragon, #minotaur  {
+    margin-left: 50px; /* Add spacing between images */
+    margin-top: -85px;
+    width: 140px; /* Set a fixed width for dragon and minotaur */
+    height: 160px; /* Set a fixed height for dragon and minotaur */
+}
+#orc{
+    margin-left: 50px; /* Add spacing between images */
+    margin-top: -110px;
+    width: 140px; /* Set a fixed width for dragon and minotaur */
+    height: 160px; /* Set a fixed height for dragon and minotaur */
+}
+
+#troll {
+    margin-left: 40px; 
+    margin-top: -140px;
+    width: 160px; 
+    height: 160px; 
+}
+#medusa{
+    margin-left: 46px; 
+    margin-top: -105px;
+    width: 153px; 
+    height: 153px; 
+}
+#giant_rat{
+    margin-left: 46px; 
+    margin-top: -115px;
+    width: 165px; 
+    height: 160px; 
+}
+
+.enemy-info p {
+    margin-right: 10px; 
+    margin-left: 210px;
+    margin-top: 90px;
+    width: 130px;
 }
 
 #showInfoBtn{
-    margin-top: 70px;
+    position: relative;
+    margin-top: 90px;
+    margin-left: 100px;
+   
+   
 }
 
-.enemy-info-btn:hover .enemy-info {
-    display: block;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 8px outset silver;
-    border-radius: 5px;
-}
-.enemy-info.active {
-    display: block;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 8px outset silver;
-    border-radius: 5px;
-}
-.enemy-picture.active {
-    display: block;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 8px outset silver;
-    border-radius: 5px;
-}
 
-.tooltip {
-    position: absolute;
-    background-color: #333;
-    color: #fff;
-    padding: 6px;
-    border-radius: 8px;
-    font-size: 15px;
-    display: none;
-  }

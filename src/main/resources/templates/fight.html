@@ -46,7 +46,7 @@
     <button id="death_ray" class="btn btn-secondary" type="submit" data-effect="Deals 100 damage and ignores armor">Death Ray</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <form class="spellCast" action="/lifesteal" method="post" style="display: none;">
+  <form class="spellCast" action="/lifesteal" method="post" style="display: none; z-index: 2;">
     <button id="life_steal" class="btn btn-secondary" type="submit" data-effect="Steals up to 20 health from living enemy and heals you">Life Steal</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
@@ -67,20 +67,20 @@
   <p>Defense: <span th:text="${enemy.defence}"></span></p>
   <div class="enemy-info-btn">
     <button type="button" class="btn btn-secondary" id="showInfoBtn">Show Info</button>
-    <div class="enemy-info">
+    <div class="enemy-info" style="display: none ">
       <p th:text="${enemy.info}"></p>
       <div id="enemy-pictures">
-        <img class="enemy-picture" id="figurine" src="/images/figurine.jpg" alt="dummy" style="display: none; width: 220px; height: 180px;">
-        <img class="enemy-picture" id="giant_rat" src="/images/giant_rat.png" alt="rat" style="display: none; width: 225px; height: 185px;">
-        <img class="enemy-picture" id="goblin" src="/images/goblin.jpg" alt="goblin" style="display: none; width: 160px; height: 230px;">
-        <img class="enemy-picture" id="orc" src="/images/orc.jpeg" alt="orc" style="display: none; width: 160px; height: 230px;">
-        <img class="enemy-picture" id="troll" src="/images/troll.jpg" alt="troll" style="display: none; width: 205px; height: 230px;">
-        <img class="enemy-picture" id="drake" src="/images/drake.jpg" alt="drake" style="display: none; width: 220px; height: 180px;">
-        <img class="enemy-picture" id="minotaur" src="/images/minotaur.png" alt="minotaur" style="display: none; width: 160px; height: 230px;">
-        <img class="enemy-picture" id="behemoth" src="/images/behemoth.jpg" alt="behemoth" style="display: none; width: 220px; height: 180px;">
-        <img class="enemy-picture" id="medusa" src="/images/medusa.png" alt="medusa" style="display: none; width: 200px; height: 230px;">
-        <img class="enemy-picture" id="lich" src="/images/lich.jpg" alt="lich" style="display: none; width: 170px; height: 230px;">
-        <img class="enemy-picture" id="dragon" src="/images/dragon.png" alt="dragon" style="display: none; width: 220px; height: 180px;">
+        <img class="enemy-picture" id="figurine" src="/images/figurine.png" alt="dummy" style="display: none">
+        <img class="enemy-picture" id="giant_rat" src="/images/giant_rat.png" alt="rat" style="display: none">
+        <img class="enemy-picture" id="goblin" src="/images/goblin.png" alt="goblin" style="display: none">
+        <img class="enemy-picture" id="orc" src="/images/orc2.png" alt="orc" style="display: none">
+        <img class="enemy-picture" id="troll" src="/images/troll.png" alt="troll" style="display: none">
+        <img class="enemy-picture" id="elemental" src="/images/elemental.png" alt="elemental" style="display: none">
+        <img class="enemy-picture" id="minotaur" src="/images/minotaur.png" alt="minotaur" style="display: none">
+        <img class="enemy-picture" id="behemoth" src="/images/behemoth.jpg" alt="behemoth" style="display: none">
+        <img class="enemy-picture" id="medusa" src="/images/medusa.png" alt="medusa" style="display: none">
+        <img class="enemy-picture" id="lich" src="/images/lich.png" alt="lich" style="display: none">
+        <img class="enemy-picture" id="dragon" src="/images/dragon.png" alt="dragon" style="display: none">
       </div>
     </div>
   </div>
@@ -101,6 +101,14 @@
 </html>
 
 <script th:inline="javascript">
+
+function toggleFormVisibility() {
+    const spellForms = document.querySelectorAll('.spellCast');
+    spellForms.forEach(form => {
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     /* Check if heroLost flag is true (hero has lost) and disable the buttons */
     var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
@@ -122,54 +130,30 @@
     const showInfoBtn = document.getElementById('showInfoBtn');
     const enemyInfo = document.querySelector('.enemy-info');
     const enemyPictures = document.getElementById('enemy-pictures');
-    const enemyName = /*[[${enemy.name}]]*/ ''; 
+    const enemyName = /*[[${enemy.name}]]*/ '';
 
-    showInfoBtn.addEventListener('mouseover', function() {
-      const imageId = enemyName.replace(' ', '_').toLowerCase();
-      const image = enemyPictures.querySelector(`#${imageId}`);
-      if (image) {
-        image.style.display = 'block';
-      }
+    showInfoBtn.addEventListener('mouseenter', function () {
+        const imageId = enemyName.replace(' ', '_').toLowerCase();
+        const image = enemyPictures.querySelector(`#${imageId}`);
+        if (image) {
+            image.style.display = 'block';
+        }
+        enemyInfo.style.display = 'block'; // Show the info container on hover
     });
 
-    showInfoBtn.addEventListener('mouseout', function() {
-      const imageId = enemyName.replace(' ', '_').toLowerCase();
-      const image = enemyPictures.querySelector(`#${imageId}`);
-      if (image) {
-        image.style.display = 'none';
-      }
+    showInfoBtn.addEventListener('mouseleave', function () {
+        const imageId = enemyName.replace(' ', '_').toLowerCase();
+        const image = enemyPictures.querySelector(`#${imageId}`);
+        if (image) {
+            image.style.display = 'none';
+        }
+        enemyInfo.style.display = 'none'; // Hide the info container when not hovering
     });
 
-    showInfoBtn.addEventListener('click', function() {
+    showInfoBtn.addEventListener('click', function () {
         enemyInfo.classList.toggle('active');
     });
-  });
-
-  const buttons = document.querySelectorAll('.btn-secondary[data-effect]');
-  const tooltip = document.createElement('div');
-  tooltip.classList.add('tooltip');
-  document.body.appendChild(tooltip);
-
-  buttons.forEach(button => {
-    button.addEventListener('mouseover', function(e) {
-      const effect = e.target.getAttribute('data-effect');
-      tooltip.innerText = effect;
-      tooltip.style.top = `${e.clientY + 12}px`;
-      tooltip.style.left = `${e.clientX + 18}px`;
-      tooltip.style.display = 'block';
-    });
-
-    button.addEventListener('mouseout', function() {
-      tooltip.style.display = 'none';
-    });
-  });
-
-  function toggleFormVisibility() {
-    const spellForms = document.querySelectorAll('.spellCast');
-    spellForms.forEach(form => {
-      form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    });
-  }
+  }); 
 </script>
 </body>
 </html>

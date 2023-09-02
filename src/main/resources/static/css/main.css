@@ -12,19 +12,25 @@ body {
 }
 
 #container {
-    background-image: url('/images/main.jpg');
+    background-image: url('/images/ram3.png');
     background-size: contain; /* Ensure the entire image fits inside the container */
     background-repeat: no-repeat;
     background-position: center center;
-    height: 610px;
-    width: 510px;
+    height: 620px;
+    width: 520px;
   }
+
+  @font-face {
+    font-family: 'MedievalFantasyFont'; /* Define a font family name */
+    src: url('/fonts/medieval3.ttf') format('truetype'); /* Replace with the actual path to your font file */
+    
+}
   
 h1 {
- width:350px;
-    height: 24px;
-    font-size: 25px;
-    margin-top: 80px;
+    font-family: 'MedievalFantasyFont', sans-serif; 
+    width:350px;
+    height: 30px;
+    margin-top: 200px;
     margin-left: 100px;
 }
 
@@ -32,13 +38,11 @@ h1 {
     font-size: 24px; /* Adjust the font size to your preference */
   }
   
-
-
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 80px;
+    margin-top: 50px;
 }
 
 input[type="text"] {
@@ -52,17 +56,16 @@ input[type="text"] {
 }
 
 button[type="submit"] {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: #fff;
-    border: 5px double darkblue;
-    border-radius: 5px;
+    background-color: transparent; /* Set the background color to transparent */
+    margin-top: 6px;
+    padding: 4px 15px; /* Note the correct value for padding */
+    font-size: 18px;
+    color: black;
+    border: none; /* Remove the button border if needed */
 }
 
+
 button[type="submit"]:hover {
-   
-    background-color: #0056b3;
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 
@@ -72,7 +75,7 @@ button[type="submit"]:hover {
     gap: 10px;
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 .starting-bonus label {
