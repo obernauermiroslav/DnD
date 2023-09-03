@@ -9,6 +9,6 @@ Here are some screenshots:
 ![App Screenshot](./src/main/resources/screenshots/2.jpg)
 ![App Screenshot](./src/main/resources/screenshots/3.jpg)
 ![App Screenshot](./src/main/resources/screenshots/4.jpg)
-![App Screenshot](./src/main/resources/screenshots/5.jpg)
-![App Screenshot](./src/main/resources/screenshots/6.jpg)
+![App Screenshot](./src/main/resources/screenshots/5.png)
+![App Screenshot](./src/main/resources/screenshots/6.png)
 
