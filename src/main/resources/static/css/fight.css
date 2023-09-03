@@ -35,17 +35,15 @@ h2 {
     width: 273px;
     height: 330px;
     position: absolute;
-    margin-top: -35px;
-    margin-left: -610px;
+    margin-top: -50px;
+    margin-left: -700px;
     background-image: url('/images/ram4.png'); /* Change to the URL of your new background image */
     background-size: cover; /* Adjust the sizing of the background image */
     background-repeat: no-repeat;
     padding: 5px;
     align-items: center;
     z-index: -1;
-    
 }
-
 
 .hero-container h2,
 .hero-container p {
@@ -56,40 +54,42 @@ h2 {
 
 .enemy-container {
     width: 273px;
-    height: 330px;
+    height: 370px;
     position: absolute;
-    margin-top: -35px;
-    margin-left: 650px;
-    background-image: url('/images/ram4.png'); /* Change to the URL of your new background image */
+    margin-top: -125px;
+    margin-left: 780px;
+    background-image: url('/images/fight.png'); /* Change to the URL of your new background image */
     background-size: cover; /* Adjust the sizing of the background image */
     background-repeat: no-repeat;
     padding: 5px;
     align-items: center;
-    z-index: 0;
-    
+    z-index: 0; 
 }
 
-.enemy-container h2,
 .enemy-container p {
     margin-left: 90px;
-    margin-top: 40px; 
-    margin-bottom: -25px;
+    margin-top: 10px; /* Decrease margin-top to reduce space between h2 and p */
+    margin-bottom: 5px;
 }
-
+.enemy-container h2{
+    margin-left: 90px;
+    margin-top: 115px; /* Decrease margin-top to reduce space between h2 and p */
+    margin-bottom: 5px;
+}
 
 .results {
     background-image: url('/images/stone2.png'); /* Change to the URL of your new background image */
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: absolute;
-    margin-top: -115px;
-    margin-left: 20px;
+    margin-top: -140px;
+    margin-left: 50px;
     margin-bottom: 2px;
     max-width: 800px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     padding: 15px;
-    width: 265px;
+    width: 400px;
     height: 170px;
     display: flex;
     flex-direction: column;
@@ -103,11 +103,9 @@ h2 {
     margin: 3px; /* Add some spacing between elements if needed */
 }
 
-
-
 #buttons {
     position: absolute;
-    margin-top: -420px;
+    margin-top: -440px;
     display: inline-flex;
     gap: 10px;
     padding: 30px;
@@ -139,7 +137,7 @@ h2 {
 
 #spells {
     position: absolute;
-    margin-top: -355px;
+    margin-top: -375px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -152,8 +150,6 @@ h2 {
     cursor: url('../images/spell.cur'), auto !important;
   }
 
-
-
   .enemy-info {
     background-image: url('/images/ram2.png'); /* Change to the URL of your new background image */
     background-size: cover; /* Adjust the sizing of the background image */
@@ -161,47 +157,47 @@ h2 {
     display: flex;
     align-items: center; /* Vertically center align items */
     overflow: hidden;
-    width: 390px;
-    margin-left: -370px;
-    margin-top: -25px;
-    height: 265px;
+    width: 380px;
+    margin-left: -440px;
+    margin-top: -65px;
+    height: 257px;
 }
 
 .enemy-info .enemy-picture {
     margin-left: 50px; /* Add spacing between images */
-    margin-top: -110px;
+    margin-top: -120px;
     width: 140px; /* Set a fixed width for all images */
     height: 140px; /* Set a fixed height for all images */
 }
 
 #dragon, #minotaur  {
     margin-left: 50px; /* Add spacing between images */
-    margin-top: -85px;
+    margin-top: -100px;
     width: 140px; /* Set a fixed width for dragon and minotaur */
     height: 160px; /* Set a fixed height for dragon and minotaur */
 }
 #orc{
     margin-left: 50px; /* Add spacing between images */
-    margin-top: -110px;
+    margin-top: -115px;
     width: 140px; /* Set a fixed width for dragon and minotaur */
     height: 160px; /* Set a fixed height for dragon and minotaur */
 }
 
 #troll {
     margin-left: 40px; 
-    margin-top: -140px;
+    margin-top: -150px;
     width: 160px; 
     height: 160px; 
 }
 #medusa{
     margin-left: 46px; 
-    margin-top: -105px;
+    margin-top: -110px;
     width: 153px; 
     height: 153px; 
 }
 #giant_rat{
     margin-left: 46px; 
-    margin-top: -115px;
+    margin-top: -120px;
     width: 165px; 
     height: 160px; 
 }

@@ -153,7 +153,7 @@ public class DnDApplication implements CommandLineRunner {
         enemiesRepository.save(enemy2);
         Enemies enemy3 = new Enemies(3L,"Goblin", 150,150,16,8,"He is small, mean, armed with mace and can steal your money if you are not carefull.");
         enemiesRepository.save(enemy3);
-        Enemies enemy4= new Enemies(4L,"Orc", 235,235,19,10,"This fearless warrior is armed with greatsword and leather armor.");
+        Enemies enemy4= new Enemies(4L,"Orc", 235,235,19,10,"This fearless warrior is armed with 2 axes and leather armor.");
         enemiesRepository.save(enemy4);
         Enemies enemy5= new Enemies(5L,"Troll", 290,290,22,13,"He stinks, carries big two handed club and if he hits you, his smell will not bother you anymore.  ");
         enemiesRepository.save(enemy5);

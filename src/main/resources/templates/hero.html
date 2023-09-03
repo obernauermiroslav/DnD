@@ -10,13 +10,6 @@
   <body>
     <div class="container">
       <div id="hero-table">
-        <h3 id="heroName">
-          <span th:if="${hero != null}">
-            <span th:text="${hero.name}"></span>
-            <span id="chosenBonus"></span>
-          </span>
-          <span th:unless="${hero != null}">Guest</span>
-        </h3>
         <div id="buttons">
           <button
             class="btn btn-secondary"
@@ -81,6 +74,7 @@
           Runes: <span th:text="${hero.runes}"></span>
         </p>
       </div>
+      
       <div id="items-table">
         <h3>Inventory & Spells:</h3>
         <div class="equipped-items">
@@ -123,6 +117,13 @@
         
       </div>
       <div id="item-pictures">
+        <h3 id="heroName">
+          <span th:if="${hero != null}">
+            <span th:text="${hero.name}"></span>
+            <span id="chosenBonus"></span>
+          </span>
+          <span th:unless="${hero != null}">Guest</span>
+        </h3>
         <img id="myHero" src="/images/hero.jpg" alt="" />
         <img
           class="item-picture"
@@ -242,9 +243,9 @@
         <span th:utext="${bonusMessage}"></span>
         <img src="/images/helmet.png" alt="Image description" style="width: 45px; height: 45px; margin-left: 10px;">
       </p>
-      
-    </div>
-
+   
+  <img id="spellbook" src="/images/book.png">
+</div>
     <script th:inline="javascript">
       var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
 

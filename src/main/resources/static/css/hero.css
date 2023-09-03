@@ -19,23 +19,47 @@ html body {
 }
 
 #hero-table {
-    background-color: rgba(255, 255, 255, 0.2);
-    margin-left: -410px;
+    background-image: url('/images/heromiddle.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: -560px;
     position: absolute;
-    width: 175px;
+    width: 335px;
+    height: 500px;
     padding: 8px;
-    padding-left: 20px;
-    border: 5px double #ccc;
+    padding-left: 5px;
     border-radius: 10px;
     margin-top: 80px;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
     display: flex;
     flex-direction: column;
 }
-#hero-table p,
-#hero-table button {
-    margin-bottom: 10px;
+
+#hero-table p {
+  font-weight: bold;
+    font-size: 18px;
+    margin-left: 110px;
+    margin-top: 10px; /* Increase margin-top to move paragraphs down */
+    margin-bottom: 5px; /* Increase margin-bottom to add space between paragraphs */
 }
+
+#buttons {
+    padding: 5px 10px; 
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 43px;
+    margin-top: 25px; 
+    margin-left: 90px;
+}
+
+#heroName{
+    font-size: 20px;
+    margin-left: 90px;
+    margin-bottom: -27px;
+}
+
 
 #items-table{
     background-color: rgba(255, 255, 255, 0.2);
@@ -44,7 +68,7 @@ html body {
     width: 200px;
     height: 300px;
     padding: 10px;
-    border: 5px double #ccc;
+    border: 6px double #ccc;
     border-radius: 5px;
     margin-top: 80px;
     display: flex;
@@ -55,24 +79,14 @@ html body {
 
 #item-pictures {
     margin-top: 80px;
-    margin-left: 158px;
-    border: 5px double white;
+    margin-left: 150px;
+    border: 6px double white;
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.2);
     width: 330px;
     height: 503px;
   }
 
-  .btn {
-    padding: 3px 6px;
-    font-size: 13px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-bottom: 14px;
-    margin-left: 2px;
-  
-}
 
 .btn-secondary:active {
     background-color: #aaa; 
@@ -86,6 +100,7 @@ html body {
 }
 
 #upgradeMessage {
+   
     background-color: rgba(255, 255, 255, 0.3);
     border: 2px double white;
     border-radius: 8px;
@@ -102,7 +117,7 @@ html body {
     display: none;
     position: absolute;
     background-color: rgba(255, 255, 255, 0.3);
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     padding: 5px;
     z-index: 1;
     border-radius: 5px;
@@ -112,26 +127,26 @@ html body {
 }
 #health{
     position: absolute;
-    margin-left: 130px;
-    margin-top: -30px;
+    margin-left: 85px;
+    margin-top: -26px;
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 #attack{
     position: absolute;
     margin-left: 85px;
-    margin-top: -30px;
+    margin-top: -26px;
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 #defense{
     position: absolute;
-    margin-left: 95px;
-    margin-top: -30px;
+    margin-left: 85px;
+    margin-top: -26px;
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 #mana{
     position: absolute;
     margin-left: 85px;
-    margin-top: -30px;
+    margin-top: -26px;
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
 }
 #myHero{
@@ -193,55 +208,66 @@ html body {
     margin-left: 10px;
     margin-top: 120px;
 }
+
+#spellbook{
+    position: absolute;
+    margin-left: 740px;
+    margin-top: 415px;
+    height: 180px;
+    width: 230px;
+    z-index: -1;
+ 
+}
+
 #spell-picture-firebolt {
     position: absolute;
-    margin-left: 345px;
-    margin-top: 340px;
-    height: 50px;
-    width: 50px;
+    margin-left: 385px;
+    margin-top: 330px;
+    height: 40px;
+    width: 40px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
 }
 
 #spell-picture-sunder_armor {
     position: absolute;
-    margin-left: 400px;
-    margin-top: 340px;
-    height: 50px;
-    width: 52px;
+    margin-left: 485px;
+    margin-top: 330px;
+    height: 40px;
+    width: 40px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
 }
 
 #spell-picture-weakness {
     position: absolute;
-    margin-left: 460px;
-    margin-top: 340px;
-    height: 50px;
-    width: 50px;
+    margin-left: 485px;
+    margin-top: 375px;
+    height: 40px;
+    width: 40px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
 }
 
 #spell-picture-healing {
     position: absolute;
-    margin-left: 515px;
-    margin-top: 340px;
-    height: 50px;
-    width: 50px;
+    margin-left: 485px;
+    margin-top: 420px;
+    height: 40px;
+    width: 40px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
 }
 #spell-picture-death_ray{
     position: absolute;
-    margin-left: 345px;
-    margin-top: 400px;
-    height: 50px;
-    width: 50px;
+    margin-left: 385px;
+    margin-top: 375px;
+    height: 40px;
+    width: 40px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
 }
 #spell-picture-life_steal{
     position: absolute;
-    margin-left: 400px;
-    margin-top: 400px;
-    height: 50px;
-    width: 52px;
+    margin-left: 385px;
+    margin-top: 420px;
+    height: 40px;
+    width: 42px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
 }
 
