@@ -68,7 +68,6 @@ html body {
     height: 170px;
     padding: 10px;
     margin-top: 160px;
-    margin-bottom: -5px;
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -97,8 +96,6 @@ html body {
 #items-table::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.5); /* Adjust the color as needed */
 }
-
-
 
 #item-pictures {
     margin-top: 80px;
@@ -323,11 +320,13 @@ html body {
 
 .item-button {
     margin-right: 5px; 
+    margin-bottom: 3px;
 }
 
 .item-container:hover {
     transform: scale(1.07);
     transition: transform 0.2s ease-in-out; 
+   
   }
 
  
