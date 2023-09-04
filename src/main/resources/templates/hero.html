@@ -74,9 +74,7 @@
           Runes: <span th:text="${hero.runes}"></span>
         </p>
       </div>
-      
       <div id="items-table">
-        <h3>Inventory & Spells:</h3>
         <div class="equipped-items">
           <!-- Loop through equippedItems and create a new button for each item -->
           <div
@@ -245,6 +243,7 @@
       </p>
    
   <img id="spellbook" src="/images/book.png">
+  <img id="items" src="/images/items.png">
 </div>
     <script th:inline="javascript">
       var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model

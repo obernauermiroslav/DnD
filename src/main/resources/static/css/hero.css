@@ -61,21 +61,44 @@ html body {
 }
 
 
-#items-table{
-    background-color: rgba(255, 255, 255, 0.2);
+#items-table {
     position: absolute;
     margin-left: 740px;
-    width: 200px;
-    height: 300px;
+    width: 100px;
+    height: 170px;
     padding: 10px;
-    border: 6px double #ccc;
-    border-radius: 5px;
-    margin-top: 80px;
+    margin-top: 160px;
+    margin-bottom: -5px;
     display: flex;
     flex-direction: column;
     list-style: none;
     overflow-x: auto;
 }
+
+/* Hide scrollbar in Firefox */
+#items-table {
+    scrollbar-width: thin; /* Adjust the width to your preference */
+    scrollbar-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5); /* Adjust the colors as needed */
+}
+
+/* Hide scrollbar in IE/Edge */
+#items-table::-ms-scrollbar {
+    width: 6px; /* Adjust the width to your preference */
+    color: rgba(255, 255, 255, 0.5); /* Adjust the color as needed */
+}
+
+/* Hide scrollbar in webkit-based browsers (Chrome, Safari) */
+#items-table::-webkit-scrollbar {
+    width: 6px; /* Adjust the width to your preference */
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color as needed */
+}
+
+/* Customize the scrollbar thumb */
+#items-table::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the color as needed */
+}
+
+
 
 #item-pictures {
     margin-top: 80px;
@@ -212,8 +235,18 @@ html body {
 #spellbook{
     position: absolute;
     margin-left: 740px;
-    margin-top: 415px;
+    margin-top: 420px;
     height: 180px;
+    width: 230px;
+    z-index: -1;
+ 
+}
+
+#items{
+    position: absolute;
+    margin-left: 740px;
+    margin-top: 70px;
+    height: 340px;
     width: 230px;
     z-index: -1;
  
@@ -313,6 +346,7 @@ html body {
 
 #upgradeButton{
     cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
+    
 }
 #bonusMessage {
     background-color: rgba(255, 255, 255, 0.4);
