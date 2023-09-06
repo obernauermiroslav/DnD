@@ -9,14 +9,18 @@
 <div id="buttons">
   <button onclick="location.href='/readmeFight'" style="cursor: url(https://cur.cursors-4u.net/games/gam-11/gam1070.png), auto !important;">Readme</button>
   <button class="btn btn-secondary" onclick="location.href='/hero'">Hero</button>
-  <form id="healForm" action="/heal" method="post">
-    <button type="submit" class="btn btn-secondary" data-effect="Heals you up to 30 health" style="cursor: url('../images/health.cur'), auto !important;">Use Healing potion</button>
-    <input type="hidden" name="heroId" value="1"  />
-  </form>
-  <form id="manaForm" action="/mana" method="post">
-    <button type="submit" class="btn btn-secondary" data-effect="Restores 20 mana" style="cursor: url('../images/mana.cur'), auto !important;" >Use Mana potion</button>
+
+  <form id="healForm">
     <input type="hidden" name="heroId" value="1" />
+    <button type="button" class="btn btn-secondary" data-effect="Heals you up to 30 health" style="cursor: url('../images/health.cur'), auto !important;" th:onclick="'javascript:postData(event, 1)'">Use Healing potion</button>
   </form>
+  
+
+  <form id="manaForm" >
+    <input type="hidden" name="heroId" value="1" />
+    <button type="button" class="btn btn-secondary" data-effect="Restores 20 mana" style="cursor: url('../images/mana.cur'), auto !important;" th:onclick="'javascript:postData2(event, 1)'" >Use Mana potion</button>
+  </form>
+
   <form id="fight" class="btn btn-secondary" action="/fight" method="post">
     <input type="hidden" name="startingBonus" value="${startingBonus}" />
     <input type="hidden" name="heroId" th:value="${hero.id}">
@@ -53,12 +57,12 @@
 </div>
 <div class="hero-container">
   <h2><span th:text="${hero.name}"></span></h2>
-  <p>Health: <span th:text="${hero.health}"></span> / <span th:text="${hero.maxHealth}"></span></p>
+  <p>Health: <span id="herohealth" th:text="${hero.health}"></span> / <span th:text="${hero.maxHealth}"></span></p>
   <p>Attack: <span th:text="${hero.attack}"></span></p>
   <p>Defense: <span th:text="${hero.defense}"></span></p>
-  <p>Mana: <span th:text="${hero.mana}"></span></p>
-  <p>Healing potion: <span th:text="${hero.healingPotion}"></span></p>
-  <p>Mana potion: <span th:text="${hero.manaPotion}"></span></p>
+  <p>Mana: <span id="heromana" th:text="${hero.mana}"></span></p>
+  <p>Healing potion: <span id="heroHealingPotion" th:text="${hero.healingPotion}"></span></p>
+  <p>Mana potion: <span id="heroManaPotion" th:text="${hero.manaPotion}"></span></p>
 </div>
 <div class="enemy-container" th:if="${enemy != null}">
   <h2><span th:text="${enemy.name}"></span></h2>
@@ -101,59 +105,159 @@
 </html>
 
 <script th:inline="javascript">
+  /*
+  async function fetchAndReplaceData(actionUrl, targetElementId) {
+      try {
+          const response = await fetch(actionUrl);
+          if (!response.ok) {
+              throw new Error(
+                  `Failed to fetch data. Status: ${response.status} ${response.statusText}`
+              );
+          }
+          const responseData = await response.json();
+          const targetElement = document.getElementById(targetElementId);
 
-function toggleFormVisibility() {
-    const spellForms = document.querySelectorAll('.spellCast');
-    spellForms.forEach(form => {
-      form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    });
+          if (targetElement) {
+              targetElement.innerHTML = responseData.htmlContent;
+          }
+
+          restoreScrollPosition();
+      } catch (error) {
+          console.error("Error fetching and replacing data:", error);
+      }
+  }
+*/
+  function postData(event, heroId) {
+      event.preventDefault();
+let formData = new FormData();
+formData.append("heroId", heroId)
+
+      fetch(`/heal`, {
+          method: "POST",
+          headers: {
+        //      "content-type": "application/json",
+          },
+          body:formData
+      })
+          .then(response => {
+            console.log(response.status)
+              if (response.status === 200) {
+                  return response.json();
+              } else {
+                  throw new Error("Failed to fetch data");
+              }
+          })
+          .then(heroData => {
+            console.log(heroData)
+              const heroHealthElement = document.getElementById("herohealth");
+              const healingPotionCountElement = document.getElementById("heroHealingPotion");
+              const healMessageElement = document.getElementById("fightResultP");
+
+              heroHealthElement.textContent = heroData.hero.health;
+              healingPotionCountElement.textContent = heroData.hero.healingPotion;
+              healMessageElement.textContent = heroData.healMessage;
+              
+          })
+          .catch(error => {
+              console.error("Error updating UI:", error);
+          });
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    /* Check if heroLost flag is true (hero has lost) and disable the buttons */
-    var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
+  function postData2(event, heroId) {
+      event.preventDefault();
+let formData = new FormData();
+formData.append("heroId", heroId)
 
-    if (heroLost) {
-      var buttons = document.querySelectorAll('button[type="submit"]');
-      buttons.forEach(function(button) {
-        button.disabled = true;
+      fetch(`/mana`, {
+          method: "POST",
+          headers: {
+        //      "content-type": "application/json",
+          },
+          body:formData
+      })
+          .then(response => {
+            console.log(response.status)
+              if (response.status === 200) {
+                  return response.json();
+              } else {
+                  throw new Error("Failed to fetch data");
+              }
+          })
+          .then(heroData => {
+            console.log(heroData)
+              const heroManaElement = document.getElementById("heromana");
+              const manaPotionCountElement = document.getElementById("heroManaPotion");
+              const healMessageElement = document.getElementById("fightResultP");
+
+              heroManaElement.textContent = heroData.hero.mana;
+              manaPotionCountElement.textContent = heroData.hero.manaPotion;
+              healMessageElement.textContent = heroData.healMessage;
+              
+          })
+          .catch(error => {
+              console.error("Error updating UI:", error);
+          });
+  }
+
+
+  function toggleFormVisibility() {
+      const spellForms = document.querySelectorAll('.spellCast');
+      spellForms.forEach(form => {
+          form.style.display = form.style.display === 'none' ? 'block' : 'none';
       });
-      var fightForm = document.getElementById('fight');
-      if (fightForm) {
-        var fightButton = fightForm.querySelector('input[type="submit"]');
-        if (fightButton) {
-          fightButton.disabled = true;
-        }
+  }
+
+  document.addEventListener('DOMContentLoaded', async function () {
+      /* Check if heroLost flag is true (hero has lost) and disable the buttons */
+      var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
+
+      if (heroLost) {
+          var buttons = document.querySelectorAll('button[type="submit"]');
+          buttons.forEach(function (button) {
+              button.disabled = true;
+          });
+          var fightForm = document.getElementById('fight');
+          if (fightForm) {
+              var fightButton = fightForm.querySelector('input[type="submit"]');
+              if (fightButton) {
+                  fightButton.disabled = true;
+              }
+          }
       }
-    }
+      const actionUrlTemplate = "/heal";
+     // const actionUrl = actionUrlTemplate.replace("{itemId}", itemId);
+      const targetElementId = "healForm";
 
-    const showInfoBtn = document.getElementById('showInfoBtn');
-    const enemyInfo = document.querySelector('.enemy-info');
-    const enemyPictures = document.getElementById('enemy-pictures');
-    const enemyName = /*[[${enemy.name}]]*/ '';
+      // Fetch and replace data without reloading the page
+      //await fetchAndReplaceData(actionUrl, targetElementId);
+  });
 
-    showInfoBtn.addEventListener('mouseenter', function () {
-        const imageId = enemyName.replace(' ', '_').toLowerCase();
-        const image = enemyPictures.querySelector(`#${imageId}`);
-        if (image) {
-            image.style.display = 'block';
-        }
-        enemyInfo.style.display = 'block'; // Show the info container on hover
-    });
+  const showInfoBtn = document.getElementById('showInfoBtn');
+  const enemyInfo = document.querySelector('.enemy-info');
+  const enemyPictures = document.getElementById('enemy-pictures');
+  const enemyName = /*[[${enemy.name}]]*/ '';
 
-    showInfoBtn.addEventListener('mouseleave', function () {
-        const imageId = enemyName.replace(' ', '_').toLowerCase();
-        const image = enemyPictures.querySelector(`#${imageId}`);
-        if (image) {
-            image.style.display = 'none';
-        }
-        enemyInfo.style.display = 'none'; // Hide the info container when not hovering
-    });
+  showInfoBtn.addEventListener('mouseenter', function () {
+      const imageId = enemyName.replace(' ', '_').toLowerCase();
+      const image = enemyPictures.querySelector(`#${imageId}`);
+      if (image) {
+          image.style.display = 'block';
+      }
+      enemyInfo.style.display = 'block'; // Show the info container on hover
+  });
 
-    showInfoBtn.addEventListener('click', function () {
-        enemyInfo.classList.toggle('active');
-    });
-  }); 
+  showInfoBtn.addEventListener('mouseleave', function () {
+      const imageId = enemyName.replace(' ', '_').toLowerCase();
+      const image = enemyPictures.querySelector(`#${imageId}`);
+      if (image) {
+          image.style.display = 'none';
+      }
+      enemyInfo.style.display = 'none'; // Hide the info container when not hovering
+  });
+
+  showInfoBtn.addEventListener('click', function () {
+      enemyInfo.classList.toggle('active');
+  });
 </script>
 </body>
 </html>

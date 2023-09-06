@@ -60,11 +60,10 @@ html body {
     margin-bottom: -27px;
 }
 
-
 #items-table {
     position: absolute;
-    margin-left: 740px;
-    width: 100px;
+    margin-left: 735px;
+    width: 115px;
     height: 170px;
     padding: 10px;
     margin-top: 160px;
@@ -120,7 +119,6 @@ html body {
 }
 
 #upgradeMessage {
-   
     background-color: rgba(255, 255, 255, 0.3);
     border: 2px double white;
     border-radius: 8px;
@@ -236,7 +234,6 @@ html body {
     height: 180px;
     width: 230px;
     z-index: -1;
- 
 }
 
 #items{
@@ -246,7 +243,6 @@ html body {
     height: 340px;
     width: 230px;
     z-index: -1;
- 
 }
 
 #spell-picture-firebolt {

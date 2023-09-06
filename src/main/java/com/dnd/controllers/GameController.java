@@ -8,12 +8,15 @@ import com.dnd.services.EnemiesService;
 import com.dnd.services.HeroService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -124,7 +127,7 @@ public class GameController {
         // Check if the hero has the "Fire Shield" equipped and if the enemy is "Drake"
         if (enemy.getName().equalsIgnoreCase("Elemental") && hero.hasFireShield() && Math.random() <= 0.18) {
             enemyAttack = 0;
-            enemyAttackMessage = "You blocked dragon's attack with your Fire Shield!";
+            enemyAttackMessage = "You blocked Elemental's attack with your Fire Shield!";
         } else if (!enemy.getName().equalsIgnoreCase("Elemental") && !enemy.getName().equalsIgnoreCase("lich")
                 && hero.hasShield() && Math.random() <= 0.16) {
             enemyAttack = 0;
@@ -284,18 +287,19 @@ public class GameController {
         return "fight";
     }
 
+
     @PostMapping("/heal")
-    public String healHero(@RequestParam("heroId") Long heroId,
-            Model model,
-            HttpSession session) {
+    public ResponseEntity<Map<String, Object>> healHero(@RequestParam("heroId") Long heroId,
+        HttpSession session) {
+    var response = new HashMap<String, Object>();
         Optional<Hero> heroOptional = heroService.getHeroById(heroId);
         Hero hero = heroOptional.orElse(null);
-
+/* 
         if (hero == null) {
-            model.addAttribute("message", "Hero not found");
+            response.put("message", "Hero not found");
             return "error"; // You might want to return an error page here
         }
-
+*/
         // Check if the hero has at least one healing potion
         int potionCount = hero.getHealingPotion();
         if (potionCount > 0) {
@@ -315,37 +319,38 @@ public class GameController {
                 // Update the hero's stats in the database
                 heroService.saveHero(hero);
 
-                model.addAttribute("healMessage", "Healing potion restores " + actualHealingAmount + " health.");
+                response.put("healMessage", "Healing potion restores " + actualHealingAmount + " health.");
             } else {
-                model.addAttribute("healMessage", "Hero's health is already full.");
+                response.put("healMessage", "Hero's health is already full.");
             }
         } else {
-            model.addAttribute("healMessage", "Hero does not have any healing potion.");
+            response.put("healMessage", "Hero does not have any healing potion.");
         }
 
         // Load the enemy from the service and add it to the model
         Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
         if (currentEnemyId != null) {
             Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
-            model.addAttribute("enemy", enemy);
+            response.put("enemy", enemy);
         }
 
-        model.addAttribute("hero", hero);
-        return "fight";
+        response.put("hero", hero);
+        return ResponseEntity.ok(response);
     }
 
+
     @PostMapping("/mana")
-    public String manaHero(@RequestParam("heroId") Long heroId,
-            Model model,
-            HttpSession session) {
+    public ResponseEntity<Map<String, Object>> manaHero(@RequestParam("heroId") Long heroId,
+    HttpSession session) {
+    var response = new HashMap<String, Object>();
         Optional<Hero> heroOptional = heroService.getHeroById(heroId);
         Hero hero = heroOptional.orElse(null);
-
+/* 
         if (hero == null) {
             model.addAttribute("message", "Hero not found");
             return "error"; // You might want to return an error page here
         }
-
+*/
         // Check if the hero has at least one healing potion
         int potionCount = hero.getManaPotion();
         if (potionCount > 0) {
@@ -358,21 +363,21 @@ public class GameController {
             // Update the hero's stats in the database
             heroService.saveHero(hero);
 
-            model.addAttribute("healMessage", "Mana potion restores 20 mana.");
+            response.put("healMessage", "Mana potion restores 20 mana.");
 
         } else {
-            model.addAttribute("healMessage", "Hero does not have any mana potion.");
+            response.put("healMessage", "Hero does not have any mana potion.");
         }
 
         // Load the enemy from the service and add it to the model
         Long currentEnemyId = (Long) session.getAttribute("currentEnemyId");
         if (currentEnemyId != null) {
             Enemies enemy = enemiesService.getEnemyById(currentEnemyId);
-            model.addAttribute("enemy", enemy);
+            response.put("enemy", enemy);
         }
 
-        model.addAttribute("hero", hero);
-        return "fight";
+        response.put("hero", hero);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/lifesteal")
