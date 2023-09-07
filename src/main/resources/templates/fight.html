@@ -29,28 +29,28 @@
   </form>
 </div>
 <div id="spells">
-<button type="button"  class="btn btn-secondary" onclick="toggleFormVisibility()">Spells</button>
-  <form class="spellCast" action="/healing" method="post" style="display: none;">
+<button type="button"  class="btn btn-secondary" id="toggleSpells">Spells</button>
+  <form class="spellCast" action="/healing" method="post" >
     <button id="healing" class="btn btn-secondary" type="submit" data-effect="Heals you up to 25 health">Healing</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <form class="spellCast" action="/weakness" method="post" style="display: none;">
+  <form class="spellCast" action="/weakness" method="post" >
     <button id="weakness" class="btn btn-secondary" type="submit" data-effect="Weakens the enemy's attack by 3">Weakness</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <form class="spellCast" action="/sunder_armor" method="post" style="display: none;">
+  <form class="spellCast" action="/sunder_armor" method="post" >
     <button id="sunder_armor" class="btn btn-secondary" type="submit" data-effect="Reduces enemy's defense by 3">Sunder Armor</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <form class="spellCast" action="/firebolt" method="post" style="display: none;">
+  <form class="spellCast" action="/firebolt" method="post" >
     <button id="firebolt" class="btn btn-secondary" type="submit" data-effect="Deals 30 damage and ignores armor">Firebolt</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <form class="spellCast" action="/deathray" method="post" style="display: none;">
+  <form class="spellCast" action="/deathray" method="post" >
     <button id="death_ray" class="btn btn-secondary" type="submit" data-effect="Deals 100 damage and ignores armor">Death Ray</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
-  <form class="spellCast" action="/lifesteal" method="post" style="display: none; z-index: 2;">
+  <form class="spellCast" action="/lifesteal" method="post" >
     <button id="life_steal" class="btn btn-secondary" type="submit" data-effect="Steals up to 20 health from living enemy and heals you">Life Steal</button>
     <input type="hidden" name="heroId" value="1" />
   </form>
@@ -200,12 +200,47 @@ formData.append("heroId", heroId)
   }
 
 
-  function toggleFormVisibility() {
-      const spellForms = document.querySelectorAll('.spellCast');
-      spellForms.forEach(form => {
-          form.style.display = form.style.display === 'none' ? 'block' : 'none';
-      });
+ // Function to toggle the visibility of spell forms
+function toggleFormVisibility() {
+  const spellForms = document.querySelectorAll('.spellCast');
+  const shouldShow = spellForms[0].style.display === 'none';
+  spellForms.forEach((form) => {
+    form.style.display = shouldShow ? 'block' : 'none';
+  });
+  saveVisibilityState(shouldShow);
+}
+
+// Function to save and load the visibility state in localStorage
+function saveVisibilityState(shouldShow) {
+  localStorage.setItem('spellVisibilityState', shouldShow ? 'visible' : 'hidden');
+}
+
+// Function to initialize the visibility state from localStorage
+function loadVisibilityState() {
+  const state = localStorage.getItem('spellVisibilityState');
+  const spellForms = document.querySelectorAll('.spellCast');
+  if (state === 'visible') {
+    spellForms.forEach((form) => {
+      form.style.display = 'block';
+    });
+  } else {
+    spellForms.forEach((form) => {
+      form.style.display = 'none';
+    });
   }
+}
+
+// Add event listener for the "Spells" button
+const toggleSpellsButton = document.getElementById('toggleSpells');
+toggleSpellsButton.addEventListener('click', () => {
+  toggleFormVisibility();
+});
+
+// Load and apply the initial visibility state
+window.addEventListener('load', () => {
+  loadVisibilityState();
+});
+
 
   document.addEventListener('DOMContentLoaded', async function () {
       /* Check if heroLost flag is true (hero has lost) and disable the buttons */
