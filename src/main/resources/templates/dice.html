@@ -5,114 +5,129 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dice Game</title>
-   </head>
-    <style>
-        body {
-            background-image: url('../images/room.jpeg');
-            background-position: center 20%;
-            background-size: cover;
-            font-family: Arial, sans-serif;
-            margin: 50px;
-            padding: 0;
-        }
+</head>
+<style>
+    body {
+        background-image: url('../images/room.jpeg');
+        background-position: center 20%;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        margin: 30px;
+        padding: 0;
+        cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), auto !important;
+    }
 
-        #dice {
-            background-color: rgba(255, 255, 255, 0.3);
-            border: 5px double white;
-            border-radius: 20px;
-            padding: 15px;
-            margin: 20px;
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
-        }
+    #dice {
+        position: absolute;
+        padding: 10px;
+        margin-top: 150px;
+        margin-left: 795px;
+        max-width: 400px;
+        text-align: center;
+    }
 
-        h1 {
-            font-size: 22px;
-            color: black;
-        }
-        p{
-            font-size: 19px;
-            color: black;
-        }
+    h1 {
+        font-size: 18px;
+        color: black;
+    }
 
-        form {
-            margin-top: 19px;
-        }
+    .btn-secondary {
+        margin-top: 10px;
+        cursor: url(https://cur.cursors-4u.net/games/gam-4/gam372.cur), auto !important;
+    }
 
-        label {
-            font-size: 20px;
-            color: black;
-            display: block;
-            
-        }
+    input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
 
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid black;
-            border-radius: 5px;
-        }
+    button[type="submit"] {
+        background-color: #007bff;
+        color: black;
+        border: 1px solid black;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        cursor: url('../images/dice.cur'), auto !important;
+    }
 
-        button[type="submit"] {
-            background-color: #007bff;
-            color: black;
-            border: 1px solid black;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    #gameResult {
+        margin-top: -25px;
+        padding: 10px;
+        text-align: center;
+    }
 
-        #gameResult {
-            background-color: rgba(255, 255, 255, 0.2);
-            margin-top: 20px;
-            border: 3px double white;
-            border-radius: 30px;
-            padding: 20px;
-            text-align: center;
-        }
+    form {
+        margin-top: -5px;
+    }
 
-        #gameResult p {
-            
-            color: black;
-        }
-        #bet{
-            width: 70px;
-        }
-        #message{
-            font-size: 18px;
-            font-weight: bold;
-            color: black;
-        }
+    #gameResult p {
+        color: black;
+    }
+
+    #bet {
+        width: 70px;
+    }
+
+    #message {
+        margin-top: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+    }
+
+    #diceimg {
+        
+        z-index: -1;
+        margin-left: 600px;
+        opacity: 0.4;
+        border-radius: 400px;
+        width: 600px;
+        height: 600px;
+        position: absolute;
+    }
+
+    .input-group {
+        margin: 5px 0;
+    }
 </style>
 <body>
+    <img id="diceimg" src="images/dice.jpg">
     <div>
         <div id="dice">
             <button class="btn btn-secondary" onclick="location.href='/shop'">
                 Shop
-              </button>
-            <h1>Short on funds? You can try<br> your luck with dice... </h1>
+            </button>
+       
             <form id="diceForm" action="/dice" method="post">
-                <p>Your current gold: <span id="gold" th:text="${heroGold}"></span></p>
-              <label for="bet">Max bet amount = 300 gold</label>
-              <br>
-              <input type="number" id="bet" name="betAmount" min="1" max="300" required> 
-              <button class="btn btn-secondary" type="submit">Roll Dice</button>
-          </form>
-          <div id="gameResult" class="hidden">
-              <p th:if="${gameResult}">Hero rolled: <span id="heroRoll1" th:text="${heroRoll1}"></span> + <span id="heroRoll2" th:text="${heroRoll2}"></span> = <span th:text="${heroRoll1 + heroRoll2}"></span></p>
-            <p th:if="${gameResult}">Computer rolled: <span id="computerRoll1" th:text="${computerRoll1}"></span> + <span id="computerRoll2" th:text="${computerRoll2}"></span> = <span th:text="${computerRoll1 + computerRoll2}"></span></p>
-            <p2 id="message" th:if="${gameResult}" th:text="${gameResult}"></p2>
-            <p id="error" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+                <div class="input-group">
+                    <p>Your current gold: <span id="gold" th:text="${heroGold}"></span></p>
+                </div>
+                <div class="input-group">
+                    <label for="bet">Max bet amount = 300 gold</label>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="bet" name="betAmount" min="1" max="300" required>
+                    <button class="btn btn-secondary" type="submit">Roll Dice</button>
+                </div>
+            </form>
+            <div id="gameResult" class="hidden">
+                <p th:if="${gameResult}">Hero rolled: <span id="heroRoll1" th:text="${heroRoll1}"></span> + <span id="heroRoll2" th:text="${heroRoll2}"></span> = <span th:text="${heroRoll1 + heroRoll2}"></span></p>
+                <p th:if="${gameResult}">Computer rolled: <span id="computerRoll1" th:text="${computerRoll1}"></span> + <span id="computerRoll2" th:text="${computerRoll2}"></span> = <span th:text="${computerRoll1 + computerRoll2}"></span></p>
+                <p2 id="message" th:if="${gameResult}" th:text="${gameResult}"></p2>
+                <p id="error" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+            </div>
+            <script th:inline="javascript">
+                function showDiceGameResult() {
+                    var gameResult = document.getElementById("gameResult");
+                    gameResult.classList.remove("hidden");
+                }
+            </script>
         </div>
-    
-          <script th:inline="javascript">
-      function showDiceGameResult() {
-              var gameResult = document.getElementById("gameResult");
-              gameResult.classList.remove("hidden");
-          }
-    </script>
     </div>
 </body>
 </html>

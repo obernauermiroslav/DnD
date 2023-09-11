@@ -151,7 +151,7 @@ public class ShopController {
             model.addAttribute("computerRoll2", computerDice2);
             hero.setGold(heroGold - betAmount); // Decrease hero's gold
             model.addAttribute("heroGold", hero.getGold());
-            model.addAttribute("gameResult", "Computer wins! You lost " + betAmount + " gold!");
+            model.addAttribute("gameResult", "You lost " + betAmount + " gold!");
             heroRepository.save(hero);
         } else {
             model.addAttribute("heroRoll1", heroDice1);

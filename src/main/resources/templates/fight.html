@@ -66,7 +66,7 @@
 </div>
 <div class="enemy-container" th:if="${enemy != null}">
   <h2><span th:text="${enemy.name}"></span></h2>
-  <p>Health: <span id="enemyhealth" th:text="${enemy.health}"></span> / <span th:text="${enemy.max}"></span></p>
+  <p>Health: <span id="enemyhealth" th:text="${enemy.health}"></span> / <span th:text="${enemy.maxHealth}"></span></p>
   <p>Attack: <span th:text="${enemy.attack}"></span></p>
   <p>Defense: <span id="enemydefence" th:text="${enemy.defence}"></span></p>
   <div class="enemy-info-btn">
