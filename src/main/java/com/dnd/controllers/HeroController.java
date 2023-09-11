@@ -68,7 +68,7 @@ public class HeroController {
         if (hero == null) {
             // Create a new hero with the given name
             hero = new Hero(heroName);
-            hero.setGold(600);
+            hero.setGold(300);
             hero.setMana(0);
             hero.setHealingPotion(1);
             hero.setManaPotion(0);

@@ -90,18 +90,18 @@ public class GameController {
     }
 
     @PostMapping("/fight")
-    public String fight(@RequestParam("heroId") Long heroId,
-            @RequestParam("enemyId") Long enemyId,
-            Model model) {
+    public ResponseEntity<Map<String, Object>> fight(@RequestParam("heroId") Long heroId,
+            @RequestParam("enemyId") Long enemyId ) {
         // Load your hero and the enemy from their respective tables using the IDs
         // received from the form
+        var response = new HashMap<String, Object>();
         Optional<Hero> heroOptional = heroService.getHeroById(heroId);
         Hero hero = heroOptional.orElse(null);
 
         Enemies enemy = enemiesService.getEnemyById(enemyId);
         if (hero == null || enemy == null) {
-            model.addAttribute("errorMessage", "Hero or enemy not found");
-            return "error-page";
+            response.put("errorMessage", "Hero or enemy not found");
+              return ResponseEntity.ok(response);
         }
 
         int heroAttack;
@@ -174,7 +174,7 @@ public class GameController {
         if (enemy.getName().equalsIgnoreCase("goblin") && hero.getGold() > 0 && Math.random() <= 0.23) {
             int stolenGold = Math.min(12, hero.getGold()); // Maximum 12 gold can be stolen
             hero.setGold(hero.getGold() - stolenGold);
-            model.addAttribute("stolenGold", stolenGold);
+            enemySpecialAttackMessage = " Goblin stole " + stolenGold + " gold from you!";
         }
 
         if (enemy.getName().equalsIgnoreCase("troll") && enemy.getHealth() <= 100) {
@@ -191,7 +191,7 @@ public class GameController {
 
         // Update the health of the hero and the enemy
         hero.setHealth(Math.max(newHeroHealth, 0));
-        enemy.setHealth(newEnemyHealth);
+        enemy.setHealth(Math.max(newEnemyHealth, 0));
 
         // Save the updated hero and enemy data back to their respective tables
         heroService.saveHero(hero);
@@ -199,14 +199,14 @@ public class GameController {
 
         // Set the hero and enemy as model attributes to display their updated health on
         // the fight page
-        model.addAttribute("hero", hero);
-        model.addAttribute("enemy", enemy);
-        model.addAttribute("heroAttack", heroAttack);
-        model.addAttribute("enemyAttack", enemyAttack);
+        response.put("hero", hero);
+        response.put("enemy", enemy);
+        response.put("heroAttack", heroAttack);
+        response.put("enemyAttack", enemyAttack);
 
         // Determine the fight result message based on hero's and enemy's health after
         // the fight
-        String fightResult;
+        String fightResult = "";
         String heroAttackMessage = "";
         String ineffectiveHeroAttackMessage = "";
         String ineffectiveEnemyAttackMessage = "";
@@ -222,7 +222,7 @@ public class GameController {
                 hero.setHealingPotion(hero.getHealingPotion() + 1);
                 heroService.saveHero(hero);
                 bonusMessage = "You have won the fight and received: + 200 Gold, + 15 health, + 1 Skill Point, + 3 Runes and 1 healing potion";
-
+               //return ResponseEntity.ok().header("Location", "/hero").body(response);
             } else if ("mage".equals(chosenBonus)) {
                 // Update the bonuses for the mage here
                 // For example:
@@ -233,32 +233,38 @@ public class GameController {
                 hero.setManaPotion(hero.getManaPotion() + 1);
                 heroService.saveHero(hero);
                 bonusMessage = "You have won the fight and received: + 250 Gold, + 22 Mana, + 3 Skill Points , + 1 rune and 1 mana potion";
+                response.put("bonusMessage", bonusMessage);
+              //  return ResponseEntity.ok().header("Location", "/hero").body(response);
+                
             }
 
-            model.addAttribute("bonusMessage", bonusMessage);
+            response.put("bonusMessage", bonusMessage);
+            
 
             // Remove the defeated enemy from the database
             enemiesService.deleteEnemy(enemy);
+    
 
             // Get the next enemy for the next fight
             Enemies nextEnemy = enemiesService.getNextEnemy();
             if (nextEnemy != null) {
+                
                 session.setAttribute("currentEnemyId", nextEnemy.getId());
-                model.addAttribute("enemy", nextEnemy);
-                return "hero";
+                response.put("enemy", nextEnemy);
+                
             } else {
                 // Handle the case where there are no more enemies in the database
                 fightResult = "You have won the game! Congratulations!";
-                model.addAttribute("noMoreEnemies", true);
+                response.put("noMoreEnemies", true);
             }
 
         } else if (newHeroHealth <= 0) {
             fightResult = "You have lost!";
-            model.addAttribute("heroLost", true);
+            response.put("heroLost", true);
             session.setAttribute("heroLost", true);
         } else {
             fightResult = "";
-            model.addAttribute("heroLost", false);
+            response.put("heroLost", false);
         }
 
         if (heroAttack > 0) {
@@ -277,14 +283,14 @@ public class GameController {
             ineffectiveEnemyAttackMessage = "Enemy's attack was ineffective!";
         }
 
-        model.addAttribute("fightResult", fightResult);
-        model.addAttribute("heroAttackMessage", heroAttackMessage);
-        model.addAttribute("enemyAttackMessage", enemyAttackMessage);
-        model.addAttribute("enemySpecialAttackMessage", enemySpecialAttackMessage);
-        model.addAttribute("ineffectiveHeroAttackMessage", ineffectiveHeroAttackMessage);
-        model.addAttribute("ineffectiveEnemyAttackMessage", ineffectiveEnemyAttackMessage);
+        response.put("fightResult", fightResult);
+        response.put("heroAttackMessage", heroAttackMessage);
+        response.put("enemyAttackMessage", enemyAttackMessage);
+        response.put("enemySpecialAttackMessage", enemySpecialAttackMessage);
+        response.put("ineffectiveHeroAttackMessage", ineffectiveHeroAttackMessage);
+        response.put("ineffectiveEnemyAttackMessage", ineffectiveEnemyAttackMessage);
 
-        return "fight";
+        return ResponseEntity.ok(response);
     }
 
 

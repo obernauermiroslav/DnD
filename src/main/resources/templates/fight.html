@@ -15,7 +15,6 @@
     <button type="button" class="btn btn-secondary" data-effect="Heals you up to 30 health" style="cursor: url('../images/health.cur'), auto !important;" th:onclick="'javascript:postData(event, 1)'">Use Healing potion</button>
   </form>
   
-
   <form id="manaForm" >
     <input type="hidden" name="heroId" value="1" />
     <button type="button" class="btn btn-secondary" data-effect="Restores 20 mana" style="cursor: url('../images/mana.cur'), auto !important;" th:onclick="'javascript:postData2(event, 1)'" >Use Mana potion</button>
@@ -24,8 +23,9 @@
   <form id="fight" class="btn btn-secondary" action="/fight" method="post">
     <input type="hidden" name="startingBonus" value="${startingBonus}" />
     <input type="hidden" name="heroId" th:value="${hero.id}">
-    <input type="hidden" name="enemyId" th:if="${enemy != null}" th:value="${enemy.id}">
-    <input type="submit" value="Fight!" th:if="${enemy != null}" style="cursor: url(https://cur.cursors-4u.net/games/gam-4/gam376.cur), auto !important;">
+    <input type="hidden" name="enemyId" th:value="${enemy != null ? enemy.id : ''}">
+
+    <button type="button" value="Fight!" th:if="${enemy != null}" style="cursor: url(https://cur.cursors-4u.net/games/gam-4/gam376.cur), auto !important;" th:onclick="'javascript:postData3(event, 1, ' + ${enemy.id} + ')'">Fight!</button>
   </form>
 </div>
 <div id="spells">
@@ -66,9 +66,9 @@
 </div>
 <div class="enemy-container" th:if="${enemy != null}">
   <h2><span th:text="${enemy.name}"></span></h2>
-  <p>Health: <span th:text="${enemy.health} + '/' + ${enemy.maxHealth}"></span></p>
+  <p>Health: <span id="enemyhealth" th:text="${enemy.health}"></span> / <span th:text="${enemy.max}"></span></p>
   <p>Attack: <span th:text="${enemy.attack}"></span></p>
-  <p>Defense: <span th:text="${enemy.defence}"></span></p>
+  <p>Defense: <span id="enemydefence" th:text="${enemy.defence}"></span></p>
   <div class="enemy-info-btn">
     <button type="button" class="btn btn-secondary" id="showInfoBtn">Show Info</button>
     <div class="enemy-info" style="display: none ">
@@ -99,7 +99,6 @@
   <p id="fightResultIH" th:text="${ineffectiveHeroAttackMessage}"></p>
   <p id="fightResultIE" th:text="${ineffectiveEnemyAttackMessage}"></p>
   <p id="fightResultS" th:text="${spellCastingResult}"></p>
-  <p th:if="${stolenGold}">Goblin stole <span th:text="${stolenGold}"></span> gold from you!</p>
 </div>
 </body>
 </html>
@@ -193,11 +192,92 @@ formData.append("heroId", heroId)
               manaPotionCountElement.textContent = heroData.hero.manaPotion;
               healMessageElement.textContent = heroData.healMessage;
               
+              
           })
           .catch(error => {
               console.error("Error updating UI:", error);
           });
   }
+
+  function postData3(event, heroId, enemyId) {
+    event.preventDefault();
+
+   // console.log("Hero ID:", heroId);
+   // console.log("Enemy ID:", enemyId);
+
+    let formData = new FormData();
+    formData.append("heroId", heroId);
+    formData.append("enemyId", enemyId);
+
+    fetch(`/fight`, {
+        method: "POST",
+        headers: {
+            // "content-type": "application/json",
+        },
+        body: formData,
+    })
+        .then(response => {
+           // console.log(response.status);
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error("Failed to fetch data");
+            }
+        })
+        .then(heroData => {
+    // Access hero and enemy properties from heroData
+    const hero = heroData.hero;
+    const enemy = heroData.enemy;
+
+    // Access other properties
+    const heroAttack = heroData.heroAttack;
+    const fightResult = heroData.fightResult;
+    const heroAttackMessage = heroData.heroAttackMessage;
+    const enemySpecialAttackMessage = heroData.enemySpecialAttackMessage;
+    const enemyAttack = heroData.enemyAttack;
+    const enemyAttackMessage = heroData.enemyAttackMessage;
+    const ineffectiveHeroAttackMessage = heroData.ineffectiveHeroAttackMessage;
+    const ineffectiveEnemyAttackMessage = heroData.ineffectiveEnemyAttackMessage;
+
+
+
+    // Update HTML elements with the retrieved data
+    const heroFightElement = document.getElementById("fight");
+    const heroHealthElement = document.getElementById("herohealth");
+    const enemyHealthElement = document.getElementById("enemyhealth");
+    const enemymaxHealthElement = document.getElementById("enemyhealth");
+    const enemydefenceElement = document.getElementById("enemydefence");
+    const fightresultElement = document.getElementById("fightResult");
+    const fightresultHeroElement = document.getElementById("fightResultH");
+    const fightresultEnemyElement = document.getElementById("fightResultE");
+    const fightresultSpecialElement = document.getElementById("fightResultS");
+    const fightresultIneffectiveElement = document.getElementById("fightResultIH");
+    const fightresultIneffectiveEnemyElement = document.getElementById("fightResultIE");
+
+    heroHealthElement.textContent = hero.health;
+    enemyHealthElement.textContent = enemy.health;
+    enemydefenceElement.textContent = enemy.defence;
+    fightresultElement.textContent = fightResult;
+    fightresultHeroElement.textContent = heroAttackMessage;
+    fightresultEnemyElement.textContent = enemyAttackMessage;
+    fightresultSpecialElement.textContent = enemySpecialAttackMessage;
+    fightresultIneffectiveElement.textContent = ineffectiveHeroAttackMessage;
+    fightresultIneffectiveEnemyElement.textContent = ineffectiveEnemyAttackMessage;
+
+    console.log(enemy.health);
+
+// Check if the enemy is defeated
+if (enemy.health <= 0 || hero.health <= 0) {
+    window.location.href = "/hero";
+}
+
+})
+.catch(error => {
+    console.error("Error updating UI:", error);
+});
+
+  }
+
 
 
  // Function to toggle the visibility of spell forms
@@ -259,6 +339,7 @@ window.addEventListener('load', () => {
               }
           }
       }
+
       const actionUrlTemplate = "/heal";
      // const actionUrl = actionUrlTemplate.replace("{itemId}", itemId);
       const targetElementId = "healForm";

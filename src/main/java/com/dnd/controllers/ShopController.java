@@ -14,7 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,7 +52,6 @@ public class ShopController {
         }
     }
 
-
     @GetMapping("/shop")
     public String viewShop(Model model) {
         // Fetch the latest items from the database
@@ -78,11 +81,94 @@ public class ShopController {
         // Return the shop view
         return "shop";
     }
+
     @GetMapping("/readmeShop")
     public String showReadmeShopPage() {
-        return "readmeShop"; 
+        return "readmeShop";
     }
 
+    @GetMapping("/dice")
+    public String playDice(Model model) {
+        Hero hero = heroService.getYourHero();
+    
+        if (hero == null) {
+            return "error";
+        }
+    
+        // Set the hero's gold in the model
+        model.addAttribute("heroGold", hero.getGold());
+    
+        return "dice";
+    }
+    
+
+    @PostMapping("/dice")
+    public String playDiceGame(Model model, @RequestParam int betAmount) {
+        Hero hero = heroService.getYourHero();
+
+        if (hero == null) {
+          
+            return "error"; 
+        }
+
+        int heroGold = hero.getGold();
+
+        // Check if the bet amount is valid (not negative and not more than hero's gold)
+        if (betAmount <= 0 || betAmount > heroGold) {
+            model.addAttribute("errorMessage", "Not enough gold to bet!");
+            model.addAttribute("heroGold", heroGold); // Add the hero's gold to the model
+
+            // Fetch the latest items from the database
+            List<Items> availableItems = (List<Items>) itemsRepository.findAll();
+            model.addAttribute("items", availableItems);
+
+            return "dice";
+        }
+
+        int heroDice1 = (int) (Math.random() * 6) + 1;
+        int heroDice2 = (int) (Math.random() * 6) + 1;
+        int computerDice1 = (int) (Math.random() * 6) + 2;
+        int computerDice2 = (int) (Math.random() * 6) + 1;
+
+        int playerTotal = heroDice1 + heroDice2;
+        int computerTotal = computerDice1 + computerDice2;
+
+        // Determine the winner
+        if (playerTotal > computerTotal) {
+            int winnings = betAmount;
+            hero.setGold(heroGold + winnings); // Increase hero's gold
+            model.addAttribute("heroRoll1", heroDice1);
+            model.addAttribute("heroRoll2", heroDice2);
+            model.addAttribute("computerRoll1", computerDice1);
+            model.addAttribute("computerRoll2", computerDice2);
+            model.addAttribute("heroGold", hero.getGold());
+            model.addAttribute("gameResult", "You win " + winnings + " gold!");
+            heroRepository.save(hero);
+        } else if (playerTotal < computerTotal) {
+            model.addAttribute("heroRoll1", heroDice1);
+            model.addAttribute("heroRoll2", heroDice2);
+            model.addAttribute("computerRoll1", computerDice1);
+            model.addAttribute("computerRoll2", computerDice2);
+            hero.setGold(heroGold - betAmount); // Decrease hero's gold
+            model.addAttribute("heroGold", hero.getGold());
+            model.addAttribute("gameResult", "Computer wins! You lost " + betAmount + " gold!");
+            heroRepository.save(hero);
+        } else {
+            model.addAttribute("heroRoll1", heroDice1);
+            model.addAttribute("heroRoll2", heroDice2);
+            model.addAttribute("computerRoll1", computerDice1);
+            model.addAttribute("computerRoll2", computerDice2);
+            model.addAttribute("heroGold", hero.getGold());
+            model.addAttribute("gameResult", "It's a tie!");
+            heroRepository.save(hero);
+        }
+
+        // Fetch the latest items from the database
+        List<Items> availableItems = (List<Items>) itemsRepository.findAll();
+        model.addAttribute("items", availableItems);
+
+        return "dice"; // Return to the shop template with the game result
+    }
 
     @GetMapping("/api/equipped-items")
     @ResponseBody
@@ -95,104 +181,9 @@ public class ShopController {
     }
 
     @PostMapping("/get/shop/buy/{itemId}")
-public ResponseEntity buyItem(@PathVariable Long itemId) {
-    var response = new HashMap<String, Object>();
+    public ResponseEntity buyItem(@PathVariable Long itemId) {
+        var response = new HashMap<String, Object>();
 
-    Items itemToBuy = itemsRepository.findById(itemId).orElse(null);
-    if (itemToBuy != null) {
-        Hero hero = heroService.getYourHero();
-        if (hero != null) {
-            // Check if the hero already has the same spell equipped
-            if (itemToBuy.getType() == ItemType.SPELL) {
-                boolean hasSameSpell = hero.getEquippedItems().stream()
-                        .anyMatch(existingSpell -> existingSpell.getName().equals(itemToBuy.getName()));
-
-                if (hasSameSpell) {
-                    response.put("message", "Spell learned already!");
-                } else {
-                    // Buy the spell and update the hero's equipment
-                    int heroGold = hero.getGold();
-                    int itemPrice = itemToBuy.getPrice();
-
-                    if (heroGold >= itemPrice) {
-                        hero.setGold(heroGold - itemPrice);
-                        hero.equipItem(itemToBuy);
-                        heroService.updateHeroById(hero.getId(), hero);
-                        response.put("message", "Item purchased!");
-                    } else {
-                        response.put("message", "Not enough gold!");
-                    }
-                }
-            } else {
-                // For non-spell items, proceed as before
-                Items existingItemOfType = hero.getEquippedItems().stream()
-                        .filter(item -> item.getType() == itemToBuy.getType())
-                        .findFirst()
-                        .orElse(null);
-
-                if (existingItemOfType != null) {
-                    if (!existingItemOfType.getName().equals(itemToBuy.getName())) {
-                        hero.unequipItem(existingItemOfType);
-                    } else {
-                        response.put("message", "You already have that item!");
-                        // Fetch the latest items from the database
-                        List<Items> availableItems = (List<Items>) itemsRepository.findAll();
-                        // Add the available items to the model
-                        response.put("items", availableItems);
-                        response.put("heroGold", hero.getGold());
-                       return ResponseEntity.ok(response);
-                    }
-                }
-
-                int heroGold = hero.getGold();
-                int itemPrice = itemToBuy.getPrice();
-
-                if (heroGold >= itemPrice) {
-                    // Update hero's equipment and gold
-                    if (itemToBuy.getType() == ItemType.SHIELD) {
-                        // Set hasShield to true since the hero bought a shield
-                        hero.setHasShield(true);
-                        hero.equipItem(itemToBuy);
-                    } else if (itemToBuy.getName().equals("Healing Potion")) {
-                        hero.setHealingPotion(hero.getHealingPotion() + 1);
-                    } else if (itemToBuy.getName().equals("Mana Potion")) {
-                        hero.setManaPotion(hero.getManaPotion() + 1);
-                    } 
-                    else {
-                        hero.equipItem(itemToBuy);
-                    }
-
-                    hero.setGold(heroGold - itemPrice);
-                    heroService.updateHeroById(hero.getId(), hero);
-                    response.put("message", "Item purchased!");
-                } else {
-                    response.put("message", "Not enough gold!");
-                }
-            }
-        } else {
-            response.put("message", "Hero not found!");
-        }
-    } else {
-        response.put("message", "Item not found!");
-    }
-
-    // Fetch the latest items from the database
-    List<Items> availableItems = (List<Items>) itemsRepository.findAll();
-    // Add the available items to the model
-    response.put("items", availableItems);
-
-    Hero updatedHero = heroService.getYourHero();
-    if (updatedHero != null) {
-        response.put("heroGold", updatedHero.getGold());
-    }
-
-    return ResponseEntity.ok(response);
-}
-
-
-/* 
-    @PostMapping("/shop/buy/{itemId}")
-    public String buyItem(@PathVariable Long itemId, Model model) {
         Items itemToBuy = itemsRepository.findById(itemId).orElse(null);
         if (itemToBuy != null) {
             Hero hero = heroService.getYourHero();
@@ -203,7 +194,7 @@ public ResponseEntity buyItem(@PathVariable Long itemId) {
                             .anyMatch(existingSpell -> existingSpell.getName().equals(itemToBuy.getName()));
 
                     if (hasSameSpell) {
-                        model.addAttribute("message", "Spell learned already!");
+                        response.put("message", "Spell learned already!");
                     } else {
                         // Buy the spell and update the hero's equipment
                         int heroGold = hero.getGold();
@@ -213,9 +204,9 @@ public ResponseEntity buyItem(@PathVariable Long itemId) {
                             hero.setGold(heroGold - itemPrice);
                             hero.equipItem(itemToBuy);
                             heroService.updateHeroById(hero.getId(), hero);
-                            model.addAttribute("message", "Item purchased!");
+                            response.put("message", "Item purchased!");
                         } else {
-                            model.addAttribute("message", "Not enough gold!");
+                            response.put("message", "Not enough gold!");
                         }
                     }
                 } else {
@@ -229,13 +220,13 @@ public ResponseEntity buyItem(@PathVariable Long itemId) {
                         if (!existingItemOfType.getName().equals(itemToBuy.getName())) {
                             hero.unequipItem(existingItemOfType);
                         } else {
-                            model.addAttribute("message", "You already have that item!");
+                            response.put("message", "You already have that item!");
                             // Fetch the latest items from the database
                             List<Items> availableItems = (List<Items>) itemsRepository.findAll();
                             // Add the available items to the model
-                            model.addAttribute("items", availableItems);
-                            model.addAttribute("heroGold", hero.getGold());
-                            return "shop";
+                            response.put("items", availableItems);
+                            response.put("heroGold", hero.getGold());
+                            return ResponseEntity.ok(response);
                         }
                     }
 
@@ -252,36 +243,35 @@ public ResponseEntity buyItem(@PathVariable Long itemId) {
                             hero.setHealingPotion(hero.getHealingPotion() + 1);
                         } else if (itemToBuy.getName().equals("Mana Potion")) {
                             hero.setManaPotion(hero.getManaPotion() + 1);
-                        } 
-                        else {
+                        } else {
                             hero.equipItem(itemToBuy);
                         }
 
                         hero.setGold(heroGold - itemPrice);
                         heroService.updateHeroById(hero.getId(), hero);
-                        model.addAttribute("message", "Item purchased!");
+                        response.put("message", "Item purchased!");
                     } else {
-                        model.addAttribute("message", "Not enough gold!");
+                        response.put("message", "Not enough gold!");
                     }
                 }
             } else {
-                model.addAttribute("message", "Hero not found!");
+                response.put("message", "Hero not found!");
             }
         } else {
-            model.addAttribute("message", "Item not found!");
+            response.put("message", "Item not found!");
         }
 
         // Fetch the latest items from the database
         List<Items> availableItems = (List<Items>) itemsRepository.findAll();
         // Add the available items to the model
-        model.addAttribute("items", availableItems);
+        response.put("items", availableItems);
 
         Hero updatedHero = heroService.getYourHero();
         if (updatedHero != null) {
-            model.addAttribute("heroGold", updatedHero.getGold());
+            response.put("heroGold", updatedHero.getGold());
         }
 
-        return "shop";
+        return ResponseEntity.ok(response);
     }
-    */
+
 }
