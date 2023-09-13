@@ -238,8 +238,7 @@ formData.append("heroId", heroId)
     const enemyAttackMessage = heroData.enemyAttackMessage;
     const ineffectiveHeroAttackMessage = heroData.ineffectiveHeroAttackMessage;
     const ineffectiveEnemyAttackMessage = heroData.ineffectiveEnemyAttackMessage;
-
-
+    const enemydefeat = heroData.enemydefeat;
 
     // Update HTML elements with the retrieved data
     const heroFightElement = document.getElementById("fight");
@@ -254,6 +253,7 @@ formData.append("heroId", heroId)
     const fightresultIneffectiveElement = document.getElementById("fightResultIH");
     const fightresultIneffectiveEnemyElement = document.getElementById("fightResultIE");
 
+
     heroHealthElement.textContent = hero.health;
     enemyHealthElement.textContent = enemy.health;
     enemydefenceElement.textContent = enemy.defence;
@@ -267,10 +267,24 @@ formData.append("heroId", heroId)
     console.log(enemy.health);
 
 // Check if the enemy is defeated
-if (enemy.health <= 0 || hero.health <= 0) {
-    window.location.href = "/hero";
+if (enemy.health <= 0 || hero.health <= 0 || enemydefeat === true) {
+  window.location.href = "/hero";  
+  //sessionStorage.setItem("chosenBonus", "mage");
+/*
+  let formData = new FormData()
+  formData.append("bonusMessage", heroData.bonusMessage)
+  fetch("/hero" , {
+    method:"POST", 
+    body: formData
+  }).then(response => {
+    console.log(response.body)
+    console.log(response.status)
+    
+  })
+  */
+   // window.location.href = "/hero";    
+  
 }
-
 })
 .catch(error => {
     console.error("Error updating UI:", error);

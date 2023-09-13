@@ -149,7 +149,7 @@ public class DnDApplication implements CommandLineRunner {
 
         Enemies enemy1 = new Enemies(1L,"Figurine", 60,60,0,4,"Yes, it's a Training figurine...everyone starts somewhere, try not to hit yourself.");
         enemiesRepository.save(enemy1);
-        Enemies enemy2 = new Enemies(2L,"Giant rat", 105,105,12,5,"Bigger and more dangerous that standard Rat, but should not be hard to kill.");
+        Enemies enemy2 = new Enemies(2L,"Giant rat", 105,105,12,5,"Bigger and more dangerous that standard Rat, and these rats are usually not alone .");
         enemiesRepository.save(enemy2);
         Enemies enemy3 = new Enemies(3L,"Goblin", 150,150,16,8,"He is small, mean, armed with mace and can steal your money if you are not carefull.");
         enemiesRepository.save(enemy3);

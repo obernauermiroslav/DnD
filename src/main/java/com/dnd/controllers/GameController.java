@@ -162,6 +162,14 @@ public class GameController {
             // Default special attack message (empty if not triggered)
             enemySpecialAttackMessage = "";
         }
+        if (enemy.getName().equalsIgnoreCase("Giant rat") && Math.random() <= 0.21) {
+            // Swarm of rats can appear and attackt hero, so rat's basic attack will be multiplied by 3
+            enemyAttack = (enemy.getAttack() + enemy.getAttack() + enemy.getAttack()) - hero.getDefense();
+            enemySpecialAttackMessage =  " Swarm of rats suddenly appeared and attacked you for triple damage !";
+        } else if (enemySpecialAttackMessage.isEmpty()) {
+            // Default special attack message (empty if not triggered)
+            enemySpecialAttackMessage = "";
+        }
         if (enemy.getName().equalsIgnoreCase("figurine") && Math.random() <= 0.38) {
             // Figurine's special attack: 38% chance to return hero 10 damage
             enemyAttack = (enemy.getAttack() + 6);
@@ -222,7 +230,7 @@ public class GameController {
                 hero.setHealingPotion(hero.getHealingPotion() + 1);
                 heroService.saveHero(hero);
                 bonusMessage = "You have won the fight and received: + 200 Gold, + 15 health, + 1 Skill Point, + 3 Runes and 1 healing potion";
-               //return ResponseEntity.ok().header("Location", "/hero").body(response);
+              
             } else if ("mage".equals(chosenBonus)) {
                 // Update the bonuses for the mage here
                 // For example:
@@ -232,31 +240,24 @@ public class GameController {
                 hero.setRunes(hero.getRunes() + 1);
                 hero.setManaPotion(hero.getManaPotion() + 1);
                 heroService.saveHero(hero);
-                bonusMessage = "You have won the fight and received: + 250 Gold, + 22 Mana, + 3 Skill Points , + 1 rune and 1 mana potion";
+                bonusMessage = "You have won the fight and received: + 250 Gold, + 22 Mana, + 3 Skill Points, + 1 rune, and 1 mana potion";
+                // return ResponseEntity.ok().header("Location", "/hero").body(response);
+            }
                 response.put("bonusMessage", bonusMessage);
-              //  return ResponseEntity.ok().header("Location", "/hero").body(response);
-                
-            }
 
-            response.put("bonusMessage", bonusMessage);
-            
-
-            // Remove the defeated enemy from the database
-            enemiesService.deleteEnemy(enemy);
-    
-
-            // Get the next enemy for the next fight
-            Enemies nextEnemy = enemiesService.getNextEnemy();
-            if (nextEnemy != null) {
-                
-                session.setAttribute("currentEnemyId", nextEnemy.getId());
-                response.put("enemy", nextEnemy);
-                
-            } else {
-                // Handle the case where there are no more enemies in the database
-                fightResult = "You have won the game! Congratulations!";
-                response.put("noMoreEnemies", true);
-            }
+                enemiesService.deleteEnemy(enemy);
+                // Get the next enemy for the next fight
+                Enemies nextEnemy = enemiesService.getNextEnemy();
+                // Check if there is a next enemy
+                if (nextEnemy != null) {
+                    session.setAttribute("currentEnemyId", nextEnemy.getId());
+                    response.put("enemy", nextEnemy);
+                } else {
+                    // Handle the case where there are no more enemies in the database
+                    fightResult = "You have won the game! Congratulations!";
+                    response.put("noMoreEnemies", true);
+                }
+              response.put("enemydefeat" , true);
 
         } else if (newHeroHealth <= 0) {
             fightResult = "You have lost!";
@@ -289,6 +290,7 @@ public class GameController {
         response.put("enemySpecialAttackMessage", enemySpecialAttackMessage);
         response.put("ineffectiveHeroAttackMessage", ineffectiveHeroAttackMessage);
         response.put("ineffectiveEnemyAttackMessage", ineffectiveEnemyAttackMessage);
+       
 
         return ResponseEntity.ok(response);
     }
