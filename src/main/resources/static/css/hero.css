@@ -8,6 +8,12 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+@font-face {
+    font-family: 'MedievalFantasyFont'; /* Define a font family name */
+    src: url('/fonts/medieval3.ttf') format('truetype'); /* Replace with the actual path to your font file */
+    
+}
+
 html body {
     cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), pointer !important;
 }
@@ -54,11 +60,15 @@ html body {
     margin-left: 90px;
 }
 
-#heroName{
-    font-size: 20px;
-    margin-left: 90px;
-    margin-bottom: -27px;
+#heroName {
+    font-family: 'MedievalFantasyFont', sans-serif;
+    font-size: 25px;
+    display: flex; /* Make it a flex container */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin-bottom: -30px;
 }
+
 
 #items-table {
     position: absolute;
@@ -73,28 +83,13 @@ html body {
     overflow-x: auto;
 }
 
+
 /* Hide scrollbar in Firefox */
 #items-table {
-    scrollbar-width: thin; /* Adjust the width to your preference */
-    scrollbar-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5); /* Adjust the colors as needed */
+   
+    scrollbar-color: rgb(139, 115, 76) rgba(10, 10, 10, 0.25) ; /* Adjust the colors as needed */
 }
 
-/* Hide scrollbar in IE/Edge */
-#items-table::-ms-scrollbar {
-    width: 6px; /* Adjust the width to your preference */
-    color: rgba(255, 255, 255, 0.5); /* Adjust the color as needed */
-}
-
-/* Hide scrollbar in webkit-based browsers (Chrome, Safari) */
-#items-table::-webkit-scrollbar {
-    width: 6px; /* Adjust the width to your preference */
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color as needed */
-}
-
-/* Customize the scrollbar thumb */
-#items-table::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.5); /* Adjust the color as needed */
-}
 
 #item-pictures {
     margin-top: 80px;
@@ -106,7 +101,10 @@ html body {
     height: 503px;
   }
 
-
+  #bonusMessageContainer {
+    display: flex; /* or display: block; or any other appropriate value */
+  }
+  
 .btn-secondary:active {
     background-color: #aaa; 
 }
@@ -126,8 +124,8 @@ html body {
     font-size: 16px;
     color: black;
     position: absolute;
-    top: 2.5%;
-    left: 54%;
+    top: 3%;
+    left: 55%;
     transform: translate(-50%, -50%);
 }
 
@@ -280,6 +278,7 @@ html body {
     width: 40px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
 }
+
 #spell-picture-death_ray{
     position: absolute;
     margin-left: 385px;
@@ -288,6 +287,7 @@ html body {
     width: 40px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
 }
+
 #spell-picture-life_steal{
     position: absolute;
     margin-left: 385px;
@@ -325,7 +325,6 @@ html body {
    
   }
 
- 
 #upgradeMessageItem{
     padding: 5px;
     border: 2px double white;
@@ -333,8 +332,8 @@ html body {
     font-size: 16px;
     color: black;
     position: absolute;
-    top: 2.5%;
-    left: 54%;
+    top: 3%;
+    left: 55%;
     transform: translate(-50%, -50%);
     border-radius: 7px;
 }

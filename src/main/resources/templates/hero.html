@@ -103,19 +103,34 @@
           </div>
         </div>
       </div>
-      <p id="upgradeMessage" th:if="${upgradeMessage}" style="display: flex; align-items: center;">
+      <p
+        id="upgradeMessage"
+        th:if="${upgradeMessage}"
+        style="display: flex; align-items: center"
+      >
         <span th:text="${upgradeMessage}"></span>
-        <img src="/images/helmet.png" alt="Image description" style="width: 55px; height: 55px; margin-left: 10px;">
+        <img
+          src="/images/helmet.png"
+          alt="Image description"
+          style="width: 55px; height: 55px; margin-left: 10px"
+        />
       </p>
       <div>
-        <p id="upgradeMessageItem" th:if="${not #strings.isEmpty(upgradeMessageItem)}" style="display: flex; align-items: center;">
+        <p
+          id="upgradeMessageItem"
+          th:if="${not #strings.isEmpty(upgradeMessageItem)}"
+          style="display: flex; align-items: center"
+        >
           <span th:text="${upgradeMessageItem}   "></span>
-          <img src="/images/helmet.png" alt="Image description" style="width: 55px; height: 55px; margin-left: 10px;">
+          <img
+            src="/images/helmet.png"
+            alt="Image description"
+            style="width: 55px; height: 55px; margin-left: 10px"
+          />
         </p>
-        
       </div>
-      <div id="item-pictures">
-        <h3 id="heroName">
+      <div id="item-pictures" class="d-flex flex-column align-items-center">
+        <h3 id="heroName" class="mt-3">
           <span th:if="${hero != null}">
             <span th:text="${hero.name}"></span>
             <span id="chosenBonus"></span>
@@ -237,15 +252,33 @@
         />
       </div>
       <div id="item-info-popup" class="item-popup"></div>
-      <p id="bonusMessage" th:if="${bonusMessage}" style="display: flex; align-items: center;">
+      <p
+        id="bonusMessage"
+        th:if="${bonusMessage}"
+        style="display: flex; align-items: center"
+      >
         <span th:utext="${bonusMessage}"></span>
-        <img src="/images/helmet.png" alt="Image description" style="width: 45px; height: 45px; margin-left: 10px;">
+        <img
+          src="/images/helmet.png"
+          alt="Image description"
+          style="width: 45px; height: 45px; margin-left: 10px"
+        />
       </p>
-   
-  <img id="spellbook" src="/images/book.png">
-  <img id="items" src="/images/items.png">
-</div>
+      <!-- Add this div for displaying bonus message -->
+      <div id="bonusMessageContainer" style="display: none">
+        <p id="bonusMessageText"></p>
+        <img
+          src="/images/helmet.png"
+          alt="Image description"
+          style="width: 45px; height: 45px; margin-left: 10px"
+        />
+      </div>
+      <img id="spellbook" src="/images/book.png" />
+      <img id="items" src="/images/items.png" />
+    </div>
     <script th:inline="javascript">
+      
+      
       var heroLost = /*[[${heroLost}]]*/ false; // Get the actual value from the model
 
       if (heroLost) {
@@ -438,8 +471,38 @@
         });
       }
 
+     // Function to display the bonus message
+function displayBonusMessage(message) {
+  const bonusMessageContainer = document.getElementById("bonusMessageContainer");
+  const bonusMessageText = document.getElementById("bonusMessageText");
+  console.log("enemyH:", enemyDefeat);
+
+  if (bonusMessageContainer && bonusMessageText) {
+    // Set the bonus message text
+    bonusMessageText.textContent = message; // Use the 'message' parameter here
+
+    // Show the bonus message container
+    bonusMessageContainer.style.display = "block";
+  }
+}
+
       // Call the function to update item pictures on page load
       document.addEventListener("DOMContentLoaded", function () {
+        var bonusMessage = sessionStorage.getItem("bonusMessage");
+        var enemyDefeat = sessionStorage.getItem("enemydefeat");
+        console.log("bonusMessageH:", bonusMessage);
+
+        // Check if bonusMessage exists and is not empty
+        if (bonusMessage) {
+          // Display the bonus message in the specified HTML element
+          var bonusMessageElement = document.getElementById("bonusMessageContainer");
+
+          if (bonusMessageElement && enemyDefeat === true) {
+            bonusMessageElement.textContent = bonusMessage;
+           // bonusMessageElement.style.display = "block";  
+          }
+        }
+
         var itemButtons = document.querySelectorAll(".item-button");
         itemButtons.forEach(function (button) {
           var itemType = button.getAttribute("data-item-type");

@@ -10,7 +10,14 @@ body {
     cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1232.png), auto !important;
 }
 
+@font-face {
+    font-family: 'MedievalFantasyFont'; /* Define a font family name */
+    src: url('/fonts/medieval3.ttf') format('truetype'); /* Replace with the actual path to your font file */
+    
+}
+
 h1 {
+    font-family: 'MedievalFantasyFont', sans-serif; 
     position: absolute;
     margin-top: -480px;
     color: black;
@@ -19,6 +26,7 @@ h1 {
 }
 
 h2 {
+    font-family: 'MedievalFantasyFont', sans-serif; 
     color: black;
     margin-top: -5px;
 }
@@ -78,6 +86,8 @@ h2 {
 }
 
 .results {
+    font-family: 'MedievalFantasyFont', sans-serif; 
+    font-size: 20px;
     background-image: url('/images/stone2.png'); /* Change to the URL of your new background image */
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -151,6 +161,7 @@ h2 {
   }
 
   .enemy-info {
+    font-family: 'MedievalFantasyFont', sans-serif; 
     background-image: url('/images/ram2.png'); /* Change to the URL of your new background image */
     background-size: cover; /* Adjust the sizing of the background image */
     background-repeat: no-repeat;

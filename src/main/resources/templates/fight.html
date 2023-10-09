@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to the arena</title>
   <link rel="stylesheet" href="/css/fight.css">
 </head>
@@ -90,7 +93,6 @@
   </div>
 </div>
 <div class="results">
-  <h2>Results:</h2>
   <p id="fightResultP" th:text="${healMessage}"></p>
   <p id="fightResult" th:text="${fightResult}"></p>
   <p id="fightResultH" th:text="${heroAttackMessage}"></p>
@@ -201,9 +203,7 @@ formData.append("heroId", heroId)
 
   function postData3(event, heroId, enemyId) {
     event.preventDefault();
-
-   // console.log("Hero ID:", heroId);
-   // console.log("Enemy ID:", enemyId);
+    var chosenBonus = sessionStorage.getItem("chosenBonus");
 
     let formData = new FormData();
     formData.append("heroId", heroId);
@@ -212,12 +212,11 @@ formData.append("heroId", heroId)
     fetch(`/fight`, {
         method: "POST",
         headers: {
-            // "content-type": "application/json",
         },
         body: formData,
     })
         .then(response => {
-           // console.log(response.status);
+        
             if (response.status === 200) {
                 return response.json();
             } else {
@@ -225,6 +224,8 @@ formData.append("heroId", heroId)
             }
         })
         .then(heroData => {
+          console.log(heroData);
+          console.log("bonus messageF: " + heroData.bonusMessage);
     // Access hero and enemy properties from heroData
     const hero = heroData.hero;
     const enemy = heroData.enemy;
@@ -253,7 +254,6 @@ formData.append("heroId", heroId)
     const fightresultIneffectiveElement = document.getElementById("fightResultIH");
     const fightresultIneffectiveEnemyElement = document.getElementById("fightResultIE");
 
-
     heroHealthElement.textContent = hero.health;
     enemyHealthElement.textContent = enemy.health;
     enemydefenceElement.textContent = enemy.defence;
@@ -264,12 +264,11 @@ formData.append("heroId", heroId)
     fightresultIneffectiveElement.textContent = ineffectiveHeroAttackMessage;
     fightresultIneffectiveEnemyElement.textContent = ineffectiveEnemyAttackMessage;
 
-    console.log(enemy.health);
-
 // Check if the enemy is defeated
 if (enemy.health <= 0 || hero.health <= 0 || enemydefeat === true) {
   window.location.href = "/hero";  
-  //sessionStorage.setItem("chosenBonus", "mage");
+  sessionStorage.setItem("enemydefeat", heroData.enemydefeat);
+  sessionStorage.setItem("bonusMessage", heroData.bonusMessage);
 /*
   let formData = new FormData()
   formData.append("bonusMessage", heroData.bonusMessage)
@@ -283,16 +282,23 @@ if (enemy.health <= 0 || hero.health <= 0 || enemydefeat === true) {
   })
   */
    // window.location.href = "/hero";    
-  
+const bonusMessageElement = heroData.bonusMessage;
+const enemyDefeat = heroData.enemydefeat;
+sessionStorage.setItem("bonusMessage", heroData.bonusMessage);
+console.log("bonusMessageElementF:", bonusMessageElement);
+console.log("enemy1:", enemyDefeat);
+
+if (bonusMessageElement) {
+    console.log("Updating bonusMessage contentF...");
+    bonusMessageElement.textContent = heroData.bonusMessage;
+    console.log("bonusMessageElementF:", bonusMessageElement);
+}
 }
 })
 .catch(error => {
     console.error("Error updating UI:", error);
 });
-
   }
-
-
 
  // Function to toggle the visibility of spell forms
 function toggleFormVisibility() {

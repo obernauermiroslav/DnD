@@ -219,6 +219,7 @@ public class GameController {
         String ineffectiveHeroAttackMessage = "";
         String ineffectiveEnemyAttackMessage = "";
         String bonusMessage = "";
+        boolean enemydefeat = false;
         if (newEnemyHealth <= 0) {
             String chosenBonus = (String) session.getAttribute("chosenBonus");
             if ("warrior".equals(chosenBonus)) {
@@ -230,10 +231,8 @@ public class GameController {
                 hero.setHealingPotion(hero.getHealingPotion() + 1);
                 heroService.saveHero(hero);
                 bonusMessage = "You have won the fight and received: + 200 Gold, + 15 health, + 1 Skill Point, + 3 Runes and 1 healing potion";
-              
+             
             } else if ("mage".equals(chosenBonus)) {
-                // Update the bonuses for the mage here
-                // For example:
                 hero.setGold(hero.getGold() + 250);
                 hero.setMana(hero.getMana() + 22);
                 hero.setSkillPoints(hero.getSkillPoints() + 3);
@@ -241,7 +240,7 @@ public class GameController {
                 hero.setManaPotion(hero.getManaPotion() + 1);
                 heroService.saveHero(hero);
                 bonusMessage = "You have won the fight and received: + 250 Gold, + 22 Mana, + 3 Skill Points, + 1 rune, and 1 mana potion";
-                // return ResponseEntity.ok().header("Location", "/hero").body(response);
+             
             }
                 response.put("bonusMessage", bonusMessage);
 
