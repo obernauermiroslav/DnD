@@ -75,7 +75,7 @@ public class HeroController {
             hero.setSkillPoints(1);
             hero.setHealth(130);
             hero.setMaxHealth(130);
-            hero.setAttack(8);
+            hero.setAttack(18);
             hero.setDefense(7);
             hero.setRunes(1);
             isNewHero = true; // Mark the hero as new

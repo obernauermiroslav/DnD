@@ -102,7 +102,15 @@ html body {
   }
 
   #bonusMessageContainer {
-    display: flex; /* or display: block; or any other appropriate value */
+    background-color: rgba(255, 255, 255, 0.4);
+    position: absolute;
+  
+    height: 55px;
+    border-radius: 7px;
+    border: 5px double #ccc;
+    top: 5%;
+    left: 54%;
+    transform: translate(-50%, -50%);
   }
   
 .btn-secondary:active {

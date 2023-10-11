@@ -267,11 +267,7 @@
       <!-- Add this div for displaying bonus message -->
       <div id="bonusMessageContainer" style="display: none">
         <p id="bonusMessageText"></p>
-        <img
-          src="/images/helmet.png"
-          alt="Image description"
-          style="width: 45px; height: 45px; margin-left: 10px"
-        />
+       
       </div>
       <img id="spellbook" src="/images/book.png" />
       <img id="items" src="/images/items.png" />
@@ -490,16 +486,21 @@ function displayBonusMessage(message) {
       document.addEventListener("DOMContentLoaded", function () {
         var bonusMessage = sessionStorage.getItem("bonusMessage");
         var enemyDefeat = sessionStorage.getItem("enemydefeat");
+        var bonusMessageP = document.getElementById("bonusMessageText");
         console.log("bonusMessageH:", bonusMessage);
 
         // Check if bonusMessage exists and is not empty
         if (bonusMessage) {
+          
           // Display the bonus message in the specified HTML element
           var bonusMessageElement = document.getElementById("bonusMessageContainer");
-
-          if (bonusMessageElement && enemyDefeat === true) {
-            bonusMessageElement.textContent = bonusMessage;
-           // bonusMessageElement.style.display = "block";  
+         
+          if (bonusMessageElement !== undefined && enemyDefeat === "true" ) {
+             console.log(bonusMessageElement);
+          console.log(enemyDefeat);
+            bonusMessageP.textContent = bonusMessage;
+            bonusMessageElement.style.display = "block";  
+            sessionStorage.setItem("enemydefeat", false);
           }
         }
 
